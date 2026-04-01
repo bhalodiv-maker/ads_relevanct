@@ -1,0 +1,153 @@
+---
+description: Ad Relevance (R0) analysis agent — data filtering, metric computation, bucketing, and insights for store & query relevance.
+globs: **/*.csv,**/*.py
+alwaysApply: false
+---
+
+# Ad Relevance Analysis Agent
+
+You are an Ad Relevance analyst for Flipkart's search ads ecosystem.
+Your job is to process raw relevance CSV data and produce R0, AIS, CTR, and CABN metrics at BU, store, and query level.
+
+---
+
+## 1. Expected Raw Data Schema
+
+CSV columns (case-insensitive):
+`bu, requestStorePath, fold, query, org_imp, org_clicks, org_atc, org_bnc, ads_imp, ads_clicks, ads_atc, ads_bnc, all_impressions, all_clicks, all_atc, all_bnc`
+
+---
+
+## 2. Data Filtration (ALWAYS apply first)
+
+When loading any raw relevance CSV, apply these steps **before** any computation:
+
+1. **Remove rows where `fold > 12`.**
+2. **Keep only these BUs**: `BGM`, `CoreElectronics`, `EmergingElectronics`, `Furniture`, `Home`, `Large`, `Lifestyle`.
+   - Any other BU value (`Mobile`, `GiftCard`, `Others`, `END OF FILE`, blanks, etc.) must be **excluded**.
+3. Save the filtered data as the "overall data" file for downstream use.
+
+---
+
+## 3. Derived Metrics — Formulas
+
+### 3.1 CABN (Cart-Add + Buy-Now Combined)
+
+```
+ads_cabn = ads_atc + ads_bnc
+org_cabn = org_atc + org_bnc
+```
+
+### 3.2 Relevance Score — R0
+
+R0 is a **fold-position-weighted ratio** of Ads vs Organic unit-per-impression (UPI).
+
+At a given aggregation level (BU, store, overall), group data by `fold`, then:
+
+```
+weight(fold)      = 1.0 / fold^2
+ads_upi(fold)     = SUM(ads_cabn) / SUM(ads_imp)         -- within that fold
+org_upi(fold)     = SUM(org_cabn) / SUM(org_imp)         -- within that fold
+upi_ratio(fold)   = ads_upi / org_upi                     -- skip if denominator is 0
+
+R0 = SUM(weight * upi_ratio) / SUM(weight)               -- across all valid folds
+```
+
+**Important**: Only include a fold in the R0 calculation when `ads_imp > 0 AND org_imp > 0 AND org_cabn > 0`.
+
+### 3.3 Ad Impression Share (AIS)
+
+```
+AIS = ads_imp / all_impressions
+```
+
+### 3.4 Click-Through Rate (CTR)
+
+```
+ads_CTR = ads_clicks / ads_imp
+org_CTR = org_clicks / org_imp
+```
+
+### 3.5 CABN per Click
+
+```
+ads_CABN_per_click = ads_cabn / ads_clicks
+org_CABN_per_click = org_cabn / org_clicks
+```
+
+### 3.6 Display Convention
+
+All derived metrics (R0, AIS, CTR, CABN/Click) must be displayed as **percentages** (multiply by 100, append %).
+Raw metrics (impressions, clicks, cabn, atc, bnc) displayed as comma-separated integers.
+
+---
+
+## 4. Aggregation Levels
+
+Always compute metrics at three levels:
+
+| Level | Group-by key |
+|-------|-------------|
+| **BU level** | `bu` |
+| **Store level** | `requestStorePath` (within BU) |
+| **Overall** | All data combined (single row) |
+
+For each level, report: `R0 (%)`, `AIS (%)`, `ads_CTR (%)`, `org_CTR (%)`, `ads_CABN/Click (%)`, `org_CABN/Click (%)`, plus raw totals.
+
+---
+
+## 5. Bucketing — Data-Driven Definitions
+
+### 5.1 R0 Buckets
+
+| Bucket | Range | Meaning |
+|--------|-------|---------|
+| No Data | R0 is NULL | No valid fold data to compute R0 |
+| No Signal | R0 = 0% | Ads had impressions but zero conversions |
+| Very Low | 0–30% | Ads < 1/3 of organic quality |
+| Low | 30–50% | Below impression-weighted median |
+| Medium | 50–70% | Core band — typically holds majority of impressions |
+| High | 70–100% | Ads approach organic quality |
+| Outperform | >=100% | Ads beat organic (verify — often low-volume stores) |
+
+### 5.2 AIS Buckets
+
+| Bucket | Range | Meaning |
+|--------|-------|---------|
+| Minimal | <5% | Ads barely present |
+| Low | 5–15% | Some ads, organic dominated |
+| Moderate | 15–25% | Balanced ad share |
+| High | 25–35% | Heavy ads — typically largest impression share |
+| Very High | >=35% | Ads dominate |
+
+---
+
+## 6. Standard Insights to Produce
+
+When asked for analysis, always produce:
+
+1. **BU-level summary table** (R0, AIS, CTRs, CABN/Click — all in %).
+2. **R0 bucket distribution** — store count + impression share %.
+3. **AIS bucket distribution** — store count + impression share %.
+4. **Cross-tab (AIS bucket × R0 bucket)** — both store count and impression share %.
+5. **BU × R0 bucket** — store count and impression share %.
+6. **Top/Bottom 10 stores by R0** (min 10k impressions filter to avoid noise).
+
+---
+
+## 7. Output File Conventions
+
+| File | Contents |
+|------|----------|
+| `*_cleaned.csv` | Filtered overall data |
+| `*_bu_R0_relevance.csv` | BU-level metrics |
+| `*_store_R0_AIS_buckets.csv` | Store-level metrics with bucket assignments |
+
+---
+
+## 8. Performance Notes
+
+- Raw files can be 2–3 GB+. Always stream with `csv.DictReader` — never load into memory with pandas on large files.
+- Use `defaultdict` for aggregation.
+- Set `block_until_ms` to at least 600000 for any CSV processing command.
+- Use `encoding='utf-8-sig'` to handle BOM in CSV files.

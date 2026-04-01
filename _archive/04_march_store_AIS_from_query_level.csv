@@ -1,0 +1,1668 @@
+BU,store_id,store_name,AIS_pct_weighted,AIS_bucket,all_impressions_total,query_rows,store_AIS_bucket_csv
+BGM,1mt,Automotive Accessories,37.4218,35–40%,874723,295,15–25%
+BGM,1mt/0mi,Oils and Lubricants,41.9026,>40%,49312,9,35–40%
+BGM,1mt/0mi/p2g,Engine Oil,39.2671,35–40%,219008,71,35–40%
+BGM,1mt/0mi/rfk,Chain Oil,45.3934,>40%,63485,17,>40%
+BGM,1mt/0mi/wtr,Gear Oil,50.5745,>40%,6353,2,35–40%
+BGM,1mt/4aa,Automotive Combos,47.3845,>40%,42822,6,>40%
+BGM,1mt/85k,Vehicle Lights,34.7826,30–35%,842168,246,25–30%
+BGM,1mt/85k/a7e,Headlights and Fog Lamps,30.8598,30–35%,106838,37,15–25%
+BGM,1mt/85k/rfq,Vehicle Light Bulbs,27.7503,25–30%,163371,63,15–25%
+BGM,1mt/85k/xpu,Daytime Running Lights and LED Strip Lights,32.0646,30–35%,50208,18,25–30%
+BGM,1mt/aa4,Vehicle Body Covers,35.6805,35–40%,9742,6,30–35%
+BGM,1mt/aa4/hoc,Car Body Covers,50.0749,>40%,247050,84,>40%
+BGM,1mt/aa4/law,Bike Body Covers,49.8491,>40%,172932,47,>40%
+BGM,1mt/b75,Vehicle Storage and Organizers,16.2636,15–25%,31137,5,5–15%
+BGM,1mt/b75/rzf,Bike Luggage Carriers,12.4023,5–15%,11764,7,5–15%
+BGM,1mt/b75/zbi,Bike Luggage Bag & Box,11.5431,5–15%,26622,12,5–15%
+BGM,1mt/bpx,Car Air Purifiers and Air Fresheners,30.8893,30–35%,119135,20,30–35%
+BGM,1mt/bpx/bij,Car Air Fresheners & Refills,42.7185,>40%,27611,8,35–40%
+BGM,1mt/bpx/bij/z6n,Car Air Fresheners,41.7803,>40%,88458,14,>40%
+BGM,1mt/d0x,Vehicle Styling,19.6379,15–25%,344503,132,5–15%
+BGM,1mt/d0x/inl/h9r,Car Hanging Ornaments,38.2235,35–40%,30892,7,25–30%
+BGM,1mt/d0x/inl/s8d,Vehicle Key Covers,36.5485,35–40%,101922,42,30–35%
+BGM,1mt/d0x/tyd,Stickers and Emblems,15.0254,15–25%,35826,20,5–15%
+BGM,1mt/d0x/tyd/hpp,Vehicle Emblems,26.4384,25–30%,4293,2,5–15%
+BGM,1mt/d0x/tyd/sul,Vehicle Stickers,24.2653,15–25%,529319,150,15–25%
+BGM,1mt/d0x/zab,Exterior Stylings,7.8376,5–15%,197446,68,5–15%
+BGM,1mt/d0x/zab/1v2,Bike Fairing Kits,3.5272,<5%,9214,6,5–15%
+BGM,1mt/d0x/zab/auo,Door & Window Garnishs,9.3966,5–15%,1011,1,5–15%
+BGM,1mt/d0x/zab/btj,Bike Headlight Visors,3.5861,<5%,38761,16,<5%
+BGM,1mt/d0x/zab/bzf,Spoilers,9.3941,5–15%,41409,15,5–15%
+BGM,1mt/d0x/zab/moe,Car Side Beadings,5.5421,5–15%,3302,2,15–25%
+BGM,1mt/d0x/zab/ppx,Bike Tank Pads,4.066,<5%,11584,6,<5%
+BGM,1mt/d0x/zab/zqt,Bike Tank Covers,12.41,5–15%,23046,12,5–15%
+BGM,1mt/ebm,Vehicle Utility Accessories,18.0676,15–25%,32799,15,15–25%
+BGM,1mt/ebm/iwn,Vehicle Mobile Accessories,44.7591,>40%,39592,7,35–40%
+BGM,1mt/ebm/iwn/nkd,Car Mobile Chargers,45.8691,>40%,95016,14,>40%
+BGM,1mt/ebm/iwn/rjb,Car Mobile Holders,40.1151,>40%,112940,21,35–40%
+BGM,1mt/ebm/iwn/sta,Bike Mobile Chargers,9.9713,5–15%,15314,4,5–15%
+BGM,1mt/ebm/iwn/tkk,Bike Mobile Holders,39.9229,35–40%,336153,49,35–40%
+BGM,1mt/ebm/iwn/zam,Car Multi Purpose Chargers,31.059,30–35%,31189,12,25–30%
+BGM,1mt/ebm/rfr,Car Interior Fans,13.2346,5–15%,54433,15,5–15%
+BGM,1mt/eoe,Vehicle Stereo and Music System,18.9472,15–25%,296487,111,15–25%
+BGM,1mt/eoe/5p2,Car Amplifiers,18.4806,15–25%,43900,10,15–25%
+BGM,1mt/eoe/gjf,Vehicle Antennas,16.7054,15–25%,11188,6,5–15%
+BGM,1mt/eoe/kyc,Car Subwoofers,32.934,30–35%,315662,71,30–35%
+BGM,1mt/eoe/vuu,Car Speakers,16.832,15–25%,181660,44,15–25%
+BGM,1mt/eoe/wmk,Car Media Players,33.0789,30–35%,131114,44,25–30%
+BGM,1mt/hoh,Car Dashboard Accessories,25.4358,25–30%,23349,8,5–15%
+BGM,1mt/hoh/02x,Speedometers,3.8907,<5%,12851,6,<5%
+BGM,1mt/hoh/dtf,Car Dashboard Covers,12.6866,5–15%,49643,1,5–15%
+BGM,1mt/kiq,Vehicle Safety; Security and Guards,22.9402,15–25%,130099,26,15–25%
+BGM,1mt/kiq/r4g,Bike Protective Guards,9.5468,5–15%,127394,53,5–15%
+BGM,1mt/kiq/r4g/6x9,Bike Crash Guards,10.0747,5–15%,39783,24,5–15%
+BGM,1mt/kiq/t8u/gbj,GPS Navigation Devices,41.4105,>40%,68840,19,35–40%
+BGM,1mt/kiq/t8u/lvr,Bike Locks,24.8285,15–25%,29442,12,15–25%
+BGM,1mt/kiq/t8u/w2o,Car Security Cameras,39.0698,35–40%,58311,14,35–40%
+BGM,1mt/m2b,Spares; Tools and Maintenance Service Parts,15.9297,15–25%,192050,92,5–15%
+BGM,1mt/m2b/8pv/k6c,Bike Chain Sprockets,5.5215,5–15%,7335,5,<5%
+BGM,1mt/m2b/9nw/biu,Obd Scanners,49.992,>40%,6277,3,>40%
+BGM,1mt/m2b/dnc/8tu,Vehicle Batteries,15.0526,15–25%,67696,20,5–15%
+BGM,1mt/m2b/ekz,Vehicle Brake & Clutch,0.0,<5%,1268,1,<5%
+BGM,1mt/m2b/ekz/o8n,Brake & Clutch Levers,6.2091,5–15%,6716,4,5–15%
+BGM,1mt/m2b/iic/gsn,Bike Side & Centre Stands,6.9035,5–15%,5403,2,5–15%
+BGM,1mt/m2b/iic/guc,Foot Rests,15.7912,15–25%,15097,9,5–15%
+BGM,1mt/m2b/jt8/daq,Vehicle Number Plates,30.4659,30–35%,59414,19,15–25%
+BGM,1mt/m2b/jt8/z6a,Mud Guards,14.7221,5–15%,5794,4,5–15%
+BGM,1mt/m2b/jxk,Vehicle Exhaust,1.8929,<5%,8083,5,5–15%
+BGM,1mt/m2b/jxk/fk6,Bike Exhaust Systems,4.3393,<5%,267740,88,<5%
+BGM,1mt/m2b/lqf,Vehicle Horns,15.7986,15–25%,179927,52,5–15%
+BGM,1mt/m2b/r3n/69d,Vehicle Air Filters,6.8257,5–15%,6915,3,15–25%
+BGM,1mt/m2b/weh,Steering,13.8582,5–15%,8587,3,15–25%
+BGM,1mt/m2b/weh/iaz,Car Steering Covers,23.7534,15–25%,35195,15,5–15%
+BGM,1mt/m2b/xhh,Vehicle Gear,18.0921,15–25%,1520,1,5–15%
+BGM,1mt/m2b/xhh/a8p,Gear Knobs,7.5194,5–15%,55669,14,5–15%
+BGM,1mt/m2b/xzn,Bike Handlebar,2.5376,<5%,1064,1,5–15%
+BGM,1mt/m2b/xzn/8wu,Handlebars,5.3429,5–15%,28917,12,<5%
+BGM,1mt/m2b/xzn/kkm,Handlebar Grips,10.8892,5–15%,26439,10,5–15%
+BGM,1mt/qwe,Vehicle Seat and Accessories,36.8103,35–40%,63140,24,25–30%
+BGM,1mt/qwe/dpb,Bike Seat Covers,21.022,15–25%,56793,29,15–25%
+BGM,1mt/qwe/gyt,Car Pillows and Cushions,47.8588,>40%,54431,16,>40%
+BGM,1mt/qwe/jiy,Car Seat Covers,20.7155,15–25%,66887,24,5–15%
+BGM,1mt/qwe/pry,Car Inflatable Beds,48.7626,>40%,18264,5,>40%
+BGM,1mt/qwe/syo,Car Armrests,36.6259,35–40%,5477,3,30–35%
+BGM,1mt/s84,Vehicle Cleaners,45.2668,>40%,359449,61,>40%
+BGM,1mt/s84/atb,Vehicle Vacuum Cleaners,46.7624,>40%,63735,11,>40%
+BGM,1mt/s84/jwa,Vehicle Body Cleaners,50.1553,>40%,16746,7,>40%
+BGM,1mt/s84/jwa/vrx,Car Interior Cleaners,50.39,>40%,22052,7,>40%
+BGM,1mt/s84/jwa/vzn,Car Polishes,46.8141,>40%,156831,41,>40%
+BGM,1mt/s84/jzx,Vehicle Pressure Washers,42.8986,>40%,235889,64,35–40%
+BGM,1mt/s84/jzx/nrz,High Pressure Washers,40.7879,>40%,362723,69,35–40%
+BGM,1mt/s84/zb5,Vehicle Cleaning Supplies,45.8767,>40%,14212,8,>40%
+BGM,1mt/s84/zb5/gex,Vehicle Cleaning Cloths,49.8387,>40%,39692,10,>40%
+BGM,1mt/u7j,Vehicle Door; Windshield; Windows and Mirrors,28.1669,25–30%,108766,47,15–25%
+BGM,1mt/u7j/bgv,Car Door Bumper Guards,44.0614,>40%,22219,10,25–30%
+BGM,1mt/u7j/cp0,Vehicle Mirrors,24.1992,15–25%,179427,62,15–25%
+BGM,1mt/u7j/u1w/csi,Car Wiper Blades,53.7154,>40%,2530,2,25–30%
+BGM,1mt/u7j/yl7,Car Sun Shades,44.8379,>40%,20418,8,25–30%
+BGM,1mt/uhg/2ka/f8t,Vehicle Jacks,40.3136,>40%,25381,10,30–35%
+BGM,1mt/uhg/2ka/s8w,Puncture Repair Kits,44.7987,>40%,23869,8,35–40%
+BGM,1mt/uhg/zfb/2wf,Scratch Removers,50.2029,>40%,3450,2,>40%
+BGM,1mt/vvb,Vehicle Mats,33.3791,30–35%,5096,4,15–25%
+BGM,1mt/vvb/cmj,Car Mats,33.8685,30–35%,47643,22,15–25%
+BGM,1mt/vvb/qh0,Bike Mats,31.8884,30–35%,1684,1,15–25%
+BGM,1mt/w8q,Tyre and Wheel,20.6584,15–25%,29528,14,15–25%
+BGM,1mt/w8q/fos,Tyres,24.0942,15–25%,29173,7,15–25%
+BGM,1mt/w8q/fos/8rs,Car Tyres,12.7986,5–15%,38684,17,5–15%
+BGM,1mt/w8q/fos/w6m,Bike Tyres,11.4037,5–15%,158536,69,5–15%
+BGM,1mt/w8q/i33/bsw,Tyre Air Pumps,48.1746,>40%,153309,36,>40%
+BGM,1mt/w8q/i33/c7h,Wheel Covers,13.5099,5–15%,73065,33,5–15%
+BGM,1mt/ztf,Helmets and Riding Gear,41.685,>40%,114871,27,35–40%
+BGM,1mt/ztf/iv8,Helmet and Accessories,34.7582,30–35%,91262,20,30–35%
+BGM,1mt/ztf/iv8/tih,Biker Helmets,38.0364,35–40%,2531574,321,35–40%
+BGM,1mt/ztf/iv8/yc3,Helmet Locks,31.9238,30–35%,24831,4,30–35%
+BGM,1mt/ztf/tbi,Riding Gear,38.475,35–40%,60681,20,30–35%
+BGM,1mt/ztf/tbi/9tm,Riding Gloves,38.8461,35–40%,177750,26,35–40%
+BGM,1mt/ztf/tbi/api,Rider Protective Jackets,42.7372,>40%,50710,7,>40%
+BGM,1mt/ztf/tbi/ehz,Rider Face Masks,50.0068,>40%,81485,25,>40%
+BGM,1mt/ztf/tbi/end,Arm Sleeves,45.0249,>40%,92742,26,>40%
+BGM,26x,Sunglasses,32.3963,30–35%,4643825,585,30–35%
+BGM,abc,Sports,28.733,25–30%,151272,45,15–25%
+BGM,abc/5jb,Fishing,33.93,30–35%,21733,9,25–30%
+BGM,abc/5jb/2ku,Fishing Nets,49.3897,>40%,42685,11,>40%
+BGM,abc/5jb/6w5,Fishing Reels,13.5248,5–15%,13368,3,5–15%
+BGM,abc/5jb/9dt,Fishing Rods,34.7654,30–35%,111102,13,30–35%
+BGM,abc/5jb/a1d,Fishing Lines,9.1902,5–15%,7323,3,5–15%
+BGM,abc/5jb/ic5,Fishing Lures,17.0215,15–25%,22683,6,5–15%
+BGM,abc/5jb/raj,Fishing Hooks,19.2982,15–25%,14136,3,5–15%
+BGM,abc/5lf,Cricket,23.5686,15–25%,303234,54,15–25%
+BGM,abc/5lf/1qz,Cricket Pads,16.1743,15–25%,21868,7,5–15%
+BGM,abc/5lf/8fr,Cricket Grips,23.1976,15–25%,55868,9,15–25%
+BGM,abc/5lf/gj5,Cricket Wickets,15.1265,15–25%,103044,23,5–15%
+BGM,abc/5lf/jjn,Cricket Gloves,22.6879,15–25%,139184,31,15–25%
+BGM,abc/5lf/kds,Cricket Bags,22.533,15–25%,31962,7,15–25%
+BGM,abc/5lf/opr,Cricket Goggles,27.6555,25–30%,18405,6,25–30%
+BGM,abc/5lf/p8v,Cricket Bat,15.8665,15–25%,1531257,239,5–15%
+BGM,abc/5lf/pvf,Cricket Guards,30.3032,30–35%,29812,14,25–30%
+BGM,abc/5lf/ra8,Cricket Kits,15.337,15–25%,361224,51,5–15%
+BGM,abc/5lf/yfv,Cricket Helmets,32.8683,30–35%,24729,5,30–35%
+BGM,abc/5lf/yjg,Cricket Balls,20.4435,15–25%,291472,56,15–25%
+BGM,abc/5lf/zgv,Cricket Nets,42.5988,>40%,32346,6,35–40%
+BGM,abc/6mb/q91,Carrom Boards,12.728,5–15%,171991,20,5–15%
+BGM,abc/6sh/bgw,Basketballs,29.6616,25–30%,22460,4,15–25%
+BGM,abc/byq/p7q,Swim Ear & Nose Plug,36.8042,35–40%,15827,6,30–35%
+BGM,abc/egs,Badminton,20.2011,15–25%,92005,16,15–25%
+BGM,abc/egs/39o,Badminton Grip,6.2917,5–15%,8392,3,5–15%
+BGM,abc/egs/4vs,Badminton Kits,6.0287,5–15%,162125,14,5–15%
+BGM,abc/egs/5wq,Badminton Racquet,20.7006,15–25%,336821,49,15–25%
+BGM,abc/egs/fhp,Badminton Bag,5.4512,5–15%,20931,4,5–15%
+BGM,abc/egs/m6b,Shuttles,13.778,5–15%,87538,28,5–15%
+BGM,abc/fvf,Camping & Hiking,7.4584,5–15%,56500,15,5–15%
+BGM,abc/fvf/kum,Camping Nets,13.066,5–15%,11595,5,5–15%
+BGM,abc/fvf/s9a,Camping Tents,24.483,15–25%,70016,21,15–25%
+BGM,abc/g9d,Sport Accessories,20.2484,15–25%,10065,4,5–15%
+BGM,abc/gxg,Football,24.9497,15–25%,7451,5,15–25%
+BGM,abc/gxg/eha,Footballs,29.4138,25–30%,252320,26,25–30%
+BGM,abc/gxg/wsc,Football Gloves,2.876,<5%,24409,6,<5%
+BGM,abc/jwd,Kite Flying,0.3272,<5%,22309,7,<5%
+BGM,abc/jwd/uev,Kites,0.0,<5%,32469,6,<5%
+BGM,abc/jxb,Scooters,26.5181,25–30%,42307,8,25–30%
+BGM,abc/mgq,Skating,28.1487,25–30%,18285,8,30–35%
+BGM,abc/mgq/rbi,Skates,27.4778,25–30%,212539,38,25–30%
+BGM,abc/mgq/tp8,Skateboards,38.8747,35–40%,42583,5,35–40%
+BGM,abc/ppq,Boxing,29.7662,25–30%,24165,9,25–30%
+BGM,abc/ppq/31s,Boxing Punching Bag,33.5329,30–35%,94707,10,30–35%
+BGM,abc/ppq/bb6,Boxing Gloves,43.6436,>40%,30678,6,35–40%
+BGM,abc/ppq/kbf,Boxing Kit,15.2589,15–25%,14621,5,5–15%
+BGM,abc/tdn/2tw,Baseball Bats,8.8083,5–15%,33173,6,5–15%
+BGM,abc/tir/rcx,Hockey Sticks,27.4755,25–30%,18744,3,15–25%
+BGM,abc/ulv,Cycling,33.7586,30–35%,249282,69,25–30%
+BGM,abc/ulv/4nj,Cycling Accessories,30.2739,30–35%,47721,12,25–30%
+BGM,abc/ulv/4nj/4ax,Cycling Pumps,29.7213,25–30%,64977,10,25–30%
+BGM,abc/ulv/4nj/buv,Bicycle Locks,43.2913,>40%,26026,6,>40%
+BGM,abc/ulv/4nj/ghj,Lights,27.9143,25–30%,183906,27,25–30%
+BGM,abc/ulv/4nj/ugv,Cycle Bells,14.4696,5–15%,14603,4,5–15%
+BGM,abc/ulv/ixt,Cycles,44.4831,>40%,433603,69,>40%
+BGM,abc/ulv/ixt/i5v,Adult Cycles,45.9644,>40%,192658,25,>40%
+BGM,abc/ulv/ixt/i5v/1eh,,40.3416,>40%,20143,7,35–40%
+BGM,abc/ulv/ixt/i5v/yjn,,39.0819,35–40%,76268,9,35–40%
+BGM,abc/ulv/ixt/tvt,Kids Cycles,45.8695,>40%,339945,56,>40%
+BGM,abc/ulv/oog,Cycling Spares,4.5867,<5%,12994,4,5–15%
+BGM,abc/ulv/oog/nex,Cycle Handle grips,4.8349,<5%,53879,16,5–15%
+BGM,abc/ulv/oog/zqk,Cycle Disk Brakes,4.0605,<5%,28026,12,<5%
+BGM,abc/ulv/twp,Electric Cycle,23.8227,15–25%,155612,23,15–25%
+BGM,abc/uyc,Volleyball,24.0655,15–25%,43714,7,15–25%
+BGM,abc/uyc/fzt,Volleyballs,20.2694,15–25%,228749,33,15–25%
+BGM,abc/uyc/pr1,Volleyball Nets,19.503,15–25%,20202,3,15–25%
+BGM,abc/ziv/vtv,Running Tally Counters,46.8292,>40%,268657,50,>40%
+BGM,abc/zzi/yx1,Tennis Balls,28.1068,25–30%,24446,2,25–30%
+BGM,bks,Books,31.2789,30–35%,1390824,496,15–25%
+BGM,bks/8y7,Other Books,0.0,<5%,1388,1,5–15%
+BGM,d69,Kids Accessories,41.298,>40%,15393,4,35–40%
+BGM,d69/thr,School Supplies,34.2567,30–35%,422819,107,25–30%
+BGM,d69/thr/a34,Examination Pads,31.6908,30–35%,66483,19,15–25%
+BGM,d69/thr/bap/2yg,Chalks & Chalk Boxes,8.0098,5–15%,50688,14,5–15%
+BGM,d69/thr/bap/4ol,Erasers,7.9729,5–15%,60342,12,<5%
+BGM,d69/thr/bap/9xx,Rulers,7.7683,5–15%,11135,6,5–15%
+BGM,d69/thr/bap/fcy,Sharpeners,7.6866,5–15%,13543,4,5–15%
+BGM,d69/thr/bap/lsr,Pencils,12.918,5–15%,134239,17,5–15%
+BGM,d69/thr/c4y,Coin Banks,44.2518,>40%,322929,71,35–40%
+BGM,d69/thr/dkv,Geometry & Pencil Boxes,14.1981,5–15%,670145,129,5–15%
+BGM,d69/thr/e1h,Water Bottles,28.0878,25–30%,594738,109,25–30%
+BGM,d69/thr/ub2,Uniform,3.6718,<5%,3023,2,5–15%
+BGM,d69/thr/wsp,School Bags,42.2111,>40%,1321861,232,>40%
+BGM,dgv,Pens & Stationery,32.9533,30–35%,540884,145,15–25%
+BGM,dgv/gas,Diaries & Notebooks,32.2426,30–35%,147674,47,25–30%
+BGM,dgv/gas/mwh,Diaries,34.5718,30–35%,81821,11,25–30%
+BGM,dgv/gas/v3u,Notebooks,27.9713,25–30%,93696,12,25–30%
+BGM,dgv/gas/wti,Scrapbook Kits,4.3681,<5%,72595,9,<5%
+BGM,dgv/id7,Office Equipments,23.8546,15–25%,26343,11,15–25%
+BGM,dgv/id7/lt9,Biometric Devices,33.6435,30–35%,5374,3,25–30%
+BGM,dgv/id7/s1s,Note Counting Machines,53.0247,>40%,22448,5,>40%
+BGM,dgv/j6t,Art Supplies,22.9169,15–25%,783957,197,15–25%
+BGM,dgv/j6t/3i7,Art Clay,24.4084,15–25%,16101,5,15–25%
+BGM,dgv/j6t/7uz,Paint Brushes,38.8659,35–40%,39114,13,30–35%
+BGM,dgv/j6t/ale,Paints,25.0676,25–30%,18131,5,15–25%
+BGM,dgv/j6t/ale/t6t,Water Colors,11.2424,5–15%,17603,5,5–15%
+BGM,dgv/j6t/ale/u9s,Acrylic Colors,28.2028,25–30%,36234,5,15–25%
+BGM,dgv/j6t/ax9,Sketch Pens,18.9799,15–25%,26528,13,5–15%
+BGM,dgv/j6t/ey6,Drawing Papers,25.847,25–30%,1033,1,15–25%
+BGM,dgv/j6t/iv1,Color Pencils,24.409,15–25%,41116,10,15–25%
+BGM,dgv/j6t/nf0,Pastels & Crayons,13.6908,5–15%,3842,2,5–15%
+BGM,dgv/j6t/sk7,Sketch Pads,13.2474,5–15%,63235,9,5–15%
+BGM,dgv/lx4,Tailoring & Embroidery Supplies,10.4629,5–15%,613977,195,5–15%
+BGM,dgv/mqm,Pens,19.0751,15–25%,326877,90,15–25%
+BGM,dgv/mqm/g3e,Mechanical Pencils,0.8595,<5%,18848,4,<5%
+BGM,dgv/mqm/upv,Ball Pens,20.7079,15–25%,18249,2,15–25%
+BGM,dgv/qtq,Calculators,36.6752,35–40%,61322,5,35–40%
+BGM,dgv/rxj,College Supplies,26.2874,25–30%,60063,21,15–25%
+BGM,dgv/rxj/azx/7dd,Pens,24.4516,15–25%,150387,14,15–25%
+BGM,dgv/rxj/hk2,Globes,45.9245,>40%,17507,4,>40%
+BGM,dgv/tkw,Office Supplies,28.1911,25–30%,577650,167,15–25%
+BGM,dgv/tkw/0og,Bookmarks,26.7352,25–30%,14004,5,15–25%
+BGM,dgv/tkw/3tk,Paper Cutters,36.0789,35–40%,10344,3,25–30%
+BGM,dgv/tkw/amn,Key Chains,44.2027,>40%,165033,13,>40%
+BGM,dgv/tkw/b89,Punches & Punching Machines,18.0247,15–25%,11978,4,5–15%
+BGM,dgv/tkw/d00,Files and Folders,46.5764,>40%,117918,22,>40%
+BGM,dgv/tkw/hlr,Desk Organizers,37.8335,35–40%,174422,46,30–35%
+BGM,dgv/tkw/lel,Staplers; Pins & Removers,24.3924,15–25%,19379,4,15–25%
+BGM,dgv/tkw/lxx/7ug,Sticky Notes,10.3066,5–15%,39567,6,5–15%
+BGM,dgv/tkw/mwh,Diaries,28.2393,25–30%,21162,7,25–30%
+BGM,dgv/tkw/p17,Cello Tapes & Tape Dispensers,45.6184,>40%,44333,23,35–40%
+BGM,dgv/tkw/q0z,Sketch & Paint Markers,34.1614,30–35%,15740,4,15–25%
+BGM,dgv/tkw/toy,3D Printer Pens,36.5423,35–40%,30269,3,30–35%
+BGM,eat,Food Products,31.2818,30–35%,509069,184,30–35%
+BGM,eat/0p5,Egg,8.3297,5–15%,48333,5,5–15%
+BGM,eat/0pt,Chocolates,28.5522,25–30%,1068046,159,25–30%
+BGM,eat/0we,Namkeen,28.1969,25–30%,252815,69,25–30%
+BGM,eat/18p,Edible Oil,34.713,30–35%,2059502,383,30–35%
+BGM,eat/5am,Biscuit; Cookie and Rusk,37.0402,35–40%,464619,100,35–40%
+BGM,eat/5ht,Salt,28.4121,25–30%,73233,21,30–35%
+BGM,eat/7rr/nrr,Yogurt and Curd,3.6694,<5%,195675,32,<5%
+BGM,eat/8qh,Papad,29.5215,25–30%,31096,7,25–30%
+BGM,eat/anl,Pulses,28.2831,25–30%,55139,16,25–30%
+BGM,eat/anl/e3o,Gram,31.8686,30–35%,14701,6,30–35%
+BGM,eat/anl/id0,Peanut,18.7539,15–25%,38536,9,15–25%
+BGM,eat/anl/ovb,Dal,28.3373,25–30%,105617,25,25–30%
+BGM,eat/anl/vsh,Soya Chunk,10.0395,5–15%,18716,3,5–15%
+BGM,eat/br4,Fruit Juice,39.4901,35–40%,419270,97,35–40%
+BGM,eat/cpy,Breakfast Cereal,40.1886,>40%,581852,89,35–40%
+BGM,eat/cqq,Drinking Water,12.8938,5–15%,47046,13,5–15%
+BGM,eat/czb,Meat,3.915,<5%,22120,7,<5%
+BGM,eat/d25,Instant Drink Mix,16.7733,15–25%,29714,7,15–25%
+BGM,eat/dui,Coffee Powder,37.8841,35–40%,194372,37,30–35%
+BGM,eat/e6o,Flour and Sooji,31.5188,30–35%,433605,87,30–35%
+BGM,eat/eeg,Cake and Pastry Mix,20.6376,15–25%,79680,9,15–25%
+BGM,eat/eeg/c7s,Custard Powder,29.7245,25–30%,15933,7,25–30%
+BGM,eat/fpm,Tea Powder,42.0728,>40%,361626,82,>40%
+BGM,eat/g6m,Herb and Seasoning,32.8232,30–35%,26006,8,25–30%
+BGM,eat/g6m/rla,Herb Seasoning,52.7721,>40%,57663,7,>40%
+BGM,eat/iw1,Soft Drink Products,12.8803,5–15%,685682,142,5–15%
+BGM,eat/j70,Baking Ingredients and Essential Products,25.6086,25–30%,65681,18,15–25%
+BGM,eat/j70/9sb,Food Essence,22.0837,15–25%,19254,7,15–25%
+BGM,eat/jcr,Sauce and Dip,33.296,30–35%,103505,28,30–35%
+BGM,eat/kjf,Pickle,43.1319,>40%,88146,30,35–40%
+BGM,eat/klf/f3s,Ghee,32.9655,30–35%,332250,64,30–35%
+BGM,eat/kuc,Pasta,29.5327,25–30%,28118,4,30–35%
+BGM,eat/lmt,Vegetables,11.4449,5–15%,34854,14,5–15%
+BGM,eat/lmt/zhh,Fresh Vegetables,7.672,5–15%,356166,44,5–15%
+BGM,eat/lng,Chips,25.4024,25–30%,169795,27,25–30%
+BGM,eat/lnz,Honey,46.1229,>40%,95690,15,>40%
+BGM,eat/ltb,Dry Fruit; Nut & Seed,46.6534,>40%,882485,143,>40%
+BGM,eat/ltb/jlc,Edible Seed,50.3795,>40%,396669,46,>40%
+BGM,eat/ltb/ngb,Dry Fruits,46.8851,>40%,986744,149,>40%
+BGM,eat/mzy,Sugar,32.9073,30–35%,167221,22,30–35%
+BGM,eat/nin,Artificial Sweetener,44.3314,>40%,26735,9,>40%
+BGM,eat/nvt,Vinegar,46.2884,>40%,36938,9,>40%
+BGM,eat/pqj,Noodle,29.9408,25–30%,217459,61,25–30%
+BGM,eat/pta,Sweets and Mixes,34.3921,30–35%,84057,16,25–30%
+BGM,eat/pta/cpt,Dessert Mix,20.5285,15–25%,33797,11,15–25%
+BGM,eat/pta/qoz,Packaged Sweets,26.4447,25–30%,204748,47,25–30%
+BGM,eat/sr7,Ice Cream Mix,4.7546,<5%,236718,43,5–15%
+BGM,eat/tkb,Vermicelli,15.1797,15–25%,40284,17,15–25%
+BGM,eat/umm,Cheese,5.4791,5–15%,83480,16,5–15%
+BGM,eat/uwf,Confectionery Products,38.0707,35–40%,88651,22,30–35%
+BGM,eat/uwf/7wx,Candy,37.4904,35–40%,50733,19,30–35%
+BGM,eat/uwf/eoi,Mouthfreshener,34.6444,30–35%,62039,11,30–35%
+BGM,eat/uwf/fba,Chewing Gum,11.47,5–15%,10218,4,5–15%
+BGM,eat/uxm,Paneer and Tofu,9.579,5–15%,81762,12,5–15%
+BGM,eat/vfd,Jaggery,40.8162,>40%,34011,7,>40%
+BGM,eat/vqg,Syrup,22.1387,15–25%,134055,36,15–25%
+BGM,eat/vyv,Butter,12.631,5–15%,38437,4,5–15%
+BGM,eat/w2q,Fruits,28.3996,25–30%,28930,15,25–30%
+BGM,eat/w2q/b0g,Fresh Fruit,10.4237,5–15%,144123,24,5–15%
+BGM,eat/xgg,Spice Powder and Masala,38.0266,35–40%,350957,128,35–40%
+BGM,eat/xhc,Chutneys,38.978,35–40%,13210,6,>40%
+BGM,eat/xhv,Food Spreads,39.1987,35–40%,333623,38,35–40%
+BGM,eat/xn7,Ready Meal & Mixes,21.4989,15–25%,35360,16,15–25%
+BGM,eat/xn7/dsl,Ready to Eat,19.5147,15–25%,79704,16,15–25%
+BGM,eat/xn7/kzo,Ready Mix Meals,26.3284,25–30%,29527,10,25–30%
+BGM,eat/xog,Milk Powder,38.7176,35–40%,63289,14,35–40%
+BGM,eat/ymr,Food Combo,19.105,15–25%,15195,4,15–25%
+BGM,eat/yul,Rice,32.8849,30–35%,340409,90,30–35%
+BGM,eat/zn0,Milk,22.9211,15–25%,479772,63,15–25%
+BGM,eat/znz/a6k,Millet,45.1997,>40%,13520,4,>40%
+BGM,g9b,Beauty and Grooming,37.7025,35–40%,1022834,242,35–40%
+BGM,g9b/0yh,Fragrances,36.3987,35–40%,1783567,320,35–40%
+BGM,g9b/0yh/22f,Attar,34.168,30–35%,470232,104,30–35%
+BGM,g9b/0yh/aum,Body Mist,36.4001,35–40%,27662,6,30–35%
+BGM,g9b/0yh/jhz,Perfume,38.1986,35–40%,1473348,299,35–40%
+BGM,g9b/0yh/jhz/6ht,Eau De Toilette,32.6242,30–35%,12739,4,30–35%
+BGM,g9b/0yh/jhz/xys,Eau De Parfum,33.902,30–35%,2006847,205,30–35%
+BGM,g9b/0yh/vp1,Deodorants,38.6361,35–40%,112470,17,35–40%
+BGM,g9b/0yh/vp1/0kb,Deodorant Spray,31.3361,30–35%,427647,99,30–35%
+BGM,g9b/0yh/vp1/jvv,Deodorant Roll-ons,39.5359,35–40%,294469,60,35–40%
+BGM,g9b/5nz,Bath & Shower,41.1958,>40%,86288,26,35–40%
+BGM,g9b/5nz/b1b,Bath Essentials,34.1709,30–35%,54918,25,30–35%
+BGM,g9b/5nz/b1b/bwa,Body Wash,39.2375,35–40%,670000,84,35–40%
+BGM,g9b/5nz/b1b/dfs,Bath Essential Oil,45.8071,>40%,39913,14,>40%
+BGM,g9b/5nz/b1b/yug,Bath Soap,37.628,35–40%,1725306,296,35–40%
+BGM,g9b/5nz/yic,Bath Accessory,49.1011,>40%,19413,10,>40%
+BGM,g9b/5nz/yic/fkl,Bath Brush,49.2768,>40%,30974,12,>40%
+BGM,g9b/5nz/yic/hl8,Loofah,49.0894,>40%,38051,7,>40%
+BGM,g9b/cey,Oral Care,42.2521,>40%,90521,30,35–40%
+BGM,g9b/cey/3ky,Teeth Whitening,46.2895,>40%,19445,5,>40%
+BGM,g9b/cey/7ym,Toothpaste,38.0715,35–40%,479335,97,35–40%
+BGM,g9b/cey/m59,Breath Freshener,41.425,>40%,28239,4,>40%
+BGM,g9b/cey/prx,Toothbrush,39.8755,35–40%,119833,19,35–40%
+BGM,g9b/cey/ufa,Mouthwash,42.7841,>40%,21529,5,35–40%
+BGM,g9b/ema,Body & Face Skin Care,35.1908,35–40%,608608,125,35–40%
+BGM,g9b/ema/5la,Body and Face Care,36.8231,35–40%,3338079,949,35–40%
+BGM,g9b/ema/5la/0wq,Facial Kit,41.8861,>40%,264477,59,35–40%
+BGM,g9b/ema/5la/1ke,Moisturizer,35.685,35–40%,2544000,433,35–40%
+BGM,g9b/ema/5la/2em,Face Pack,44.5778,>40%,515974,110,>40%
+BGM,g9b/ema/5la/5ge,,38.51,35–40%,483771,156,35–40%
+BGM,g9b/ema/5la/8um,,37.346,35–40%,924181,129,35–40%
+BGM,g9b/ema/5la/bbf,Skin Care Combo,34.4975,30–35%,237220,71,30–35%
+BGM,g9b/ema/5la/cvd,Scrub,43.1343,>40%,286185,40,>40%
+BGM,g9b/ema/5la/ic8,Hair Removal,43.6184,>40%,472952,115,>40%
+BGM,g9b/ema/5la/jav,Face Wash,38.8482,35–40%,2688299,285,35–40%
+BGM,g9b/ema/5la/r0t,Toner,43.0345,>40%,248352,64,35–40%
+BGM,g9b/ema/5la/tyb,Talcum Powder,33.623,30–35%,123826,39,30–35%
+BGM,g9b/ema/5la/xrh,Sunscreen,40.9824,>40%,3070058,389,35–40%
+BGM,g9b/ema/5la/yzb,Skin Treatment,38.891,35–40%,13183,6,35–40%
+BGM,g9b/ema/me0,Eye Care,50.8634,>40%,16621,5,>40%
+BGM,g9b/ema/me0/5cm,Eye Mask,48.4511,>40%,23630,7,>40%
+BGM,g9b/ema/me0/fmp,Eye Cream,45.6772,>40%,58990,16,>40%
+BGM,g9b/ema/rhm,Hand & Foot Care,46.3986,>40%,40984,11,>40%
+BGM,g9b/ema/rhm/4sp,Pedicure Kit,37.7404,35–40%,28704,3,35–40%
+BGM,g9b/ema/rhm/hdi,Foot Filers,45.1617,>40%,23314,10,>40%
+BGM,g9b/ema/rhm/irj,Hand Wash,39.4752,35–40%,213514,26,35–40%
+BGM,g9b/ema/rhm/jrn,Hand Sanitizer,51.7839,>40%,25927,5,>40%
+BGM,g9b/ema/yfh/ebw,Oil and Wax Heater,46.0293,>40%,34339,3,>40%
+BGM,g9b/ema/yfh/ri0,Blackhead Remover,46.1137,>40%,39292,9,>40%
+BGM,g9b/ema/yfh/tdo,Massager,0.0,<5%,41207,12,<5%
+BGM,g9b/ffi,Makeup,30.9462,30–35%,1239849,286,25–30%
+BGM,g9b/ffi/3dd,Makeup Kits & Combo,29.5352,25–30%,435375,24,25–30%
+BGM,g9b/ffi/3dd/vgd,Makeup Kit Combo,7.6154,5–15%,17504,9,5–15%
+BGM,g9b/ffi/3dd/zjo,Makeup Kit,22.3149,15–25%,52848,21,15–25%
+BGM,g9b/ffi/bhh,Nails,32.2315,30–35%,13372,5,15–25%
+BGM,g9b/ffi/bhh/5vr,Nail Polish Remover,23.4164,15–25%,19875,8,15–25%
+BGM,g9b/ffi/bhh/hb8,Nail Polish,36.5886,35–40%,305888,50,30–35%
+BGM,g9b/ffi/bhh/t4z,Nail Art,6.4801,5–15%,76388,19,5–15%
+BGM,g9b/ffi/dzu,Face Makeup,32.208,30–35%,162354,48,30–35%
+BGM,g9b/ffi/dzu/dqh,Makeup Remover,34.6921,30–35%,14891,4,30–35%
+BGM,g9b/ffi/dzu/gru,Foundation,36.3633,35–40%,690639,137,35–40%
+BGM,g9b/ffi/dzu/njv,Concealer,37.1418,35–40%,326928,48,35–40%
+BGM,g9b/ffi/dzu/sa5,Primer,40.8315,>40%,504603,87,35–40%
+BGM,g9b/ffi/dzu/ww0,Face Makeup Combo,12.0948,5–15%,16999,8,15–25%
+BGM,g9b/ffi/dzu/y2c,Highlighter,35.6935,35–40%,332671,51,30–35%
+BGM,g9b/ffi/dzu/yk7,Blush,38.2612,35–40%,264375,39,35–40%
+BGM,g9b/ffi/dzu/ypp,Compact,38.4892,35–40%,318131,62,35–40%
+BGM,g9b/ffi/ssf,Makeup Accessory,9.9656,5–15%,61261,33,5–15%
+BGM,g9b/ffi/ssf/2yj,Sindoor,39.1881,35–40%,32293,11,30–35%
+BGM,g9b/ffi/ssf/35h,Artificial Nail,11.7468,5–15%,401090,45,5–15%
+BGM,g9b/ffi/ssf/6pw,Tattoos Sticker,1.045,<5%,570915,88,<5%
+BGM,g9b/ffi/ssf/9r6,Bindi,6.0633,5–15%,83007,19,<5%
+BGM,g9b/ffi/ssf/dnv,Mehendi,31.3124,30–35%,31042,9,15–25%
+BGM,g9b/ffi/ssf/gem,Makeup Brush,36.5525,35–40%,287121,50,30–35%
+BGM,g9b/ffi/ssf/gjj,Hand Mirror,9.5429,5–15%,29425,14,5–15%
+BGM,g9b/ffi/ssf/iik,Vanity Box,23.4782,15–25%,658914,163,15–25%
+BGM,g9b/ffi/ssf/nef,Artificial Eyelash,32.0342,30–35%,35100,8,25–30%
+BGM,g9b/ffi/ssf/qg8,Nail Cutter,24.5052,15–25%,81995,6,15–25%
+BGM,g9b/ffi/ssf/vpf,Facial Wipe,47.4645,>40%,91757,13,>40%
+BGM,g9b/ffi/ssf/zto,Sponge,16.5275,15–25%,44901,14,15–25%
+BGM,g9b/ffi/ttr,Eye Makeup,40.5374,>40%,301988,92,30–35%
+BGM,g9b/ffi/ttr/dbs,Kajal,37.0433,35–40%,203176,41,35–40%
+BGM,g9b/ffi/ttr/i7s,Eyeshadow,35.3802,35–40%,266358,25,30–35%
+BGM,g9b/ffi/ttr/nz1,Eyebrow Pencil,46.796,>40%,24376,6,>40%
+BGM,g9b/ffi/ttr/q3d,Eyeliner,43.0386,>40%,118963,22,35–40%
+BGM,g9b/ffi/ttr/xbe,Mascara,44.1237,>40%,80621,9,>40%
+BGM,g9b/ffi/tv5,Lips,35.9884,35–40%,147242,41,30–35%
+BGM,g9b/ffi/tv5/4rm,Lip Gloss,31.2948,30–35%,473992,58,25–30%
+BGM,g9b/ffi/tv5/nyo,Lip Liner,29.5821,25–30%,172868,19,25–30%
+BGM,g9b/ffi/tv5/sho,Lip Balm,39.9315,35–40%,669924,121,35–40%
+BGM,g9b/ffi/tv5/una,Lipstick,37.0304,35–40%,2219308,312,30–35%
+BGM,g9b/iph,Women's Personal Hygiene,44.3499,>40%,57468,13,>40%
+BGM,g9b/iph/flg,Menstrual Cup,52.688,>40%,27418,9,>40%
+BGM,g9b/iph/jth,Sanitary Pad,39.4204,35–40%,731197,130,35–40%
+BGM,g9b/iph/oag,Pantyliner,46.343,>40%,17159,6,>40%
+BGM,g9b/iph/p78,Intimate Care,36.9094,35–40%,21038,6,35–40%
+BGM,g9b/lcf,Hair Care and Accessory,39.2865,35–40%,294984,67,35–40%
+BGM,g9b/lcf/bjl,Hair Accessory,26.2167,25–30%,1162686,308,15–25%
+BGM,g9b/lcf/bjl/1gu,Braid Extension,0.9236,<5%,62688,12,<5%
+BGM,g9b/lcf/bjl/3qf,Hair Comb,41.3097,>40%,181093,39,35–40%
+BGM,g9b/lcf/bjl/abk,Rubber Band,3.7803,<5%,109595,24,<5%
+BGM,g9b/lcf/bjl/ahy,Bun,3.6269,<5%,33224,9,<5%
+BGM,g9b/lcf/bjl/auy,Hair Band,6.277,5–15%,41628,13,5–15%
+BGM,g9b/lcf/bjl/aw9,Hair Brush,39.3559,35–40%,54805,21,35–40%
+BGM,g9b/lcf/bjl/bxz,Hair Accessory Set,22.0669,15–25%,34128,14,15–25%
+BGM,g9b/lcf/bjl/e7c,Hair Pin,3.5363,<5%,38175,11,<5%
+BGM,g9b/lcf/bjl/edf,Hair Wig,5.5128,5–15%,109980,32,5–15%
+BGM,g9b/lcf/bjl/exg,Hair Extension,6.525,5–15%,246313,69,5–15%
+BGM,g9b/lcf/bjl/fic,Hair Clip,10.5637,5–15%,359011,51,5–15%
+BGM,g9b/lcf/bjl/iyr,Head Band,33.4772,30–35%,75317,16,30–35%
+BGM,g9b/lcf/bjl/rti,Banana Clip,1.4566,<5%,16682,3,<5%
+BGM,g9b/lcf/bjl/zbu,Hair Claw,7.9446,5–15%,179594,34,5–15%
+BGM,g9b/lcf/qqm,Hair Care,40.8257,>40%,1104003,271,35–40%
+BGM,g9b/lcf/qqm/331,Hair Treatment,41.3201,>40%,234629,51,>40%
+BGM,g9b/lcf/qqm/55t,Hair Color,42.9831,>40%,393006,101,>40%
+BGM,g9b/lcf/qqm/803,Henna,46.8498,>40%,46600,10,>40%
+BGM,g9b/lcf/qqm/fmb,Hair Oil,38.6777,35–40%,674469,172,35–40%
+BGM,g9b/lcf/qqm/ha1,Conditioner,37.8557,35–40%,160602,22,35–40%
+BGM,g9b/lcf/qqm/q0a,Hair Wax,48.4617,>40%,24411,7,>40%
+BGM,g9b/lcf/qqm/sys,Hair Styling,41.8912,>40%,28870,11,>40%
+BGM,g9b/lcf/qqm/t36,Shampoo,38.5983,35–40%,1581168,277,35–40%
+BGM,g9b/lcf/qqm/tml,Hair Serum,42.0574,>40%,610848,103,>40%
+BGM,g9b/lcf/qqm/un4,Hair Gel,37.0194,35–40%,28504,7,35–40%
+BGM,g9b/lcf/qqm/x2y,Hair Care Combo,35.5723,35–40%,78086,27,35–40%
+BGM,g9b/tiz,Shaving & Beard Care,36.4096,35–40%,142597,38,35–40%
+BGM,g9b/tiz/07u,Shaving Blades,21.5776,15–25%,13375,5,15–25%
+BGM,g9b/tiz/pwx,Men's Grooming Combo Kit,45.0752,>40%,32783,9,>40%
+BGM,g9b/tiz/rop,Shaving Razors,42.4082,>40%,249096,42,>40%
+BGM,g9b/tiz/v6u,Aftershave,45.3856,>40%,35844,13,>40%
+BGM,gsx/bad/csq,Corrugated Boxes,19.2029,15–25%,16961,7,5–15%
+BGM,gsx/bfk,Safety Products,34.5706,30–35%,34243,8,30–35%
+BGM,gsx/bfk/51q,Safety Glasses,31.5379,30–35%,27180,8,25–30%
+BGM,gsx/bfk/9fn,Safety Gloves,48.9855,>40%,16805,4,>40%
+BGM,gsx/bfk/cin,Safety Shoes,35.2727,35–40%,275831,29,30–35%
+BGM,gsx/bfk/o9h,Safety Helmets,30.2319,30–35%,13327,5,25–30%
+BGM,gsx/l9d,Lab & Scientific Products,5.3782,5–15%,27723,8,5–15%
+BGM,gsx/l9d/gap,Lab Coat,44.6998,>40%,12311,5,>40%
+BGM,gsx/l9d/vhz,TDS Meter,51.8659,>40%,21706,4,>40%
+BGM,gsx/o8k/fx7/0kl,3D Printers,12.5858,5–15%,23598,5,5–15%
+BGM,hlc,Health Care,44.1889,>40%,307530,90,>40%
+BGM,hlc/20m,Home Medical Supplies,35.7865,35–40%,123798,38,35–40%
+BGM,hlc/20m/0sl,Bathroom and Toilet Aid,40.9424,>40%,34060,14,35–40%
+BGM,hlc/20m/0sl/gqo,Commode Chairs,43.2719,>40%,40509,8,>40%
+BGM,hlc/20m/0sl/wgc,Adult Diapers,47.1488,>40%,90891,21,>40%
+BGM,hlc/20m/21y/48h,Pill Boxes,34.8332,30–35%,30603,9,30–35%
+BGM,hlc/20m/52n/9pv,Wheel Chairs,36.1234,35–40%,42903,5,30–35%
+BGM,hlc/20m/idb/5sg,Hot and Cold Packs,52.9765,>40%,18293,6,>40%
+BGM,hlc/20m/idb/6dt,Hot Bags,45.5688,>40%,150985,12,>40%
+BGM,hlc/20m/led/dew,Pollution Masks,49.4392,>40%,27193,15,>40%
+BGM,hlc/20m/led/jih,Smoking Cessation,20.2936,15–25%,69017,14,15–25%
+BGM,hlc/20m/mk7,Pregnancy Kits,31.5846,30–35%,62828,12,30–35%
+BGM,hlc/20m/n8k/pm0,Crepe Bandages,51.4663,>40%,12583,6,>40%
+BGM,hlc/ah4,Home Medicines,37.2336,35–40%,743274,238,35–40%
+BGM,hlc/ah4/2bl/fbe,Ayurvedic,43.6005,>40%,48699,12,35–40%
+BGM,hlc/ah4/9ii/nkv,Ayurvedic,47.5659,>40%,6717,3,35–40%
+BGM,hlc/ah4/aml/pfq,Ayurvedic,33.7251,30–35%,11742,5,30–35%
+BGM,hlc/ah4/c6g,Antiseptics,6.5563,5–15%,47573,8,5–15%
+BGM,hlc/ah4/iav/jnk,Ayurvedic,40.4551,>40%,117592,42,35–40%
+BGM,hlc/ah4/ipc/lqh,Ayurvedic,39.5044,35–40%,11743,5,35–40%
+BGM,hlc/ah4/lm3/e74,Ayurvedic,35.0606,35–40%,24161,10,30–35%
+BGM,hlc/ah4/ms0/suo,Ayurvedic,48.5478,>40%,7850,2,>40%
+BGM,hlc/ah4/wwq/fvh,Contact Lens,17.4836,15–25%,116269,23,15–25%
+BGM,hlc/ah4/wwq/zpw,Eye Drops,44.7817,>40%,4283,3,>40%
+BGM,hlc/ah4/xos,Body Pain Relief,46.383,>40%,215247,49,>40%
+BGM,hlc/etg,Health Supplements,43.2627,>40%,380494,98,>40%
+BGM,hlc/etg/1rx,Protein Supplement,44.8055,>40%,1231760,187,>40%
+BGM,hlc/etg/2yn,Energy Drinks,32.2965,30–35%,152029,36,30–35%
+BGM,hlc/etg/qtw,Vitamin Supplement,46.5074,>40%,631891,166,>40%
+BGM,hlc/etg/sxm,Milk Drink Mixes,33.5164,30–35%,397015,68,30–35%
+BGM,hlc/mly,Professional medical supplies,49.6991,>40%,28910,6,35–40%
+BGM,hlc/mly/qbi/2jl,Hospital Scrubs,49.495,>40%,15347,7,>40%
+BGM,hlc/p5s,,36.8568,35–40%,134298,40,30–35%
+BGM,hlc/p5s/h5u,,41.0887,>40%,843134,142,35–40%
+BGM,hlc/p5s/o8a,,39.774,35–40%,29034,8,35–40%
+BGM,hlc/p5s/sjm,,43.0477,>40%,45956,13,>40%
+BGM,kyh,Baby Care,46.8438,>40%,326344,99,>40%
+BGM,kyh/5mt,Baby Gear,38.336,35–40%,150934,44,35–40%
+BGM,kyh/5mt/763,Baby Walkers,45.4662,>40%,247340,28,>40%
+BGM,kyh/5mt/9b3,Baby Swings,32.398,30–35%,22986,5,30–35%
+BGM,kyh/5mt/jv5,Baby Bouncers & Rockers,27.7377,25–30%,25395,6,25–30%
+BGM,kyh/5mt/llt,Baby Strollers & Prams,44.1524,>40%,38118,7,>40%
+BGM,kyh/5mt/uja,Baby High Chairs,43.4866,>40%,34022,5,>40%
+BGM,kyh/5mt/x7b,Baby Carriers & Cuddlers,41.729,>40%,100985,15,>40%
+BGM,kyh/7j3,Baby Bedding,45.6871,>40%,445693,106,>40%
+BGM,kyh/7j3/5j4,Baby Pillows,43.9707,>40%,78168,18,>40%
+BGM,kyh/7j3/g7e,Baby Mats,44.7374,>40%,57158,18,>40%
+BGM,kyh/7j3/lcl,Baby Bed Protector,45.7923,>40%,41127,19,>40%
+BGM,kyh/7j3/mer,Baby Cradles,46.3279,>40%,192381,44,>40%
+BGM,kyh/7j3/vyj,Baby Mosquito Nets,38.7954,35–40%,125141,28,35–40%
+BGM,kyh/7j3/w47,Baby Blankets,44.8056,>40%,63972,20,>40%
+BGM,kyh/7j3/yr4,Baby Bedding Sets,47.6985,>40%,83011,19,>40%
+BGM,kyh/9gj,Baby Feeding Bottle & Accessories,46.315,>40%,21099,8,35–40%
+BGM,kyh/9gj/exs,Baby Bottle Covers,37.6222,35–40%,10329,6,30–35%
+BGM,kyh/9gj/ovq,Baby Feeding Bottles,41.3979,>40%,276135,59,35–40%
+BGM,kyh/9gj/tum,Baby Bottle Nipples,32.882,30–35%,5687,2,15–25%
+BGM,kyh/9gj/ty9,Baby Bottle Cleaning Brushes,46.1289,>40%,17902,8,>40%
+BGM,kyh/arw/jq6,Infant Formula,16.0755,15–25%,76203,27,15–25%
+BGM,kyh/arw/mgv,Baby Cereal,23.107,15–25%,43437,15,25–30%
+BGM,kyh/dki,Baby Feeding Utensils & Accessories,44.7689,>40%,91463,37,>40%
+BGM,kyh/dki/9ya,Baby Spoons,46.2532,>40%,18963,5,>40%
+BGM,kyh/dki/gtn,Baby Sipper Cups,44.9356,>40%,96162,15,>40%
+BGM,kyh/dki/huw,Teethers,47.6705,>40%,51277,11,>40%
+BGM,kyh/dki/vvp,Baby Bibs & Hankies,45.2349,>40%,19496,8,>40%
+BGM,kyh/fdp,Diaper & Potty Training,45.668,>40%,70614,25,>40%
+BGM,kyh/fdp/c5n,Potty Seats,43.5749,>40%,83477,19,>40%
+BGM,kyh/fdp/kvq,Baby Wipes,42.1624,>40%,431346,54,>40%
+BGM,kyh/fdp/q59,Diaper Bags,44.2587,>40%,71726,17,>40%
+BGM,kyh/fdp/urx,Nappy,47.4232,>40%,68359,25,>40%
+BGM,kyh/fdp/yvf,Baby Diapers,42.7649,>40%,1743674,295,>40%
+BGM,kyh/g83,Baby Medical & Health Care,29.8886,25–30%,14089,6,25–30%
+BGM,kyh/g83/wcm,Baby Mosquito & Insect Repellant,38.1732,35–40%,11846,6,35–40%
+BGM,kyh/g83/xf5,Nasal Aspirators,41.9244,>40%,14872,7,>40%
+BGM,kyh/ga0,Baby Oral Care,48.5027,>40%,17465,9,>40%
+BGM,kyh/ga0/aim,Baby Toothpastes,47.4455,>40%,20004,7,>40%
+BGM,kyh/ga0/okg,Baby Toothbrushes,50.3468,>40%,20041,12,>40%
+BGM,kyh/ie7,Nursing & Breast Feeding,39.182,35–40%,64527,12,35–40%
+BGM,kyh/ie7/dcl,Breast Feeding Pillows,51.1915,>40%,39948,5,>40%
+BGM,kyh/ie7/gua,Breast Pumps,46.2635,>40%,84585,21,>40%
+BGM,kyh/pl5,Baby Bath; Hair & Skin Care,39.6929,35–40%,101391,39,35–40%
+BGM,kyh/pl5/0a0,Baby Powder Puffs,36.593,35–40%,18908,5,35–40%
+BGM,kyh/pl5/8q6,Baby Lotions & Creams,35.3927,35–40%,213459,49,35–40%
+BGM,kyh/pl5/a0b,Baby Powders,25.9669,25–30%,56807,10,25–30%
+BGM,kyh/pl5/ckx,Baby Shampoo,41.7553,>40%,74424,18,>40%
+BGM,kyh/pl5/kjr,Baby Soap,32.5557,30–35%,120372,26,30–35%
+BGM,kyh/pl5/pee,Baby Body Wash,43.5135,>40%,24790,10,35–40%
+BGM,kyh/pl5/sfs,Baby Sunscreen,48.0535,>40%,27742,8,>40%
+BGM,kyh/pl5/v7f,Baby Massage Oils,36.8837,35–40%,81052,25,35–40%
+BGM,kyh/rdc,Baby Bathing Accessories,31.4239,30–35%,163920,45,25–30%
+BGM,kyh/rdc/aaj,Baby Bath Towel,50.2517,>40%,28200,7,>40%
+BGM,kyh/rdc/kbh,Baby Bath Tub,37.159,35–40%,182887,37,30–35%
+BGM,kyh/rdc/wjk,Baby Bath Toys,0.0,<5%,1243,1,5–15%
+BGM,kyh/tyn/i07,Baby Nail Clippers,47.1431,>40%,59086,12,>40%
+BGM,kyh/utp,Baby Gift Sets & Combo,38.6907,35–40%,232074,58,30–35%
+BGM,kyh/utp/8yr,,31.2794,30–35%,172526,14,25–30%
+BGM,kyh/utp/bte,Baby Bath; Hair & Skin Care Combo,19.5498,15–25%,83612,19,15–25%
+BGM,kyh/vxo,Baby Proofing & Safety,39.5356,35–40%,18606,11,35–40%
+BGM,kyh/vxo/kyv,Baby Head protector,51.3723,>40%,35562,6,>40%
+BGM,kyh/vxo/ppd,Baby Proofing,42.3386,>40%,49038,16,35–40%
+BGM,mgl/ksc,Party Supplies,22.0653,15–25%,193222,78,15–25%
+BGM,mgl/ksc/99s,Accessories,4.3562,<5%,57642,19,5–15%
+BGM,mgl/ksc/gcv,Balloons & Decoration,33.3412,30–35%,96892,25,25–30%
+BGM,mgl/ksc/vkl,Party & Gift Bags,18.3453,15–25%,96297,18,15–25%
+BGM,p3t,Pet Supplies,28.0032,25–30%,109566,47,25–30%
+BGM,p3t/0mo,Cats,25.9703,25–30%,102205,33,25–30%
+BGM,p3t/0mo/oiv,Cat Food,41.0569,>40%,154834,29,35–40%
+BGM,p3t/0mo/wfi,Cat Litter Tray Refills,39.8053,35–40%,23311,5,35–40%
+BGM,p3t/9iu,Birds,18.6081,15–25%,68771,28,15–25%
+BGM,p3t/9iu/3dm,Egg Incubators,39.5011,35–40%,28741,9,35–40%
+BGM,p3t/9iu/4kp,Bird Food,54.0198,>40%,3234,2,>40%
+BGM,p3t/9iu/e3v,Bird Shoulder Guards,0.0289,<5%,10374,4,<5%
+BGM,p3t/9iu/ubi,Bird Feeders,39.2204,35–40%,53875,13,30–35%
+BGM,p3t/ea3,Dogs,37.8385,35–40%,190515,46,30–35%
+BGM,p3t/ea3/8zj,Dog Food,41.8869,>40%,138776,22,35–40%
+BGM,p3t/ea3/b1n,Dog Collars,40.5673,>40%,39771,14,>40%
+BGM,p3t/ixl,Grooming & Hygiene,49.6647,>40%,12228,6,35–40%
+BGM,p3t/ixl/770,Pet Combs,46.8866,>40%,16975,7,>40%
+BGM,p3t/ixl/osh,Pet Shampoo,47.1917,>40%,41715,8,>40%
+BGM,p3t/ixl/xcj,Pet Hair Trimmer,36.8019,35–40%,29561,14,30–35%
+BGM,p3t/ljf,Fish & Aquatic,13.1314,5–15%,10235,8,15–25%
+BGM,p3t/ljf/9uk,Fish Food,47.0784,>40%,21290,7,>40%
+BGM,p3t/ljf/nct,Aquarium & Accessories,18.3472,15–25%,240118,37,15–25%
+BGM,p3t/ljf/nct/dv5,Aquarium Substrates,4.5595,<5%,36144,13,5–15%
+BGM,p3t/ljf/nct/hya,Fish Bowls,2.8059,<5%,14826,4,<5%
+BGM,p3t/ljf/nct/ksy,Aquarium Pumps,28.6463,25–30%,14892,7,15–25%
+BGM,p3t/ljf/nct/uvh,Aquarium Lights,18.2968,15–25%,32891,6,15–25%
+BGM,p3t/ljf/nct/vvl,Aquarium Filters,33.7184,30–35%,76967,19,30–35%
+BGM,p3t/qxs,Small Animals,15.826,15–25%,17585,3,15–25%
+BGM,qoc,Exercise & Fitness,44.5773,>40%,153623,36,35–40%
+BGM,qoc/acb,Fitness Accessories,42.5254,>40%,314417,75,35–40%
+BGM,qoc/acb/0xb,Skipping Ropes,47.2429,>40%,70654,12,>40%
+BGM,qoc/acb/aa3,Supports,44.088,>40%,79761,33,>40%
+BGM,qoc/acb/aa3/fot,,47.8723,>40%,173712,53,>40%
+BGM,qoc/acb/aa3/h1y,,39.1309,35–40%,19077,5,35–40%
+BGM,qoc/acb/aa3/irn,,48.914,>40%,29973,7,>40%
+BGM,qoc/acb/aa3/qzw,,43.8605,>40%,68670,20,>40%
+BGM,qoc/acb/aa3/soi,,48.125,>40%,46907,14,>40%
+BGM,qoc/acb/aa3/us7,,41.0523,>40%,20413,5,>40%
+BGM,qoc/acb/aa3/vf0,,45.5998,>40%,78656,21,>40%
+BGM,qoc/acb/acl,Resistance Tubes,44.0507,>40%,16254,7,>40%
+BGM,qoc/acb/afr,Gym Gloves,37.7568,35–40%,162638,15,35–40%
+BGM,qoc/acb/b80,Fitness Bands,46.9464,>40%,33191,6,>40%
+BGM,qoc/acb/buq,Bars,41.976,>40%,181263,40,35–40%
+BGM,qoc/acb/jjo,Hand Grips,41.1577,>40%,345904,39,>40%
+BGM,qoc/acb/kjs,Free Weights,27.8368,25–30%,14603,8,15–25%
+BGM,qoc/acb/qat,Shakers and Sippers,44.2994,>40%,274622,37,>40%
+BGM,qoc/acb/zgt,Gym Bag,42.6923,>40%,191833,11,>40%
+BGM,qoc/acb/zuc,Dumbbells,31.3293,30–35%,554219,73,25–30%
+BGM,qoc/amf,Fitness Equipment,42.2201,>40%,314182,59,35–40%
+BGM,qoc/amf/eut,Exercise Bikes,48.5215,>40%,21407,7,>40%
+BGM,qoc/amf/o3b,Fitness Benches,23.9037,15–25%,41550,8,15–25%
+BGM,qoc/amf/oyq,Treadmills,51.6602,>40%,114322,22,>40%
+BGM,qoc/amf/pz0,Home Gym Combos,15.9505,15–25%,292824,22,15–25%
+BGM,qoc/amf/sma,Ab Exercisers,37.9573,35–40%,36354,16,>40%
+BGM,qoc/amf/vh3,Fitness Kits,36.9923,35–40%,33315,12,35–40%
+BGM,qoc/jl8,Mobility Aids & Equipments,29.542,25–30%,27466,8,25–30%
+BGM,qoc/jl8/lxm,Finger Sleeves,1.9981,<5%,94393,17,<5%
+BGM,qoc/jl8/pn6,Walking Sticks,47.1533,>40%,56522,20,>40%
+BGM,qoc/s1h/fco,Yoga Mats,39.5632,35–40%,145893,15,35–40%
+BGM,tng,Toys and Games,29.9871,25–30%,2563171,544,25–30%
+BGM,tng/09a,Sports Toys,11.4636,5–15%,27330,17,5–15%
+BGM,tng/2cz,Tricycles and Rideons,35.6751,35–40%,521619,116,30–35%
+BGM,tng/2cz/hsq,Tricycles,38.9957,35–40%,222317,35,35–40%
+BGM,tng/2cz/yth,Electric Rideons,33.374,30–35%,318275,74,30–35%
+BGM,tng/56a,Toy Vehicles,15.1588,15–25%,1266618,226,5–15%
+BGM,tng/56a/fq8,Remote Control Toys,24.9105,15–25%,318444,55,15–25%
+BGM,tng/56a/fq8/asz,Mini Drones,0.5445,<5%,53260,12,<5%
+BGM,tng/56a/fq8/gl8,Remote Control Toy Vehicles,23.3931,15–25%,1858701,285,15–25%
+BGM,tng/56a/fq8/p0j,Remote Control Aeroplane and Helicopters,6.9132,5–15%,332539,58,5–15%
+BGM,tng/56a/sa6,Road Vehicles,6.4184,5–15%,338716,81,5–15%
+BGM,tng/8k8,Hobby Kits,2.7795,<5%,188341,80,<5%
+BGM,tng/8k8/fqj,Coin Collection,8.6618,5–15%,13115,5,5–15%
+BGM,tng/8r2,,34.59,30–35%,48858,17,30–35%
+BGM,tng/cg5,Art and Craft,23.9199,15–25%,84946,37,15–25%
+BGM,tng/cg5/tzr,Art Craft Kit,25.3836,25–30%,554544,134,15–25%
+BGM,tng/clb,Soft Toys,29.3888,25–30%,408737,82,15–25%
+BGM,tng/clb/fe8,Cartoon Characters Soft Toys,11.531,5–15%,18073,10,5–15%
+BGM,tng/clb/vl5,Animals Soft Toys,12.2935,5–15%,38142,12,5–15%
+BGM,tng/clb/xv3,Teddy Bears,31.2097,30–35%,457688,60,25–30%
+BGM,tng/dcr,Musical Toys,22.8649,15–25%,23359,7,15–25%
+BGM,tng/dcr/5y5,Toy Piano,20.0185,15–25%,32410,4,15–25%
+BGM,tng/dyy,Role Play Toys,25.9677,25–30%,105150,34,15–25%
+BGM,tng/dyy/8g2,Animal Figures and Play Sets,10.8107,5–15%,17085,4,5–15%
+BGM,tng/dyy/daw,Fashion and Makeup Toy Set,26.6133,25–30%,16627,5,15–25%
+BGM,tng/dyy/k55,Doctor Play Sets,36.6333,35–40%,50798,8,30–35%
+BGM,tng/dyy/kea,Kitchen Set,26.6105,25–30%,164082,38,25–30%
+BGM,tng/dyy/vl9,Detective and Spy Kits,4.7194,<5%,7501,4,5–15%
+BGM,tng/fkw,Baby Toys,35.6394,35–40%,841861,134,30–35%
+BGM,tng/fkw/jyk,Baby Musical Toy,24.1002,15–25%,60319,20,15–25%
+BGM,tng/gfv,Indoor Games,41.9173,>40%,18453,9,30–35%
+BGM,tng/gfv/h1e,Card Games,16.971,15–25%,181916,32,5–15%
+BGM,tng/gfv/isv,Board Games,37.8475,35–40%,167303,42,30–35%
+BGM,tng/hyl,,2.3262,<5%,25664,10,<5%
+BGM,tng/kk6,Puzzles and Cubes,41.5655,>40%,220688,55,35–40%
+BGM,tng/kks,Dolls & Doll Houses,12.4178,5–15%,293933,57,5–15%
+BGM,tng/kks/5p9,Doll House Set,20.451,15–25%,23906,4,15–25%
+BGM,tng/kks/aty,Dolls,11.4147,5–15%,68526,13,5–15%
+BGM,tng/lhf,Outdoor Toys,19.2456,15–25%,787141,122,15–25%
+BGM,tng/lhf/azy,Kids Tents,43.3969,>40%,127721,30,>40%
+BGM,tng/lhf/eyz,Kids Scooters,45.0466,>40%,24912,7,>40%
+BGM,tng/lhf/jxi,Swimming Pool,9.6638,5–15%,158198,21,5–15%
+BGM,tng/lhf/qz4,Kids Swings and Slides,26.8369,25–30%,72009,19,25–30%
+BGM,tng/ll1,Learning and Educational Toys,37.4277,35–40%,173644,68,30–35%
+BGM,tng/ll1/cwo,Kids Laptops and Tablets,20.0227,15–25%,47491,17,15–25%
+BGM,tng/ll1/e5o,Building and Blocks Toys,21.044,15–25%,116347,31,15–25%
+BGM,tng/ll1/u5b,Science Project Kit,42.4411,>40%,13633,3,30–35%
+BGM,tng/sv3,Action Toys,11.4641,5–15%,882296,145,5–15%
+BGM,tng/sv3/bm8,Gag Toys,8.4221,5–15%,56779,9,5–15%
+BGM,tng/sv3/f14,Spinning and Launcher Toys,6.6559,5–15%,155472,31,<5%
+BGM,tng/sv3/p36,Battle Toys,15.8323,15–25%,2235935,146,15–25%
+BGM,tng/sv3/zum,Action Figures,13.3293,5–15%,446377,88,5–15%
+BGM,tng/t4r,,2.8789,<5%,595893,218,<5%
+BGM,ypu,Musical Instruments,31.1333,30–35%,28484,13,25–30%
+BGM,ypu/a3t/p03,Harmonicas,26.7485,25–30%,23377,5,15–25%
+BGM,ypu/a3t/q4z,Flutes,42.5548,>40%,37937,8,>40%
+BGM,ypu/alc,Studio/Stage Equipment & Accessories,14.5857,5–15%,101531,23,15–25%
+BGM,ypu/alc/3d4,Microphone,43.6795,>40%,641211,135,>40%
+BGM,ypu/alc/6pt,DJ Controller,0.2723,<5%,44070,5,<5%
+BGM,ypu/asg,Accessories,51.1311,>40%,4111,2,15–25%
+BGM,ypu/asg/yhz,Cases & Covers,29.7837,25–30%,9616,4,15–25%
+BGM,ypu/nvg/n7w,Harmoniums,1.0688,<5%,33308,3,<5%
+BGM,ypu/nvg/xqg,Musical Keyboards,11.265,5–15%,117452,21,5–15%
+BGM,ypu/ttd,Drums & Percussion,10.5339,5–15%,53627,23,5–15%
+BGM,ypu/ttd/giz,Dholaks,29.1388,25–30%,59124,12,25–30%
+BGM,ypu/ttd/q70,Tablas,7.0603,5–15%,19192,2,5–15%
+BGM,ypu/ttd/s0r,,0.0,<5%,28660,3,<5%
+BGM,ypu/ttd/ybw,Ghungroos,7.5889,5–15%,11978,4,5–15%
+BGM,ypu/ujd,String Instruments,29.8673,25–30%,118290,13,25–30%
+BGM,ypu/ujd/7wz,Acoustic Guitars,19.5867,15–25%,252911,32,15–25%
+BGM,ypu/ujd/ggx,Ukuleles,23.8964,15–25%,23560,3,15–25%
+BGM,ypu/ujd/kqe,Electric Guitars,5.862,5–15%,25094,3,5–15%
+CoreElectronics,4rr,Gaming,14.6101,5–15%,106536,29,5–15%
+CoreElectronics,4rr/fa6,Games,5.3562,5–15%,195176,27,<5%
+CoreElectronics,4rr/fa6/32v,,0.3469,<5%,40358,8,<5%
+CoreElectronics,4rr/fa6/4r9,,1.7125,<5%,21372,8,<5%
+CoreElectronics,4rr/km5,Gaming Accessories,18.8881,15–25%,324442,89,15–25%
+CoreElectronics,4rr/km5/7uj,Gaming Chairs,38.5385,35–40%,28203,1,35–40%
+CoreElectronics,4rr/km5/r39,Controllers,16.9462,15–25%,164137,33,5–15%
+CoreElectronics,4rr/km5/r39/a7g,Gamepads,12.0485,5–15%,16143,6,5–15%
+CoreElectronics,4rr/km5/r39/q8s,Motion Controllers,2.2665,<5%,3662,2,<5%
+CoreElectronics,4rr/tin,Gaming Components,7.9717,5–15%,109751,21,5–15%
+CoreElectronics,4rr/tz1,Gaming Laptops,13.3874,5–15%,150216,34,5–15%
+CoreElectronics,4rr/x1m,Gaming Consoles,3.9854,<5%,400338,65,<5%
+CoreElectronics,4rr/x1m/ogz,PS5,2.5447,<5%,108617,7,<5%
+CoreElectronics,4rr/x1m/wym,PS4,4.8649,<5%,46949,7,<5%
+CoreElectronics,6bo,Computers,27.4598,25–30%,325865,74,15–25%
+CoreElectronics,6bo/70k,Network Components,17.7957,15–25%,148463,55,15–25%
+CoreElectronics,6bo/70k/2a2,Routers,21.3513,15–25%,125814,23,15–25%
+CoreElectronics,6bo/70k/85j,Wireless USB Adapters,25.1125,25–30%,30889,10,15–25%
+CoreElectronics,6bo/70k/nj6,Cables,40.222,>40%,35135,9,30–35%
+CoreElectronics,6bo/70k/o47,Data cards,16.6151,15–25%,7764,5,5–15%
+CoreElectronics,6bo/ai3,Laptop Accessories,28.3171,25–30%,803759,203,15–25%
+CoreElectronics,6bo/ai3/0rp,Stands,44.1702,>40%,116986,5,>40%
+CoreElectronics,6bo/ai3/1vp,Projector Screens,51.049,>40%,22545,4,>40%
+CoreElectronics,6bo/ai3/59n,Cooling Pads/Cooling Stands,33.1073,30–35%,19316,4,30–35%
+CoreElectronics,6bo/ai3/7h1,Monitor & TV Covers,45.7874,>40%,26765,12,>40%
+CoreElectronics,6bo/ai3/8p1,Laptop Adapters,35.7443,35–40%,15236,6,25–30%
+CoreElectronics,6bo/ai3/c1j,Computer Accessories Combos,37.0729,35–40%,21687,8,25–30%
+CoreElectronics,6bo/ai3/cn2,Laser Pointers,5.2143,5–15%,18545,6,<5%
+CoreElectronics,6bo/ai3/pak,,35.8583,35–40%,229562,43,25–30%
+CoreElectronics,6bo/ai3/pi1,UPS,28.9239,25–30%,24274,4,25–30%
+CoreElectronics,6bo/ai3/qh2,Keyboard Skins,19.5514,15–25%,2987,1,5–15%
+CoreElectronics,6bo/ai3/r3e,Webcams,23.8057,15–25%,7494,4,15–25%
+CoreElectronics,6bo/ai3/w65,Batteries,43.9222,>40%,5915,4,15–25%
+CoreElectronics,6bo/ai3/zvm,Laptop Skins & Decals,8.8435,5–15%,45333,10,<5%
+CoreElectronics,6bo/b5g,Laptops,15.5601,15–25%,3269682,391,15–25%
+CoreElectronics,6bo/g0i,Computer Components,15.8825,15–25%,392979,96,15–25%
+CoreElectronics,6bo/g0i/s5u,RAMs,0.3694,<5%,95545,28,<5%
+CoreElectronics,6bo/g0i/unb,,1.0909,<5%,39234,1,<5%
+CoreElectronics,6bo/g0i/unb/pp8,,15.192,15–25%,516279,80,5–15%
+CoreElectronics,6bo/g0i/xcm,Coolers,11.3256,5–15%,26056,6,5–15%
+CoreElectronics,6bo/g0i/y7i,Motherboards,2.1301,<5%,41595,14,<5%
+CoreElectronics,6bo/jdy,Storage,16.0941,15–25%,60140,15,15–25%
+CoreElectronics,6bo/jdy/dus,SSD,9.9141,5–15%,111024,20,5–15%
+CoreElectronics,6bo/jdy/dus/grs,Internal SSD,1.6,<5%,50686,14,<5%
+CoreElectronics,6bo/jdy/nl6,HDD,31.6864,30–35%,36855,11,30–35%
+CoreElectronics,6bo/jdy/nl6/dvs,External HDD,31.6304,30–35%,84795,16,30–35%
+CoreElectronics,6bo/jdy/nl6/zdx,Internal HDD,17.4406,15–25%,6439,4,15–25%
+CoreElectronics,6bo/jdy/tby,Memory Cards,10.4769,5–15%,378566,63,5–15%
+CoreElectronics,6bo/jdy/uar,Pen Drives,7.5792,5–15%,886649,125,5–15%
+CoreElectronics,6bo/nl4,Desktop PCs,16.3289,15–25%,231461,24,5–15%
+CoreElectronics,6bo/nl4/dze,Tower PCs,10.5713,5–15%,138621,28,5–15%
+CoreElectronics,6bo/nl4/igk,All In One PCs,6.5405,5–15%,360765,46,5–15%
+CoreElectronics,6bo/nl4/okr,Mini PCs,18.3922,15–25%,25065,5,15–25%
+CoreElectronics,6bo/ord,Audio Players,12.9133,5–15%,164806,41,5–15%
+CoreElectronics,6bo/ord/rlj,Home Audio,8.0302,5–15%,31917,13,5–15%
+CoreElectronics,6bo/ord/rlj/dkd,Amplifiers & AV Receivers,3.0257,<5%,4594,2,<5%
+CoreElectronics,6bo/tia,Computer Peripherals,30.7505,30–35%,554034,128,25–30%
+CoreElectronics,6bo/tia/1hx,Projectors,39.2754,35–40%,304611,43,35–40%
+CoreElectronics,6bo/tia/8pp/p0w,,34.0656,30–35%,505929,67,30–35%
+CoreElectronics,6bo/tia/8pp/wap,,29.1557,25–30%,312323,50,25–30%
+CoreElectronics,6bo/tia/ffn,Printers & Inks,47.4048,>40%,16068,5,35–40%
+CoreElectronics,6bo/tia/ffn/t64,Printers,37.2585,35–40%,70086,13,30–35%
+CoreElectronics,6bo/ul6,TV & Video Accessories,11.497,5–15%,16239,12,5–15%
+CoreElectronics,6bo/ul6/fcz,Selector & Smart Box,5.5995,5–15%,23127,8,<5%
+CoreElectronics,7dk/0aj,Bikes & Scooters,6.6762,5–15%,568841,83,5–15%
+CoreElectronics,7dk/0aj/kcq,Petrol Bikes & Scooters,0.8781,<5%,28357,9,<5%
+CoreElectronics,7dk/0aj/kcq/nf7/dje,Scooter,0.6375,<5%,32784,8,<5%
+CoreElectronics,7dk/0aj/kcq/whu,Petrol Bikes,2.0619,<5%,59168,20,<5%
+CoreElectronics,7dk/0aj/kcq/whu/86s,Commuters,3.1122,<5%,89970,24,<5%
+CoreElectronics,7dk/0aj/kcq/whu/jr3,Sports Bike,1.5855,<5%,22642,8,<5%
+CoreElectronics,7dk/0aj/kuz/gyu,Electric Bikes,4.9381,<5%,31915,9,5–15%
+CoreElectronics,7dk/0aj/kuz/gyu/bbh,Electric Scooters,8.4016,5–15%,277708,42,5–15%
+CoreElectronics,jek,Cameras & Accessories,17.2571,15–25%,364361,49,15–25%
+CoreElectronics,jek/6l2,Camera Accessories,39.8498,35–40%,511626,108,30–35%
+CoreElectronics,jek/6l2/0un,Camera Microphones,9.2465,5–15%,26345,4,5–15%
+CoreElectronics,jek/6l2/2x7,Telescopes,13.2531,5–15%,52199,4,5–15%
+CoreElectronics,jek/6l2/4bd,LED Lights,20.4825,15–25%,42612,17,15–25%
+CoreElectronics,jek/6l2/ce6,Tripods,41.7636,>40%,19596,9,35–40%
+CoreElectronics,jek/6l2/e9y,Camera Lenses,15.5792,15–25%,25412,9,15–25%
+CoreElectronics,jek/6l2/epu,Binoculars & Optics,23.9977,15–25%,43300,10,15–25%
+CoreElectronics,jek/6l2/g9h,Reflectors,18.7329,15–25%,13842,7,5–15%
+CoreElectronics,jek/6l2/krc,Battery chargers,31.2445,30–35%,13612,4,25–30%
+CoreElectronics,jek/6l2/nlb,Camera Mounts,25.0818,25–30%,15896,9,15–25%
+CoreElectronics,jek/6l2/ykl,Gimbals,17.1884,15–25%,222534,34,15–25%
+CoreElectronics,jek/p31,Cameras,10.1915,5–15%,256950,81,5–15%
+CoreElectronics,jek/p31/jnp,Drones,1.5753,<5%,761642,47,<5%
+CoreElectronics,jek/p31/s3q,Sports & Action,5.1229,5–15%,244002,60,<5%
+CoreElectronics,jek/p31/trv,DSLR & Mirrorless,2.4529,<5%,322023,47,<5%
+CoreElectronics,jek/p31/ysu,Instant Cameras,1.5295,<5%,78654,16,<5%
+CoreElectronics,tyy,Mobiles & Accessories,16.3256,15–25%,367074,106,15–25%
+CoreElectronics,tyy/hry,Tablets,1.7742,<5%,1637114,194,<5%
+CoreElectronics,zlw,Health & Personal Care Appliances,45.5252,>40%,9654,3,35–40%
+CoreElectronics,zlw/79s,Personal Care Appliances,40.3396,>40%,838550,130,35–40%
+CoreElectronics,zlw/79s/76i,Hair Curlers,20.6129,15–25%,97992,10,15–25%
+CoreElectronics,zlw/79s/by3,Trimmers,39.116,35–40%,1867092,210,35–40%
+CoreElectronics,zlw/79s/dk5,Hair Straighteners,31.8663,30–35%,729905,83,30–35%
+CoreElectronics,zlw/79s/k32,Epilators,28.1778,25–30%,43449,14,25–30%
+CoreElectronics,zlw/79s/mh8,Hair Dryers,41.2026,>40%,405372,35,35–40%
+CoreElectronics,zlw/79s/rtx,Hair Stylers,11.2403,5–15%,46200,9,5–15%
+CoreElectronics,zlw/79s/u3j,Shavers,38.75,35–40%,74960,20,35–40%
+CoreElectronics,zlw/nyl,Health Care,30.383,30–35%,384567,95,30–35%
+CoreElectronics,zlw/nyl/bvv,Health Care Devices,44.3977,>40%,40403,15,35–40%
+CoreElectronics,zlw/nyl/bvv/4cw,Vaporizer,43.035,>40%,38464,8,>40%
+CoreElectronics,zlw/nyl/bvv/b5f,Pulse Oximeters,39.4145,35–40%,26201,4,35–40%
+CoreElectronics,zlw/nyl/bvv/d9z,Massagers,35.7126,35–40%,905620,156,30–35%
+CoreElectronics,zlw/nyl/bvv/dxu,Nebulizers,48.894,>40%,142807,25,>40%
+CoreElectronics,zlw/nyl/bvv/h7c,Digital Thermometers,50.5964,>40%,64473,13,>40%
+CoreElectronics,zlw/nyl/bvv/kbk,Blood Pressure Monitors,42.3116,>40%,246838,28,>40%
+CoreElectronics,zlw/nyl/bvv/o4o,Weighing Scales,45.3715,>40%,330551,33,>40%
+CoreElectronics,zlw/nyl/bvv/ozv,Electric Toothbrushes,37.2328,35–40%,79771,16,30–35%
+CoreElectronics,zlw/nyl/bvv/x5e,Glucometers and Accessories,49.9451,>40%,8195,3,35–40%
+CoreElectronics,zlw/nyl/bvv/x5e/0mu,Glucometer Strips,41.5304,>40%,53922,14,35–40%
+CoreElectronics,zlw/nyl/bvv/x5e/n0n,Glucometers,48.9374,>40%,96699,13,>40%
+EmergingElectronics,0pm,,17.0263,15–25%,184832,30,15–25%
+EmergingElectronics,0pm/0o7,Speakers,25.2123,25–30%,4815827,765,15–25%
+EmergingElectronics,0pm/0o7/0it/sfd,,26.4128,25–30%,581134,54,25–30%
+EmergingElectronics,0pm/0o7/0it/xdm,,2.5677,<5%,34155,3,<5%
+EmergingElectronics,0pm/0o7/2to,,16.075,15–25%,640826,19,15–25%
+EmergingElectronics,0pm/0o7/2to/6h8,,13.7108,5–15%,132691,17,5–15%
+EmergingElectronics,0pm/0o7/2to/ict,,3.6827,<5%,230590,59,<5%
+EmergingElectronics,0pm/0o7/2to/ynx,,22.4798,15–25%,655683,51,15–25%
+EmergingElectronics,0pm/dfp,Audio Players & Recorders,12.1336,5–15%,37730,11,5–15%
+EmergingElectronics,0pm/fcn,Headset,37.4415,35–40%,3132016,283,35–40%
+EmergingElectronics,0pm/fcn/821,Earphones,33.1301,30–35%,3792726,717,30–35%
+EmergingElectronics,0pm/fcn/821/a7x,Wireless Earphones,40.0094,>40%,440532,50,35–40%
+EmergingElectronics,0pm/fcn/821/a7x/2rv,Neckband,32.1429,30–35%,592273,78,30–35%
+EmergingElectronics,0pm/fcn/821/a7x/2si,True Wireless,30.9733,30–35%,7792966,601,30–35%
+EmergingElectronics,0pm/fcn/821/fof,Wired Earphones,28.1087,25–30%,745565,119,25–30%
+EmergingElectronics,0pm/fcn/gc3,Headphones,36.4272,35–40%,995126,221,30–35%
+EmergingElectronics,0pm/fcn/gc3/ka8,Wireless Headphones,34.118,30–35%,349056,55,30–35%
+EmergingElectronics,0pm/fcn/gc3/rph,Wired Headphones,36.7095,35–40%,18453,1,30–35%
+EmergingElectronics,0pm/uvd,Audio Accessories,37.466,35–40%,49290,28,30–35%
+EmergingElectronics,ajy,Wearable Smart Devices,36.8197,35–40%,113787,45,30–35%
+EmergingElectronics,ajy/7rp,Smart Trackers,9.258,5–15%,11806,5,5–15%
+EmergingElectronics,ajy/buh,Smart Watches,34.3259,30–35%,7370874,933,30–35%
+EmergingElectronics,ajy/p6d,Smart Rings,5.148,5–15%,27059,3,<5%
+EmergingElectronics,ajy/q7p,Smart Bands,19.6984,15–25%,61462,18,15–25%
+EmergingElectronics,ajy/tcy,Smart Glasses,4.4349,<5%,73486,24,<5%
+EmergingElectronics,ajy/vne,Wearable Accessories,13.7203,5–15%,79488,22,5–15%
+EmergingElectronics,ajy/vne/0wk,Smart Watch Straps,32.8588,30–35%,87946,36,15–25%
+EmergingElectronics,ajy/vne/qic,Smart Watch Screenguards,1.8225,<5%,52839,11,5–15%
+EmergingElectronics,ckf/czl,Televisions,14.7771,5–15%,2940791,424,5–15%
+EmergingElectronics,ckf/ore,Audio Players,6.5803,5–15%,102139,13,5–15%
+EmergingElectronics,ckf/ore/rlj,Home Audio,2.0986,<5%,10864,4,<5%
+EmergingElectronics,ckf/rlj,Home Audio,9.5653,5–15%,10099,4,5–15%
+EmergingElectronics,ckf/see,Video Players & Accessories,10.4443,5–15%,70718,27,5–15%
+EmergingElectronics,ckf/see/ul5,Video Accessories,13.9684,5–15%,44028,16,5–15%
+EmergingElectronics,ckf/see/ul5/fcz,Selector & Smart Box,18.084,15–25%,31492,5,15–25%
+EmergingElectronics,igc,Automation & Robotics,43.3632,>40%,66372,11,>40%
+EmergingElectronics,igc/b4q,Smart Lighting,8.2325,5–15%,42296,14,5–15%
+EmergingElectronics,igc/j69,Surveillance Devices,23.9847,15–25%,9160,5,15–25%
+EmergingElectronics,igc/j69/agd,Security Cameras,36.0495,35–40%,1357585,225,30–35%
+EmergingElectronics,igc/snr,Smart Switches,29.3109,25–30%,23087,10,30–35%
+EmergingElectronics,igc/u0f,Smart Door Locks,38.9501,35–40%,15050,8,>40%
+EmergingElectronics,tyy/4mr,Mobile Accessories,28.1082,25–30%,597747,250,25–30%
+EmergingElectronics,tyy/4mr/3nu,Mobile Cables,40.266,>40%,387975,124,35–40%
+EmergingElectronics,tyy/4mr/52s,Mobile Spare Parts,9.0157,5–15%,6045,5,<5%
+EmergingElectronics,tyy/4mr/bmu,Headphone Cushions & Earbuds,3.2919,<5%,8202,6,<5%
+EmergingElectronics,tyy/4mr/fu6,Power Banks,39.8411,35–40%,1955121,226,35–40%
+EmergingElectronics,tyy/4mr/ift,Mobile Battery,14.8087,5–15%,15079,10,5–15%
+EmergingElectronics,tyy/4mr/jqb,Headphone Pouches & Cases,23.3266,15–25%,29880,14,15–25%
+EmergingElectronics,tyy/4mr/kcr,Mobile Flashes,22.7533,15–25%,112854,23,15–25%
+EmergingElectronics,tyy/4mr/kx1,Mobile Phone Lens,5.365,5–15%,120410,28,5–15%
+EmergingElectronics,tyy/4mr/lrv,Screen Guards,46.9249,>40%,78534,45,>40%
+EmergingElectronics,tyy/4mr/mr4/00w,Mobile Skin Stickers,1.1104,<5%,43590,19,<5%
+EmergingElectronics,tyy/4mr/mr4/ghl,Phone Charms,15.5181,15–25%,61599,13,5–15%
+EmergingElectronics,tyy/4mr/mtg,Mobile Camera Lens Protectors,25.0652,25–30%,38356,22,15–25%
+EmergingElectronics,tyy/4mr/nkm,Selfie Sticks,44.0237,>40%,79071,12,>40%
+EmergingElectronics,tyy/4mr/q2u,Cases & Covers,38.1836,35–40%,16281128,3621,35–40%
+EmergingElectronics,tyy/4mr/qph/smt,Phone Converters,23.216,15–25%,11561,3,15–25%
+EmergingElectronics,tyy/4mr/r6z,Screen Expander For Phones,1.9321,<5%,15165,8,<5%
+EmergingElectronics,tyy/4mr/tp2,Mobile Chargers,28.1593,25–30%,116299,38,30–35%
+EmergingElectronics,tyy/4mr/tp2/1h7,Wireless Chargers,22.5927,15–25%,27708,3,15–25%
+EmergingElectronics,tyy/4mr/tp2/loq,Wall Chargers,36.7928,35–40%,476740,146,35–40%
+EmergingElectronics,tyy/4mr/ukk,Mobile Body Panels,8.8337,5–15%,17071,11,5–15%
+EmergingElectronics,tyy/4mr/vnf,Mobile Holders,42.528,>40%,291773,41,>40%
+EmergingElectronics,tyy/4mr/w65,Batteries,27.2097,25–30%,120071,41,15–25%
+EmergingElectronics,tyy/4mr/xel,Cable Drop Clips,18.3082,15–25%,207393,46,15–25%
+EmergingElectronics,tyy/4mr/xxl,Mobile Pouches,20.4441,15–25%,8242,5,30–35%
+EmergingElectronics,tyy/4mr/zmd,OTG Adapters,38.1331,35–40%,14848,5,30–35%
+EmergingElectronics,tyy/jgu,Tablet Accessories,37.8731,35–40%,82663,45,30–35%
+EmergingElectronics,tyy/jgu/47g,Cases & Covers,41.1963,>40%,34156,20,>40%
+EmergingElectronics,tyy/jgu/k0m,Stylus Pens,37.3012,35–40%,49170,17,35–40%
+Furniture,wwe,Furniture,36.7359,35–40%,717456,172,30–35%
+Furniture,wwe/0ye,Shoe Racks & More,41.9086,>40%,496915,118,35–40%
+Furniture,wwe/0ye/n0l,Shoe Rack,42.0041,>40%,1074782,91,>40%
+Furniture,wwe/243,TV Units & Cabinets,30.8925,30–35%,141549,37,25–30%
+Furniture,wwe/243/koe,TV Entertainment Units,29.6414,25–30%,286316,36,25–30%
+Furniture,wwe/3sa,Showcases,22.5332,15–25%,26330,4,15–25%
+Furniture,wwe/4n6,Bean Bags,30.1239,30–35%,110059,16,25–30%
+Furniture,wwe/4n6/biq,Bean Bag Fillers,21.4633,15–25%,22182,6,15–25%
+Furniture,wwe/4n6/q2w,Bean Bag Covers,20.6143,15–25%,28228,10,15–25%
+Furniture,wwe/4n6/zet,Bean Bags,22.2458,15–25%,80523,8,15–25%
+Furniture,wwe/6by,Cabinets,42.0117,>40%,30501,10,30–35%
+Furniture,wwe/6by/9dn,Kitchen Cabinets,38.5341,35–40%,99953,23,35–40%
+Furniture,wwe/7p7,Beds & More,23.2671,15–25%,78768,30,15–25%
+Furniture,wwe/7p7/4yf,Beds,26.4454,25–30%,1079192,175,25–30%
+Furniture,wwe/c3z,Sofas,19.9413,15–25%,577605,75,15–25%
+Furniture,wwe/c3z/0mv,Sofas & Sectionals,18.736,15–25%,350096,72,15–25%
+Furniture,wwe/c3z/cba,Diwans & Settees,12.9975,5–15%,31029,8,5–15%
+Furniture,wwe/c3z/gxy,Recliners,40.8637,>40%,63822,9,35–40%
+Furniture,wwe/c3z/hjj,Inflatable Sofas,8.3369,5–15%,169223,31,5–15%
+Furniture,wwe/c3z/r0c,Sofa Sets,14.1548,5–15%,590434,20,5–15%
+Furniture,wwe/fc3,Wardrobes & More,33.8662,30–35%,1397648,282,30–35%
+Furniture,wwe/fc3/dsw,Wardrobes,24.3269,15–25%,823196,87,15–25%
+Furniture,wwe/fc3/xlp,Collapsible Wardrobes,35.5075,35–40%,411676,80,30–35%
+Furniture,wwe/ki7,Tables,35.2197,35–40%,994561,129,30–35%
+Furniture,wwe/ki7/d4s,Portable Laptop Tables,38.1462,35–40%,255037,36,35–40%
+Furniture,wwe/ki7/l1t,Office Study Table,26.8421,25–30%,738344,82,25–30%
+Furniture,wwe/ki7/ot1,Coffee Tables,22.081,15–25%,429762,72,15–25%
+Furniture,wwe/ki7/vh2,Dressing Tables,9.6058,5–15%,420411,46,5–15%
+Furniture,wwe/ki7/yso,Side Tables,26.1874,25–30%,290896,41,25–30%
+Furniture,wwe/osg,Sofa Beds & More,23.2327,15–25%,261011,57,15–25%
+Furniture,wwe/osg/itp,Sofa Beds,25.1742,25–30%,693749,44,15–25%
+Furniture,wwe/q7b,Furniture Accessories,33.4044,30–35%,476380,72,25–30%
+Furniture,wwe/q7b/1sr,Hammock Swings,29.2982,25–30%,270119,61,25–30%
+Furniture,wwe/q7b/3ql,Trunk Boxes,3.1552,<5%,17241,8,<5%
+Furniture,wwe/q7b/96a,Room Divider Partitions,33.0571,30–35%,27274,10,25–30%
+Furniture,wwe/q7b/9zz,Home Temple,28.6326,25–30%,663293,116,25–30%
+Furniture,wwe/q7b/hht,Ottoman & Pouffe,25.3792,25–30%,27554,10,25–30%
+Furniture,wwe/q7b/hqd,Shampoo Styling Chairs,28.8003,25–30%,23663,6,25–30%
+Furniture,wwe/q7b/jhc,Aquarium Tanks,0.0,<5%,85197,6,<5%
+Furniture,wwe/q7b/kh7,Kid Seating,31.8869,30–35%,89372,23,30–35%
+Furniture,wwe/q7b/kko,Kids Table,41.2885,>40%,79131,14,>40%
+Furniture,wwe/q7b/zzm,Bar Stools & Chairs,42.9646,>40%,25002,9,>40%
+Furniture,wwe/rg9,Mattresses,39.8058,35–40%,270860,75,35–40%
+Furniture,wwe/rg9/6t1,Bed Mattress,42.9789,>40%,652152,84,>40%
+Furniture,wwe/ur9,Dining Tables & Sets,35.4474,35–40%,429380,50,30–35%
+Furniture,wwe/ur9/0t7,Dining Sets,31.4614,30–35%,127067,23,30–35%
+Furniture,wwe/ur9/ysz,Dining Tables,17.0728,15–25%,34722,11,15–25%
+Furniture,wwe/vmc,Shelves,46.2851,>40%,252766,29,>40%
+Furniture,wwe/vmc/1qe,Bookshelves,40.9231,>40%,88879,16,35–40%
+Furniture,wwe/xdf,Drawers,34.1676,30–35%,57815,21,30–35%
+Furniture,wwe/xdf/fcg,Cabinets & Drawers,41.9617,>40%,21441,8,35–40%
+Furniture,wwe/y7b,Chairs,40.4446,>40%,612961,125,35–40%
+Furniture,wwe/y7b/99i,Rocking Chairs,23.0211,15–25%,25203,7,15–25%
+Furniture,wwe/y7b/bzv,Outdoor Chairs,37.164,35–40%,529668,55,35–40%
+Furniture,wwe/y7b/foc,Office Study Chairs,40.8987,>40%,745671,80,>40%
+Furniture,wwe/y7b/j3p,Stool,31.2143,30–35%,40113,6,25–30%
+Furniture,wwe/y7b/ke2,Dining Chairs,44.7779,>40%,41353,12,>40%
+Furniture,wwe/y7b/lwd,Living Room Chairs,36.2653,35–40%,12847,8,30–35%
+Home,arb,Home Decor,34.4776,30–35%,641259,182,15–25%
+Home,arb/a77,Wall Decor Items,24.6438,15–25%,984095,184,15–25%
+Home,arb/a77/8js,Key Holders,33.0913,30–35%,152723,21,30–35%
+Home,arb/a77/m3m,Decorative Mirrors,8.0791,5–15%,66876,14,5–15%
+Home,arb/a77/suk,Wall Hangings,33.7032,30–35%,1049695,63,30–35%
+Home,arb/a77/vk7,Wall Shelves,20.2897,15–25%,332667,89,15–25%
+Home,arb/a77/z9k,Name Plates,21.2036,15–25%,44964,12,15–25%
+Home,arb/bga,Paintings & Posters,21.6526,15–25%,78568,38,15–25%
+Home,arb/bga/f3b,Posters,24.9197,15–25%,165620,53,15–25%
+Home,arb/bga/mmf,Paintings,32.69,30–35%,251606,60,25–30%
+Home,arb/g0v,Flowers & Vases,22.2206,15–25%,341301,99,15–25%
+Home,arb/g0v/6vh,Artificial Plants,23.4357,15–25%,333901,59,15–25%
+Home,arb/g0v/ctx,Artificial Flowers,19.5343,15–25%,327348,80,15–25%
+Home,arb/g0v/tyl,Vases,18.3818,15–25%,237147,35,15–25%
+Home,arb/g0v/wfl,Fresh Flowers,6.9822,5–15%,88797,12,5–15%
+Home,arb/keu,Home Fragrance,36.8355,35–40%,35778,17,35–40%
+Home,arb/kjw,Clocks,20.1791,15–25%,102487,19,15–25%
+Home,arb/kjw/bm1,Wall Clocks,21.9852,15–25%,1765093,237,15–25%
+Home,arb/kjw/zja,Table Clocks,23.4195,15–25%,208028,38,15–25%
+Home,arb/mvm,Diyas; Candles & Holders,26.1917,25–30%,17265,6,15–25%
+Home,arb/mvm/bnl,Diyas,29.265,25–30%,103547,38,15–25%
+Home,arb/mvm/p0s,Candles,37.4361,35–40%,75649,17,30–35%
+Home,arb/mvm/skr,Candle Holders,16.9079,15–25%,26319,6,15–25%
+Home,arb/nuq/5vh,Windchimes,19.5432,15–25%,36734,8,15–25%
+Home,arb/nuq/qhj,Dream Catchers,10.6693,5–15%,28062,3,5–15%
+Home,arb/rm9,Photo Frames & Albums,11.5131,5–15%,65291,23,5–15%
+Home,arb/rm9/96b,Photo Albums,14.5931,5–15%,40992,9,5–15%
+Home,arb/rm9/hzf,Photo Frames,22.3105,15–25%,577486,89,15–25%
+Home,arb/uj2,Showpieces & Decor Accents,22.2525,15–25%,274455,102,15–25%
+Home,arb/uj2/0lb,Magnets,35.6081,35–40%,88258,15,25–30%
+Home,arb/uj2/uvt,Flags,11.7267,5–15%,46586,24,5–15%
+Home,arb/uj2/wcj,Trophies & Medals,19.573,15–25%,61493,21,15–25%
+Home,arb/uj2/z1t,Showpieces & Figurines,24.545,15–25%,1278870,344,15–25%
+Home,arb/y1n,Hookah & Hookah Accessories,6.8321,5–15%,87191,37,5–15%
+Home,arb/y1n/5y2,Hookahs,1.7962,<5%,246306,38,<5%
+Home,arb/y1n/dth,Bongs,8.8676,5–15%,55562,7,5–15%
+Home,arb/y1n/hxg,Hookah Flavors,3.5413,<5%,36681,7,<5%
+Home,arb/y1n/nig,Rolling Paper,30.0704,30–35%,31097,6,25–30%
+Home,arb/y1n/rtr,Hookah Mouth Tips,8.3935,5–15%,40150,12,5–15%
+Home,arb/yod,Stickers & Wallpapers,30.1364,30–35%,365541,145,25–30%
+Home,arb/yod/8m7,Wallpapers,39.7519,35–40%,1038660,144,35–40%
+Home,arb/yod/si0,Stickers,31.4529,30–35%,1297811,264,25–30%
+Home,b8s,Building Materials and Supplies,30.1847,30–35%,32480,20,15–25%
+Home,b8s/5cy,Solar and Alternate Energy,20.5642,15–25%,224458,48,15–25%
+Home,b8s/5cy/0qi,Solar Charge Controllers,27.7522,25–30%,31929,10,15–25%
+Home,b8s/5cy/f7w,Solar Panels,31.8913,30–35%,106396,15,25–30%
+Home,b8s/5cy/lao,Solar Light Sets,44.9557,>40%,265139,39,>40%
+Home,b8s/5cy/vqk,Solar Batteries,28.2196,25–30%,12750,3,5–15%
+Home,b8s/8dw,Door and Window Fittings,26.4914,25–30%,56758,26,25–30%
+Home,b8s/8dw/0mj,Door Closers,33.1447,30–35%,39228,7,30–35%
+Home,b8s/8dw/a3g,Doors,7.4427,5–15%,55491,17,5–15%
+Home,b8s/8dw/dm5,Hinges,45.3877,>40%,1496,1,35–40%
+Home,b8s/8dw/ufb,Door Stoppers,52.0512,>40%,85145,12,>40%
+Home,b8s/8dw/vkg,Latches and Bolts,24.733,15–25%,2434,2,35–40%
+Home,b8s/8dw/xya,Knobs and Handles,43.9969,>40%,37464,12,>40%
+Home,b8s/8lg/l6b,Veneers,0.9383,<5%,13428,3,<5%
+Home,b8s/ecr,Bathroom and Kitchen Fittings,33.6317,30–35%,546139,109,30–35%
+Home,b8s/ecr/5cd,Towel Rack Holders,44.3674,>40%,30279,11,>40%
+Home,b8s/ecr/5i8,Shelf Brackets,22.0011,15–25%,24276,7,15–25%
+Home,b8s/ecr/d2r,Kitchen Sinks,44.4789,>40%,60939,9,35–40%
+Home,b8s/ecr/ft0,Drain Strainers,38.2336,35–40%,24468,9,30–35%
+Home,b8s/ecr/g8x,Shower Heads,37.15,35–40%,43895,11,35–40%
+Home,b8s/ecr/gpq,Commodes,46.948,>40%,113845,35,>40%
+Home,b8s/ecr/ihr,Seat Covers,37.1338,35–40%,16928,5,35–40%
+Home,b8s/ecr/lbl,Wash Basins,42.8972,>40%,200843,36,>40%
+Home,b8s/ecr/n1g,Bathroom Mirrors,18.6092,15–25%,100219,17,15–25%
+Home,b8s/ecr/rkl,Bathroom Racks,41.3461,>40%,136511,43,>40%
+Home,b8s/ecr/vm9,Tap Mount Water Filters,48.3483,>40%,51371,18,>40%
+Home,b8s/ecr/xpl,Faucets,41.2993,>40%,445015,128,35–40%
+Home,b8s/gdd,Furniture Parts,20.8614,15–25%,13676,10,15–25%
+Home,b8s/po2,Paint Supplies and Equipment,19.9243,15–25%,37527,21,15–25%
+Home,b8s/po2/isz,Paint Rollers,15.4343,15–25%,17513,9,5–15%
+Home,b8s/po2/k0b,Wall Paints,7.9365,5–15%,66289,26,5–15%
+Home,b8s/po2/qpy,Paint Sprayers,29.7514,25–30%,54868,19,25–30%
+Home,b8s/po2/zde,Spray Paints,43.3629,>40%,36944,13,30–35%
+Home,b8s/prq,Electrical Hardware,21.3101,15–25%,199070,81,15–25%
+Home,b8s/prq/4pp,Door Bell,34.9286,30–35%,61600,16,30–35%
+Home,b8s/prq/5wd,Wires and Cables,20.1927,15–25%,195729,69,15–25%
+Home,b8s/prq/8d3,Light Sockets,3.249,<5%,12804,3,<5%
+Home,b8s/prq/9lc,Wire Connectors,14.6242,5–15%,12240,5,5–15%
+Home,b8s/prq/gxf,Spike Guard and Surge Protectors,32.2556,30–35%,230546,33,25–30%
+Home,b8s/prq/n1o,Exhaust Fans,30.6064,30–35%,215197,39,25–30%
+Home,b8s/prq/nzw,Pumps,16.2305,15–25%,496041,152,15–25%
+Home,b8s/prq/o44,Electrical Plugs,8.9671,5–15%,7929,3,5–15%
+Home,b8s/prq/qkl,Fan Regulator,8.9174,5–15%,42972,11,5–15%
+Home,b8s/prq/wcx,Electrical Switches,17.3087,15–25%,22064,8,15–25%
+Home,b8s/prq/zlq,RCCB,23.8925,15–25%,25485,7,25–30%
+Home,b8s/ryh,Building Supplies Add-Ons,10.8137,5–15%,47292,8,5–15%
+Home,b8s/ryh/eyp,Water Tanks,1.8693,<5%,136791,40,<5%
+Home,b8s/tmf,Building Raw Materials,34.6686,30–35%,20595,6,15–25%
+Home,b8s/tmf/b1o,Crack Filler,16.867,15–25%,8733,5,15–25%
+Home,b8s/zp2,Plumbing Supplies,18.1554,15–25%,35020,19,15–25%
+Home,bro,Festive Decor & Gifting,35.2334,35–40%,219116,15,30–35%
+Home,bro/sun,Fireworks & Crackers,2.7848,<5%,219942,50,<5%
+Home,bro/sun/x7g,Pocket Lighters,1.5059,<5%,46285,16,<5%
+Home,bro/tez,Festive Decor,19.8786,15–25%,311063,72,15–25%
+Home,bro/tez/hpt,Toran,35.2145,35–40%,38345,9,30–35%
+Home,bro/tez/pgz,Rangoli Stencils,30.606,30–35%,11403,4,25–30%
+Home,bro/tez/w8e,Holi Colors,14.072,5–15%,1120378,158,5–15%
+Home,bro/vev,Spiritual Items,32.1674,30–35%,246675,74,15–25%
+Home,bro/vev/80x,Havan Items,33.9071,30–35%,112590,38,30–35%
+Home,bro/vev/ast,Incense Sticks,41.1189,>40%,115380,26,35–40%
+Home,bro/vev/b43,Kalash,5.6573,5–15%,16545,8,5–15%
+Home,bro/vev/clq,Garlands,27.8953,25–30%,9740,5,25–30%
+Home,bro/vev/lkl,Religious Frames,16.2104,15–25%,16767,10,15–25%
+Home,bro/vev/mfe,Dhoop Cones,44.7497,>40%,22018,8,>40%
+Home,bro/vev/p0m,Incense Holders,44.7175,>40%,104590,29,>40%
+Home,bro/vev/pbo,Deity Ornaments,0.0,<5%,1745,1,<5%
+Home,bro/vev/qt3,Deity Dresses,13.7476,5–15%,78792,24,5–15%
+Home,bro/vev/sjp,Pooja Thali Sets,20.4024,15–25%,72060,25,15–25%
+Home,bro/vev/t0y,Chowkis,17.3925,15–25%,7233,3,5–15%
+Home,bro/vev/ty0,Bells,16.6467,15–25%,2511,2,15–25%
+Home,bro/vev/udz,Prayer Mats,33.4723,30–35%,86854,26,30–35%
+Home,bro/zwb,Festive Gifts,29.6439,25–30%,500831,163,25–30%
+Home,bro/zwb/2ff,Envelopes,12.0658,5–15%,24872,5,5–15%
+Home,bro/zwb/7xg,Gift Sets,34.1045,30–35%,963909,106,30–35%
+Home,bro/zwb/vva,Decorative Platters,32.2509,30–35%,36213,8,30–35%
+Home,bro/zwb/vvx,Festive Gift Boxes,30.5806,30–35%,21046,4,15–25%
+Home,h1m,Home Improvement,24.7736,15–25%,50239,16,25–30%
+Home,h1m/hww,Tools and Measuring Equipment,31.7394,30–35%,535196,154,25–30%
+Home,h1m/hww/5gd,Measuring and Layout Tools,42.8457,>40%,4997,1,15–25%
+Home,h1m/hww/5gd/alz,Levels,28.7646,25–30%,41478,20,15–25%
+Home,h1m/hww/5gd/fv0,Multimeters,43.287,>40%,71250,11,35–40%
+Home,h1m/hww/5gd/gkv,Measuring Tapes,22.1819,15–25%,45528,15,15–25%
+Home,h1m/hww/8d1,Tool Accessories and Supplies,38.1981,35–40%,12731,8,15–25%
+Home,h1m/hww/8d1/7s0,Tool Boxes and Trays,19.9031,15–25%,22283,5,15–25%
+Home,h1m/hww/8d1/bkm,Oil Lubricant Sprayers,28.4327,25–30%,12665,5,25–30%
+Home,h1m/hww/8d1/bwp,Drill Bit Sets,16.4229,15–25%,47044,19,5–15%
+Home,h1m/hww/8d1/jba,Nut and Bolt Sets,10.4654,5–15%,4147,3,5–15%
+Home,h1m/hww/8d1/rmz,Rust Removers,35.5754,35–40%,79018,11,35–40%
+Home,h1m/hww/8d1/yhp,Tool Bags and Holsters,36.197,35–40%,27715,7,35–40%
+Home,h1m/hww/cmc/cll,Voltage Testers,28.5692,25–30%,12727,1,15–25%
+Home,h1m/hww/fgi,Hand Tools,18.5428,15–25%,174310,46,15–25%
+Home,h1m/hww/fgi/2i5,Socket Sets,29.7403,25–30%,14361,7,15–25%
+Home,h1m/hww/fgi/5zz,Screwdrivers,37.3843,35–40%,72525,20,30–35%
+Home,h1m/hww/fgi/6hz,Levers,8.3333,5–15%,14136,7,5–15%
+Home,h1m/hww/fgi/ejg,Hammers,22.5962,15–25%,42016,6,15–25%
+Home,h1m/hww/fgi/iih,Cable Cutters,32.5889,30–35%,16389,4,15–25%
+Home,h1m/hww/fgi/ioz,Pliers,19.9642,15–25%,45837,19,15–25%
+Home,h1m/hww/fgi/mo7,Wrench Sets,14.9788,5–15%,75954,24,15–25%
+Home,h1m/hww/fgi/p2s,Pipe Cutters,8.1342,5–15%,13978,6,5–15%
+Home,h1m/hww/fgi/x5t,Cutters,19.6041,15–25%,2627,2,15–25%
+Home,h1m/hww/fgi/zcc,Allen Keys,11.5631,5–15%,18438,9,5–15%
+Home,h1m/hww/slm,Power Tools,35.867,35–40%,376996,65,30–35%
+Home,h1m/hww/slm/6po,Chainsaws,15.4966,15–25%,35653,16,15–25%
+Home,h1m/hww/slm/9mw,Rotary Tools,28.125,25–30%,18720,6,15–25%
+Home,h1m/hww/slm/dkh,Hammer Drills,41.5195,>40%,59678,17,35–40%
+Home,h1m/hww/slm/hnz,Soldering Irons,21.4993,15–25%,60588,12,15–25%
+Home,h1m/hww/slm/lde,Blowers,35.8731,35–40%,128255,26,30–35%
+Home,h1m/hww/slm/lk2,Angle Grinders,34.3439,30–35%,104659,21,30–35%
+Home,h1m/hww/slm/lyc,Welding Machines,29.5669,25–30%,137593,26,15–25%
+Home,h1m/hww/slm/mi7,Tile Cutters,31.9606,30–35%,34505,11,25–30%
+Home,h1m/hww/slm/ncc,Impact Wrenches,35.6503,35–40%,7927,3,25–30%
+Home,h1m/hww/slm/nkc,Power Drills,33.5286,30–35%,71873,25,25–30%
+Home,h1m/hww/slm/nq1,Heat Guns,43.7376,>40%,18204,7,35–40%
+Home,h1m/hww/slm/oye,Glue Guns,35.8664,35–40%,60402,7,30–35%
+Home,h1m/hww/slm/puw,Polishers,12.3484,5–15%,12285,7,5–15%
+Home,h1m/hww/slm/s8p,Sanders,6.2909,5–15%,8107,4,5–15%
+Home,h1m/hww/slm/x8q,Heat Sealers,44.6369,>40%,30999,10,>40%
+Home,h1m/iee,Home Utilities and Organizers,43.0078,>40%,222606,64,35–40%
+Home,h1m/iee/3a7,Laundry,41.7219,>40%,40281,16,35–40%
+Home,h1m/iee/3a7/5uf,Lint Rollers,46.1289,>40%,20343,3,>40%
+Home,h1m/iee/3a7/7k5,Cloth Clips,30.3493,30–35%,27111,9,25–30%
+Home,h1m/iee/3a7/a6i,Ironing Boards,44.9997,>40%,96225,20,>40%
+Home,h1m/iee/3a7/gnc,Clothesline,24.5332,15–25%,16121,8,15–25%
+Home,h1m/iee/3a7/q4v,Hangers,42.7684,>40%,111234,18,>40%
+Home,h1m/iee/3a7/yqq,Cloth Dryer Stands,47.9534,>40%,270767,53,>40%
+Home,h1m/iee/3a7/zsa,Laundry Baskets,37.4021,35–40%,256507,39,35–40%
+Home,h1m/iee/ctp/lly,Rat Traps,46.7336,>40%,34656,7,>40%
+Home,h1m/iee/kjm/jt3,Water Filter Cartridges,45.2187,>40%,97128,35,>40%
+Home,h1m/iee/kjp,Umbrellas,35.4156,35–40%,85598,23,30–35%
+Home,h1m/iee/xzu/61l,Appliance Trolleys,44.4147,>40%,216050,44,>40%
+Home,h1m/iee/xzu/vjg,Inverter Trolleys,40.2858,>40%,55764,15,35–40%
+Home,h1m/iee/zom,Home Storage and Organization,41.6008,>40%,218044,59,35–40%
+Home,h1m/iee/zom/aay,Step Ladders,46.4376,>40%,155473,32,>40%
+Home,h1m/iee/zom/d4h,Storage Boxes,45.1919,>40%,89859,9,>40%
+Home,h1m/iee/zom/k59,Hooks,47.9674,>40%,110671,29,>40%
+Home,h1m/iee/zom/qee,Hanging Organizers,27.916,25–30%,3095,2,25–30%
+Home,h1m/uls,Home Safety,7.8277,5–15%,2159,2,15–25%
+Home,h1m/uls/78l,Locks and Security,36.476,35–40%,30579,14,35–40%
+Home,h1m/uls/78l/2kk,Safe Lockers,42.8825,>40%,66414,14,>40%
+Home,h1m/uls/78l/gjw,Locks,40.452,>40%,33897,13,35–40%
+Home,h1m/uls/78l/pil,Door Locks,39.9816,35–40%,118662,20,35–40%
+Home,h1m/uls/78l/wig,Cash Boxes,17.0978,15–25%,15616,7,15–25%
+Home,h1m/uls/ie0/gew,Ear Muffs,23.1119,15–25%,5932,4,5–15%
+Home,h1m/um7,Lawn and Gardening,24.3721,15–25%,254114,68,15–25%
+Home,h1m/um7/0mc/az1,Stones and Pebbles,50.5046,>40%,20709,7,>40%
+Home,h1m/um7/i06,Watering Equipments,19.7521,15–25%,23800,13,15–25%
+Home,h1m/um7/i06/chn,Garden Sprayers,27.1082,25–30%,147380,48,25–30%
+Home,h1m/um7/i06/ur7,Drip Irrigation Kits,34.6112,30–35%,11921,4,15–25%
+Home,h1m/um7/i06/xvh,Hose Pipes,29.6454,25–30%,130499,40,25–30%
+Home,h1m/um7/sd1,Plants and Planters,12.7389,5–15%,101555,47,5–15%
+Home,h1m/um7/sd1/0k2,Grow Bags,34.8231,30–35%,73523,16,30–35%
+Home,h1m/um7/sd1/a6l,Plants Saplings,18.0315,15–25%,787099,166,15–25%
+Home,h1m/um7/sd1/iqo,Potting Mixtures,34.573,30–35%,233668,75,30–35%
+Home,h1m/um7/sd1/kkl,Plant Seeds,18.3668,15–25%,278943,91,5–15%
+Home,h1m/um7/sd1/oyg,Plant Containers,37.4436,35–40%,850278,187,35–40%
+Home,h1m/um7/yse,Gardening Tools,40.3354,>40%,61068,26,35–40%
+Home,h1m/um7/yse/eua,Grass Trimmers,37.6472,35–40%,34478,12,30–35%
+Home,h1m/um7/yse/ixk,Garden Tool Sets,44.5729,>40%,61948,10,35–40%
+Home,h1m/um7/yse/r9i,Portable Green Houses,27.6478,25–30%,51921,19,15–25%
+Home,jhg,Home Lighting,44.3777,>40%,282680,49,30–35%
+Home,jhg/6w8,Decor lighting & Accessories,28.5201,25–30%,868666,220,15–25%
+Home,jhg/6w8/gde,Table Lamps,26.3135,25–30%,87632,8,15–25%
+Home,jhg/6w8/grh,Lanterns,12.1403,5–15%,5873,3,5–15%
+Home,jhg/6w8/ikw,Floor Lamps,24.2988,15–25%,46994,13,25–30%
+Home,jhg/6w8/jjg,Rice Lights,20.5419,15–25%,316933,53,15–25%
+Home,jhg/6w8/jlo,Night Lamps,18.5064,15–25%,348144,73,15–25%
+Home,jhg/6w8/mbd,Wall Lamps,21.8549,15–25%,279447,59,15–25%
+Home,jhg/6w8/nyc,Outdoor Lamps,36.3489,35–40%,166943,42,30–35%
+Home,jhg/6w8/os7,Disco Lights,4.2962,<5%,104906,23,<5%
+Home,jhg/6w8/rws,Ceiling Lamps,14.5117,5–15%,407754,89,5–15%
+Home,jhg/yqn,Utility Lighting,37.9392,35–40%,319938,84,35–40%
+Home,jhg/yqn/0le,Ceiling Light,35.809,35–40%,95895,17,30–35%
+Home,jhg/yqn/4ms,Tube Lights,33.5191,30–35%,131340,26,30–35%
+Home,jhg/yqn/db9,Torches,36.8512,35–40%,287437,64,35–40%
+Home,jhg/yqn/feb,Bulbs,37.9293,35–40%,214826,50,30–35%
+Home,jhg/yqn/k5y,Study Lamps,35.0048,35–40%,155770,13,30–35%
+Home,jhg/yqn/m6m,Emergency Lights,37.8973,35–40%,107443,18,35–40%
+Home,jhg/yqn/zy7,Emergency Bulbs,44.1437,>40%,60149,16,>40%
+Home,jra,Home Furnishing,33.9392,30–35%,68829,26,30–35%
+Home,jra/iwp,Kitchen & Table Linen,33.6662,30–35%,44157,19,30–35%
+Home,jra/iwp/2pd,Coasters,27.1354,25–30%,14564,6,25–30%
+Home,jra/iwp/3if,Table Runners,27.9072,25–30%,25273,6,25–30%
+Home,jra/iwp/5x4,Napkins,37.9221,35–40%,11993,4,30–35%
+Home,jra/iwp/aly,Table Covers,31.523,30–35%,412943,79,30–35%
+Home,jra/iwp/bmf,Aprons,44.4136,>40%,65955,14,>40%
+Home,jra/iwp/jwv,Table Placemats,31.115,30–35%,77432,15,30–35%
+Home,jra/ixy,Covers & Protectors,38.617,35–40%,180467,49,30–35%
+Home,jra/ixy/5dj,Bolster Covers,36.151,35–40%,19839,9,30–35%
+Home,jra/ixy/hqs,Appliance Covers,41.3443,>40%,568062,122,35–40%
+Home,jra/ixy/jgq,Cushion Covers,39.5523,35–40%,719614,26,35–40%
+Home,jra/ixy/lt0,Pillow Covers,42.3954,>40%,89972,8,>40%
+Home,jra/ixy/ui0,Duvet Covers,44.428,>40%,12159,4,>40%
+Home,jra/ixy/uis,Sofa Covers,35.3695,35–40%,1257819,164,30–35%
+Home,jra/jk3,Bath Linen,37.7745,35–40%,137614,21,30–35%
+Home,jra/jk3/dur,Bath Robes,44.852,>40%,27428,4,>40%
+Home,jra/jk3/wtg,Bath Towels,35.1236,35–40%,151955,50,30–35%
+Home,jra/knw,Bed Linen & Blankets,39.5832,35–40%,267068,73,35–40%
+Home,jra/knw/13s,Bedding Sets,38.1016,35–40%,16540,6,30–35%
+Home,jra/knw/4dj,,44.4541,>40%,40363,7,>40%
+Home,jra/knw/dgd,Bed Covers,24.835,15–25%,79722,12,15–25%
+Home,jra/knw/gjh,Diwan Sets,34.5053,30–35%,78472,16,30–35%
+Home,jra/knw/i6y,Mosquito Nets,36.5998,35–40%,1748884,243,30–35%
+Home,jra/knw/llw,Blankets,36.9101,35–40%,360785,76,30–35%
+Home,jra/knw/qcw,Bedsheets,38.3701,35–40%,3205163,423,35–40%
+Home,jra/knw/sg5,Mattress Protectors,43.4855,>40%,144002,43,>40%
+Home,jra/kwq,Floor Coverings,32.1922,30–35%,243531,59,30–35%
+Home,jra/kwq/exp,Mats,33.8245,30–35%,621103,126,30–35%
+Home,jra/kwq/ogw,Bath Mats,42.3319,>40%,41829,10,>40%
+Home,jra/kwq/z3j,Carpet Rugs,22.9045,15–25%,744189,79,15–25%
+Home,jra/kzv,Cushions & Pillows,36.1636,35–40%,158206,38,30–35%
+Home,jra/kzv/3bw,Pillows,33.9334,30–35%,493871,53,30–35%
+Home,jra/kzv/u7w,Cushions,36.6465,35–40%,140390,31,30–35%
+Home,jra/sl5,Curtains & Accessories,31.9366,30–35%,84123,37,25–30%
+Home,jra/sl5/2va,Curtains,33.5202,30–35%,1954889,301,30–35%
+Home,jra/sl5/bqw,Curtain Accessories,40.2331,>40%,244090,66,35–40%
+Home,jra/sl5/hkg,Blinds,5.5229,5–15%,79415,23,5–15%
+Home,rja,Home Cleaning & Bathroom Accessories,47.7754,>40%,22746,13,>40%
+Home,rja/plv,HouseHold Supplies,33.6351,30–35%,973147,235,35–40%
+Home,rja/plv/9lr,Bathroom Floor Cleaners,34.0529,30–35%,239410,46,30–35%
+Home,rja/plv/9tt,Dish Washing Bars,27.5028,25–30%,72378,20,25–30%
+Home,rja/plv/a3u,Insect Repellants,43.0475,>40%,87487,28,>40%
+Home,rja/plv/adc,Drain Openers,48.7635,>40%,30611,14,>40%
+Home,rja/plv/bwz,Washing Powders,30.5514,30–35%,607942,123,30–35%
+Home,rja/plv/byk,Mosquito Vaporizers,27.7054,25–30%,32528,5,25–30%
+Home,rja/plv/c7w,Air Fresheners,38.4072,35–40%,325054,44,35–40%
+Home,rja/plv/d0s,Aluminium Foils & Shrink Wraps,47.6824,>40%,45759,12,>40%
+Home,rja/plv/fg0,Dish Washing Detergents,44.0994,>40%,39708,15,>40%
+Home,rja/plv/gat,All Purpose Cleaners,37.8225,35–40%,28996,13,35–40%
+Home,rja/plv/hot,Washing Bars,32.311,30–35%,49364,22,30–35%
+Home,rja/plv/jwz,Mosquito Vaporiser Refills,25.3769,25–30%,177240,32,15–25%
+Home,rja/plv/kbo,Stain Removers,47.4853,>40%,26882,11,>40%
+Home,rja/plv/kv5,Garbage Bags,48.2468,>40%,50109,9,>40%
+Home,rja/plv/mzc,Glass Cleaners,45.601,>40%,38918,9,>40%
+Home,rja/plv/oej,Mosquito Killers,43.129,>40%,877103,103,>40%
+Home,rja/plv/qsp,Kitchen Rolls,46.0888,>40%,43082,14,>40%
+Home,rja/plv/trq,Toilet Cleaners,27.992,25–30%,147628,23,30–35%
+Home,rja/plv/txk,Dish Cleaning Gels,39.1591,35–40%,159876,33,35–40%
+Home,rja/plv/wwv,Kitchen Surface Cleaners,44.1348,>40%,49444,15,>40%
+Home,rja/plv/xdq,Liquid Detergents,38.0197,35–40%,646194,124,35–40%
+Home,rja/plv/yav,Fabric Softeners,25.6083,25–30%,154360,16,25–30%
+Home,rja/plv/z2g,Detergent Pods,44.299,>40%,18330,6,>40%
+Home,rja/z2d,Cleaning Supplies,41.8227,>40%,607660,131,>40%
+Home,rja/z2d/de2,Toilet Brushes,44.2058,>40%,33473,5,>40%
+Home,rja/z2d/eyn,Scrub Pads,38.4726,35–40%,72657,21,35–40%
+Home,rja/z2d/hhd,Dusters,43.7119,>40%,19052,7,>40%
+Home,rja/z2d/ivx,,40.5299,>40%,173857,29,>40%
+Home,rja/z2d/jef,Cleaning Gloves,48.9928,>40%,34552,13,>40%
+Home,rja/z2d/jms,Brooms,32.7641,30–35%,69219,20,30–35%
+Home,rja/z2d/ns2,Cleaning Clothes,44.5049,>40%,15432,5,>40%
+Home,rja/z2d/r6h,Dustbins,40.0201,>40%,163213,27,35–40%
+Home,rja/z2d/rrc,Brushes,42.8222,>40%,35930,17,35–40%
+Home,rja/z2d/xrz,Mops,40.3979,>40%,204496,40,35–40%
+Home,rja/zqm,Bathroom Accessories,42.8547,>40%,396673,40,35–40%
+Home,rja/zqm/7rm,Buckets,24.4531,15–25%,156823,36,15–25%
+Home,rja/zqm/oga,Toothbrush Holders,44.9984,>40%,119102,20,>40%
+Home,rja/zqm/p0g,Liquid Dispensers,40.615,>40%,132781,24,35–40%
+Home,rja/zqm/yf1,Soap Dishes,49.7646,>40%,30160,6,>40%
+Home,upp,Kitchen; Cookware & Serveware,33.0724,30–35%,959405,261,25–30%
+Home,upp/3at,Spray Bottle,30.0312,30–35%,95454,12,25–30%
+Home,upp/3t7,Water Bottles & Flasks,32.0807,30–35%,4698803,628,30–35%
+Home,upp/5ix,Kitchen Storage & Containers,34.2129,30–35%,1796111,340,25–30%
+Home,upp/5ix/01e,Kitchen Containers,35.13,35–40%,1599565,333,30–35%
+Home,upp/5ix/eqk,Water Dispensers,29.716,25–30%,112071,34,25–30%
+Home,upp/5ix/g9l,Lids,4.3136,<5%,2411,2,5–15%
+Home,upp/5ix/m83,Glass Holders,18.9336,15–25%,20556,4,15–25%
+Home,upp/5ix/p4v,Storage Drums,1.3293,<5%,21364,8,<5%
+Home,upp/5ix/p6h,Grocery Bags,34.6641,30–35%,3632,3,35–40%
+Home,upp/5ix/r5f,Fruit Baskets,25.1439,25–30%,138435,15,15–25%
+Home,upp/5ix/tlu,Kitchen Racks,19.6617,15–25%,1248450,232,15–25%
+Home,upp/5ix/w52,Storage Baskets,29.4828,25–30%,84100,22,25–30%
+Home,upp/5ix/xi9,Oil Dispensers,40.5229,>40%,385471,47,35–40%
+Home,upp/5ix/ymq,Condiment Sets,17.7122,15–25%,297800,60,15–25%
+Home,upp/6z1,Outdoor Cooking,21.3235,15–25%,8160,4,5–15%
+Home,upp/6z1/oxt,Barbecues & Grills,32.206,30–35%,22443,5,25–30%
+Home,upp/bgd,Bakeware,19.8834,15–25%,131874,35,15–25%
+Home,upp/bgd/3wi,Moulds,29.2777,25–30%,87353,24,15–25%
+Home,upp/bgd/q0u,Measuring Cups,12.4764,5–15%,14267,6,5–15%
+Home,upp/bgd/xte,Baking Sparkle Toppers,9.5024,5–15%,16059,5,5–15%
+Home,upp/bqi,Lunch Boxes,38.3969,35–40%,1438134,200,35–40%
+Home,upp/d7m,Gas Stove & Accessories,21.6616,15–25%,123061,40,15–25%
+Home,upp/d7m/98d,Gas Cylinder Trolleys,42.0406,>40%,36479,11,>40%
+Home,upp/d7m/o8z,Gas Lighters,42.9046,>40%,97155,12,>40%
+Home,upp/d7m/uhm,Gas Stoves,33.3512,30–35%,1508621,191,30–35%
+Home,upp/d7m/vrs,Gas Cylinder Regulators,11.0857,5–15%,33746,9,5–15%
+Home,upp/i7t,Tableware & Dinnerware,25.5022,25–30%,1253620,314,15–25%
+Home,upp/i7t/0st,Jugs,22.3358,15–25%,173327,35,15–25%
+Home,upp/i7t/1xc,Bowls,29.8373,25–30%,202150,58,15–25%
+Home,upp/i7t/bel,Chopsticks,20.783,15–25%,21686,4,15–25%
+Home,upp/i7t/bic,Plates,21.3676,15–25%,229244,43,15–25%
+Home,upp/i7t/g9o,Serving Trays,31.2029,30–35%,62991,15,25–30%
+Home,upp/i7t/gka,Casseroles,30.6041,30–35%,289494,57,25–30%
+Home,upp/i7t/kxv,Spoons,12.8554,5–15%,40590,13,5–15%
+Home,upp/i7t/lha,Dinner Sets,20.7626,15–25%,625191,72,15–25%
+Home,upp/i7t/msi,Mugs,27.2245,25–30%,435515,91,15–25%
+Home,upp/i7t/obo,Cutlery Sets,16.6322,15–25%,102109,9,15–25%
+Home,upp/i7t/ozw,Glasses,25.0539,25–30%,224775,50,15–25%
+Home,upp/i7t/rok,Lemon Sets,6.0817,5–15%,28939,12,5–15%
+Home,upp/i7t/tnp,Cake & Pie Servers,14.0687,5–15%,12176,4,5–15%
+Home,upp/i7t/uaz,Cups & Saucers,26.9254,25–30%,482671,78,15–25%
+Home,upp/i7t/vcg,Cutlery Cases,15.3628,15–25%,69317,10,5–15%
+Home,upp/ldf,Kitchen Tools,15.9944,15–25%,347097,85,5–15%
+Home,upp/ldf/dvc,Knife Sharpeners,26.1192,25–30%,41502,8,15–25%
+Home,upp/ldf/laj,Ice Cube Trays,41.3783,>40%,104127,15,35–40%
+Home,upp/ldf/mrk,Kitchen Presses,11.3235,5–15%,13600,8,5–15%
+Home,upp/ldf/pbr,Dumpling Presses,16.9543,15–25%,16975,6,15–25%
+Home,upp/ldf/ql1,Strainers & Colanders,20.6777,15–25%,73872,25,15–25%
+Home,upp/ldf/sog,Kitchen Tool Sets,22.7115,15–25%,32565,11,15–25%
+Home,upp/ldf/wmd,Rolling Pins & Boards,7.8421,5–15%,72289,21,5–15%
+Home,upp/nwv,Knives; Choppers & Cutters,21.4928,15–25%,149799,55,15–25%
+Home,upp/nwv/3dc,Cutting Boards,43.9533,>40%,174856,31,>40%
+Home,upp/nwv/h1d,Peelers,38.9728,35–40%,26616,5,30–35%
+Home,upp/nwv/jem,Choppers & Slicers,31.5117,30–35%,677051,119,25–30%
+Home,upp/nwv/otq,Kitchen Knives,23.3489,15–25%,411638,58,15–25%
+Home,upp/s4o,Disposable Supplies,16.8502,15–25%,71002,36,5–15%
+Home,upp/ta2,Barware,15.7914,15–25%,155775,55,15–25%
+Home,upp/ta2/c11,Bar Glasses,17.2966,15–25%,39239,13,5–15%
+Home,upp/ta2/hp5,Ice Boxes,18.7089,15–25%,24630,5,15–25%
+Home,upp/tnx,Cookware,30.0834,30–35%,449132,136,25–30%
+Home,upp/tnx/6hk,Pressure Cooker Gaskets,14.5374,5–15%,1135,1,15–25%
+Home,upp/tnx/9fq,Pans,36.9049,35–40%,277473,69,30–35%
+Home,upp/tnx/gsl,Pressure Cookers,33.3002,30–35%,1603623,228,30–35%
+Home,upp/tnx/j12,Tawas,38.2052,35–40%,337184,53,35–40%
+Home,upp/tnx/neu,Cookware Pots,22.4972,15–25%,41654,20,15–25%
+Home,upp/tnx/nrl,Idli Makers,21.6073,15–25%,249369,50,15–25%
+Home,upp/tnx/qvz,Cookware Sets,33.1568,30–35%,302197,76,30–35%
+Home,upp/tnx/uy9,Woks & Kadhais,35.6828,35–40%,452974,71,30–35%
+Home,upp/tnx/yhy,Steamers,16.2601,15–25%,101254,8,15–25%
+Home,upp/tnx/zvo,Handis,14.3949,5–15%,66885,23,5–15%
+Home,upp/xim,Hand Juicers & Grinders,20.8616,15–25%,340421,18,15–25%
+Home,upp/xim/3ai,Mashers,8.8984,5–15%,172155,65,5–15%
+Home,upp/xim/r0j,Hand Juicers,36.3679,35–40%,77156,26,30–35%
+Large,j9e,Home & Kitchen,35.4541,35–40%,17242,5,25–30%
+Large,j9e/abm,Home Appliances,28.7801,25–30%,1199192,210,25–30%
+Large,j9e/abm/0zg,Sewing Machines,30.8381,30–35%,383574,101,30–35%
+Large,j9e/abm/3o4,Air Purifiers,38.5464,35–40%,58462,9,35–40%
+Large,j9e/abm/52j,Air Coolers,39.7428,35–40%,2368600,227,35–40%
+Large,j9e/abm/8qx,Washing Machines,30.5225,30–35%,1354914,129,25–30%
+Large,j9e/abm/a0u,Irons,38.6717,35–40%,938364,127,35–40%
+Large,j9e/abm/bfm,Water Geysers,35.7202,35–40%,148493,35,30–35%
+Large,j9e/abm/c54,Air Conditioners,32.363,30–35%,3087582,333,30–35%
+Large,j9e/abm/hzg,Refrigerators,19.599,15–25%,2771227,279,15–25%
+Large,j9e/abm/i45,Water purifiers,45.3284,>40%,841141,87,>40%
+Large,j9e/abm/ix6,Freezer Chests,24.8386,15–25%,120156,41,15–25%
+Large,j9e/abm/k3w,Sensor Security Systems,24.9787,15–25%,21090,9,15–25%
+Large,j9e/abm/lbz,Fans,37.4431,35–40%,4152228,498,35–40%
+Large,j9e/abm/n0f,Landline Phones,3.8034,<5%,93628,19,<5%
+Large,j9e/abm/qh9,Appliance Parts & Accessories,26.364,25–30%,28812,15,15–25%
+Large,j9e/abm/qh9/bep,Washing Machine Nets,19.2447,15–25%,3601,2,5–15%
+Large,j9e/abm/qh9/de3,Air Purifer Filters,3.4675,<5%,21139,9,5–15%
+Large,j9e/abm/qh9/vng,Washing Machine Door Hinges,2.5709,<5%,64102,10,<5%
+Large,j9e/abm/qh9/wvv,Fridge Door Shelves,2.9551,<5%,23586,10,<5%
+Large,j9e/abm/rqo,Immersion Rods,41.8762,>40%,54322,10,35–40%
+Large,j9e/abm/ul2,Vacuum Cleaners,44.476,>40%,219559,30,>40%
+Large,j9e/abm/ve9,Inverters and Accessories,21.0513,15–25%,333875,49,15–25%
+Large,j9e/abm/ve9/7no,Inverters,18.351,15–25%,117089,22,15–25%
+Large,j9e/abm/ve9/hlv,Inverter Batteries,17.6719,15–25%,33126,12,15–25%
+Large,j9e/abm/xf4,Voltage Stabilizers,42.7447,>40%,154115,41,>40%
+Large,j9e/abm/xie,Room Heaters,39.8599,35–40%,28555,11,35–40%
+Large,j9e/m38,Kitchen Appliances,37.3416,35–40%,798597,199,30–35%
+Large,j9e/m38/1vj,Sandwich Makers,34.2259,30–35%,99600,11,30–35%
+Large,j9e/m38/2re,Electric Choppers,30.9883,30–35%,61791,12,25–30%
+Large,j9e/m38/3yh,Electric Cooking Heaters,33.128,30–35%,26781,6,25–30%
+Large,j9e/m38/575,Induction Cooktops,38.5429,35–40%,464228,46,35–40%
+Large,j9e/m38/58n,Dish washers,1.2202,<5%,66957,8,<5%
+Large,j9e/m38/7ek,Mixer Juicer Grinder,41.0248,>40%,2189046,246,35–40%
+Large,j9e/m38/9m9,Electric Cookers,22.3884,15–25%,281275,45,15–25%
+Large,j9e/m38/aao,Flourmills,46.6268,>40%,55333,18,>40%
+Large,j9e/m38/htd,Wet Grinders,23.2357,15–25%,114113,19,15–25%
+Large,j9e/m38/j1e,Air Fryers,37.2053,35–40%,494723,36,35–40%
+Large,j9e/m38/o49,Microwave Ovens,2.3499,<5%,197073,17,<5%
+Large,j9e/m38/rj3,Food Processors,9.1717,5–15%,28152,5,5–15%
+Large,j9e/m38/rq0,Roti Makers,41.2016,>40%,172588,26,>40%
+Large,j9e/m38/tgz,Chimney,42.6606,>40%,157949,19,35–40%
+Large,j9e/m38/txh,Pop-up Toasters,23.2399,15–25%,23791,4,15–25%
+Large,j9e/m38/u7m,Hand Blenders,43.8454,>40%,99730,27,35–40%
+Large,j9e/m38/vli,Appliance Parts & Accessories,25.6578,25–30%,82131,15,15–25%
+Large,j9e/m38/vli/squ,Mixer Juicer Jars,20.7529,15–25%,129630,42,15–25%
+Large,j9e/m38/vr5,Oven Toaster Grills,16.1949,15–25%,61439,8,15–25%
+Large,j9e/m38/wqo,Coffee makers,40.2056,>40%,79208,15,35–40%
+Large,j9e/m38/xrv,Electric Jug(heater)/Travel Kettles,37.9888,35–40%,444336,64,35–40%
+Large,j9e/m38/zo3,Egg Cookers,42.3436,>40%,135907,12,>40%
+Lifestyle,clo,Clothing and Accessories,28.1168,25–30%,6467960,1914,15–25%
+Lifestyle,clo/1hc,Sleepwear,33.7204,30–35%,768789,195,30–35%
+Lifestyle,clo/1hc/5d2,Night Suits,38.3752,35–40%,273752,44,30–35%
+Lifestyle,clo/1hc/5d2/ac8,Kids' Night Suits,33.713,30–35%,77356,15,30–35%
+Lifestyle,clo/1hc/5d2/cny,Women's Night Suits,35.1404,35–40%,2749696,364,30–35%
+Lifestyle,clo/1hc/5d2/dos,Men's Night Suits,43.4319,>40%,146107,26,>40%
+Lifestyle,clo/1hc/a7m,Pyjamas and Lounge Pants,44.3656,>40%,19718,5,35–40%
+Lifestyle,clo/1hc/a7m/az8,Women's Pyjamas and Lounge Pants,43.8254,>40%,281677,44,>40%
+Lifestyle,clo/1hc/a7m/b4p,Men's Pyjamas and Lounge Pants,40.3404,>40%,45773,8,35–40%
+Lifestyle,clo/1hc/kc4,Night Dresses and Nighties,32.9288,30–35%,728982,78,30–35%
+Lifestyle,clo/1hc/kc4/nmu,Women's Night Dresses and Nighties,35.7943,35–40%,2628482,365,30–35%
+Lifestyle,clo/1hc/kc4/vem,Kids' Night Dresses and Nighties,47.3914,>40%,167617,45,>40%
+Lifestyle,clo/8on,Sarees and Saree Essentials,29.4953,25–30%,177042,53,15–25%
+Lifestyle,clo/8on/5n9,Blouses,34.3169,30–35%,710630,118,30–35%
+Lifestyle,clo/8on/5n9/hny,Woman's Blouse,32.8543,30–35%,3001890,512,25–30%
+Lifestyle,clo/8on/a4q,Saree Falls,12.8294,5–15%,32176,13,5–15%
+Lifestyle,clo/8on/tpo/tuw,Women's Petticoats,39.5753,35–40%,96444,22,35–40%
+Lifestyle,clo/8on/zpd,Sarees,30.9741,30–35%,3498439,387,25–30%
+Lifestyle,clo/8on/zpd/9og,Women's Sarees,24.7251,15–25%,16758810,2539,15–25%
+Lifestyle,clo/8on/zpd/ele,Kids' Sarees,35.6647,35–40%,98411,36,30–35%
+Lifestyle,clo/ash,Topwear,23.1923,15–25%,755485,250,15–25%
+Lifestyle,clo/ash/ank,T-shirts,34.8459,30–35%,3770268,593,30–35%
+Lifestyle,clo/ash/ank/edy,Men's T-shirts,34.0166,30–35%,15649849,2008,30–35%
+Lifestyle,clo/ash/ank/jqi,Couple T-shirts,28.6991,25–30%,71734,11,15–25%
+Lifestyle,clo/ash/ank/loi,Women's T-shirts,35.4756,35–40%,4696071,626,30–35%
+Lifestyle,clo/ash/ank/pgi,Kids' T-shirts,39.4859,35–40%,1420469,327,30–35%
+Lifestyle,clo/ash/axc,Shirts,38.3702,35–40%,2097164,315,35–40%
+Lifestyle,clo/ash/axc/mmk,Men's Shirts,31.554,30–35%,5072464,891,25–30%
+Lifestyle,clo/ash/axc/mmk/bk1,Formal Shirts,33.0841,30–35%,375177,54,30–35%
+Lifestyle,clo/ash/axc/mmk/kp7,Casual Shirts,29.1273,25–30%,12841618,1130,25–30%
+Lifestyle,clo/ash/axc/vop,Women's Shirts,20.6952,15–25%,2915941,282,15–25%
+Lifestyle,clo/ash/axc/znf,Kids' Shirts,35.1853,35–40%,602768,131,30–35%
+Lifestyle,clo/ash/ohw,Tops,32.217,30–35%,1917561,241,25–30%
+Lifestyle,clo/ash/ohw/36j,Women's Tops,29.7395,25–30%,11971376,1200,25–30%
+Lifestyle,clo/ash/ohw/otd,Kids' Tops,30.3957,30–35%,498682,96,25–30%
+Lifestyle,clo/cfv,Kurtas; Ethnic Sets and Bottoms,18.6647,15–25%,3863001,900,15–25%
+Lifestyle,clo/cfv/1n0,Salwars and Patialas,30.6374,30–35%,26027,6,25–30%
+Lifestyle,clo/cfv/1n0/ops,Women's Salwars and Patialas,31.5811,30–35%,46531,13,25–30%
+Lifestyle,clo/cfv/7po,Shararas,28.2185,25–30%,90058,9,25–30%
+Lifestyle,clo/cfv/cib,Kurtas,27.437,25–30%,3032731,425,15–25%
+Lifestyle,clo/cfv/cib/jks,Men's Kurtas,34.6835,30–35%,2674980,317,30–35%
+Lifestyle,clo/cfv/cib/rkt,Women's Kurtas,25.1566,25–30%,13303730,1368,15–25%
+Lifestyle,clo/cfv/cib/zlc,Kids' Kurtas,9.2755,5–15%,220894,43,5–15%
+Lifestyle,clo/cfv/dra,Sherwanis,16.7826,15–25%,37795,8,15–25%
+Lifestyle,clo/cfv/dra/brt,Men's Sherwanis,10.2353,5–15%,262466,29,5–15%
+Lifestyle,clo/cfv/e1p/5l2,Men's Ethnic Pyjamas,22.9446,15–25%,11689,3,15–25%
+Lifestyle,clo/cfv/ht7,Leggings and Churidars,42.7839,>40%,79198,23,35–40%
+Lifestyle,clo/cfv/ht7/cjo,Women's Leggings and Churidars,40.2059,>40%,275594,48,35–40%
+Lifestyle,clo/cfv/ht7/fr2,Kids' Leggings and Churidars,42.6171,>40%,31004,9,>40%
+Lifestyle,clo/cfv/itg,Ethnic Sets,18.789,15–25%,4282148,820,15–25%
+Lifestyle,clo/cfv/itg/pme,Men's Ethnic Sets,20.9582,15–25%,1810980,304,15–25%
+Lifestyle,clo/cfv/itg/sym,Kids' Ethnic Sets,24.5375,15–25%,1582938,439,15–25%
+Lifestyle,clo/cfv/itg/tys,Women's Ethnic Sets,15.6814,15–25%,39903334,3738,5–15%
+Lifestyle,clo/cfv/mn6,Palazzos,29.7346,25–30%,1424048,197,25–30%
+Lifestyle,clo/cfv/nnk,Dhotis,43.048,>40%,117750,23,35–40%
+Lifestyle,clo/eof,Kids' Combos and Costumes,31.9059,30–35%,715787,195,25–30%
+Lifestyle,clo/eof/1bp,Kids' Apparel Combos,35.6551,35–40%,4244116,922,30–35%
+Lifestyle,clo/eof/ygv,Kids' Costume Wear,26.0006,25–30%,94471,36,25–30%
+Lifestyle,clo/h4p,Jumpsuits and Dungarees,12.3538,5–15%,54817,19,5–15%
+Lifestyle,clo/h4p/2z1,Kids' Rompers and Dungarees,35.583,35–40%,16269,7,25–30%
+Lifestyle,clo/h4p/2z1/7zd,Kids' Jumpsuits,18.8815,15–25%,58258,13,15–25%
+Lifestyle,clo/h4p/2z1/ckv,Kids' Dungarees,30.8321,30–35%,150914,44,25–30%
+Lifestyle,clo/h4p/fpl,Women's Jumpsuits and Dungarees,7.338,5–15%,11529,6,5–15%
+Lifestyle,clo/h4p/fpl/48d,Women's Dungarees,7.7409,5–15%,66995,10,5–15%
+Lifestyle,clo/h4p/fpl/cl5,Women's Jumpsuits,26.5291,25–30%,590520,49,25–30%
+Lifestyle,clo/hlg,Lehenga Cholis,31.9679,30–35%,623485,139,25–30%
+Lifestyle,clo/hlg/nb5,Kids' Lehenga Cholis,23.7343,15–25%,450234,99,15–25%
+Lifestyle,clo/hlg/wrp,Women's Lehenga Cholis,32.1197,30–35%,2025307,311,30–35%
+Lifestyle,clo/l1l,Co-ords,22.9733,15–25%,2198897,366,15–25%
+Lifestyle,clo/mz5/jbj,Men and Women Raincoats,33.6469,30–35%,51550,8,30–35%
+Lifestyle,clo/nyk,Tracksuits,31.0563,30–35%,67355,20,30–35%
+Lifestyle,clo/nyk/bu3,Kids' Tracksuits,38.7451,35–40%,6917,4,30–35%
+Lifestyle,clo/nyk/ndn,Women's Tracksuits,45.5632,>40%,161376,33,>40%
+Lifestyle,clo/nyk/zp4,Men's Tracksuits,35.9632,35–40%,265722,55,30–35%
+Lifestyle,clo/odx,Dresses and Gowns,22.787,15–25%,2488191,653,15–25%
+Lifestyle,clo/odx/maj,Dresses,29.7024,25–30%,1335402,262,25–30%
+Lifestyle,clo/odx/maj/jhy,Women's Dresses,25.381,25–30%,10882915,1247,15–25%
+Lifestyle,clo/odx/maj/zc1,Kids' Dresses,29.3508,25–30%,4519829,726,25–30%
+Lifestyle,clo/odx/od7,Gowns,18.5269,15–25%,277737,47,15–25%
+Lifestyle,clo/odx/od7/0xx,Women's Gowns,17.9757,15–25%,1506014,222,15–25%
+Lifestyle,clo/odx/od7/c7m,Kids' Gowns,20.5186,15–25%,40490,14,15–25%
+Lifestyle,clo/qd8,Clothing Accessories,29.0978,25–30%,322877,111,25–30%
+Lifestyle,clo/qd8/90q,Stoles,23.2336,15–25%,64256,15,15–25%
+Lifestyle,clo/qd8/dfg,Applique Patch,23.7595,15–25%,10097,5,15–25%
+Lifestyle,clo/qd8/dy2,Bandanas,42.2609,>40%,27891,3,35–40%
+Lifestyle,clo/qd8/el0,Handkerchiefs,39.7937,35–40%,24426,6,30–35%
+Lifestyle,clo/qd8/el0/a6h,Women's Handkerchiefs,20.2769,15–25%,16758,5,15–25%
+Lifestyle,clo/qd8/el0/t9d,Men's Handkerchiefs,42.9264,>40%,44341,10,35–40%
+Lifestyle,clo/qd8/ezr,Socks,41.7748,>40%,67007,11,>40%
+Lifestyle,clo/qd8/ezr/ut9,Men's and Women's Socks,39.5386,35–40%,730158,138,35–40%
+Lifestyle,clo/qd8/ezr/uwe,Kids' Socks,43.5017,>40%,58823,18,>40%
+Lifestyle,clo/qd8/fyx,Stockings,42.153,>40%,11807,5,35–40%
+Lifestyle,clo/qd8/fyx/rk5,Women's Stockings,38.7011,35–40%,28286,3,30–35%
+Lifestyle,clo/qd8/igi,Turbans,14.1712,5–15%,26561,14,5–15%
+Lifestyle,clo/qd8/igi/ygk,Men's Turbans,5.213,5–15%,14579,7,5–15%
+Lifestyle,clo/qd8/lrt,Ties and Cufflinks,37.057,35–40%,81237,18,30–35%
+Lifestyle,clo/qd8/lrt/y02,Men's Neck Ties and Cufflinks,20.7287,15–25%,4062,1,25–30%
+Lifestyle,clo/qd8/rvu,Abayas and Burqas,17.6302,15–25%,1028566,197,15–25%
+Lifestyle,clo/qd8/t6b,Dupattas,27.2205,25–30%,243658,69,15–25%
+Lifestyle,clo/qd8/t6b/pjy,Women's Dupattas,21.7165,15–25%,732186,152,15–25%
+Lifestyle,clo/qd8/t6b/zmb,Men's Dupattas,10.2119,5–15%,28780,11,5–15%
+Lifestyle,clo/qd8/y9u,Caps,21.9244,15–25%,429681,135,15–25%
+Lifestyle,clo/qd8/y9u/222,Women's Caps,34.9836,30–35%,76476,16,25–30%
+Lifestyle,clo/qd8/y9u/c32,Kids' Caps,28.6537,25–30%,115067,42,15–25%
+Lifestyle,clo/qd8/y9u/gy0,Men's Caps,19.4183,15–25%,1354524,146,15–25%
+Lifestyle,clo/qd8/zsi,Wristbands,9.0914,5–15%,18677,5,5–15%
+Lifestyle,clo/qfi,Fabrics,18.594,15–25%,674682,184,15–25%
+Lifestyle,clo/qfi/alw,Shirt and Trouser Fabrics,19.9173,15–25%,40899,18,15–25%
+Lifestyle,clo/qfi/alw/fwl,Men's Shirt and Trouser Fabrics,17.9987,15–25%,130187,52,15–25%
+Lifestyle,clo/qfi/gkj,Blouse Material,28.0357,25–30%,72636,21,15–25%
+Lifestyle,clo/qfi/gkj/484,Women's Blouse Materials,24.7454,15–25%,116652,40,15–25%
+Lifestyle,clo/qfi/xcx,Dress Materials,21.9187,15–25%,72007,17,15–25%
+Lifestyle,clo/qfi/xcx/eg6,Kids' Ethnic Fabrics,13.7061,5–15%,10499,4,5–15%
+Lifestyle,clo/qfi/xcx/ms4,Women's Dress Materials,21.911,15–25%,2169850,477,15–25%
+Lifestyle,clo/qfl,Innerwear and Swimwear,40.8476,>40%,1434424,274,35–40%
+Lifestyle,clo/qfl/1pt,Boxers,37.2029,35–40%,19227,5,30–35%
+Lifestyle,clo/qfl/1pt/jlb,Men's Boxers,30.5385,30–35%,166351,20,30–35%
+Lifestyle,clo/qfl/dru/jao,Women's Swimsuits,29.9319,25–30%,81084,17,25–30%
+Lifestyle,clo/qfl/dru/tmi,Kids' Swimsuits,40.131,>40%,15878,6,35–40%
+Lifestyle,clo/qfl/pji,Camisoles and Slips,36.7951,35–40%,19152,11,30–35%
+Lifestyle,clo/qfl/pji/crb,Women's Camisoles and Slips,36.1406,35–40%,179787,51,30–35%
+Lifestyle,clo/qfl/pji/kl5,Kids' Camisoles and Slips,33.4666,30–35%,45284,15,30–35%
+Lifestyle,clo/qfl/q5u,Panties,40.0916,>40%,119626,32,35–40%
+Lifestyle,clo/qfl/q5u/la2,Women's Panties,37.7621,35–40%,1340688,232,35–40%
+Lifestyle,clo/qfl/q5u/pb2,Kids' Panties,46.2101,>40%,77351,30,>40%
+Lifestyle,clo/qfl/szr,Briefs and Trunks,22.343,15–25%,93170,27,25–30%
+Lifestyle,clo/qfl/szr/3xl,Men's Briefs and Trunks,34.452,30–35%,2578696,331,30–35%
+Lifestyle,clo/qfl/szr/egu,Kids' Briefs and Trunks,41.478,>40%,60174,19,35–40%
+Lifestyle,clo/qfl/t6c,Babydolls,38.5351,35–40%,358315,60,35–40%
+Lifestyle,clo/qfl/uga,Shapewears,47.2647,>40%,106807,37,>40%
+Lifestyle,clo/qfl/uga/7li,Men's Shapewears,46.4478,>40%,32867,11,>40%
+Lifestyle,clo/qfl/uga/tpq,Women's Shapewears,43.589,>40%,217362,33,>40%
+Lifestyle,clo/qfl/v5v,Bras,38.6622,35–40%,622670,94,35–40%
+Lifestyle,clo/qfl/v5v/cev,Girls' Bras,47.6008,>40%,63501,12,>40%
+Lifestyle,clo/qfl/v5v/kzg,Women's Bras,36.7819,35–40%,3151541,471,30–35%
+Lifestyle,clo/qfl/w4j,Lingerie Sets and Accessories,39.3778,35–40%,91021,2,35–40%
+Lifestyle,clo/qfl/w4j/53e,Lingerie Sets,34.2993,30–35%,809813,139,30–35%
+Lifestyle,clo/qfl/w4j/jxq,Lingerie Accessories,43.2077,>40%,37410,13,35–40%
+Lifestyle,clo/qfl/wp7,Vests,36.8359,35–40%,178109,46,35–40%
+Lifestyle,clo/qfl/wp7/sgn,Kids' Vests,40.9764,>40%,96780,41,35–40%
+Lifestyle,clo/qfl/wp7/zpk,Men's Vests,36.9779,35–40%,814501,162,30–35%
+Lifestyle,clo/qvw,Winter Wear,27.5891,25–30%,264945,72,15–25%
+Lifestyle,clo/qvw/64a,Sweatshirts,31.7514,30–35%,39951,15,25–30%
+Lifestyle,clo/qvw/64a/lwy,Kids' Sweatshirts,40.5474,>40%,19730,10,30–35%
+Lifestyle,clo/qvw/64a/lzz,Women's Sweatshirts,36.4939,35–40%,126846,26,30–35%
+Lifestyle,clo/qvw/64a/vui,Men's Sweatshirts,36.3871,35–40%,387357,77,30–35%
+Lifestyle,clo/qvw/kpn,Shawls,35.509,35–40%,23456,6,30–35%
+Lifestyle,clo/qvw/kpn/9pk,Women's Shawls,34.8184,30–35%,56878,11,30–35%
+Lifestyle,clo/qvw/kpn/aul,Men's Shawls,22.0671,15–25%,125608,14,15–25%
+Lifestyle,clo/qvw/mgw,Scarves,23.1364,15–25%,211502,44,15–25%
+Lifestyle,clo/qvw/mgw/jlh,Kids' Scarves,15.5158,15–25%,2346,2,5–15%
+Lifestyle,clo/qvw/mgw/pq1,Women's Scarves,12.8004,5–15%,31835,7,5–15%
+Lifestyle,clo/qvw/tog,Gloves,33.3235,30–35%,40737,10,30–35%
+Lifestyle,clo/qvw/tog/ggy,Women's Gloves,29.6582,25–30%,15038,5,15–25%
+Lifestyle,clo/qvw/ugg/4rf,Women's Thermals,42.7708,>40%,9102,2,35–40%
+Lifestyle,clo/qvw/vkb,Sweaters and Cardigans,34.6872,30–35%,10710,4,30–35%
+Lifestyle,clo/qvw/vkb/hbp,Women's Sweaters,28.8634,25–30%,184389,35,15–25%
+Lifestyle,clo/qvw/vkb/ieq,Men's Sweaters,32.9433,30–35%,53161,14,25–30%
+Lifestyle,clo/qvw/vkb/sjw,Kids' Sweaters,39.225,35–40%,4232,3,30–35%
+Lifestyle,clo/qvw/vvr,Shrugs,41.3214,>40%,22521,5,25–30%
+Lifestyle,clo/qvw/vvr/syu,Women's Shrugs,36.7179,35–40%,329967,48,30–35%
+Lifestyle,clo/qvw/z0g,Jackets,32.2456,30–35%,215028,52,25–30%
+Lifestyle,clo/qvw/z0g/0vw,Kids' Jackets,34.5589,30–35%,32773,13,25–30%
+Lifestyle,clo/qvw/z0g/jbm,Men's Jackets,29.4177,25–30%,1109549,188,25–30%
+Lifestyle,clo/qvw/z0g/rwo,Women's Jackets,28.3569,25–30%,448723,82,25–30%
+Lifestyle,clo/twn/vpg,,7.5959,5–15%,37981,5,5–15%
+Lifestyle,clo/upk,Blazers; Waistcoats and Suits,29.4939,25–30%,224992,72,25–30%
+Lifestyle,clo/upk/6zw,Coats,35.6509,35–40%,12067,4,25–30%
+Lifestyle,clo/upk/6zw/hkw,Women's Coats,32.3143,30–35%,68626,12,25–30%
+Lifestyle,clo/upk/6zw/k8s,Men's Coats,3.1186,<5%,51241,5,5–15%
+Lifestyle,clo/upk/8mn,Waistcoats,41.52,>40%,15737,5,30–35%
+Lifestyle,clo/upk/8mn/mik,Men's Waistcoats,28.4771,25–30%,144295,28,25–30%
+Lifestyle,clo/upk/fj9,Blazers,29.4795,25–30%,1998,1,15–25%
+Lifestyle,clo/upk/fj9/bsv,Women's Readymade Blazers,24.62,15–25%,91312,21,15–25%
+Lifestyle,clo/upk/fj9/kqi,Kids' Readymade Blazers,23.3881,15–25%,26475,8,15–25%
+Lifestyle,clo/upk/fj9/qd3,Men's Readymade Blazers,25.7826,25–30%,813675,90,15–25%
+Lifestyle,clo/upk/sxw,Suits,30.0671,30–35%,98024,18,25–30%
+Lifestyle,clo/upk/sxw/0xk,Kids' Readymade Suits,16.4675,15–25%,4937,3,15–25%
+Lifestyle,clo/upk/sxw/5bi,Women's Readymade Suits,18.3256,15–25%,10750,5,15–25%
+Lifestyle,clo/upk/sxw/doc,Men's Readymade Suits,12.5504,5–15%,352938,61,5–15%
+Lifestyle,clo/vua,Bottomwear,37.8453,35–40%,2397456,512,30–35%
+Lifestyle,clo/vua/5jo/cqs,Men's Lungis,39.044,35–40%,194442,43,35–40%
+Lifestyle,clo/vua/7e0/kep,Kids' Capris,39.0991,35–40%,9435,2,30–35%
+Lifestyle,clo/vua/7e0/lc2,Women's Capris,42.3708,>40%,111145,25,35–40%
+Lifestyle,clo/vua/e8g,Shorts,40.2098,>40%,266425,73,35–40%
+Lifestyle,clo/vua/e8g/fkx,Kids' Shorts,43.786,>40%,341742,98,>40%
+Lifestyle,clo/vua/e8g/hbd,Women's Shorts,36.2061,35–40%,1101707,140,30–35%
+Lifestyle,clo/vua/e8g/kc7,Men's Shorts,39.3379,35–40%,1613372,224,35–40%
+Lifestyle,clo/vua/eum/4qq,Men's Three-Fourths,42.2773,>40%,71031,14,>40%
+Lifestyle,clo/vua/iku,Skirts,30.5385,30–35%,280096,50,25–30%
+Lifestyle,clo/vua/iku/2hl,Kids' Skirts,20.7146,15–25%,7053,3,15–25%
+Lifestyle,clo/vua/iku/w5t,Women's Skirts,27.522,25–30%,1511839,169,25–30%
+Lifestyle,clo/vua/ioa/n4p,Women's Jeggings,41.5432,>40%,68921,12,35–40%
+Lifestyle,clo/vua/jlk,Track Pants,38.6594,35–40%,450056,95,35–40%
+Lifestyle,clo/vua/jlk/4oa,Kids' Track Pants,43.8143,>40%,299868,89,>40%
+Lifestyle,clo/vua/jlk/6ql,Men's Track Pants,37.9764,35–40%,3300655,464,35–40%
+Lifestyle,clo/vua/jlk/hp8,Women's Track Pants,40.0262,>40%,775300,107,35–40%
+Lifestyle,clo/vua/k58,Jeans,32.2365,30–35%,1006797,187,25–30%
+Lifestyle,clo/vua/k58/4hp,Women's Jeans,36.208,35–40%,4195326,463,30–35%
+Lifestyle,clo/vua/k58/i51,Men's Jeans,27.6409,25–30%,7051903,804,25–30%
+Lifestyle,clo/vua/k58/s9z,Kids' Jeans,32.648,30–35%,775549,175,25–30%
+Lifestyle,clo/vua/mle,Trousers,36.9773,35–40%,321941,82,30–35%
+Lifestyle,clo/vua/mle/8ie,Women's Trousers,41.3052,>40%,2475803,292,35–40%
+Lifestyle,clo/vua/mle/lhk,Men's Trousers,34.4173,30–35%,2958979,448,30–35%
+Lifestyle,clo/vua/mle/y8t,Kids' Trousers,37.7218,35–40%,30831,14,30–35%
+Lifestyle,clo/vua/rqy,Cargos,38.1573,35–40%,214310,43,35–40%
+Lifestyle,clo/vua/rqy/nli,Men's Cargos,35.4486,35–40%,1401095,178,30–35%
+Lifestyle,clo/vua/rqy/r4w,Kids' Cargos,22.8297,15–25%,70772,26,15–25%
+Lifestyle,clo/vua/rqy/rqn,Women's Cargos,34.0828,30–35%,361396,50,30–35%
+Lifestyle,clo/vua/zvq,Tights,44.5288,>40%,6187,4,>40%
+Lifestyle,clo/vua/zvq/ebd,Men's Tights,49.5377,>40%,27583,7,>40%
+Lifestyle,clo/vua/zvq/je3,Women's Tights,44.456,>40%,115413,26,>40%
+Lifestyle,mcr,Jewellery,32.8973,30–35%,2588741,362,30–35%
+Lifestyle,mcr/73x/ydh,Coins & Bars,8.349,5–15%,140856,26,5–15%
+Lifestyle,mcr/96v,Artificial Jewellery,30.9506,30–35%,1558339,479,25–30%
+Lifestyle,mcr/96v/0ew,Nose Rings & Studs,18.7685,15–25%,239891,41,15–25%
+Lifestyle,mcr/96v/0ew/7kg,Nathiya,13.4695,5–15%,21983,8,5–15%
+Lifestyle,mcr/96v/0ew/gs6,Nose Ring,16.2047,15–25%,128926,9,15–25%
+Lifestyle,mcr/96v/0vq,Necklaces & Chains,36.7999,35–40%,333838,89,30–35%
+Lifestyle,mcr/96v/0vq/izm,Necklaces,30.4476,30–35%,77947,28,15–25%
+Lifestyle,mcr/96v/0vq/vs6,Chains,39.2407,35–40%,701712,126,35–40%
+Lifestyle,mcr/96v/2lx,Kamarband,3.8522,<5%,319633,63,<5%
+Lifestyle,mcr/96v/az2,Rings,34.1473,30–35%,1012833,252,25–30%
+Lifestyle,mcr/96v/btd,Pendants & Lockets,37.4023,35–40%,442566,125,25–30%
+Lifestyle,mcr/96v/fbc,Bangles Bracelets & Armlets,25.5102,25–30%,8991624,1331,15–25%
+Lifestyle,mcr/96v/jf9,Anklets,22.2053,15–25%,562416,110,15–25%
+Lifestyle,mcr/96v/k9d,Earrings,27.6293,25–30%,6920938,1077,25–30%
+Lifestyle,mcr/96v/ofb/dej,Charms,11.8626,5–15%,15688,8,5–15%
+Lifestyle,mcr/96v/ofb/gwz,Maang Tikkas,8.8035,5–15%,102573,35,5–15%
+Lifestyle,mcr/96v/ofb/jrm,Brooches,31.1391,30–35%,169719,40,25–30%
+Lifestyle,mcr/96v/t4i/0f4,Mangalsutra,25.261,25–30%,722687,152,15–25%
+Lifestyle,mcr/96v/yx2,Jewellery Sets,27.6427,25–30%,6660035,1114,25–30%
+Lifestyle,mcr/pyi,Precious Articles,2.6803,<5%,28168,5,<5%
+Lifestyle,mcr/tfz,Silver Jewellery,25.5093,25–30%,190652,45,15–25%
+Lifestyle,mcr/tfz/0x3,Jewellery Sets,1.9979,<5%,136394,11,<5%
+Lifestyle,mcr/tfz/fey/lzk,Bracelets,39.7853,35–40%,35400,6,30–35%
+Lifestyle,mcr/tfz/k2j,Earrings,34.2923,30–35%,38481,12,30–35%
+Lifestyle,mcr/tfz/uue,Anklets,17.4567,15–25%,40105,16,15–25%
+Lifestyle,mcr/tfz/xnc,Rings,33.7926,30–35%,64310,19,30–35%
+Lifestyle,mcr/tfz/xsr/lvu,Chains,27.0068,25–30%,43152,4,25–30%
+Lifestyle,mcr/ykh,Precious Jewellery,5.6398,5–15%,54098,14,5–15%
+Lifestyle,mcr/ykh/3ob,Rings,8.9397,5–15%,51031,10,5–15%
+Lifestyle,mcr/ykh/nvk,Earrings,8.7574,5–15%,28022,10,5–15%
+Lifestyle,mcr/ykh/woy/job,Chains,4.8656,<5%,43345,4,5–15%
+Lifestyle,osp,Footwear,33.6829,30–35%,10077563,1145,30–35%
+Lifestyle,osp/cil,Men's Footwear,32.0376,30–35%,20587626,1758,30–35%
+Lifestyle,osp/cil/1cu,Sports Shoes,29.1438,25–30%,13910286,1310,25–30%
+Lifestyle,osp/cil/e1f,Casual Shoes,31.4644,30–35%,11063064,1070,30–35%
+Lifestyle,osp/cil/e1r,Slippers & Flip Flops,32.1645,30–35%,9760019,911,30–35%
+Lifestyle,osp/cil/e83,Sandals & Floaters,30.8585,30–35%,8078016,786,25–30%
+Lifestyle,osp/cil/ja7,Shoe Care,44.304,>40%,41520,13,>40%
+Lifestyle,osp/cil/ja7/spc,Shoe Polishes & Creams,46.0719,>40%,21677,10,>40%
+Lifestyle,osp/cil/ssb,Formal Shoes,36.7999,35–40%,1788967,189,35–40%
+Lifestyle,osp/cil/ssd,Ethnic Shoes,34.3656,30–35%,110602,28,30–35%
+Lifestyle,osp/iko,Women's Footwear,35.3628,35–40%,11026954,1395,30–35%
+Lifestyle,osp/iko/6q1,Heels,23.8892,15–25%,4543348,588,15–25%
+Lifestyle,osp/iko/974,Ballerinas,35.4846,35–40%,361010,57,25–30%
+Lifestyle,osp/iko/9d5,Flats,31.2107,30–35%,2203538,275,25–30%
+Lifestyle,osp/iko/d20,Sports Shoes,32.8031,30–35%,941799,158,30–35%
+Lifestyle,osp/iko/iz7,Slippers & Flip Flops,38.6419,35–40%,3626569,421,35–40%
+Lifestyle,osp/iko/jpm,Wedges,28.9552,25–30%,491346,88,25–30%
+Lifestyle,osp/iko/ojy,Sports Sandals,15.8452,15–25%,21830,4,5–15%
+Lifestyle,osp/iko/sx7,Casual Shoes,36.0727,35–40%,1313526,183,30–35%
+Lifestyle,osp/iko/w4a,Ethnic Shoes,21.8167,15–25%,46547,11,15–25%
+Lifestyle,osp/mba,Kids' & Infant Footwear,37.1473,35–40%,2912728,728,30–35%
+Lifestyle,osp/mba/erx,Girls Footwear,30.0623,30–35%,460666,91,25–30%
+Lifestyle,osp/mba/erx/efe,Ethnic Shoes,13.3619,5–15%,18216,7,5–15%
+Lifestyle,osp/mba/erx/k2f,Sandals,20.5778,15–25%,150993,53,15–25%
+Lifestyle,osp/mba/erx/p4o,Slippers & Flip Flops,44.5236,>40%,46034,15,35–40%
+Lifestyle,osp/mba/erx/q43,Casual Shoes,40.7469,>40%,43888,13,30–35%
+Lifestyle,osp/mba/o3t,Boys Footwear,37.3575,35–40%,360118,77,35–40%
+Lifestyle,osp/mba/o3t/1q2,Slippers & Flip Flops,37.0305,35–40%,222738,18,30–35%
+Lifestyle,osp/mba/o3t/aua,Sports Shoes,34.858,30–35%,10319,5,30–35%
+Lifestyle,osp/mba/o3t/drt,Casual Shoes,31.2486,30–35%,45730,16,25–30%
+Lifestyle,osp/mba/o3t/w34,Ethnic Shoes,14.067,5–15%,18028,5,5–15%
+Lifestyle,osp/mba/o3t/wqv,Sandals,44.2799,>40%,20524,5,35–40%
+Lifestyle,osp/mba/qzr,Infants,41.2413,>40%,262984,48,>40%
+Lifestyle,osp/mba/qzr/g31,Baby Girls Footwear,40.7416,>40%,261995,71,35–40%
+Lifestyle,osp/mba/qzr/gz2,Baby Boys Footwear,44.2484,>40%,8389,2,35–40%
+Lifestyle,r18,Watches,41.6118,>40%,524311,26,35–40%
+Lifestyle,r18/f13,Wrist Watches,32.8946,30–35%,30341506,2774,30–35%
+Lifestyle,r18/trt,Watch Accessories,13.9267,5–15%,14167,6,15–25%
+Lifestyle,r18/trt/7qt,Watch Straps,16.2718,15–25%,88374,28,5–15%
+Lifestyle,r18/trt/kn9,Watch Boxes,46.4405,>40%,71584,13,>40%
+Lifestyle,reh,Bags; Wallets & Belts,41.0162,>40%,1435752,383,35–40%
+Lifestyle,reh/4d7,Bags & Backpacks,37.2324,35–40%,3545353,447,35–40%
+Lifestyle,reh/4d7/ak9,Backpacks,36.6907,35–40%,260995,48,30–35%
+Lifestyle,reh/4d7/j66,Cross Body Bags,43.3378,>40%,145718,35,>40%
+Lifestyle,reh/4d7/ss4,Messenger Bags,40.8748,>40%,24372,11,>40%
+Lifestyle,reh/4d7/x9i,Laptop Bags,39.4524,35–40%,1035984,119,35–40%
+Lifestyle,reh/agc,Garment Covers,46.6226,>40%,406410,65,>40%
+Lifestyle,reh/cca,Wallets & Clutches,38.2138,35–40%,302103,73,35–40%
+Lifestyle,reh/cca/h76,Wallets,37.9634,35–40%,92431,12,35–40%
+Lifestyle,reh/cca/q6i,Clutches,42.6842,>40%,53528,5,>40%
+Lifestyle,reh/flc,Key Chains,23.5724,15–25%,667211,204,15–25%
+Lifestyle,reh/gie,Accessories Combo,35.3871,35–40%,12773,8,30–35%
+Lifestyle,reh/ihu,Handbags & Clutches,38.8769,35–40%,5876785,771,35–40%
+Lifestyle,reh/ihu/1gy,Shoulder Bags,39.7435,35–40%,51626,16,35–40%
+Lifestyle,reh/ihu/6vv,Pouches and Potlis,11.7381,5–15%,10845,5,5–15%
+Lifestyle,reh/ihu/m08,Handbags,35.6905,35–40%,91481,30,30–35%
+Lifestyle,reh/ihu/mf2,Sling Bags,36.8119,35–40%,1551198,240,30–35%
+Lifestyle,reh/ihu/psb,Messenger Bags,28.9758,25–30%,26039,7,25–30%
+Lifestyle,reh/ihu/q6i,Clutches,43.7474,>40%,14138,5,35–40%
+Lifestyle,reh/ihu/v57,Totes,31.1538,30–35%,611194,90,25–30%
+Lifestyle,reh/ihu/x9j,Clutches & Wallets,43.6562,>40%,5131,2,30–35%
+Lifestyle,reh/ihu/yvb,Backpack Handbags,38.9015,35–40%,458131,70,35–40%
+Lifestyle,reh/plk,Luggage & Travel,44.29,>40%,1117921,198,>40%
+Lifestyle,reh/plk/26y,Duffel Bags,37.3333,35–40%,172361,49,35–40%
+Lifestyle,reh/plk/san,Rucksacks,42.1237,>40%,162177,39,>40%
+Lifestyle,reh/plk/t1w,Travel Accessories,44.4691,>40%,49956,13,35–40%
+Lifestyle,reh/plk/t1w/390,Travel Toiletry Kits,41.7162,>40%,17003,6,35–40%
+Lifestyle,reh/plk/t1w/myk,Luggage Covers,48.7714,>40%,25029,4,>40%
+Lifestyle,reh/plk/t1w/x07,Neck Pillows & Eye Shades,45.2961,>40%,46578,7,>40%
+Lifestyle,reh/plk/t1w/ysp,Travel Organizers,29.6916,25–30%,10764,4,30–35%
+Lifestyle,reh/plk/tvv,Suitcases,41.0012,>40%,3807792,364,>40%
+Lifestyle,reh/ro3,Belts,43.1306,>40%,1575386,173,>40%
+Lifestyle,u73,Eyewear,44.4074,>40%,212192,31,35–40%
+Lifestyle,u73/2uc,Reading Glasses,42.5188,>40%,20311,5,30–35%
+Lifestyle,u73/h4k,Frames,29.9367,25–30%,424319,118,25–30%

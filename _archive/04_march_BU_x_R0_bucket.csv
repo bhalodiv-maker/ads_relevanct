@@ -1,0 +1,16 @@
+metric,bu,0–25%,25–40%,40–50%,50–60%,60–70%,70–100%,>100%,Total
+store_count,BGM,83,115,87,90,86,157,69,687
+store_count,CoreElectronics,18,16,14,13,21,22,10,114
+store_count,EmergingElectronics,14,9,7,10,12,14,7,73
+store_count,Furniture,4,7,12,8,9,9,8,57
+store_count,Home,26,53,65,65,55,84,27,375
+store_count,Large,3,10,13,11,8,4,1,50
+store_count,Lifestyle,25,46,52,72,52,49,23,319
+
+impression_share_pct,BGM,4.03,18.49,12.37,19.50,16.56,24.45,4.60,100.00
+impression_share_pct,CoreElectronics,8.48,8.94,14.48,21.15,22.73,21.23,2.98,100.00
+impression_share_pct,EmergingElectronics,2.08,2.63,13.30,40.94,30.67,8.46,1.92,100.00
+impression_share_pct,Furniture,0.81,15.12,21.43,23.52,19.13,17.55,2.45,100.00
+impression_share_pct,Home,2.30,18.04,26.28,18.68,15.39,17.09,2.23,100.00
+impression_share_pct,Large,0.55,4.64,25.42,38.58,18.63,11.84,0.34,100.00
+impression_share_pct,Lifestyle,0.29,3.86,20.41,41.39,28.04,4.49,1.51,100.00

@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ad Relevance Dashboard — Jan–Mar 2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="2026_dashboard_data.js"></script>
+<script src="query_ais_embed.js"></script>
+<style>
+:root {
+  --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+  --border: #475569; --text: #e2e8f0; --text2: #94a3b8; --text3: #64748b; --muted: #64748b;
+  --accent: #3b82f6; --green: #10b981; --red: #ef4444; --amber: #f59e0b;
+  --purple: #a78bfa; --cyan: #22d3ee; --pink: #f472b6;
+  --radius: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.container { max-width: 1440px; margin: 0 auto; padding: 24px; }
+
+.header { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; margin-bottom: 32px; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header-meta { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+.meta-tag { background: var(--surface2); padding: 6px 16px; border-radius: 20px; font-size: 13px; color: var(--text2); }
+.meta-tag span { color: var(--text); font-weight: 600; }
+
+.section { margin-bottom: 32px; }
+.section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--surface2); display: flex; align-items: center; gap: 8px; }
+.section-title .icon { font-size: 22px; }
+
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.metric-card { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 20px; text-align: center; transition: transform 0.2s, border-color 0.2s; }
+.metric-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.metric-card .label { font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.metric-card .value { font-size: 28px; font-weight: 700; }
+.metric-card .sub { font-size: 12px; color: var(--text2); margin-top: 4px; }
+.metric-card.highlight { border-left: 3px solid var(--accent); }
+
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--surface2); }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { background: var(--surface2); padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text2); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; white-space: nowrap; position: sticky; top: 0; }
+td { padding: 10px 16px; border-top: 1px solid rgba(71,85,105,0.3); white-space: nowrap; }
+tr:hover td { background: rgba(59,130,246,0.05); }
+.text-right { text-align: right; }
+.bu-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.bu-sort-th { cursor:pointer; user-select:none; transition:color 0.15s; white-space:nowrap; }
+.bu-sort-th:hover { color:var(--accent); }
+
+.chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.chart-card { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 24px; }
+.chart-card h3 { font-size: 15px; margin-bottom: 16px; color: var(--text2); }
+.chart-container { position: relative; height: 320px; }
+.chart-container-tall { position: relative; height: 380px; }
+
+.heatmap-wrap { overflow-x: auto; }
+.heatmap { border-collapse: collapse; width: 100%; }
+.heatmap th { padding: 10px 12px; font-size: 11px; }
+.heatmap td { padding: 10px 12px; text-align: center; font-size: 12px; font-weight: 600; border: 1px solid rgba(71,85,105,0.2); min-width: 80px; transition: transform 0.15s; }
+.heatmap td:hover { transform: scale(1.05); z-index: 1; }
+.heatmap td.ct-clickable { cursor:pointer; position:relative; transition:outline 0.15s; }
+.heatmap td.ct-clickable:hover { outline:2px solid var(--accent); outline-offset:-2px; border-radius:2px; }
+
+.insight-box { background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(167,139,250,0.05)); border: 1px solid rgba(59,130,246,0.3); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 24px; font-size: 14px; line-height: 1.7; }
+.insight-box strong { color: var(--cyan); }
+
+.sli-filters { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; align-items:flex-end; }
+.sli-filter-group { display:flex; flex-direction:column; gap:4px; }
+.sli-filter-group label { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; }
+.sli-filter-group select { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:7px 12px; border-radius:6px; font-size:13px; font-family:inherit; min-width:120px; cursor:pointer; }
+.csv-dl-btn { background:var(--surface); border:1px solid var(--border); color:var(--accent); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px; transition:all 0.2s; font-family:inherit; }
+.csv-dl-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+.ms-wrap { position:relative; min-width:160px; }
+.ms-toggle { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:7px 28px 7px 10px; border-radius:6px; font-size:13px; font-family:inherit; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block; width:100%; }
+.ms-toggle::after { content:'\25BE'; position:absolute; right:10px; top:50%; transform:translateY(-50%); font-size:12px; color:var(--text3); pointer-events:none; }
+.ms-toggle:hover { border-color:var(--accent); }
+.ms-drop { display:none; position:absolute; top:calc(100% + 4px); left:0; background:var(--surface); border:1px solid var(--border); border-radius:8px; min-width:100%; max-height:240px; overflow-y:auto; z-index:200; box-shadow:0 8px 24px rgba(0,0,0,0.4); padding:4px 0; }
+.ms-drop.open { display:block; }
+.ms-item { display:flex; align-items:center; gap:8px; padding:6px 12px; cursor:pointer; font-size:13px; color:var(--text2); transition:background 0.1s; }
+.ms-item:hover { background:var(--surface2); }
+.ms-item input { accent-color:var(--accent); cursor:pointer; margin:0; flex-shrink:0; }
+.ms-item .ms-name { flex:1; }
+.ms-item .ms-only { font-size:11px; color:var(--accent); opacity:0; padding:2px 6px; border-radius:4px; transition:opacity 0.15s; }
+.ms-item:hover .ms-only { opacity:1; }
+.ms-item .ms-only:hover { background:var(--accent); color:#fff; }
+.ms-item.ms-all { border-bottom:1px solid var(--border); margin-bottom:2px; font-weight:600; color:var(--text); }
+
+#sli-pager { display:none; align-items:center; justify-content:center; gap:12px; margin-top:12px; font-size:13px; color:var(--text2); flex-wrap:wrap; }
+#sli-pager button { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px; font-family:inherit; }
+#sli-pager button:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+#sli-pager button:disabled { opacity:0.4; cursor:not-allowed; }
+
+.ct-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; }
+.ct-modal-overlay.active { display:flex; }
+.ct-modal { position:relative; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:44px 28px 24px 28px; min-width:min(340px,96vw); width:max-content; max-width:min(96vw,1200px); max-height:85vh; overflow-x:auto; overflow-y:auto; box-shadow:0 12px 40px rgba(0,0,0,0.5); box-sizing:border-box; }
+.ct-close-x { position:absolute; top:12px; right:12px; z-index:3; width:36px; height:36px; padding:0; margin:0; border:none; border-radius:8px; background:var(--surface2); color:var(--text2); font-size:22px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:inherit; }
+.ct-close-x:hover { background:var(--border); color:var(--text); }
+.ct-modal h3 { margin:0 0 6px; font-size:16px; color:var(--accent); padding-right:32px; white-space:normal; word-break:break-word; }
+.ct-modal .ct-subtitle { font-size:12px; color:var(--muted); margin-bottom:16px; white-space:normal; word-break:break-word; }
+.ct-modal table { width:max-content; border-collapse:collapse; font-size:13px; table-layout:auto; }
+.ct-modal th, .ct-modal td { padding:7px 10px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; }
+.ct-modal th { color:var(--muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; }
+.ct-modal .ct-bar { height:6px; border-radius:3px; background:var(--accent); margin-top:3px; transition:width 0.3s; }
+.ct-modal .bu-click { cursor:pointer; transition:opacity 0.15s; }
+.ct-modal .bu-click:hover { opacity:0.8; }
+.ct-modal td.text-right { text-align:right; }
+
+.ts-controls { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:16px; }
+.ts-controls label { font-size:12px; color:var(--text3); }
+.ts-btn { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:6px 16px; border-radius:6px; font-size:12px; cursor:pointer; font-family:inherit; transition:all 0.2s; }
+.ts-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+.dr-bar { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; align-items:center; }
+.dr-bar label { font-size:13px; color:var(--text2); font-weight:600; }
+.dr-bar input[type=date] { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:8px; font-size:13px; font-family:inherit; cursor:pointer; color-scheme:dark; }
+.dr-bar input[type=date]:focus { outline:none; border-color:var(--accent); }
+.dr-bar .dr-reset { background:none; border:1px solid var(--border); color:var(--text3); padding:8px 14px; border-radius:8px; font-size:12px; cursor:pointer; font-family:inherit; }
+.dr-bar .dr-reset:hover { border-color:var(--accent); color:var(--accent); }
+.dr-bar .dr-note { font-size:12px; color:var(--text3); font-style:italic; }
+
+.qai-section-note { font-size: 12px; color: var(--text3); margin: -8px 0 16px 0; line-height: 1.45; }
+.qai-ais-dist-card { margin-bottom: 20px; }
+#ct-modal-extras { min-height: 0; }
+#qai-pager { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:12px; font-size:13px; color:var(--text2); flex-wrap:wrap; }
+#qai-pager button { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px; font-family:inherit; }
+#qai-pager button:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+#qai-pager button:disabled { opacity:0.4; cursor:not-allowed; }
+.sli-filter-group input[type="text"].qai-query-search { min-width:220px; }
+.ms-wrap.qai-store-ms { min-width:min(100%,280px); max-width:360px; }
+.ms-wrap.qai-store-ms .ms-drop { max-height:min(50vh,360px); }
+.qai-info-btn { position:absolute; top:16px; right:16px; background:none; border:1px solid var(--border); color:var(--accent); width:28px; height:28px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; line-height:1; transition:all 0.2s; }
+.qai-info-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+.qai-info-popup { display:none; position:absolute; top:50px; right:16px; z-index:100; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; max-width:380px; font-size:13px; color:var(--text2); line-height:1.6; box-shadow:0 8px 24px rgba(0,0,0,0.4); }
+.qai-info-popup.open { display:block; }
+.qai-info-popup strong { color:var(--accent); }
+.qai-info-close { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 14px; border-radius:6px; font-size:12px; cursor:pointer; font-family:inherit; }
+.qai-info-close:hover { border-color:var(--accent); color:var(--accent); }
+.ms-search { display:block; width:calc(100% - 16px); margin:4px 8px 8px; padding:6px 10px; border-radius:6px; border:1px solid var(--border); background:var(--surface2); color:var(--text); font-size:12px; font-family:inherit; box-sizing:border-box; }
+.ms-search:focus { outline:none; border-color:var(--accent); }
+
+/* BU small multiples grid */
+.bu-sm-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:16px; margin-bottom:24px; }
+.bu-sm-card { background:var(--surface); border:1px solid var(--surface2); border-radius:var(--radius); padding:16px; }
+.bu-sm-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.bu-sm-header .bu-sm-name { font-size:14px; font-weight:600; }
+.bu-sm-header .bu-sm-vals { font-size:11px; color:var(--text3); }
+.bu-sm-header .bu-sm-vals span { font-weight:600; }
+.bu-sm-chart { position:relative; height:160px; }
+
+.val-good { color: var(--green); }
+.val-warn { color: var(--amber); }
+.val-bad { color: var(--red); }
+
+@media (max-width: 900px) {
+  .chart-grid { grid-template-columns: 1fr; }
+  .header h1 { font-size: 22px; }
+}
+</style>
+</head>
+<body>
+<div class="ct-modal-overlay" id="ct-modal-overlay" onclick="if(event.target===this)closeCtModal()">
+  <div class="ct-modal" onclick="event.stopPropagation()">
+    <button type="button" class="ct-close-x" aria-label="Close" onclick="closeCtModal()">&times;</button>
+    <h3 id="ct-modal-title"></h3>
+    <div class="ct-subtitle" id="ct-modal-subtitle"></div>
+    <table id="ct-modal-table"></table>
+    <div id="ct-modal-extras"></div>
+  </div>
+</div>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header" style="position:relative;">
+  <img src="flipkart_logo.png" alt="Flipkart" style="position:absolute;top:12px;right:32px;height:60px;">
+  <h1>Ad Relevance Analysis Dashboard</h1>
+  <p style="color:var(--text2); font-size:14px;">Search Ads Ecosystem — Store Level Relevance Metrics (Long-term)</p>
+  <div class="header-meta">
+    <div class="meta-tag">Period: <span id="hdr-period"></span></div>
+    <div class="meta-tag">Marketplace: <span>Flipkart</span></div>
+    <div class="meta-tag">Page Context: <span>Search</span></div>
+    <div class="meta-tag">Stores: <span id="hdr-stores"></span> (Top 99%)</div>
+    <div class="meta-tag">BUs: <span>7</span></div>
+  </div>
+</div>
+
+<!-- DATE RANGE FILTER -->
+<div class="dr-bar" id="dr-bar">
+  <label>Date Range:</label>
+  <input type="date" id="dr-from">
+  <span style="color:var(--text3)">to</span>
+  <input type="date" id="dr-to">
+  <button class="dr-reset" onclick="resetDateRange()">Reset</button>
+  <span class="dr-note" id="dr-note"></span>
+</div>
+
+<!-- TIME SERIES -->
+<div class="section">
+  <div class="section-title"><span class="icon">&#128200;</span> R0 &amp; AIS Trends Over Time</div>
+  <div class="ts-controls">
+    <label>View:</label>
+    <button class="ts-btn active" id="ts-weekly-btn" onclick="setTsMode('weekly')">Weekly</button>
+    <button class="ts-btn" id="ts-daily-btn" onclick="setTsMode('daily')">Daily</button>
+    <span style="width:1px;height:24px;background:var(--border);margin:0 8px;display:inline-block;vertical-align:middle"></span>
+    <label>Metric:</label>
+    <button class="ts-btn active" id="ts-metric-r0ais" onclick="setTsMetric('r0ais')">R0 &amp; AIS</button>
+    <button class="ts-btn" id="ts-metric-ctr" onclick="setTsMetric('ctr')">CTR</button>
+    <button class="ts-btn" id="ts-metric-cabn" onclick="setTsMetric('cabn')">CABN/Click</button>
+  </div>
+  <div class="chart-card" style="margin-bottom:24px;">
+    <h3 id="ts-overall-title">Overall R0 &amp; AIS</h3>
+    <div class="chart-container-tall"><canvas id="tsOverallChart"></canvas></div>
+  </div>
+  <div class="insight-box" style="margin-top:16px;" id="ts-overall-insight"></div>
+  <div class="section-title" style="margin-top:24px;"><span class="icon">&#127970;</span> BU-Level Trends</div>
+  <div class="bu-sm-grid" id="bu-sm-grid"></div>
+  <div class="insight-box" style="margin-top:16px;" id="ts-bu-insight"></div>
+</div>
+
+<!-- OVERALL METRICS -->
+<div class="section">
+  <div class="section-title"><span class="icon">&#9670;</span> Overall Metrics</div>
+  <div class="metric-grid" id="overall-metrics"></div>
+  <div class="insight-box" id="overall-insight-box"></div>
+</div>
+
+<!-- BU LEVEL METRICS -->
+<div class="section">
+  <div class="section-title"><span class="icon">&#9672;</span> BU-Level Metrics</div>
+  <div class="table-wrap"><table id="bu-table"></table></div>
+  <div class="insight-box" style="margin-top:16px;" id="bu-r0-insight"></div>
+</div>
+
+<!-- BUCKET DISTRIBUTION CHARTS -->
+<div class="section">
+  <div class="section-title" style="justify-content:space-between;flex-wrap:wrap;">
+    <span><span class="icon">&#9673;</span> R0 &amp; AIS Bucket Distributions</span>
+    <select id="global-bu-filter" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;">
+      <option value="Overall">Overall</option>
+    </select>
+  </div>
+  <div class="chart-grid">
+    <div class="chart-card">
+      <h3>R0 Score Distribution <span style="font-size:11px;color:var(--muted);font-weight:400">(click bar to drill down)</span></h3>
+      <div class="chart-container"><canvas id="r0Chart" style="cursor:pointer"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h3>AIS Distribution <span style="font-size:11px;color:var(--muted);font-weight:400">(click bar to drill down)</span></h3>
+      <div class="chart-container"><canvas id="aisChart" style="cursor:pointer"></canvas></div>
+    </div>
+  </div>
+  <div class="insight-box" style="margin-top:16px;" id="bucket-insight-box"></div>
+</div>
+
+<!-- CROSS-TAB HEATMAP -->
+<div class="section">
+  <div class="section-title" style="justify-content:space-between;flex-wrap:wrap;">
+    <span><span class="icon">&#9638;</span> AIS x R0 Cross-Tab</span>
+    <select id="crosstab-metric" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;">
+      <option value="count">Store Count</option>
+      <option value="imp">Impression Share %</option>
+    </select>
+  </div>
+  <div class="chart-card">
+    <h3 id="crosstab-chart-title">Impression Share % <span style="font-size:11px;color:var(--muted);font-weight:400">(click cell to drill down)</span></h3>
+    <div class="heatmap-wrap"><table class="heatmap" id="crosstab-table"></table></div>
+  </div>
+  <div class="insight-box" style="margin-top:16px;" id="crosstab-insight"></div>
+</div>
+
+<!-- STORE-LEVEL INSIGHTS -->
+<div class="section">
+  <div class="section-title"><span class="icon">&#9776;</span> Store-Level Insights</div>
+  <div class="sli-filters" id="sli-filters-wrap">
+    <div class="sli-filter-group"><label>BU</label><div class="ms-wrap" id="sli-bu"></div></div>
+    <div class="sli-filter-group"><label>R0 Bucket</label><div class="ms-wrap" id="sli-r0"></div></div>
+    <div class="sli-filter-group"><label>AIS Bucket</label><div class="ms-wrap" id="sli-ais"></div></div>
+    <div class="sli-filter-group"><label>Show Top</label>
+      <select id="sli-topn"><option value="10">10</option><option value="20">20</option><option value="30" selected>30</option><option value="50">50</option><option value="100">100</option><option value="0">All</option></select>
+    </div>
+  </div>
+  <div style="text-align:right;margin-bottom:6px"><button class="csv-dl-btn" onclick="downloadTableCSV('table-stores','store_level_insights.csv')">&#11015; Download CSV</button></div>
+  <div class="table-wrap"><table id="table-stores"></table></div>
+  <div id="sli-pager"></div>
+</div>
+
+<!-- QUERY-LEVEL AIS -->
+<div class="section">
+  <div class="section-title"><span class="icon">&#8987;</span> Query-Level AIS</div>
+  <p class="qai-section-note">We have excluded query having &lt;1000 impressions. Data is only for 04-March-2026.</p>
+  <div class="chart-card qai-ais-dist-card" style="position:relative;">
+    <h3>Query AIS distribution <span style="font-size:11px;color:var(--muted);font-weight:400">(click bar for top 30 queries, CSV)</span></h3>
+    <button type="button" class="qai-info-btn" onclick="document.getElementById('qai-info-popup').classList.toggle('open')" title="Why Store AIS ≠ Query AIS?">&#9432;</button>
+    <div class="qai-info-popup" id="qai-info-popup">
+      <strong>Store AIS vs Query AIS</strong><br>
+      Store-level AIS averages across all queries — extremes cancel out. Query-level AIS preserves each query's individual ad share, so the &gt;45% bucket appears much larger here than in the store distribution. This is expected: most &gt;45% query-AIS impressions come from stores with 30–40% overall AIS.
+      <div style="margin-top:8px;text-align:right;"><button class="qai-info-close" onclick="document.getElementById('qai-info-popup').classList.remove('open')">Got it</button></div>
+    </div>
+    <div class="sli-filters" style="margin-bottom:16px">
+      <div class="sli-filter-group"><label>BU</label><div class="ms-wrap" id="qai-dist-bu"></div></div>
+      <div class="sli-filter-group"><label>Store AIS bucket</label><div class="ms-wrap" id="qai-dist-store-ais"></div></div>
+      <div class="sli-filter-group"><label>Store Id</label><div class="ms-wrap qai-store-ms" id="qai-dist-store"></div></div>
+    </div>
+    <div class="chart-container"><canvas id="qaiAisDistChart" style="cursor:pointer"></canvas></div>
+  </div>
+  <div class="sli-filters">
+    <div class="sli-filter-group"><label>BU</label><div class="ms-wrap" id="qai-bu"></div></div>
+    <div class="sli-filter-group"><label>Store Id</label><div class="ms-wrap qai-store-ms" id="qai-store"></div></div>
+    <div class="sli-filter-group"><label>Store AIS bucket</label><div class="ms-wrap" id="qai-store-ais-bucket"></div></div>
+    <div class="sli-filter-group"><label>Query AIS bucket</label><div class="ms-wrap" id="qai-query-ais-bucket"></div></div>
+    <div class="sli-filter-group"><label>Search query</label>
+      <input type="text" id="qai-query-search" class="qai-query-search" placeholder="Type to filter queries…" autocomplete="off" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:7px 12px;border-radius:6px;font-size:13px;font-family:inherit;">
+    </div>
+  </div>
+  <div style="text-align:right;margin-bottom:6px"><button type="button" class="csv-dl-btn" id="qai-download-csv">&#11015; Download CSV (filtered)</button></div>
+  <div class="table-wrap"><table id="table-query-ais"></table></div>
+  <div id="qai-pager" aria-label="Query table pages"></div>
+</div>
+
+<div style="text-align:center; padding:24px; color:var(--text3); font-size:12px;">
+  Generated from <code>store_level_data_for_2026.csv</code> &middot; Filters: fold &le; 12, 7 BUs, top 99% impression stores
+</div>
+</div>
+
+<script>
+/* ── State ── */
+var activePeriod = 'all';
+function PD() { return PERIODS[activePeriod]; }
+
+/* ── Utilities ── */
+function fmt(n) { return n == null ? '–' : Number(n).toLocaleString('en-IN'); }
+function pct(n) { return n == null ? '–' : Number(n).toFixed(2) + '%'; }
+function escapeHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function sn(path) {
+  return (STORE_NAMES && STORE_NAMES[path]) || path;
+}
+function bpsLabel(ads, org) {
+  var v = ((ads - org) * 100).toFixed(0);
+  var sign = v >= 0 ? '+' : '';
+  var cls = v < 0 ? 'val-bad' : 'val-good';
+  return '<span class="' + cls + '">' + sign + v + ' bps vs Organic</span>';
+}
+
+var BU_COLORS = { BGM:'#3b82f6', CoreElectronics:'#10b981', EmergingElectronics:'#f59e0b', Furniture:'#a78bfa', Home:'#f472b6', Large:'#22d3ee', Lifestyle:'#fb923c' };
+var BU_LIST = ['BGM','CoreElectronics','EmergingElectronics','Furniture','Home','Large','Lifestyle'];
+var BUCKET_COLORS = ['#ef4444','#f97316','#f59e0b','#84cc16','#10b981','#06b6d4','#8b5cf6','#ec4899'];
+
+/* ── Date Range Logic ── */
+var allDateMin = PERIODS['all'].overall.date_min;
+var allDateMax = PERIODS['all'].overall.date_max;
+
+(function initDateRange() {
+  var f = document.getElementById('dr-from'), t = document.getElementById('dr-to');
+  f.min = allDateMin; f.max = allDateMax; f.value = allDateMin;
+  t.min = allDateMin; t.max = allDateMax; t.value = allDateMax;
+  f.onchange = t.onchange = onDateRangeChange;
+})();
+
+function resetDateRange() {
+  document.getElementById('dr-from').value = allDateMin;
+  document.getElementById('dr-to').value = allDateMax;
+  onDateRangeChange();
+}
+
+function onDateRangeChange() {
+  var from = document.getElementById('dr-from').value;
+  var to = document.getElementById('dr-to').value;
+  if (!from || !to || from > to) return;
+  var months = {};
+  ['01','02','03'].forEach(function(m) {
+    var mStart = '2026-' + m + '-01';
+    var mEnd = m === '01' ? '2026-01-31' : m === '02' ? '2026-02-28' : '2026-03-31';
+    if (from <= mEnd && to >= mStart) months[m] = true;
+  });
+  var keys = Object.keys(months);
+  if (keys.length === 3) { activePeriod = 'all'; }
+  else if (keys.length === 1) { activePeriod = '2026-' + keys[0]; }
+  else { activePeriod = 'all'; }
+
+  var note = document.getElementById('dr-note');
+  var plbl = PERIOD_LABELS[activePeriod] || '';
+  if (keys.length === 2) { note.textContent = 'Showing: Full Period data (covers 2 months)'; }
+  else { note.textContent = 'Showing: ' + plbl; }
+
+  _storeAisMap = null;
+  renderAll();
+  renderTimeSeries();
+}
+
+/* ── Chart defaults ── */
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = 'rgba(71,85,105,0.3)';
+Chart.defaults.font.family = 'Inter, sans-serif';
+
+var r0ChartInstance = null, aisChartInstance = null;
+var tsOverallChartInst = null;
+var buSmCharts = [];
+var currentGlobalBU = 'Overall';
+var sliPage = 0;
+var buSortCol = null, buSortDir = 1;
+
+/* ── Modal ── */
+function closeCtModal() { document.getElementById('ct-modal-overlay').classList.remove('active'); var ex=document.getElementById('ct-modal-extras'); if(ex) ex.innerHTML=''; }
+
+/* ── Render everything ── */
+function renderAll() {
+  renderHeader();
+  renderOverallMetrics();
+  renderBuTable();
+  renderBucketCharts(currentGlobalBU);
+  renderCrosstab();
+  initSliFilters();
+  renderStoreTables();
+}
+
+/* ── Header ── */
+function renderHeader() {
+  var o = PD().overall;
+  document.getElementById('hdr-period').textContent = o.date_min + ' to ' + o.date_max + ' (' + o.n_days + ' days)';
+  document.getElementById('hdr-stores').textContent = fmt(o.stores);
+}
+
+/* ── Overall Metrics (matching 04_march: 6 cards, bps on ads) ── */
+function renderOverallMetrics() {
+  var o = PD().overall;
+  var ctrBps = bpsLabel(o.ads_CTR, o.org_CTR);
+  var cabnBps = bpsLabel(o.ads_CABN_clk, o.org_CABN_clk);
+  var cards = [
+    { label:'R0 Score', value:pct(o.R0), sub:'Fold-weighted relevance', hl:true },
+    { label:'AIS', value:pct(o.AIS), sub:'Ad Impression Share', hl:true },
+    { label:'Ads CTR', value:pct(o.ads_CTR), sub:ctrBps },
+    { label:'Organic CTR', value:pct(o.org_CTR), sub:'Organic click-through rate' },
+    { label:'Ads CABN/Click', value:pct(o.ads_CABN_clk), sub:cabnBps },
+    { label:'Organic CABN/Click', value:pct(o.org_CABN_clk), sub:'Organic CABN per click' }
+  ];
+  var h=''; cards.forEach(function(c){
+    h+='<div class="metric-card'+(c.hl?' highlight':'')+'"><div class="label">'+c.label+'</div><div class="value">'+c.value+'</div><div class="sub">'+c.sub+'</div></div>';
+  });
+  document.getElementById('overall-metrics').innerHTML=h;
+
+  var ctrG = ((o.org_CTR - o.ads_CTR)*100).toFixed(0);
+  var cabnG = ((o.org_CABN_clk - o.ads_CABN_clk)*100).toFixed(0);
+  document.getElementById('overall-insight-box').innerHTML =
+    '<strong>Overall R0 is '+pct(o.R0)+'</strong> — fold-weighted relevance vs organic. <strong>AIS at '+pct(o.AIS)+'</strong> means ads account for that share of all impressions across search. '+
+    'Organic CTR (<strong>'+pct(o.org_CTR)+'</strong>) vs ads CTR (<strong>'+pct(o.ads_CTR)+'</strong>) — gap <strong>'+ctrG+' bps</strong>. '+
+    'CABN/click: ads <strong>'+pct(o.ads_CABN_clk)+'</strong> vs organic <strong>'+pct(o.org_CABN_clk)+'</strong> (gap <strong>'+cabnG+' bps</strong>).';
+}
+
+/* ── BU Table with Overall row and sorting ── */
+var buCols = [
+  { key:'bu', label:'BU', align:'', fmt:function(r){ return r._isOverall ? '<strong>Overall</strong>' : '<span class="bu-badge" style="background:'+(BU_COLORS[r.bu]||'#64748b')+'22;color:'+(BU_COLORS[r.bu]||'#64748b')+'">'+r.bu+'</span>'; }},
+  { key:'stores', label:'Stores', align:'text-right' },
+  { key:'imprShare', label:'Impression Share', align:'text-right' },
+  { key:'R0', label:'R0 %', align:'text-right' },
+  { key:'AIS', label:'AIS %', align:'text-right' },
+  { key:'ads_CTR', label:'Ads CTR %', align:'text-right' },
+  { key:'org_CTR', label:'Org CTR %', align:'text-right' },
+  { key:'ctrGap', label:'CTR Gap (bps)', align:'text-right' },
+  { key:'ads_CABN_clk', label:'Ads CABN/Clk %', align:'text-right' },
+  { key:'org_CABN_clk', label:'Org CABN/Clk %', align:'text-right' },
+  { key:'cabnGap', label:'CABN Gap (bps)', align:'text-right' }
+];
+
+function buildBuRows() {
+  var totalImp = PD().overall.all_impressions;
+  var buRows = PD().bu_metrics.map(function(b){
+    var r = Object.assign({}, b);
+    r.ctrGap = (b.ads_CTR - b.org_CTR) * 100;
+    r.cabnGap = (b.ads_CABN_clk - b.org_CABN_clk) * 100;
+    r.imprShare = (b.all_impressions / totalImp) * 100;
+    return r;
+  });
+  var o = PD().overall;
+  var overall = {
+    _isOverall: true, bu: '', stores: o.stores, R0: o.R0, AIS: o.AIS,
+    ads_CTR: o.ads_CTR, org_CTR: o.org_CTR,
+    ads_CABN_clk: o.ads_CABN_clk, org_CABN_clk: o.org_CABN_clk,
+    all_impressions: o.all_impressions,
+    ctrGap: (o.ads_CTR - o.org_CTR) * 100,
+    cabnGap: (o.ads_CABN_clk - o.org_CABN_clk) * 100,
+    imprShare: 100
+  };
+  return { overall: overall, rows: buRows };
+}
+
+function renderBuTable() {
+  var data = buildBuRows();
+  var rows = data.rows.slice();
+  if (buSortCol !== null) {
+    var key = buCols[buSortCol].key;
+    rows.sort(function(a, b) {
+      var va = key === 'bu' ? a.bu.toLowerCase() : a[key];
+      var vb = key === 'bu' ? b.bu.toLowerCase() : b[key];
+      if (va < vb) return -1 * buSortDir;
+      if (va > vb) return 1 * buSortDir;
+      return 0;
+    });
+  } else {
+    rows.sort(function(a, b) { return b.all_impressions - a.all_impressions; });
+  }
+
+  var html = '<thead><tr>';
+  buCols.forEach(function(col, ci) {
+    var arrow = buSortCol === ci ? (buSortDir === 1 ? ' &#9650;' : ' &#9660;') : '';
+    html += '<th class="bu-sort-th ' + col.align + '" data-ci="' + ci + '">' + col.label + arrow + '</th>';
+  });
+  html += '</tr></thead><tbody>';
+
+  function renderRow(b) {
+    var gc = b.ctrGap < -150 ? 'val-bad' : b.ctrGap < -50 ? 'val-warn' : 'val-good';
+    var cc = b.cabnGap < -150 ? 'val-bad' : b.cabnGap < -50 ? 'val-warn' : 'val-good';
+    var label = b._isOverall ? '<strong>Overall</strong>' : '<span class="bu-badge" style="background:' + (BU_COLORS[b.bu]||'#64748b') + '22;color:' + (BU_COLORS[b.bu]||'#64748b') + '">' + b.bu + '</span>';
+    return '<tr' + (b._isOverall ? ' style="border-bottom:2px solid var(--border)"' : '') + '><td>' + label + '</td>' +
+      '<td class="text-right">' + fmt(b.stores) + '</td><td class="text-right">' + Number(b.imprShare).toFixed(2) + '%</td>' +
+      '<td class="text-right">' + pct(b.R0) + '</td><td class="text-right">' + pct(b.AIS) + '</td>' +
+      '<td class="text-right">' + pct(b.ads_CTR) + '</td><td class="text-right">' + pct(b.org_CTR) + '</td>' +
+      '<td class="text-right ' + gc + '">' + b.ctrGap.toFixed(0) + '</td>' +
+      '<td class="text-right">' + pct(b.ads_CABN_clk) + '</td><td class="text-right">' + pct(b.org_CABN_clk) + '</td>' +
+      '<td class="text-right ' + cc + '">' + b.cabnGap.toFixed(0) + '</td></tr>';
+  }
+
+  html += renderRow(data.overall);
+  rows.forEach(function(b) { html += renderRow(b); });
+  html += '</tbody>';
+  document.getElementById('bu-table').innerHTML = html;
+
+  document.querySelectorAll('#bu-table .bu-sort-th').forEach(function(th) {
+    th.onclick = function() {
+      var ci = parseInt(th.getAttribute('data-ci'));
+      if (buSortCol === ci) { buSortDir *= -1; } else { buSortCol = ci; buSortDir = 1; }
+      renderBuTable();
+    };
+  });
+
+  var bestR0 = rows.slice().sort(function(a,b){return b.R0-a.R0;})[0];
+  var worstR0 = rows.slice().sort(function(a,b){return a.R0-b.R0;})[0];
+  var highestAIS = rows.slice().sort(function(a,b){return b.AIS-a.AIS;})[0];
+  var biggestCtrGap = rows.slice().sort(function(a,b){return a.ctrGap-b.ctrGap;})[0];
+  var biggestCabnGap = rows.slice().sort(function(a,b){return a.cabnGap-b.cabnGap;})[0];
+  var msgs = [];
+  if (bestR0) msgs.push('<strong>' + bestR0.bu + '</strong> leads R0 at <strong>' + pct(bestR0.R0) + '</strong> with ' + fmt(bestR0.stores) + ' stores and ' + Number(bestR0.imprShare).toFixed(1) + '% impression share.');
+  if (worstR0 && worstR0.bu !== bestR0.bu) {
+    msgs.push('<strong>' + worstR0.bu + '</strong> has the lowest R0 at <strong>' + pct(worstR0.R0) + '</strong>.');
+    if (worstR0.R0 < 50) msgs.push('<span style="color:#ef4444">Action: ' + worstR0.bu + ' R0 is below 50% — prioritize relevance audits for top queries in this BU.</span>');
+  }
+  if (biggestCtrGap && biggestCtrGap.ctrGap < -100) msgs.push('<strong>' + biggestCtrGap.bu + '</strong> has the widest CTR gap (<strong>' + biggestCtrGap.ctrGap.toFixed(0) + ' bps</strong>) — ads CTR significantly lags organic, suggesting ranking or creative quality issues.');
+  if (biggestCabnGap && biggestCabnGap.cabnGap < -100) msgs.push('<strong>' + biggestCabnGap.bu + '</strong> has the widest CABN gap (<strong>' + biggestCabnGap.cabnGap.toFixed(0) + ' bps</strong>) — ad clicks convert to cart-adds at a lower rate than organic.');
+  if (highestAIS && highestAIS.AIS > 35) msgs.push('<strong>' + highestAIS.bu + '</strong> has the highest AIS at <strong>' + pct(highestAIS.AIS) + '</strong> — monitor if ad saturation is affecting user experience.');
+  document.getElementById('bu-r0-insight').innerHTML = msgs.join(' ');
+}
+
+/* ── Bucket Distribution Charts ── */
+function renderBucketCharts(buKey) {
+  var bd = PD().BU_BUCKET_DATA[buKey];
+  if (!bd) return;
+  if (r0ChartInstance) r0ChartInstance.destroy();
+  if (aisChartInstance) aisChartInstance.destroy();
+
+  r0ChartInstance = new Chart(document.getElementById('r0Chart').getContext('2d'), {
+    type:'bar', plugins:[ChartDataLabels], data:{
+      labels: bd.r0_dist.map(function(d){return d.bucket;}),
+      datasets:[{
+        label:'Store Count', data: bd.r0_dist.map(function(d){return d.stores;}),
+        order:0, backgroundColor: BUCKET_COLORS.map(function(c){return c+'99';}), borderColor: BUCKET_COLORS,
+        borderWidth:1, borderRadius:6, yAxisID:'y',
+        datalabels:{anchor:'end',align:'end',color:'#e2e8f0',font:{weight:'bold',size:12},formatter:function(v){return v;}}
+      },{
+        label:'Impression Share', data: bd.r0_dist.map(function(d){return d.impr_pct;}),
+        type:'line', order:1, borderColor:'#22d3ee', backgroundColor:'transparent',
+        pointRadius:6, pointHoverRadius:8, pointBackgroundColor:'#22d3ee', pointBorderWidth:2, pointBorderColor:'#0f172a',
+        borderWidth:3, yAxisID:'y1', tension:0.35, fill:false,
+        datalabels:{display:false}
+      }]
+    }, options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:25}},
+      onClick:function(evt,el){ if(!el.length||el[0].datasetIndex!==0) return; showBucketDrill('r0',bd.r0_dist[el[0].index].bucket,buKey); },
+      plugins:{legend:{position:'bottom'},datalabels:{},tooltip:{callbacks:{label:function(ctx){if(ctx.dataset.yAxisID==='y1') return ctx.dataset.label+': '+Number(ctx.raw).toFixed(2)+'%'; return ctx.dataset.label+': '+ctx.raw;}}}},
+      scales:{y:{beginAtZero:true,title:{display:true,text:'Store Count'},grid:{color:'rgba(71,85,105,0.2)'}},
+        y1:{position:'right',beginAtZero:true,title:{display:true,text:'Impression Share'},grid:{drawOnChartArea:false},ticks:{callback:function(v){return Number(v).toFixed(2)+'%';}}},
+        x:{grid:{display:false}}}
+    }
+  });
+
+  aisChartInstance = new Chart(document.getElementById('aisChart').getContext('2d'), {
+    type:'bar', plugins:[ChartDataLabels], data:{
+      labels: bd.ais_dist.map(function(d){return d.bucket;}),
+      datasets:[{
+        label:'Store Count', data: bd.ais_dist.map(function(d){return d.stores;}),
+        order:0, backgroundColor: BUCKET_COLORS.map(function(c){return c+'99';}), borderColor: BUCKET_COLORS,
+        borderWidth:1, borderRadius:6, yAxisID:'y',
+        datalabels:{anchor:'end',align:'end',color:'#e2e8f0',font:{weight:'bold',size:12},formatter:function(v){return v;}}
+      },{
+        label:'Impression Share', data: bd.ais_dist.map(function(d){return d.impr_pct;}),
+        type:'line', order:1, borderColor:'#f472b6', backgroundColor:'transparent',
+        pointRadius:6, pointHoverRadius:8, pointBackgroundColor:'#f472b6', pointBorderWidth:2, pointBorderColor:'#0f172a',
+        borderWidth:3, yAxisID:'y1', tension:0.35, fill:false,
+        datalabels:{display:false}
+      }]
+    }, options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:25}},
+      onClick:function(evt,el){ if(!el.length||el[0].datasetIndex!==0) return; showBucketDrill('ais',bd.ais_dist[el[0].index].bucket,buKey); },
+      plugins:{legend:{position:'bottom'},datalabels:{},tooltip:{callbacks:{label:function(ctx){if(ctx.dataset.yAxisID==='y1') return ctx.dataset.label+': '+Number(ctx.raw).toFixed(2)+'%'; return ctx.dataset.label+': '+ctx.raw;}}}},
+      scales:{y:{beginAtZero:true,title:{display:true,text:'Store Count'},grid:{color:'rgba(71,85,105,0.2)'}},
+        y1:{position:'right',beginAtZero:true,title:{display:true,text:'Impression Share'},grid:{drawOnChartArea:false},ticks:{callback:function(v){return Number(v).toFixed(2)+'%';}}},
+        x:{grid:{display:false}}}
+    }
+  });
+
+  var topR0 = bd.r0_dist.reduce(function(a,b){return b.impr_pct>a.impr_pct?b:a;});
+  var topAIS = bd.ais_dist.reduce(function(a,b){return b.impr_pct>a.impr_pct?b:a;});
+  var lowR0 = bd.r0_dist.filter(function(d){return d.bucket.indexOf('0–25')>=0 || d.bucket.indexOf('25–40')>=0;});
+  var lowR0Imp = lowR0.reduce(function(s,d){return s+d.impr_pct;},0);
+  var lowR0Stores = lowR0.reduce(function(s,d){return s+d.stores;},0);
+  var highAIS = bd.ais_dist.filter(function(d){return d.bucket.indexOf('40–45')>=0 || d.bucket.indexOf('>45')>=0;});
+  var highAISImp = highAIS.reduce(function(s,d){return s+d.impr_pct;},0);
+  var highAISStores = highAIS.reduce(function(s,d){return s+d.stores;},0);
+  var px = buKey === 'Overall' ? '' : '<strong>' + buKey + '</strong>: ';
+  var msgs = [];
+  msgs.push(px + 'The <strong>' + topR0.bucket + ' R0 bucket</strong> holds the largest impression share at <strong>' + topR0.impr_pct.toFixed(2) + '%</strong> (' + topR0.stores + ' stores).');
+  msgs.push('For AIS, the <strong>' + topAIS.bucket + '</strong> bucket dominates at <strong>' + topAIS.impr_pct.toFixed(2) + '%</strong> (' + topAIS.stores + ' stores).');
+  if (lowR0Imp > 15) msgs.push('<span style="color:#ef4444">&#9888; Low-relevance stores (R0 &lt; 40%) account for <strong>' + lowR0Imp.toFixed(1) + '%</strong> of impressions (' + lowR0Stores + ' stores) — these need relevance improvement to protect user experience.</span>');
+  if (highAISImp > 10) msgs.push('<span style="color:#f59e0b">&#9888; High-AIS stores (&gt;40%) hold <strong>' + highAISImp.toFixed(1) + '%</strong> of impressions (' + highAISStores + ' stores) — review ad load balancing for these stores.</span>');
+  document.getElementById('bucket-insight-box').innerHTML = msgs.join(' ');
+}
+
+(function(){ var s=document.getElementById('global-bu-filter'); BU_LIST.forEach(function(bu){var o=document.createElement('option');o.value=bu;o.textContent=bu;s.appendChild(o);}); s.onchange=function(){currentGlobalBU=this.value;renderBucketCharts(this.value);renderCrosstab();}; })();
+
+/* ── Bucket drill-down (impression share for BU breakdown) ── */
+function showBucketDrill(metric, bucket, buKey) {
+  var field = metric === 'r0' ? 'rb' : 'ab';
+  var stores = PD().ALL_STORES.filter(function(s){ return s[field] === bucket && (buKey === 'Overall' || s.b === buKey); });
+  stores.sort(function(a,b){return b.ti - a.ti;});
+  if (buKey === 'Overall') { showBuBreakdown(metric, bucket, stores); }
+  else { showStoreModal(metric, bucket, buKey, stores); }
+}
+
+function showBuBreakdown(metric, bucket, stores) {
+  var label = metric === 'r0' ? 'R0' : 'AIS';
+  var globalImp = PD().overall.all_impressions;
+  var buMap = {};
+  stores.forEach(function(s){
+    if (!buMap[s.b]) buMap[s.b] = {bu:s.b, count:0, imp:0};
+    buMap[s.b].count++; buMap[s.b].imp += s.ti;
+  });
+  var rows = Object.values(buMap).sort(function(a,b){return b.imp - a.imp;});
+  var maxShare = rows.length ? (rows[0].imp / globalImp * 100) : 1;
+  var totalCnt = rows.reduce(function(s,r){return s + r.count;}, 0);
+
+  document.getElementById('ct-modal-title').textContent = label + ' ' + bucket + ' — ' + totalCnt + ' Stores (click BU to see top 10)';
+  document.getElementById('ct-modal-subtitle').textContent = 'Sorted by impression share. Click any BU row to drill into its top 10 stores.';
+
+  var html = '<thead><tr><th>BU</th><th style="text-align:right">Stores</th><th style="text-align:right">Impression Share</th></tr></thead><tbody>';
+  rows.forEach(function(r){
+    var share = (r.imp / globalImp * 100);
+    var barW = Math.round(share / maxShare * 100);
+    var c = BU_COLORS[r.bu] || '#64748b';
+    html += '<tr class="bu-click" onclick="showStoreModal(\'' + metric + '\',\'' + escapeHtml(bucket) + '\',\'' + r.bu + '\',null)" style="cursor:pointer">' +
+      '<td><span class="bu-badge" style="background:' + c + '22;color:' + c + '">' + r.bu + '</span>' +
+      '<div class="ct-bar" style="width:' + barW + '%;background:' + c + '"></div></td>' +
+      '<td style="text-align:right">' + r.count + '</td>' +
+      '<td style="text-align:right">' + share.toFixed(2) + '%</td></tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('ct-modal-table').innerHTML = html;
+  document.getElementById('ct-modal-overlay').classList.add('active');
+}
+
+function showStoreModal(metric, bucket, bu, prefiltered) {
+  var field = metric === 'r0' ? 'rb' : 'ab';
+  var stores = prefiltered || PD().ALL_STORES.filter(function(s){ return s[field] === bucket && s.b === bu; });
+  stores.sort(function(a,b){return b.ti - a.ti;});
+  var top10 = stores.slice(0, 10);
+  var label = metric === 'r0' ? 'R0' : 'AIS';
+  var globalImp = PD().overall.all_impressions;
+
+  document.getElementById('ct-modal-title').textContent = 'Top ' + Math.min(10, top10.length) + ' Stores — ' + bu;
+  document.getElementById('ct-modal-subtitle').textContent = label + ' Bucket: ' + bucket + ' | ' + stores.length + ' stores, ' + fmt(stores.reduce(function(s,x){return s + x.ti;},0)) + ' impressions';
+
+  var html = '<thead><tr><th>#</th><th>Store</th><th>Store Name</th><th>R0 %</th><th>AIS %</th><th style="text-align:right">Impressions</th><th style="text-align:right">Impr Share</th></tr></thead><tbody>';
+  top10.forEach(function(s, i){
+    var r0c = s.r >= 60 ? 'val-good' : s.r < 40 ? 'val-bad' : 'val-warn';
+    var share = ((s.ti / globalImp) * 100).toFixed(2);
+    html += '<tr><td>' + (i+1) + '</td><td style="font-family:monospace;font-size:12px">' + escapeHtml(s.s) + '</td><td>' + escapeHtml(sn(s.s)) + '</td><td class="' + r0c + '">' + s.r.toFixed(2) + '%</td><td>' + s.a.toFixed(2) + '%</td><td style="text-align:right">' + fmt(s.ti) + '</td><td style="text-align:right">' + share + '%</td></tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('ct-modal-table').innerHTML = html;
+  document.getElementById('ct-modal-overlay').classList.add('active');
+}
+
+/* ── Crosstab ── */
+function renderCrosstab() {
+  var metric = document.getElementById('crosstab-metric').value;
+  var isImp = metric === 'imp';
+  document.getElementById('crosstab-chart-title').innerHTML = (isImp ? 'Impression Share %' : 'Store Count') + ' <span style="font-size:11px;color:var(--muted);font-weight:400">(click cell to drill down)</span>';
+
+  var ct;
+  if (currentGlobalBU === 'Overall') { ct = PD().crosstab; }
+  else {
+    var stores = PD().ALL_STORES.filter(function(s){return s.b === currentGlobalBU;});
+    var totalImp = stores.reduce(function(s,x){return s + x.ti;},0);
+    ct = PD().ais_order.map(function(ab){
+      var row = {ais_bucket:ab};
+      PD().r0_order.forEach(function(rb){
+        var m = stores.filter(function(s){return s.ab === ab && s.rb === rb;});
+        row[rb + '_count'] = m.length;
+        row[rb + '_imp_pct'] = totalImp ? Math.round(10000 * m.reduce(function(s,x){return s + x.ti;},0) / totalImp) / 100 : 0;
+      });
+      return row;
+    });
+  }
+
+  var maxVal = 0;
+  ct.forEach(function(row){ PD().r0_order.forEach(function(rb){ var v = isImp ? row[rb+'_imp_pct'] : row[rb+'_count']; if(v > maxVal) maxVal = v; }); });
+
+  var html = '<thead><tr><th>AIS \\ R0</th>';
+  PD().r0_order.forEach(function(rb){ html += '<th>' + rb + '</th>'; });
+  html += '</tr></thead><tbody>';
+  ct.forEach(function(row){
+    html += '<tr><th>' + row.ais_bucket + '</th>';
+    PD().r0_order.forEach(function(rb){
+      var v = isImp ? row[rb+'_imp_pct'] : row[rb+'_count'];
+      html += '<td class="ct-clickable" style="background:' + heatColor(v,maxVal) + '" onclick="showCrossDrill(\'' + escapeHtml(row.ais_bucket) + '\',\'' + escapeHtml(rb) + '\')">' + (isImp ? v.toFixed(2)+'%' : v) + '</td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('crosstab-table').innerHTML = html;
+
+  /* ── Cross-Tab Insight ── */
+  var ctInsight = document.getElementById('crosstab-insight');
+  if (ctInsight) {
+    var r0Ord = PD().r0_order, aisOrd = PD().ais_order;
+    var topCell = {ab:'',rb:'',v:0}, dangerImp = 0, dangerCnt = 0, idealImp = 0, idealCnt = 0;
+    ct.forEach(function(row){
+      r0Ord.forEach(function(rb){
+        var imp = row[rb+'_imp_pct'] || 0, cnt = row[rb+'_count'] || 0;
+        if (imp > topCell.v) { topCell = {ab:row.ais_bucket, rb:rb, v:imp, cnt:cnt}; }
+        var rIdx = r0Ord.indexOf(rb), aIdx = aisOrd.indexOf(row.ais_bucket);
+        if (rIdx <= 1 && aIdx >= aisOrd.length - 2) { dangerImp += imp; dangerCnt += cnt; }
+        if (rIdx >= r0Ord.length - 2 && aIdx <= 2) { idealImp += imp; idealCnt += cnt; }
+      });
+    });
+    var cMsgs = [];
+    var buLabel = currentGlobalBU === 'Overall' ? '' : '<strong>' + currentGlobalBU + '</strong>: ';
+    cMsgs.push(buLabel + 'Densest cell is <strong>AIS ' + topCell.ab + ' × R0 ' + topCell.rb + '</strong> with <strong>' + (isImp ? topCell.v.toFixed(2) + '% impression share' : topCell.cnt + ' stores') + '</strong>.');
+    if (dangerImp > 3) cMsgs.push('<span style="color:#ef4444">&#9888; Low R0 + High AIS zone holds <strong>' + dangerImp.toFixed(1) + '% impressions</strong> (' + dangerCnt + ' stores) — ads are shown heavily but relevance is poor. Priority area for improvement.</span>');
+    if (idealImp > 0) cMsgs.push('<span style="color:#10b981">&#10003; High R0 + Low AIS zone holds <strong>' + idealImp.toFixed(1) + '% impressions</strong> (' + idealCnt + ' stores) — good relevance with moderate ad density.</span>');
+    ctInsight.innerHTML = cMsgs.join(' ');
+  }
+}
+
+function heatColor(val,max){ var t = Math.min(val/(max||1),1); if(t<0.1) return 'rgba(30,41,59,0.8)'; var r=Math.round(59+t*196),g=Math.round(130-t*80),b=Math.round(246-t*100); return 'rgba('+r+','+g+','+b+','+(0.15+t*0.55)+')'; }
+
+function showCrossDrill(ab,rb){
+  var stores = PD().ALL_STORES.filter(function(s){ return s.ab===ab && s.rb===rb && (currentGlobalBU==='Overall' || s.b===currentGlobalBU); });
+  stores.sort(function(a,b){return b.ti-a.ti;});
+  var top = stores.slice(0,10);
+  var globalImp = PD().overall.all_impressions;
+  document.getElementById('ct-modal-title').textContent = 'AIS '+ab+' × R0 '+rb+' — '+stores.length+' stores';
+  document.getElementById('ct-modal-subtitle').textContent = 'Top 10 by impressions';
+  var html = '<thead><tr><th>#</th><th>Store</th><th>Store Name</th><th>BU</th><th>R0 %</th><th>AIS %</th><th style="text-align:right">Impressions</th><th style="text-align:right">Impr Share</th></tr></thead><tbody>';
+  top.forEach(function(s,i){
+    var c = s.r>=60?'val-good':s.r<40?'val-bad':'val-warn';
+    var share = ((s.ti/globalImp)*100).toFixed(2);
+    html += '<tr><td>'+(i+1)+'</td><td style="font-family:monospace;font-size:12px">'+escapeHtml(s.s)+'</td><td>'+escapeHtml(sn(s.s))+'</td><td><span class="bu-badge" style="background:'+(BU_COLORS[s.b]||'#64748b')+'22;color:'+(BU_COLORS[s.b]||'#64748b')+'">'+s.b+'</span></td><td class="'+c+'">'+s.r.toFixed(2)+'%</td><td>'+s.a.toFixed(2)+'%</td><td style="text-align:right">'+fmt(s.ti)+'</td><td style="text-align:right">'+share+'%</td></tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('ct-modal-table').innerHTML = html;
+  document.getElementById('ct-modal-overlay').classList.add('active');
+}
+
+document.getElementById('crosstab-metric').onchange = renderCrosstab;
+
+/* ── Store-Level Table (with Store Name) ── */
+function renderStoreTables() {
+  var stores = PD().ALL_STORES;
+  var bus = msGetSelected('sli-bu'), r0s = msGetSelected('sli-r0'), aiss = msGetSelected('sli-ais');
+  var filtered = stores.filter(function(s){return bus.indexOf(s.b)!==-1 && r0s.indexOf(s.rb)!==-1 && aiss.indexOf(s.ab)!==-1;});
+  filtered.sort(function(a,b){return b.ti-a.ti;});
+
+  var topn = parseInt(document.getElementById('sli-topn').value);
+  var total = filtered.length;
+  var pageSize = topn > 0 ? topn : total;
+  var start = sliPage * pageSize;
+  var end = Math.min(start + pageSize, total);
+  var page = filtered.slice(start, end);
+  var globalImp = PD().overall.all_impressions;
+
+  var html = '<thead><tr><th>#</th><th>BU</th><th>Store</th><th>Store Name</th><th class="text-right">R0 %</th><th class="text-right">AIS %</th><th class="text-right">Impr Share</th><th class="text-right">Ads CTR %</th><th class="text-right">Org CTR %</th><th class="text-right">Ads CABN/Clk %</th><th class="text-right">Org CABN/Clk %</th><th class="text-right">Ads Imp</th><th class="text-right">Org Imp</th><th class="text-right">All Imp</th><th class="text-right">Ads Clicks</th><th class="text-right">Org Clicks</th><th class="text-right">Ads CABN</th><th class="text-right">Org CABN</th></tr></thead><tbody>';
+  page.forEach(function(s,i){
+    var r0c = s.r>=60?'val-good':s.r<40?'val-bad':'val-warn';
+    var c = BU_COLORS[s.b]||'#64748b';
+    var share = ((s.ti/globalImp)*100).toFixed(2);
+    html += '<tr><td>'+(start+i+1)+'</td>';
+    html += '<td><span class="bu-badge" style="background:'+c+'22;color:'+c+'">'+s.b+'</span></td>';
+    html += '<td style="font-family:monospace;font-size:12px">'+escapeHtml(s.s)+'</td>';
+    html += '<td>'+escapeHtml(sn(s.s))+'</td>';
+    html += '<td class="text-right '+r0c+'">'+s.r.toFixed(2)+'%</td>';
+    html += '<td class="text-right">'+s.a.toFixed(2)+'%</td>';
+    html += '<td class="text-right">'+share+'%</td>';
+    html += '<td class="text-right">'+pct(s.ac)+'</td><td class="text-right">'+pct(s.oc)+'</td>';
+    html += '<td class="text-right">'+pct(s.acb)+'</td><td class="text-right">'+pct(s.ocb)+'</td>';
+    html += '<td class="text-right">'+fmt(s.ai)+'</td><td class="text-right">'+fmt(s.oi)+'</td><td class="text-right">'+fmt(s.ti)+'</td>';
+    html += '<td class="text-right">'+fmt(s.ak)+'</td><td class="text-right">'+fmt(s.ok)+'</td>';
+    html += '<td class="text-right">'+fmt(s.acn)+'</td><td class="text-right">'+fmt(s.ocn)+'</td></tr>';
+  });
+  html += '</tbody>';
+  document.getElementById('table-stores').innerHTML = html;
+
+  var totalPages = Math.ceil(total / pageSize);
+  var pager = document.getElementById('sli-pager');
+  if (totalPages > 1 && topn > 0) {
+    pager.style.display = 'flex';
+    pager.innerHTML = '<button onclick="sliPage--;renderStoreTables()"' + (sliPage===0?' disabled':'') + '>&#171; Prev</button><span>Page '+(sliPage+1)+' of '+totalPages+' ('+total+' stores)</span><button onclick="sliPage++;renderStoreTables()"'+(sliPage>=totalPages-1?' disabled':'')+'>Next &#187;</button>';
+  } else { pager.style.display = 'none'; }
+}
+
+/* ── Multi-select ── */
+function buildMultiSelect(wrapId, items, allLabel, onChange, getLabel, opts) {
+  if (!onChange) onChange = function(){ sliPage=0; renderStoreTables(); };
+  if (!getLabel) getLabel = function(v){ return v; };
+  opts = opts || {};
+  var wrap = document.getElementById(wrapId);
+  wrap.innerHTML = '';
+  var toggle = document.createElement('div');
+  toggle.className = 'ms-toggle'; toggle.textContent = allLabel;
+  wrap.appendChild(toggle);
+  var drop = document.createElement('div');
+  drop.className = 'ms-drop';
+  var allItem = document.createElement('label');
+  allItem.className = 'ms-item ms-all';
+  var allCb = document.createElement('input');
+  allCb.type = 'checkbox'; allCb.checked = true;
+  allItem.appendChild(allCb);
+  allItem.appendChild(document.createTextNode(' ' + allLabel));
+  drop.appendChild(allItem);
+  var searchInp = null;
+  if (opts.search) {
+    searchInp = document.createElement('input');
+    searchInp.type = 'search'; searchInp.className = 'ms-search';
+    searchInp.placeholder = opts.searchPlaceholder || 'Search\u2026';
+    searchInp.setAttribute('autocomplete','off');
+    searchInp.addEventListener('click', function(e){e.stopPropagation();});
+    drop.appendChild(searchInp);
+  }
+  var cbs = [], filterRows = [];
+  items.forEach(function(val) {
+    var lbl = document.createElement('label');
+    lbl.className = 'ms-item';
+    var cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.value = val; cb.checked = true;
+    lbl.appendChild(cb);
+    var nameSpan = document.createElement('span');
+    nameSpan.className = 'ms-name'; nameSpan.textContent = getLabel(val);
+    lbl.appendChild(nameSpan);
+    var onlyBtn = document.createElement('span');
+    onlyBtn.className = 'ms-only'; onlyBtn.textContent = 'only'; onlyBtn.setAttribute('data-val', val);
+    lbl.appendChild(onlyBtn);
+    drop.appendChild(lbl);
+    cbs.push(cb);
+    filterRows.push({val:val,el:lbl});
+  });
+  if (searchInp && filterRows.length) {
+    searchInp.addEventListener('input', function(){
+      var q = (searchInp.value||'').trim().toLowerCase();
+      filterRows.forEach(function(fr){ fr.el.style.display = !q || String(fr.val).toLowerCase().indexOf(q)!==-1 ? '' : 'none'; });
+    });
+  }
+  wrap.appendChild(drop);
+  function updateLabel() {
+    var checked = cbs.filter(function(c){return c.checked;});
+    if (allCb.checked || checked.length === cbs.length) { toggle.textContent = allLabel; allCb.checked = true; cbs.forEach(function(c){c.checked=true;}); }
+    else if (checked.length === 0) { toggle.textContent = 'None'; }
+    else if (checked.length <= 2) { toggle.textContent = checked.map(function(c){return getLabel(c.value);}).join(', '); }
+    else { toggle.textContent = checked.length + ' selected'; }
+  }
+  allCb.addEventListener('change', function(){ cbs.forEach(function(c){c.checked=allCb.checked;}); updateLabel(); onChange(); });
+  cbs.forEach(function(cb){ cb.addEventListener('change', function(){ allCb.checked = cbs.filter(function(c){return c.checked;}).length === cbs.length; updateLabel(); onChange(); }); });
+  drop.querySelectorAll('.ms-only').forEach(function(btn){
+    btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); var tv=btn.getAttribute('data-val'); allCb.checked=false; cbs.forEach(function(c){c.checked=c.value===tv;}); updateLabel(); onChange(); });
+  });
+  toggle.addEventListener('click', function(e){ e.stopPropagation(); document.querySelectorAll('.ms-drop.open').forEach(function(d){if(d!==drop)d.classList.remove('open');}); var opening=!drop.classList.contains('open'); drop.classList.toggle('open'); if(opening&&searchInp) setTimeout(function(){searchInp.focus();},0); });
+  drop.addEventListener('click', function(e){ e.stopPropagation(); });
+}
+
+function msGetSelected(id) {
+  var wrap = document.getElementById(id);
+  var cbs = wrap.querySelectorAll('.ms-item:not(.ms-all) input');
+  var sel = [];
+  cbs.forEach(function(cb){ if(cb.checked) sel.push(cb.value); });
+  return sel;
+}
+
+document.addEventListener('click', function(){ document.querySelectorAll('.ms-drop.open').forEach(function(d){d.classList.remove('open');}); });
+
+function initSliFilters() {
+  buildMultiSelect('sli-bu', BU_LIST, 'All BUs');
+  buildMultiSelect('sli-r0', PD().r0_order, 'All R0');
+  buildMultiSelect('sli-ais', PD().ais_order, 'All AIS');
+  document.getElementById('sli-topn').onchange = function(){ sliPage=0; renderStoreTables(); };
+}
+
+function downloadTableCSV(tableId, filename) {
+  var t = document.getElementById(tableId); if(!t) return;
+  var rows = t.querySelectorAll('tr');
+  var csv = [];
+  rows.forEach(function(row){
+    var cols = row.querySelectorAll('th, td');
+    var r = [];
+    cols.forEach(function(c){ var text=c.textContent.replace(/,/g,'').replace(/"/g,'""').trim(); r.push('"'+text+'"'); });
+    csv.push(r.join(','));
+  });
+  var blob = new Blob([csv.join('\n')], {type:'text/csv;charset=utf-8;'});
+  var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = filename; a.click(); URL.revokeObjectURL(a.href);
+}
+
+/* ── Time Series ── */
+var tsMode = 'weekly';
+var tsMetric = 'r0ais';
+
+function getISOWeek(ds) {
+  var d = new Date(ds+'T00:00:00');
+  d.setDate(d.getDate()+3-((d.getDay()+6)%7));
+  var jan4 = new Date(d.getFullYear(),0,4);
+  var wk = Math.ceil(((d-jan4)/86400000+jan4.getDay()+1)/7);
+  return d.getFullYear() + String(wk).padStart(2,'0');
+}
+
+function filterTsByDateRange(daily) {
+  var from = document.getElementById('dr-from').value;
+  var to = document.getElementById('dr-to').value;
+  if (!from || !to) return daily;
+  return daily.filter(function(d){ return d.date >= from && d.date <= to; });
+}
+
+function filterTsBuByDateRange(dailyBu) {
+  var from = document.getElementById('dr-from').value;
+  var to = document.getElementById('dr-to').value;
+  if (!from || !to) return dailyBu;
+  return dailyBu.filter(function(d){ return d.date >= from && d.date <= to; });
+}
+
+function aggregateWeekly(daily) {
+  var wks = {};
+  daily.forEach(function(d){
+    var w = getISOWeek(d.date);
+    if (!wks[w]) wks[w] = {week:w, ai:0, ti:0, rn:0, rd:0, acN:0, acD:0, ocN:0, ocD:0, abnN:0, abnD:0, obnN:0, obnD:0};
+    wks[w].ai += d.ads_imp; wks[w].ti += d.all_imp;
+    if (d.R0 != null) { wks[w].rn += d.R0 * d.all_imp; wks[w].rd += d.all_imp; }
+    if (d.ads_CTR != null) { wks[w].acN += (d.ads_CTR/100)*d.ads_imp; wks[w].acD += d.ads_imp; }
+    if (d.org_CTR != null) { var oi = d.all_imp - d.ads_imp; wks[w].ocN += (d.org_CTR/100)*oi; wks[w].ocD += oi; }
+    if (d.ads_CABN != null) { var ak = (d.ads_CTR/100)*d.ads_imp; wks[w].abnN += (d.ads_CABN/100)*ak; wks[w].abnD += ak; }
+    if (d.org_CABN != null) { var ok = (d.org_CTR/100)*(d.all_imp - d.ads_imp); wks[w].obnN += (d.org_CABN/100)*ok; wks[w].obnD += ok; }
+  });
+  return Object.values(wks).sort(function(a,b){return a.week<b.week?-1:1;}).map(function(w){
+    return {label:w.week, R0:w.rd?Math.round(100*w.rn/w.rd)/100:null, AIS:w.ti?Math.round(10000*w.ai/w.ti)/100:0,
+      ads_CTR:w.acD?Math.round(10000*w.acN/w.acD)/100:0, org_CTR:w.ocD?Math.round(10000*w.ocN/w.ocD)/100:0,
+      ads_CABN:w.abnD?Math.round(10000*w.abnN/w.abnD)/100:0, org_CABN:w.obnD?Math.round(10000*w.obnN/w.obnD)/100:0};
+  });
+}
+
+function aggregateWeeklyBU(dailyBu) {
+  var m = {};
+  dailyBu.forEach(function(d){
+    var w = getISOWeek(d.date), k = w+'|'+d.bu;
+    if (!m[k]) m[k] = {week:w, bu:d.bu, ti:0, ai:0, rn:0, rd:0, acN:0, acD:0, ocN:0, ocD:0, abnN:0, abnD:0, obnN:0, obnD:0};
+    m[k].ti += d.all_imp; m[k].ai += (d.AIS/100)*d.all_imp;
+    if (d.R0 != null) { m[k].rn += d.R0*d.all_imp; m[k].rd += d.all_imp; }
+    var ai = (d.AIS/100)*d.all_imp, oi = d.all_imp - ai;
+    if (d.ads_CTR != null) { m[k].acN += (d.ads_CTR/100)*ai; m[k].acD += ai; }
+    if (d.org_CTR != null) { m[k].ocN += (d.org_CTR/100)*oi; m[k].ocD += oi; }
+    if (d.ads_CABN != null) { var ak = (d.ads_CTR/100)*ai; m[k].abnN += (d.ads_CABN/100)*ak; m[k].abnD += ak; }
+    if (d.org_CABN != null) { var ok = (d.org_CTR/100)*oi; m[k].obnN += (d.org_CABN/100)*ok; m[k].obnD += ok; }
+  });
+  return Object.values(m).map(function(x){return {label:x.week, bu:x.bu,
+    R0:x.rd?Math.round(100*x.rn/x.rd)/100:null, AIS:x.ti?Math.round(10000*x.ai/x.ti)/100:0,
+    ads_CTR:x.acD?Math.round(10000*x.acN/x.acD)/100:0, org_CTR:x.ocD?Math.round(10000*x.ocN/x.ocD)/100:0,
+    ads_CABN:x.abnD?Math.round(10000*x.abnN/x.abnD)/100:0, org_CABN:x.obnD?Math.round(10000*x.obnN/x.obnD)/100:0};});
+}
+
+function setTsMode(mode) {
+  tsMode = mode;
+  document.getElementById('ts-weekly-btn').className = 'ts-btn'+(mode==='weekly'?' active':'');
+  document.getElementById('ts-daily-btn').className = 'ts-btn'+(mode==='daily'?' active':'');
+  renderTimeSeries();
+}
+function setTsMetric(m) {
+  tsMetric = m;
+  ['r0ais','ctr','cabn'].forEach(function(k){ document.getElementById('ts-metric-'+k).className = 'ts-btn'+(k===m?' active':''); });
+  renderTimeSeries();
+}
+
+function renderTimeSeries() {
+  var filteredDaily = filterTsByDateRange(TS_DAILY);
+  var filteredBu = filterTsBuByDateRange(TS_DAILY_BU);
+  var overallData, buArr;
+
+  if (tsMode === 'weekly') {
+    overallData = aggregateWeekly(filteredDaily);
+    buArr = aggregateWeeklyBU(filteredBu);
+  } else {
+    overallData = filteredDaily.map(function(d){return {label:d.date, R0:d.R0, AIS:d.AIS, ads_CTR:d.ads_CTR, org_CTR:d.org_CTR, ads_CABN:d.ads_CABN, org_CABN:d.org_CABN};});
+    buArr = filteredBu.map(function(d){return {label:d.date, bu:d.bu, R0:d.R0, AIS:d.AIS, ads_CTR:d.ads_CTR, org_CTR:d.org_CTR, ads_CABN:d.ads_CABN, org_CABN:d.org_CABN};});
+  }
+
+  if (tsOverallChartInst) tsOverallChartInst.destroy();
+  var labels = overallData.map(function(d){return d.label;});
+
+  var mCfg;
+  if (tsMetric === 'ctr') {
+    mCfg = {title:'Overall CTR — Ads vs Organic', k1:'ads_CTR', k2:'org_CTR', l1:'Ads CTR %', l2:'Organic CTR %', c1:'#f59e0b', c2:'#10b981'};
+  } else if (tsMetric === 'cabn') {
+    mCfg = {title:'Overall CABN/Click — Ads vs Organic', k1:'ads_CABN', k2:'org_CABN', l1:'Ads CABN/Clk %', l2:'Organic CABN/Clk %', c1:'#f59e0b', c2:'#10b981'};
+  } else {
+    mCfg = {title:'Overall R0 & AIS', k1:'R0', k2:'AIS', l1:'R0 %', l2:'AIS %', c1:'#3b82f6', c2:'#f472b6'};
+  }
+  document.getElementById('ts-overall-title').textContent = mCfg.title;
+
+  tsOverallChartInst = new Chart(document.getElementById('tsOverallChart').getContext('2d'), {
+    type:'line', plugins:[ChartDataLabels], data:{labels:labels, datasets:[
+      {label:mCfg.l1, data:overallData.map(function(d){return d[mCfg.k1];}), borderColor:mCfg.c1, backgroundColor:mCfg.c1+'14', pointRadius:4, pointHoverRadius:7, borderWidth:2.5, tension:0.3, fill:true,
+        datalabels:{display:'auto',align:'top',color:mCfg.c1,font:{weight:'bold',size:11},formatter:function(v){return v!=null?Number(v).toFixed(2)+'%':'';}}},
+      {label:mCfg.l2, data:overallData.map(function(d){return d[mCfg.k2];}), borderColor:mCfg.c2, backgroundColor:mCfg.c2+'14', pointRadius:4, pointHoverRadius:7, borderWidth:2.5, tension:0.3, fill:true,
+        datalabels:{display:'auto',align:'bottom',color:mCfg.c2,font:{weight:'bold',size:11},formatter:function(v){return v!=null?Number(v).toFixed(2)+'%':'';}}}
+    ]}, options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:20,bottom:10}},
+      plugins:{legend:{position:'bottom'},datalabels:{},tooltip:{mode:'index',intersect:false,callbacks:{label:function(ctx){return ctx.dataset.label+': '+Number(ctx.raw).toFixed(2)+'%';}}}},
+      scales:{y:{title:{display:true,text:'Percentage'},grid:{color:'rgba(71,85,105,0.2)'},ticks:{callback:function(v){return v+'%';}}},
+        x:{grid:{display:false},ticks:{maxRotation:45,autoSkip:true,maxTicksLimit:15}}}
+    }
+  });
+
+  // Small multiples: one card per BU
+  buSmCharts.forEach(function(c){ c.destroy(); });
+  buSmCharts = [];
+
+  var wkLabels = [], seen = {};
+  buArr.forEach(function(d){ if(!seen[d.label]){seen[d.label]=1;wkLabels.push(d.label);} });
+  wkLabels.sort();
+
+  var smK1 = mCfg.k1, smK2 = mCfg.k2, smL1 = mCfg.l1.replace(' %',''), smL2 = mCfg.l2.replace(' %','');
+  var smC1 = mCfg.c1, smC2 = mCfg.c2;
+
+  var grid = document.getElementById('bu-sm-grid');
+  grid.innerHTML = '';
+  BU_LIST.forEach(function(bu) {
+    var byL1 = {}, byL2 = {};
+    buArr.filter(function(d){return d.bu===bu;}).forEach(function(d){ byL1[d.label]=d[smK1]; byL2[d.label]=d[smK2]; });
+    var d1 = wkLabels.map(function(l){return byL1[l]!=null?byL1[l]:null;});
+    var d2 = wkLabels.map(function(l){return byL2[l]!=null?byL2[l]:null;});
+    var last1 = d1.filter(function(v){return v!=null;});
+    var last2 = d2.filter(function(v){return v!=null;});
+    var cur1 = last1.length ? last1[last1.length-1] : 0;
+    var cur2 = last2.length ? last2[last2.length-1] : 0;
+
+    var card = document.createElement('div');
+    card.className = 'bu-sm-card';
+    var col = BU_COLORS[bu] || '#64748b';
+    card.innerHTML = '<div class="bu-sm-header"><span class="bu-sm-name" style="color:'+col+'">'+bu+'</span><span class="bu-sm-vals">'+smL1+' <span style="color:'+smC1+'">'+cur1.toFixed(1)+'%</span> · '+smL2+' <span style="color:'+smC2+'">'+cur2.toFixed(1)+'%</span></span></div><div class="bu-sm-chart"><canvas></canvas></div>';
+    grid.appendChild(card);
+
+    var canvas = card.querySelector('canvas');
+    var ch = new Chart(canvas.getContext('2d'), {
+      type:'line', data:{labels:wkLabels, datasets:[
+        {label:smL1, data:d1, borderColor:smC1, backgroundColor:smC1+'10', borderWidth:2, pointRadius:2, pointHoverRadius:5, tension:0.35, fill:true, spanGaps:true},
+        {label:smL2, data:d2, borderColor:smC2, backgroundColor:smC2+'10', borderWidth:2, pointRadius:2, pointHoverRadius:5, tension:0.35, fill:true, spanGaps:true}
+      ]}, options:{responsive:true,maintainAspectRatio:false,
+        plugins:{legend:{display:false},datalabels:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(ctx){return ctx.dataset.label+': '+Number(ctx.raw).toFixed(2)+'%';}}}},
+        scales:{y:{grid:{color:'rgba(71,85,105,0.15)',drawBorder:false},ticks:{font:{size:10},callback:function(v){return v+'%';}}},
+          x:{grid:{display:false},ticks:{font:{size:9},maxRotation:0,autoSkip:true,maxTicksLimit:5}}}
+      }
+    });
+    buSmCharts.push(ch);
+  });
+
+  /* ── Time Series Insights (metric-aware) ── */
+  var tsBox = document.getElementById('ts-overall-insight');
+  if (tsBox && overallData.length >= 2) {
+    var first = overallData[0], last = overallData[overallData.length - 1];
+    var msgs = [];
+
+    if (tsMetric === 'r0ais') {
+      var r0D = last.R0 - first.R0, aisD = last.AIS - first.AIS;
+      var r0Dir = r0D > 0.5 ? 'improved' : r0D < -0.5 ? 'declined' : 'remained stable';
+      var aisDir = aisD > 0.5 ? 'increased' : aisD < -0.5 ? 'decreased' : 'remained stable';
+      msgs.push('R0 <strong>' + r0Dir + '</strong> from <strong>' + first.R0.toFixed(2) + '%</strong> (' + first.label + ') to <strong>' + last.R0.toFixed(2) + '%</strong> (' + last.label + '), shift of <strong>' + (r0D > 0 ? '+' : '') + r0D.toFixed(2) + ' pp</strong>.');
+      msgs.push('AIS <strong>' + aisDir + '</strong>: <strong>' + first.AIS.toFixed(2) + '%</strong> → <strong>' + last.AIS.toFixed(2) + '%</strong> (' + (aisD > 0 ? '+' : '') + aisD.toFixed(2) + ' pp).');
+      if (r0D < -0.5) {
+        var ctrD = (last.ads_CTR||0) - (first.ads_CTR||0);
+        var cabnD = (last.ads_CABN||0) - (first.ads_CABN||0);
+        var components = [];
+        if (ctrD < -0.05) components.push('Ads CTR dropped <strong>' + ctrD.toFixed(2) + ' pp</strong> (' + (first.ads_CTR||0).toFixed(2) + '% → ' + (last.ads_CTR||0).toFixed(2) + '%)');
+        if (cabnD < -0.05) components.push('Ads CABN/Click dropped <strong>' + cabnD.toFixed(2) + ' pp</strong> (' + (first.ads_CABN||0).toFixed(2) + '% → ' + (last.ads_CABN||0).toFixed(2) + '%)');
+        if (aisD > 0.5) components.push('AIS increased by <strong>' + aisD.toFixed(2) + ' pp</strong> — higher ad density may dilute relevance');
+        if (components.length) {
+          msgs.push('<span style="color:#ef4444">&#9888; R0 decline root causes: ' + components.join('; ') + '.</span>');
+        } else {
+          msgs.push('<span style="color:#ef4444">&#9888; R0 is trending down — check fold-level position distribution for top-impression stores.</span>');
+        }
+      }
+      if (aisD > 2) msgs.push('<span style="color:#f59e0b">&#9888; AIS rising significantly — check if ad density is hurting user experience.</span>');
+    } else if (tsMetric === 'ctr') {
+      var acD = (last.ads_CTR||0) - (first.ads_CTR||0), ocD = (last.org_CTR||0) - (first.org_CTR||0);
+      var gapF = (first.org_CTR||0) - (first.ads_CTR||0), gapL = (last.org_CTR||0) - (last.ads_CTR||0);
+      msgs.push('Ads CTR moved from <strong>' + (first.ads_CTR||0).toFixed(2) + '%</strong> to <strong>' + (last.ads_CTR||0).toFixed(2) + '%</strong> (' + (acD>0?'+':'') + acD.toFixed(2) + ' pp). Organic CTR: <strong>' + (first.org_CTR||0).toFixed(2) + '%</strong> → <strong>' + (last.org_CTR||0).toFixed(2) + '%</strong> (' + (ocD>0?'+':'') + ocD.toFixed(2) + ' pp).');
+      msgs.push('CTR gap (Organic − Ads): <strong>' + (gapF*100).toFixed(0) + ' bps</strong> → <strong>' + (gapL*100).toFixed(0) + ' bps</strong>.');
+      if (gapL > gapF + 0.1) msgs.push('<span style="color:#ef4444">&#9888; CTR gap is widening — ad click-through is falling behind organic. Review ad creative quality and ranking relevance.</span>');
+      if (gapL < gapF - 0.1) msgs.push('<span style="color:#10b981">&#10003; CTR gap is narrowing — ads are becoming more competitive with organic results.</span>');
+      if (acD < -0.1) msgs.push('<span style="color:#ef4444">Action: Ads CTR is declining — investigate if ad creative fatigue or poor targeting is the cause.</span>');
+    } else {
+      var abD = (last.ads_CABN||0) - (first.ads_CABN||0), obD = (last.org_CABN||0) - (first.org_CABN||0);
+      var gapBF = (first.org_CABN||0) - (first.ads_CABN||0), gapBL = (last.org_CABN||0) - (last.ads_CABN||0);
+      msgs.push('Ads CABN/Click: <strong>' + (first.ads_CABN||0).toFixed(2) + '%</strong> → <strong>' + (last.ads_CABN||0).toFixed(2) + '%</strong> (' + (abD>0?'+':'') + abD.toFixed(2) + ' pp). Organic: <strong>' + (first.org_CABN||0).toFixed(2) + '%</strong> → <strong>' + (last.org_CABN||0).toFixed(2) + '%</strong> (' + (obD>0?'+':'') + obD.toFixed(2) + ' pp).');
+      msgs.push('CABN gap (Organic − Ads): <strong>' + (gapBF*100).toFixed(0) + ' bps</strong> → <strong>' + (gapBL*100).toFixed(0) + ' bps</strong>.');
+      if (gapBL > gapBF + 0.1) msgs.push('<span style="color:#ef4444">&#9888; CABN gap is widening — ad clicks are converting to cart-adds at a lower rate. Review product relevance and landing page quality.</span>');
+      if (gapBL < gapBF - 0.1) msgs.push('<span style="color:#10b981">&#10003; CABN gap is narrowing — ad post-click experience is improving.</span>');
+      if (abD < -0.1) msgs.push('<span style="color:#ef4444">Action: Ads CABN/Click is declining — check if ad-product mismatch or pricing issues are reducing add-to-cart rates.</span>');
+    }
+    tsBox.innerHTML = msgs.join(' ');
+  } else if (tsBox) { tsBox.innerHTML = ''; }
+
+  /* ── BU-Level Trend Insights (metric-aware) ── */
+  var buBox = document.getElementById('ts-bu-insight');
+  if (buBox && wkLabels.length >= 2) {
+    var buDeltas = [];
+    BU_LIST.forEach(function(bu) {
+      var bd = buArr.filter(function(d){return d.bu===bu;}).sort(function(a,b){return a.label<b.label?-1:1;});
+      if (bd.length < 2) return;
+      var bf = bd[0], bl = bd[bd.length - 1];
+      buDeltas.push({bu:bu,
+        d1: (bl[smK1]||0) - (bf[smK1]||0), v1f: bf[smK1]||0, v1l: bl[smK1]||0,
+        d2: (bl[smK2]||0) - (bf[smK2]||0), v2f: bf[smK2]||0, v2l: bl[smK2]||0,
+        acD: (bl.ads_CTR||0)-(bf.ads_CTR||0), abD: (bl.ads_CABN||0)-(bf.ads_CABN||0)
+      });
+    });
+    if (buDeltas.length) {
+      var msgs2 = [];
+      if (tsMetric === 'r0ais') {
+        buDeltas.sort(function(a,b){return a.d1-b.d1;});
+        var worst = buDeltas[0], best = buDeltas[buDeltas.length-1];
+        msgs2.push('<strong>' + best.bu + '</strong> had the best R0 gain (' + (best.d1>0?'+':'') + best.d1.toFixed(2) + ' pp), <strong>' + worst.bu + '</strong> had the largest R0 drop (' + worst.d1.toFixed(2) + ' pp).');
+        if (worst.d1 < -1) {
+          var causes = [];
+          if (worst.acD < -0.05) causes.push('Ads CTR fell ' + worst.acD.toFixed(2) + ' pp');
+          if (worst.abD < -0.05) causes.push('Ads CABN/Click fell ' + worst.abD.toFixed(2) + ' pp');
+          if (worst.d2 > 0.5) causes.push('AIS rose ' + worst.d2.toFixed(1) + ' pp');
+          if (causes.length) msgs2.push('<span style="color:#ef4444">&#9888; ' + worst.bu + ' R0 decline driven by: ' + causes.join(', ') + '. Switch to CTR/CABN views for details.</span>');
+          else msgs2.push('<span style="color:#ef4444">Action: Investigate ' + worst.bu + ' — check fold position and listing quality.</span>');
+        }
+        var risingAIS = buDeltas.filter(function(d){return d.d2>2;}).map(function(d){return '<strong>'+d.bu+'</strong> (+'+d.d2.toFixed(1)+' pp)';});
+        if (risingAIS.length) msgs2.push('BUs with rising AIS: ' + risingAIS.join(', ') + ' — monitor ad load.');
+      } else if (tsMetric === 'ctr') {
+        buDeltas.sort(function(a,b){return a.d1-b.d1;});
+        var worstCtr = buDeltas[0], bestCtr = buDeltas[buDeltas.length-1];
+        msgs2.push('<strong>' + bestCtr.bu + '</strong> had the best Ads CTR gain (' + (bestCtr.d1>0?'+':'') + bestCtr.d1.toFixed(2) + ' pp), <strong>' + worstCtr.bu + '</strong> had the largest drop (' + worstCtr.d1.toFixed(2) + ' pp).');
+        var wideningGap = buDeltas.filter(function(d){return (d.d2-d.d1)>0.15;}).map(function(d){return '<strong>'+d.bu+'</strong>';});
+        if (wideningGap.length) msgs2.push('<span style="color:#ef4444">CTR gap widening in: ' + wideningGap.join(', ') + ' — ads losing ground vs organic.</span>');
+      } else {
+        buDeltas.sort(function(a,b){return a.d1-b.d1;});
+        var worstCabn = buDeltas[0], bestCabn = buDeltas[buDeltas.length-1];
+        msgs2.push('<strong>' + bestCabn.bu + '</strong> had the best Ads CABN gain (' + (bestCabn.d1>0?'+':'') + bestCabn.d1.toFixed(2) + ' pp), <strong>' + worstCabn.bu + '</strong> had the largest drop (' + worstCabn.d1.toFixed(2) + ' pp).');
+        var wideningCabn = buDeltas.filter(function(d){return (d.d2-d.d1)>0.15;}).map(function(d){return '<strong>'+d.bu+'</strong>';});
+        if (wideningCabn.length) msgs2.push('<span style="color:#ef4444">CABN gap widening in: ' + wideningCabn.join(', ') + ' — ad post-click conversion lagging organic.</span>');
+      }
+      buBox.innerHTML = msgs2.join(' ');
+    } else { buBox.innerHTML = ''; }
+  } else if (buBox) { buBox.innerHTML = ''; }
+}
+
+/* ── Query-Level AIS ── */
+var QUERY_ROWS = [];
+var qaiAisDistChartInstance = null;
+var qaiDistDrillTop30 = null;
+var qaiDistDrillBucket = '';
+var qaiPage = 0;
+var QAI_PAGE_SIZE = 30;
+
+var _storeAisMap = null;
+function getStoreAisBucket(storeId) {
+  if (!_storeAisMap) {
+    _storeAisMap = {};
+    (PD().ALL_STORES || []).forEach(function(s) { _storeAisMap[s.s] = s.a; });
+  }
+  var ais = _storeAisMap[storeId];
+  return ais != null ? qaiAisBucketFromPct(ais) : '';
+}
+
+function qaiStoreDisplay(row) {
+  var nm = row.nm;
+  if (nm != null && String(nm).trim() !== '') return String(nm).trim();
+  return sn(row.s);
+}
+
+function qaiSortAisBuckets(keys) {
+  var ord = PD().ais_order || [];
+  return keys.sort(function(a,b){
+    var ia=ord.indexOf(a), ib=ord.indexOf(b);
+    if(ia===-1&&ib===-1) return String(a).localeCompare(String(b));
+    if(ia===-1) return 1; if(ib===-1) return -1;
+    return ia-ib;
+  });
+}
+
+function qaiAisBucketFromPct(ais) {
+  if(isNaN(ais)) ais=0;
+  if(ais<5)return'<5%'; if(ais<15)return'5–15%'; if(ais<25)return'15–25%';
+  if(ais<30)return'25–30%'; if(ais<35)return'30–35%'; if(ais<40)return'35–40%';
+  if(ais<45)return'40–45%';
+  return'>45%';
+}
+
+function qaiDistQueryAisBucket(row) {
+  var order=PD().ais_order||[];
+  var ais=typeof row.a==='number'?row.a:parseFloat(row.a); if(isNaN(ais)) ais=0;
+  var abRaw=row.ab!=null&&String(row.ab).trim()!==''?String(row.ab).trim():'';
+  if(abRaw&&order.indexOf(abRaw)>=0) return abRaw;
+  return qaiAisBucketFromPct(ais);
+}
+
+function qaiFilteredRows() {
+  var buSel=msGetSelected('qai-bu'), storeSel=msGetSelected('qai-store');
+  var storeAisSel=msGetSelected('qai-store-ais-bucket'), queryAisSel=msGetSelected('qai-query-ais-bucket');
+  var inp=document.getElementById('qai-query-search');
+  var qSearch=(inp&&inp.value||'').trim().toLowerCase();
+  return QUERY_ROWS.filter(function(row){
+    if(buSel&&buSel.indexOf(row.b)===-1) return false;
+    if(storeSel&&storeSel.indexOf(row.s)===-1) return false;
+    var sab=getStoreAisBucket(row.s);
+    if(storeAisSel&&storeAisSel.indexOf(sab)===-1) return false;
+    var ais=typeof row.a==='number'?row.a:parseFloat(row.a); if(isNaN(ais)) ais=0;
+    var ab=qaiAisBucketFromPct(ais);
+    if(queryAisSel&&queryAisSel.indexOf(ab)===-1) return false;
+    if(qSearch&&String(row.q).toLowerCase().indexOf(qSearch)===-1) return false;
+    return true;
+  });
+}
+
+function qaiDistFilteredRows() {
+  var buSel=msGetSelected('qai-dist-bu'), storeSel=msGetSelected('qai-dist-store');
+  var storeAisSel=msGetSelected('qai-dist-store-ais');
+  return QUERY_ROWS.filter(function(row){
+    if(buSel&&buSel.indexOf(row.b)===-1) return false;
+    if(storeSel&&storeSel.indexOf(row.s)===-1) return false;
+    var sab=getStoreAisBucket(row.s);
+    if(storeAisSel&&storeAisSel.indexOf(sab)===-1) return false;
+    return true;
+  });
+}
+
+function qaiDistComputeSeries() {
+  var order=PD().ais_order?PD().ais_order.slice():['<5%','5–15%','15–25%','25–30%','30–35%','35–40%','40–45%','>45%'];
+  var rows=qaiDistFilteredRows();
+  var sets={}, impByBucket={};
+  order.forEach(function(b){sets[b]=new Set(); impByBucket[b]=0;});
+  var totalImp=0;
+  rows.forEach(function(row){
+    var ab=qaiDistQueryAisBucket(row); if(order.indexOf(ab)===-1) return;
+    var imp=row.all|0; totalImp+=imp; sets[ab].add(row.q); impByBucket[ab]+=imp;
+  });
+  return {labels:order.slice(), counts:order.map(function(b){return sets[b].size;}), imprPct:order.map(function(b){return totalImp>0?(impByBucket[b]/totalImp)*100:0;})};
+}
+
+function renderQaiDistChart() {
+  var canvas=document.getElementById('qaiAisDistChart');
+  if(!canvas) return;
+  var series=qaiDistComputeSeries();
+  if(qaiAisDistChartInstance){qaiAisDistChartInstance.destroy(); qaiAisDistChartInstance=null;}
+  var labels=series.labels;
+  qaiAisDistChartInstance=new Chart(canvas.getContext('2d'),{
+    type:'bar', plugins:[ChartDataLabels], data:{labels:labels, datasets:[{
+      label:'Count of Query', data:series.counts, order:0,
+      backgroundColor:BUCKET_COLORS.map(function(c){return c+'99';}), borderColor:BUCKET_COLORS,
+      borderWidth:1, borderRadius:6, yAxisID:'y',
+      datalabels:{anchor:'end',align:'end',color:'#e2e8f0',font:{weight:'bold',size:12},formatter:function(v){return v;}}
+    },{
+      label:'Impression Share', data:series.imprPct, type:'line', order:1,
+      borderColor:'#f472b6', backgroundColor:'transparent',
+      pointRadius:6, pointHoverRadius:8, pointBackgroundColor:'#f472b6',
+      pointBorderWidth:2, pointBorderColor:'#0f172a', borderWidth:3, yAxisID:'y1', tension:0.35, fill:false,
+      datalabels:{display:false}
+    }]}, options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:25}},
+      onClick:function(evt,el){if(!el.length||el[0].datasetIndex!==0)return; showQaiDistDrilldown(labels[el[0].index]);},
+      plugins:{legend:{position:'bottom'},datalabels:{},tooltip:{callbacks:{label:function(ctx){if(ctx.dataset.yAxisID==='y1')return ctx.dataset.label+': '+Number(ctx.raw).toFixed(2)+'%'; return ctx.dataset.label+': '+ctx.raw;}}}},
+      scales:{y:{beginAtZero:true,title:{display:true,text:'Count of Query'},grid:{color:'rgba(71,85,105,0.2)'}},
+        y1:{position:'right',beginAtZero:true,title:{display:true,text:'Impression Share'},grid:{drawOnChartArea:false},ticks:{callback:function(v){return Number(v).toFixed(2)+'%';}}},
+        x:{grid:{display:false}}}
+    }
+  });
+}
+
+function initQaiDistChartFilters(bus,stores,sabs) {
+  var wbu=document.getElementById('qai-dist-bu'),ws=document.getElementById('qai-dist-store'),wstab=document.getElementById('qai-dist-store-ais');
+  if(!wbu||!ws||!wstab)return;
+  wbu.innerHTML=''; ws.innerHTML=''; wstab.innerHTML='';
+  buildMultiSelect('qai-dist-bu',bus,'All BUs',function(){renderQaiDistChart();},function(v){return v;});
+  buildMultiSelect('qai-dist-store',stores,'All store IDs',function(){renderQaiDistChart();},function(v){return v;},{search:true,searchPlaceholder:'Search store IDs\u2026'});
+  buildMultiSelect('qai-dist-store-ais',sabs,'All store AIS',function(){renderQaiDistChart();},function(v){return v;});
+  renderQaiDistChart();
+}
+
+function showQaiDistDrilldown(bucket) {
+  qaiDistDrillBucket=bucket||'';
+  var rows=qaiDistFilteredRows(), byq={};
+  rows.forEach(function(row){
+    var ab=qaiDistQueryAisBucket(row); if(ab!==bucket) return;
+    var qk=row.q; if(!byq[qk]) byq[qk]={q:qk,imp:0,aisW:0};
+    var ais=typeof row.a==='number'?row.a:parseFloat(row.a); if(isNaN(ais)) ais=0;
+    var w=row.all|0; byq[qk].imp+=w; byq[qk].aisW+=ais*w;
+  });
+  var arr=Object.keys(byq).map(function(k){var o=byq[k];return{q:o.q,imp:o.imp,avgAis:o.imp>0?o.aisW/o.imp:0};});
+  arr.sort(function(a,b){return b.imp-a.imp;});
+  var top=arr.slice(0,30); qaiDistDrillTop30=top;
+
+  document.getElementById('ct-modal-title').textContent=top.length?('Top '+Math.min(30,top.length)+' queries — '+bucket):('No queries — '+bucket);
+  document.getElementById('ct-modal-subtitle').textContent=top.length?'Ranked by total impressions. Chart filters apply.':'No queries in this bucket for the current chart filters.';
+  var tbl=document.getElementById('ct-modal-table');
+  var html='<thead><tr><th>#</th><th>QUERY</th><th class="text-right">ALL IMPRESSIONS</th><th class="text-right">AVG AIS %</th></tr></thead><tbody>';
+  top.forEach(function(r,i){html+='<tr><td>'+(i+1)+'</td><td>'+escapeHtml(r.q)+'</td><td class="text-right">'+fmt(r.imp)+'</td><td class="text-right">'+r.avgAis.toFixed(2)+'%</td></tr>';});
+  html+='</tbody>'; tbl.innerHTML=html;
+  var ex=document.getElementById('ct-modal-extras');
+  if(ex){if(top.length){ex.innerHTML='<div style="text-align:center;margin:14px 0 0"><button type="button" class="csv-dl-btn" id="qai-dist-drill-csv">&#11015; Download top 30 (CSV)</button></div>';var btn=document.getElementById('qai-dist-drill-csv');if(btn)btn.onclick=downloadQaiDistDrillCSV;}else{ex.innerHTML='';}}
+  document.getElementById('ct-modal-overlay').classList.add('active');
+}
+
+function downloadQaiDistDrillCSV() {
+  var top=qaiDistDrillTop30; if(!top||!top.length) return;
+  function esc(s){s=String(s==null?'':s);if(/[",\n\r]/.test(s))return'"'+s.replace(/"/g,'""')+'"';return s;}
+  var lines=[esc('Rank')+','+esc('Query')+','+esc('All impressions')+','+esc('Avg AIS %')];
+  top.forEach(function(r,i){lines.push([esc(String(i+1)),esc(r.q),esc(fmt(r.imp)),esc(r.avgAis.toFixed(2)+'%')].join(','));});
+  var safe=String(qaiDistDrillBucket||'bucket').replace(/%/g,'pct').replace(/[^\w.-]+/g,'_').replace(/^_|_$/g,'')||'bucket';
+  var blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8;'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='query_ais_top30_'+safe+'.csv';a.click();URL.revokeObjectURL(a.href);
+}
+
+function updateQaiPager(totalFiltered) {
+  var el=document.getElementById('qai-pager'); if(!el)return;
+  if(totalFiltered===0){el.style.display='none';el.innerHTML='';return;}
+  var pages=Math.max(1,Math.ceil(totalFiltered/QAI_PAGE_SIZE));
+  if(qaiPage>=pages) qaiPage=pages-1; if(qaiPage<0) qaiPage=0;
+  el.style.display='flex';
+  var from=qaiPage*QAI_PAGE_SIZE+1, to=Math.min(totalFiltered,(qaiPage+1)*QAI_PAGE_SIZE);
+  el.innerHTML='<button type="button" id="qai-prev"'+(qaiPage<=0?' disabled':'')+'>Previous</button>'
+    +'<span>Page '+(qaiPage+1)+' of '+pages+' &middot; rows '+from+'–'+to+' of '+totalFiltered+'</span>'
+    +'<button type="button" id="qai-next"'+(qaiPage>=pages-1?' disabled':'')+'>Next</button>';
+  var prev=document.getElementById('qai-prev'),next=document.getElementById('qai-next');
+  if(prev) prev.onclick=function(){if(qaiPage>0){qaiPage--;renderQueryAisTable(true);}};
+  if(next) next.onclick=function(){if(qaiPage<pages-1){qaiPage++;renderQueryAisTable(true);}};
+}
+
+function renderQueryAisTable(fromPager) {
+  var tbl=document.getElementById('table-query-ais'); if(!tbl) return;
+  var th='<th>#</th><th>BU</th><th>Query</th><th>Store ID</th><th>Store Name</th><th>Store AIS bucket</th><th class="text-right">Query AIS %</th><th>Query AIS bucket</th><th class="text-right">Organic impressions</th><th class="text-right">Ads impressions</th><th class="text-right">All impressions</th>';
+  if(QUERY_ROWS.length===0){tbl.innerHTML='<thead><tr>'+th+'</tr></thead><tbody><tr><td colspan="11" style="color:var(--text2)">No data loaded.</td></tr></tbody>';qaiPage=0;updateQaiPager(0);return;}
+  var filtered=qaiFilteredRows();
+  filtered.sort(function(a,b){return(b.all|0)-(a.all|0);});
+  if(filtered.length===0){tbl.innerHTML='<thead><tr>'+th+'</tr></thead><tbody><tr><td colspan="11" style="color:var(--text2)">No rows match filters.</td></tr></tbody>';qaiPage=0;updateQaiPager(0);return;}
+  var pages=Math.max(1,Math.ceil(filtered.length/QAI_PAGE_SIZE));
+  if(fromPager!==true) qaiPage=0;
+  if(qaiPage>=pages) qaiPage=pages-1;
+  var rowStart=qaiPage*QAI_PAGE_SIZE;
+  var slice=filtered.slice(rowStart,rowStart+QAI_PAGE_SIZE);
+  var html='<thead><tr>'+th+'</tr></thead><tbody>';
+  slice.forEach(function(row,i){
+    var bu=row.b, col=BU_COLORS[bu]||'#64748b';
+    var ais=typeof row.a==='number'?row.a:parseFloat(row.a); if(isNaN(ais)) ais=0;
+    var all=row.all|0, org=row.org!=null?(row.org|0):0, adim=row.ads!=null?(row.ads|0):0;
+    var ab=qaiAisBucketFromPct(ais);
+    var sab=getStoreAisBucket(row.s);
+    html+='<tr><td>'+(rowStart+i+1)+'</td>'
+      +'<td><span class="bu-badge" style="background:'+col+'22;color:'+col+'">'+escapeHtml(bu)+'</span></td>'
+      +'<td>'+escapeHtml(row.q)+'</td>'
+      +'<td style="font-family:monospace;font-size:12px">'+escapeHtml(row.s)+'</td>'
+      +'<td>'+escapeHtml(qaiStoreDisplay(row))+'</td>'
+      +'<td>'+escapeHtml(sab)+'</td>'
+      +'<td class="text-right">'+ais.toFixed(2)+'%</td>'
+      +'<td>'+escapeHtml(ab)+'</td>'
+      +'<td class="text-right">'+fmt(org)+'</td>'
+      +'<td class="text-right">'+fmt(adim)+'</td>'
+      +'<td class="text-right">'+fmt(all)+'</td></tr>';
+  });
+  html+='</tbody>'; tbl.innerHTML=html;
+  updateQaiPager(filtered.length);
+}
+
+function downloadQueryAisCSV() {
+  var rows=qaiFilteredRows();
+  function esc(s){s=String(s==null?'':s);if(/[",\n\r]/.test(s))return'"'+s.replace(/"/g,'""')+'"';return s;}
+  var lines=['BU,store_id,store_name,store_AIS_bucket,query,AIS_pct,AIS_bucket,all_impressions,ads_impressions,organic_impressions'];
+  rows.sort(function(a,b){return(b.all|0)-(a.all|0);});
+  rows.forEach(function(row){
+    var ais=typeof row.a==='number'?row.a:parseFloat(row.a); if(isNaN(ais)) ais=0;
+    var ab=qaiAisBucketFromPct(ais);
+    var sab=getStoreAisBucket(row.s);
+    lines.push([esc(row.b),esc(row.s),esc(qaiStoreDisplay(row)),esc(sab),esc(row.q),esc(ais.toFixed(4)),esc(ab),esc(String(row.all|0)),esc(String(row.ads!=null?(row.ads|0):0)),esc(String(row.org!=null?(row.org|0):0))].join(','));
+  });
+  var blob=new Blob([lines.join('\n')],{type:'text/csv;charset=utf-8;'});
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='query_level_ais_filtered.csv';a.click();URL.revokeObjectURL(a.href);
+}
+
+function initQueryAisFilters() {
+  var buSet={},storeSet={},sabSet={},abSet={};
+  QUERY_ROWS.forEach(function(r){
+    buSet[r.b]=1; storeSet[r.s]=1;
+    var sabi=getStoreAisBucket(r.s); if(sabi) sabSet[sabi]=1;
+    var ais=typeof r.a==='number'?r.a:parseFloat(r.a); if(isNaN(ais)) ais=0;
+    var abi=qaiAisBucketFromPct(ais); if(abi) abSet[abi]=1;
+  });
+  var bus=Object.keys(buSet).sort(), stores=Object.keys(storeSet).sort();
+  var sabs=qaiSortAisBuckets(Object.keys(sabSet)), abs=qaiSortAisBuckets(Object.keys(abSet));
+  buildMultiSelect('qai-bu',bus,'All BUs',function(){renderQueryAisTable();},function(v){return v;});
+  buildMultiSelect('qai-store',stores,'All store IDs',function(){renderQueryAisTable();},function(v){return v;},{search:true,searchPlaceholder:'Search store IDs\u2026'});
+  buildMultiSelect('qai-store-ais-bucket',sabs,'All store AIS',function(){renderQueryAisTable();},function(v){return v;});
+  buildMultiSelect('qai-query-ais-bucket',abs,'All query AIS',function(){renderQueryAisTable();},function(v){return v;});
+  initQaiDistChartFilters(bus,stores,sabs);
+  var qs=document.getElementById('qai-query-search');
+  if(qs&&!qs._qaiBound){qs._qaiBound=true; qs.addEventListener('input',function(){renderQueryAisTable();});}
+  var dl=document.getElementById('qai-download-csv');
+  if(dl) dl.onclick=downloadQueryAisCSV;
+}
+
+function csvRecordsToQueryRows(records) {
+  return(records||[]).map(function(row){
+    var a=parseFloat(row.AIS_pct);
+    var abRaw=row.AIS_bucket!=null?String(row.AIS_bucket).trim():'';
+    var sabRaw=row.store_AIS_bucket!=null?String(row.store_AIS_bucket).trim():'';
+    return{b:(row.BU!=null?String(row.BU):'').trim(),s:(row.store_id!=null?String(row.store_id):'').trim(),
+      nm:row.store_name!=null?String(row.store_name):'',sab:sabRaw,q:row.query!=null?String(row.query):'',
+      a:a,ab:qaiAisBucketFromPct(a),
+      org:row.organic_impressions!=null&&row.organic_impressions!==''?(parseInt(row.organic_impressions,10)||0):0,
+      ads:row.ads_impressions!=null&&row.ads_impressions!==''?(parseInt(row.ads_impressions,10)||0):0,
+      all:parseInt(row.all_impressions,10)||0};
+  }).filter(function(r){return r.b&&r.s;});
+}
+
+function applyQueryAisRows(rows) {
+  var list=rows||[];
+  list.sort(function(a,b){return(b.all|0)-(a.all|0);});
+  QUERY_ROWS=list;
+  initQueryAisFilters();
+  renderQueryAisTable();
+}
+
+(function loadQueryAisData() {
+  var pre=typeof window!=='undefined'&&window.__QUERY_AIS_PRELOAD__;
+  if(pre&&pre.length){applyQueryAisRows(pre);return;}
+  renderQueryAisTable();
+})();
+
+/* ── Init ── */
+renderAll();
+renderTimeSeries();
+</script>
+</body>
+</html>
