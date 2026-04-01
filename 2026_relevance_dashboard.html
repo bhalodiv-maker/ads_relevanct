@@ -173,16 +173,9 @@ tr:hover td { background: rgba(59,130,246,0.05); }
 
 <!-- HEADER -->
 <div class="header" style="position:relative;">
-  <img src="flipkart_logo.png" alt="Flipkart" style="position:absolute;top:12px;right:32px;height:60px;">
-  <h1>Ad Relevance Analysis Dashboard</h1>
-  <p style="color:var(--text2); font-size:14px;">Search Ads Ecosystem — Store Level Relevance Metrics (Long-term)</p>
-  <div class="header-meta">
-    <div class="meta-tag">Period: <span id="hdr-period"></span></div>
-    <div class="meta-tag">Marketplace: <span>Flipkart</span></div>
-    <div class="meta-tag">Page Context: <span>Search</span></div>
-    <div class="meta-tag">Stores: <span id="hdr-stores"></span> (Top 99%)</div>
-    <div class="meta-tag">BUs: <span>7</span></div>
-  </div>
+  <img src="flipkart_logo.png" alt="Flipkart" style="position:absolute;top:14px;right:32px;height:100px;">
+  <h1>Flipkart Search Ads Relevance &amp; AIS Analysis</h1>
+  <p style="color:var(--text2); font-size:14px;">Store &amp; Query Level Ads Relevance Analysis</p>
 </div>
 
 <!-- DATE RANGE FILTER -->
@@ -417,8 +410,8 @@ function renderAll() {
 /* ── Header ── */
 function renderHeader() {
   var o = PD().overall;
-  document.getElementById('hdr-period').textContent = o.date_min + ' to ' + o.date_max + ' (' + o.n_days + ' days)';
-  document.getElementById('hdr-stores').textContent = fmt(o.stores);
+  var ep = document.getElementById('hdr-period'); if(ep) ep.textContent = o.date_min + ' to ' + o.date_max + ' (' + o.n_days + ' days)';
+  var es = document.getElementById('hdr-stores'); if(es) es.textContent = fmt(o.stores);
 }
 
 /* ── Overall Metrics (matching 04_march: 6 cards, bps on ads) ── */
@@ -917,12 +910,14 @@ function downloadTableCSV(tableId, filename) {
 var tsMode = 'weekly';
 var tsMetric = 'r0ais';
 
-function getISOWeek(ds) {
+function getSunSatWeek(ds) {
   var d = new Date(ds+'T00:00:00');
-  d.setDate(d.getDate()+3-((d.getDay()+6)%7));
-  var jan4 = new Date(d.getFullYear(),0,4);
-  var wk = Math.ceil(((d-jan4)/86400000+jan4.getDay()+1)/7);
-  return d.getFullYear() + String(wk).padStart(2,'0');
+  var day = d.getDay();
+  var sun = new Date(d); sun.setDate(d.getDate() - day);
+  var jan1 = new Date(sun.getFullYear(), 0, 1);
+  var dayOfYear = Math.floor((sun - jan1) / 86400000);
+  var wk = Math.floor(dayOfYear / 7) + 1;
+  return sun.getFullYear() + String(wk).padStart(2, '0');
 }
 
 function filterTsByDateRange(daily) {
@@ -942,7 +937,7 @@ function filterTsBuByDateRange(dailyBu) {
 function aggregateWeekly(daily) {
   var wks = {};
   daily.forEach(function(d){
-    var w = getISOWeek(d.date);
+    var w = getSunSatWeek(d.date);
     if (!wks[w]) wks[w] = {week:w, ai:0, ti:0, rn:0, rd:0, acN:0, acD:0, ocN:0, ocD:0, abnN:0, abnD:0, obnN:0, obnD:0};
     wks[w].ai += d.ads_imp; wks[w].ti += d.all_imp;
     if (d.R0 != null) { wks[w].rn += d.R0 * d.all_imp; wks[w].rd += d.all_imp; }
@@ -961,7 +956,7 @@ function aggregateWeekly(daily) {
 function aggregateWeeklyBU(dailyBu) {
   var m = {};
   dailyBu.forEach(function(d){
-    var w = getISOWeek(d.date), k = w+'|'+d.bu;
+    var w = getSunSatWeek(d.date), k = w+'|'+d.bu;
     if (!m[k]) m[k] = {week:w, bu:d.bu, ti:0, ai:0, rn:0, rd:0, acN:0, acD:0, ocN:0, ocD:0, abnN:0, abnD:0, obnN:0, obnD:0};
     m[k].ti += d.all_imp; m[k].ai += (d.AIS/100)*d.all_imp;
     if (d.R0 != null) { m[k].rn += d.R0*d.all_imp; m[k].rd += d.all_imp; }
@@ -994,16 +989,18 @@ function renderTimeSeries() {
   var filteredBu = filterTsBuByDateRange(TS_DAILY_BU);
   var overallData, buArr;
 
-  if (tsMode === 'weekly') {
+  var effectiveMode = tsMode;
+  if (tsMode === 'weekly' && filteredDaily.length <= 6) effectiveMode = 'daily';
+  if (effectiveMode === 'weekly') {
     overallData = aggregateWeekly(filteredDaily);
     buArr = aggregateWeeklyBU(filteredBu);
   } else {
     overallData = filteredDaily.map(function(d){return {label:d.date, R0:d.R0, AIS:d.AIS, ads_CTR:d.ads_CTR, org_CTR:d.org_CTR, ads_CABN:d.ads_CABN, org_CABN:d.org_CABN};});
     buArr = filteredBu.map(function(d){return {label:d.date, bu:d.bu, R0:d.R0, AIS:d.AIS, ads_CTR:d.ads_CTR, org_CTR:d.org_CTR, ads_CABN:d.ads_CABN, org_CABN:d.org_CABN};});
   }
+  var isSingle = overallData.length === 1;
 
   if (tsOverallChartInst) tsOverallChartInst.destroy();
-  var labels = overallData.map(function(d){return d.label;});
 
   var mCfg;
   if (tsMetric === 'ctr') {
@@ -1015,14 +1012,20 @@ function renderTimeSeries() {
   }
   document.getElementById('ts-overall-title').textContent = mCfg.title;
 
+  var labels = overallData.map(function(d){return d.label;});
+  var d1 = overallData.map(function(d){return d[mCfg.k1];});
+  var d2 = overallData.map(function(d){return d[mCfg.k2];});
+  if (isSingle) { labels = ['', labels[0], '']; d1 = [null, d1[0], null]; d2 = [null, d2[0], null]; }
+
+  var pr = 4, phr = 7;
   tsOverallChartInst = new Chart(document.getElementById('tsOverallChart').getContext('2d'), {
     type:'line', plugins:[ChartDataLabels], data:{labels:labels, datasets:[
-      {label:mCfg.l1, data:overallData.map(function(d){return d[mCfg.k1];}), borderColor:mCfg.c1, backgroundColor:mCfg.c1+'14', pointRadius:4, pointHoverRadius:7, borderWidth:2.5, tension:0.3, fill:true,
+      {label:mCfg.l1, data:d1, borderColor:mCfg.c1, backgroundColor:mCfg.c1+'14', pointRadius:pr, pointHoverRadius:phr, borderWidth:2.5, tension:0.3, fill:!isSingle, spanGaps:false,
         datalabels:{display:'auto',align:'top',color:mCfg.c1,font:{weight:'bold',size:11},formatter:function(v){return v!=null?Number(v).toFixed(2)+'%':'';}}},
-      {label:mCfg.l2, data:overallData.map(function(d){return d[mCfg.k2];}), borderColor:mCfg.c2, backgroundColor:mCfg.c2+'14', pointRadius:4, pointHoverRadius:7, borderWidth:2.5, tension:0.3, fill:true,
+      {label:mCfg.l2, data:d2, borderColor:mCfg.c2, backgroundColor:mCfg.c2+'14', pointRadius:pr, pointHoverRadius:phr, borderWidth:2.5, tension:0.3, fill:!isSingle, spanGaps:false,
         datalabels:{display:'auto',align:'bottom',color:mCfg.c2,font:{weight:'bold',size:11},formatter:function(v){return v!=null?Number(v).toFixed(2)+'%':'';}}}
     ]}, options:{responsive:true,maintainAspectRatio:false,layout:{padding:{top:20,bottom:10}},
-      plugins:{legend:{position:'bottom'},datalabels:{},tooltip:{mode:'index',intersect:false,callbacks:{label:function(ctx){return ctx.dataset.label+': '+Number(ctx.raw).toFixed(2)+'%';}}}},
+      plugins:{legend:{position:'bottom'},datalabels:{},tooltip:{mode:'index',intersect:false,callbacks:{label:function(ctx){return ctx.raw!=null?ctx.dataset.label+': '+Number(ctx.raw).toFixed(2)+'%':'';}}}},
       scales:{y:{title:{display:true,text:'Percentage'},grid:{color:'rgba(71,85,105,0.2)'},ticks:{callback:function(v){return v+'%';}}},
         x:{grid:{display:false},ticks:{maxRotation:45,autoSkip:true,maxTicksLimit:15}}}
     }
@@ -1038,16 +1041,18 @@ function renderTimeSeries() {
 
   var smK1 = mCfg.k1, smK2 = mCfg.k2, smL1 = mCfg.l1.replace(' %',''), smL2 = mCfg.l2.replace(' %','');
   var smC1 = mCfg.c1, smC2 = mCfg.c2;
+  var smLabels = isSingle ? ['', wkLabels[0] || '', ''] : wkLabels;
 
   var grid = document.getElementById('bu-sm-grid');
   grid.innerHTML = '';
   BU_LIST.forEach(function(bu) {
     var byL1 = {}, byL2 = {};
     buArr.filter(function(d){return d.bu===bu;}).forEach(function(d){ byL1[d.label]=d[smK1]; byL2[d.label]=d[smK2]; });
-    var d1 = wkLabels.map(function(l){return byL1[l]!=null?byL1[l]:null;});
-    var d2 = wkLabels.map(function(l){return byL2[l]!=null?byL2[l]:null;});
-    var last1 = d1.filter(function(v){return v!=null;});
-    var last2 = d2.filter(function(v){return v!=null;});
+    var bd1 = wkLabels.map(function(l){return byL1[l]!=null?byL1[l]:null;});
+    var bd2 = wkLabels.map(function(l){return byL2[l]!=null?byL2[l]:null;});
+    if (isSingle) { bd1 = [null, bd1[0] != null ? bd1[0] : null, null]; bd2 = [null, bd2[0] != null ? bd2[0] : null, null]; }
+    var last1 = bd1.filter(function(v){return v!=null;});
+    var last2 = bd2.filter(function(v){return v!=null;});
     var cur1 = last1.length ? last1[last1.length-1] : 0;
     var cur2 = last2.length ? last2[last2.length-1] : 0;
 
@@ -1058,12 +1063,13 @@ function renderTimeSeries() {
     grid.appendChild(card);
 
     var canvas = card.querySelector('canvas');
+    var smPr = 2, smPhr = 5;
     var ch = new Chart(canvas.getContext('2d'), {
-      type:'line', data:{labels:wkLabels, datasets:[
-        {label:smL1, data:d1, borderColor:smC1, backgroundColor:smC1+'10', borderWidth:2, pointRadius:2, pointHoverRadius:5, tension:0.35, fill:true, spanGaps:true},
-        {label:smL2, data:d2, borderColor:smC2, backgroundColor:smC2+'10', borderWidth:2, pointRadius:2, pointHoverRadius:5, tension:0.35, fill:true, spanGaps:true}
+      type:'line', data:{labels:smLabels, datasets:[
+        {label:smL1, data:bd1, borderColor:smC1, backgroundColor:smC1+'10', borderWidth:2, pointRadius:smPr, pointHoverRadius:smPhr, tension:0.35, fill:!isSingle, spanGaps:false},
+        {label:smL2, data:bd2, borderColor:smC2, backgroundColor:smC2+'10', borderWidth:2, pointRadius:smPr, pointHoverRadius:smPhr, tension:0.35, fill:!isSingle, spanGaps:false}
       ]}, options:{responsive:true,maintainAspectRatio:false,
-        plugins:{legend:{display:false},datalabels:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:function(ctx){return ctx.dataset.label+': '+Number(ctx.raw).toFixed(2)+'%';}}}},
+        plugins:{legend:{display:false},datalabels:{display:isSingle?true:false,align:'top',color:'#94a3b8',font:{weight:'bold',size:10},formatter:function(v){return v!=null?Number(v).toFixed(1)+'%':'';}},tooltip:{mode:'index',intersect:false,callbacks:{label:function(ctx){return ctx.raw!=null?ctx.dataset.label+': '+Number(ctx.raw).toFixed(2)+'%':'';}}}},
         scales:{y:{grid:{color:'rgba(71,85,105,0.15)',drawBorder:false},ticks:{font:{size:10},callback:function(v){return v+'%';}}},
           x:{grid:{display:false},ticks:{font:{size:9},maxRotation:0,autoSkip:true,maxTicksLimit:5}}}
       }
