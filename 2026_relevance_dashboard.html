@@ -157,9 +157,57 @@ tr:hover td { background: rgba(59,130,246,0.05); }
   .chart-grid { grid-template-columns: 1fr; }
   .header h1 { font-size: 22px; }
 }
+.login-gate{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;align-items:center;justify-content:center;}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px 36px;width:380px;text-align:center;}
+.login-box h2{font-size:22px;font-weight:700;margin-bottom:6px;background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.login-box p{color:var(--text2);font-size:13px;margin-bottom:24px;}
+.login-box input{width:100%;padding:10px 14px;margin-bottom:14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:14px;outline:none;}
+.login-box input:focus{border-color:var(--accent);}
+.login-box button{width:100%;padding:10px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;}
+.login-box button:hover{background:#2563eb;}
+.login-error{color:var(--red);font-size:13px;margin-top:12px;display:none;}
+.denied-msg{color:var(--red);font-size:18px;font-weight:600;text-align:center;margin-top:40px;}
 </style>
 </head>
 <body>
+
+<div class="login-gate" id="login-gate">
+  <div class="login-box">
+    <img src="flipkart_logo.png" alt="Flipkart" style="height:100px;margin-bottom:16px;">
+    <h2>Flipkart Search Ads Relevance</h2>
+    <p>Enter credentials to access the analysis</p>
+    <input type="text" id="login-uid" placeholder="Login ID" autocomplete="off">
+    <input type="password" id="login-pwd" placeholder="Password">
+    <button onclick="attemptLogin()">Sign In</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<script>
+var _loginAttempts = 0;
+function attemptLogin(){
+  var uid = document.getElementById('login-uid').value.trim();
+  var pwd = document.getElementById('login-pwd').value;
+  if(uid === 'ads_admin' && pwd === 'ads@admin_123'){
+    document.getElementById('login-gate').style.display = 'none';
+    document.getElementById('app-content').style.display = '';
+  } else {
+    _loginAttempts++;
+    var errEl = document.getElementById('login-error');
+    if(_loginAttempts >= 3){
+      document.getElementById('login-gate').innerHTML = '<div class="denied-msg">You are not allowed to access this analysis.</div>';
+    } else {
+      errEl.textContent = 'Invalid credentials. Try again.';
+      errEl.style.display = 'block';
+    }
+  }
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && document.getElementById('login-gate').style.display !== 'none') attemptLogin();
+});
+</script>
+
+<div id="app-content" style="display:none;">
 <div class="ct-modal-overlay" id="ct-modal-overlay" onclick="if(event.target===this)closeCtModal()">
   <div class="ct-modal" onclick="event.stopPropagation()">
     <button type="button" class="ct-close-x" aria-label="Close" onclick="closeCtModal()">&times;</button>
@@ -1454,5 +1502,6 @@ function applyQueryAisRows(rows) {
 renderAll();
 renderTimeSeries();
 </script>
+</div><!-- /app-content -->
 </body>
 </html>
