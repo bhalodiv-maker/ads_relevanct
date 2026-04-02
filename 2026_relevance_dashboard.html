@@ -315,6 +315,7 @@ document.addEventListener('keydown', function(e){
   <div class="section-title"><span class="icon">&#9776;</span> Store-Level Insights</div>
   <div class="sli-filters" id="sli-filters-wrap">
     <div class="sli-filter-group"><label>BU</label><div class="ms-wrap" id="sli-bu"></div></div>
+    <div class="sli-filter-group"><label>Store Name</label><div class="ms-wrap" id="sli-sname"></div></div>
     <div class="sli-filter-group"><label>R0 Bucket</label><div class="ms-wrap" id="sli-r0"></div></div>
     <div class="sli-filter-group"><label>AIS Bucket</label><div class="ms-wrap" id="sli-ais"></div></div>
     <div class="sli-filter-group"><label>Show Top</label>
@@ -335,7 +336,7 @@ document.addEventListener('keydown', function(e){
     <button type="button" class="qai-info-btn" onclick="document.getElementById('qai-info-popup').classList.toggle('open')" title="Why Store AIS ≠ Query AIS?">&#9432;</button>
     <div class="qai-info-popup" id="qai-info-popup">
       <strong>Store AIS vs Query AIS</strong><br>
-      Store-level AIS averages across all queries — extremes cancel out. Query-level AIS preserves each query's individual ad share, so the &gt;45% bucket appears much larger here than in the store distribution. This is expected: most &gt;45% query-AIS impressions come from stores with 30–40% overall AIS.
+      Store-level AIS averages across all queries — extremes cancel out. Query-level AIS preserves each query's individual ad share, so the &gt;60% bucket appears much larger here than in the store distribution. This is expected: most high query-AIS impressions come from stores with 30–40% overall AIS.
       <div style="margin-top:8px;text-align:right;"><button class="qai-info-close" onclick="document.getElementById('qai-info-popup').classList.remove('open')">Got it</button></div>
     </div>
     <div class="sli-filters" style="margin-bottom:16px">
@@ -385,7 +386,7 @@ function bpsLabel(ads, org) {
 
 var BU_COLORS = { BGM:'#3b82f6', CoreElectronics:'#10b981', EmergingElectronics:'#f59e0b', Furniture:'#a78bfa', Home:'#f472b6', Large:'#22d3ee', Lifestyle:'#fb923c' };
 var BU_LIST = ['BGM','CoreElectronics','EmergingElectronics','Furniture','Home','Large','Lifestyle'];
-var BUCKET_COLORS = ['#ef4444','#f97316','#f59e0b','#84cc16','#10b981','#06b6d4','#8b5cf6','#ec4899'];
+var BUCKET_COLORS = ['#ef4444','#f97316','#f59e0b','#84cc16','#10b981','#06b6d4','#8b5cf6','#ec4899','#a855f7','#e11d48'];
 
 /* ── Date Range Logic ── */
 var allDateMin = PERIODS['all'].overall.date_min;
@@ -439,6 +440,7 @@ var tsOverallChartInst = null;
 var buSmCharts = [];
 var currentGlobalBU = 'Overall';
 var sliPage = 0;
+var sliSortCol = null, sliSortDir = 1;
 var buSortCol = null, buSortDir = 1;
 
 /* ── Modal ── */
@@ -812,11 +814,56 @@ function showCrossDrill(ab,rb){
 document.getElementById('crosstab-metric').onchange = renderCrosstab;
 
 /* ── Store-Level Table (with Store Name) ── */
+function sliSortBy(col) {
+  if (sliSortCol === col) { sliSortDir *= -1; } else { sliSortCol = col; sliSortDir = 1; }
+  sliPage = 0; renderStoreTables();
+}
 function renderStoreTables() {
   var stores = PD().ALL_STORES;
   var bus = msGetSelected('sli-bu'), r0s = msGetSelected('sli-r0'), aiss = msGetSelected('sli-ais');
-  var filtered = stores.filter(function(s){return bus.indexOf(s.b)!==-1 && r0s.indexOf(s.rb)!==-1 && aiss.indexOf(s.ab)!==-1;});
-  filtered.sort(function(a,b){return b.ti-a.ti;});
+  var snames = msGetSelected('sli-sname');
+  var filtered = stores.filter(function(s){
+    if(bus.indexOf(s.b)===-1) return false;
+    if(r0s.indexOf(s.rb)===-1) return false;
+    if(aiss.indexOf(s.ab)===-1) return false;
+    if(snames && snames.indexOf(sn(s.s))===-1) return false;
+    return true;
+  });
+
+  var globalImp = PD().overall.all_impressions;
+  var sliCols = [
+    {key:'#',get:null},
+    {key:'b',get:function(s){return s.b;}},
+    {key:'s',get:function(s){return s.s;}},
+    {key:'sname',get:function(s){return sn(s.s);}},
+    {key:'r',get:function(s){return s.r;},num:true},
+    {key:'a',get:function(s){return s.a;},num:true},
+    {key:'share',get:function(s){return (s.ti/globalImp)*100;},num:true},
+    {key:'ac',get:function(s){return s.ac;},num:true},
+    {key:'oc',get:function(s){return s.oc;},num:true},
+    {key:'acb',get:function(s){return s.acb;},num:true},
+    {key:'ocb',get:function(s){return s.ocb;},num:true},
+    {key:'ai',get:function(s){return s.ai;},num:true},
+    {key:'oi',get:function(s){return s.oi;},num:true},
+    {key:'ti',get:function(s){return s.ti;},num:true},
+    {key:'ak',get:function(s){return s.ak;},num:true},
+    {key:'ok',get:function(s){return s.ok;},num:true},
+    {key:'acn',get:function(s){return s.acn;},num:true},
+    {key:'ocn',get:function(s){return s.ocn;},num:true}
+  ];
+  if (sliSortCol) {
+    var sc = sliCols.filter(function(c){return c.key===sliSortCol;})[0];
+    if (sc && sc.get) {
+      var dir = sliSortDir;
+      filtered.sort(function(a,b){
+        var va=sc.get(a), vb=sc.get(b);
+        if(sc.num) return (va-vb)*dir;
+        return String(va).localeCompare(String(vb))*dir;
+      });
+    }
+  } else {
+    filtered.sort(function(a,b){return b.ti-a.ti;});
+  }
 
   var topn = parseInt(document.getElementById('sli-topn').value);
   var total = filtered.length;
@@ -824,9 +871,12 @@ function renderStoreTables() {
   var start = sliPage * pageSize;
   var end = Math.min(start + pageSize, total);
   var page = filtered.slice(start, end);
-  var globalImp = PD().overall.all_impressions;
 
-  var html = '<thead><tr><th>#</th><th>BU</th><th>Store</th><th>Store Name</th><th class="text-right">R0 %</th><th class="text-right">AIS %</th><th class="text-right">Impr Share</th><th class="text-right">Ads CTR %</th><th class="text-right">Org CTR %</th><th class="text-right">Ads CABN/Clk %</th><th class="text-right">Org CABN/Clk %</th><th class="text-right">Ads Imp</th><th class="text-right">Org Imp</th><th class="text-right">All Imp</th><th class="text-right">Ads Clicks</th><th class="text-right">Org Clicks</th><th class="text-right">Ads CABN</th><th class="text-right">Org CABN</th></tr></thead><tbody>';
+  function sh(key,label,cls){
+    var arrow = sliSortCol===key?(sliSortDir===1?' &#9650;':' &#9660;'):'';
+    return '<th'+(cls?' class="'+cls+'"':'')+' style="cursor:pointer;white-space:nowrap" onclick="sliSortBy(\''+key+'\')">'+label+arrow+'</th>';
+  }
+  var html = '<thead><tr><th>#</th>'+sh('b','BU')+sh('s','Store')+sh('sname','Store Name')+sh('r','R0 %','text-right')+sh('a','AIS %','text-right')+sh('share','Impr Share','text-right')+sh('ac','Ads CTR %','text-right')+sh('oc','Org CTR %','text-right')+sh('acb','Ads CABN/Clk %','text-right')+sh('ocb','Org CABN/Clk %','text-right')+sh('ai','Ads Imp','text-right')+sh('oi','Org Imp','text-right')+sh('ti','All Imp','text-right')+sh('ak','Ads Clicks','text-right')+sh('ok','Org Clicks','text-right')+sh('acn','Ads CABN','text-right')+sh('ocn','Org CABN','text-right')+'</tr></thead><tbody>';
   page.forEach(function(s,i){
     var r0c = s.r>=60?'val-good':s.r<40?'val-bad':'val-warn';
     var c = BU_COLORS[s.b]||'#64748b';
@@ -935,6 +985,10 @@ document.addEventListener('click', function(){ document.querySelectorAll('.ms-dr
 
 function initSliFilters() {
   buildMultiSelect('sli-bu', BU_LIST, 'All BUs');
+  var nameSet = {};
+  (PD().ALL_STORES||[]).forEach(function(s){ var n=sn(s.s); if(n) nameSet[n]=1; });
+  var names = Object.keys(nameSet).sort();
+  buildMultiSelect('sli-sname', names, 'All Stores', function(){ sliPage=0; renderStoreTables(); }, function(v){return v;}, {search:true, searchPlaceholder:'Search store name\u2026'});
   buildMultiSelect('sli-r0', PD().r0_order, 'All R0');
   buildMultiSelect('sli-ais', PD().ais_order, 'All AIS');
   document.getElementById('sli-topn').onchange = function(){ sliPage=0; renderStoreTables(); };
@@ -1127,8 +1181,9 @@ function renderTimeSeries() {
 
   /* ── Time Series Insights (metric-aware) ── */
   var tsBox = document.getElementById('ts-overall-insight');
-  if (tsBox && overallData.length >= 2) {
-    var first = overallData[0], last = overallData[overallData.length - 1];
+  var tsInsightData = overallData.filter(function(d){ return !/^2025/.test(d.label); });
+  if (tsBox && tsInsightData.length >= 2) {
+    var first = tsInsightData[0], last = tsInsightData[tsInsightData.length - 1];
     var msgs = [];
 
     if (tsMetric === 'r0ais') {
@@ -1173,10 +1228,11 @@ function renderTimeSeries() {
 
   /* ── BU-Level Trend Insights (metric-aware) ── */
   var buBox = document.getElementById('ts-bu-insight');
-  if (buBox && wkLabels.length >= 2) {
+  var buInsightLabels = wkLabels.filter(function(l){ return !/^2025/.test(l); });
+  if (buBox && buInsightLabels.length >= 2) {
     var buDeltas = [];
     BU_LIST.forEach(function(bu) {
-      var bd = buArr.filter(function(d){return d.bu===bu;}).sort(function(a,b){return a.label<b.label?-1:1;});
+      var bd = buArr.filter(function(d){return d.bu===bu && !/^2025/.test(d.label);}).sort(function(a,b){return a.label<b.label?-1:1;});
       if (bd.length < 2) return;
       var bf = bd[0], bl = bd[bd.length - 1];
       buDeltas.push({bu:bu,
@@ -1225,6 +1281,11 @@ var qaiAisDistChartInstance = null;
 var qaiDistDrillTop30 = null;
 var qaiDistDrillBucket = '';
 var qaiPage = 0;
+var qaiSortCol = null, qaiSortDir = 1;
+function qaiSortBy(col) {
+  if (qaiSortCol === col) { qaiSortDir *= -1; } else { qaiSortCol = col; qaiSortDir = 1; }
+  qaiPage = 0; renderQueryAisTable();
+}
 var QAI_PAGE_SIZE = 30;
 
 var _storeAisMap = null;
@@ -1257,8 +1318,8 @@ function qaiAisBucketFromPct(ais) {
   if(isNaN(ais)) ais=0;
   if(ais<5)return'<5%'; if(ais<15)return'5–15%'; if(ais<25)return'15–25%';
   if(ais<30)return'25–30%'; if(ais<35)return'30–35%'; if(ais<40)return'35–40%';
-  if(ais<45)return'40–45%';
-  return'>45%';
+  if(ais<45)return'40–45%'; if(ais<50)return'45–50%'; if(ais<60)return'50–60%';
+  return'>60%';
 }
 
 function qaiDistQueryAisBucket(row) {
@@ -1300,7 +1361,7 @@ function qaiDistFilteredRows() {
 }
 
 function qaiDistComputeSeries() {
-  var order=PD().ais_order?PD().ais_order.slice():['<5%','5–15%','15–25%','25–30%','30–35%','35–40%','40–45%','>45%'];
+  var order=['<5%','5–15%','15–25%','25–30%','30–35%','35–40%','40–45%','45–50%','50–60%','>60%'];
   var rows=qaiDistFilteredRows();
   var sets={}, impByBucket={};
   order.forEach(function(b){sets[b]=new Set(); impByBucket[b]=0;});
@@ -1401,10 +1462,34 @@ function updateQaiPager(totalFiltered) {
 
 function renderQueryAisTable(fromPager) {
   var tbl=document.getElementById('table-query-ais'); if(!tbl) return;
-  var th='<th>#</th><th>BU</th><th>Query</th><th>Store ID</th><th>Store Name</th><th>Store AIS bucket</th><th class="text-right">Query AIS %</th><th>Query AIS bucket</th><th class="text-right">Organic impressions</th><th class="text-right">Ads impressions</th><th class="text-right">All impressions</th>';
+  function qh(key,label,cls){
+    var arrow=qaiSortCol===key?(qaiSortDir===1?' &#9650;':' &#9660;'):'';
+    return '<th'+(cls?' class="'+cls+'"':'')+' style="cursor:pointer;white-space:nowrap" onclick="qaiSortBy(\''+key+'\')">'+label+arrow+'</th>';
+  }
+  var th='<th>#</th>'+qh('b','BU')+qh('q','Query')+qh('s','Store ID')+qh('sname','Store Name')+qh('sab','Store AIS bucket')+qh('a','Query AIS %','text-right')+qh('ab','Query AIS bucket')+qh('org','Organic impressions','text-right')+qh('ads','Ads impressions','text-right')+qh('all','All impressions','text-right');
   if(QUERY_ROWS.length===0){tbl.innerHTML='<thead><tr>'+th+'</tr></thead><tbody><tr><td colspan="11" style="color:var(--text2)">No data loaded.</td></tr></tbody>';qaiPage=0;updateQaiPager(0);return;}
   var filtered=qaiFilteredRows();
-  filtered.sort(function(a,b){return(b.all|0)-(a.all|0);});
+  if(qaiSortCol){
+    var dir=qaiSortDir;
+    filtered.sort(function(a,b){
+      var va,vb;
+      switch(qaiSortCol){
+        case 'b': va=a.b;vb=b.b; return String(va).localeCompare(String(vb))*dir;
+        case 'q': va=a.q;vb=b.q; return String(va).localeCompare(String(vb))*dir;
+        case 's': va=a.s;vb=b.s; return String(va).localeCompare(String(vb))*dir;
+        case 'sname': va=qaiStoreDisplay(a);vb=qaiStoreDisplay(b); return String(va).localeCompare(String(vb))*dir;
+        case 'sab': va=getStoreAisBucket(a.s);vb=getStoreAisBucket(b.s); return String(va).localeCompare(String(vb))*dir;
+        case 'ab': va=qaiAisBucketFromPct(typeof a.a==='number'?a.a:parseFloat(a.a)||0);vb=qaiAisBucketFromPct(typeof b.a==='number'?b.a:parseFloat(b.a)||0); return String(va).localeCompare(String(vb))*dir;
+        case 'a': va=typeof a.a==='number'?a.a:parseFloat(a.a)||0;vb=typeof b.a==='number'?b.a:parseFloat(b.a)||0; return (va-vb)*dir;
+        case 'org': va=a.org||0;vb=b.org||0; return (va-vb)*dir;
+        case 'ads': va=a.ads||0;vb=b.ads||0; return (va-vb)*dir;
+        case 'all': va=a.all||0;vb=b.all||0; return (va-vb)*dir;
+        default: return 0;
+      }
+    });
+  } else {
+    filtered.sort(function(a,b){return(b.all|0)-(a.all|0);});
+  }
   if(filtered.length===0){tbl.innerHTML='<thead><tr>'+th+'</tr></thead><tbody><tr><td colspan="11" style="color:var(--text2)">No rows match filters.</td></tr></tbody>';qaiPage=0;updateQaiPager(0);return;}
   var pages=Math.max(1,Math.ceil(filtered.length/QAI_PAGE_SIZE));
   if(fromPager!==true) qaiPage=0;
