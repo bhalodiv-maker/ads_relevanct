@@ -22,6 +22,8 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans
 
 .header { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; margin-bottom: 32px; }
 .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header-signout { background:none; border:none; color:var(--text2); font-size:13px; font-family:inherit; padding:4px 0; cursor:pointer; white-space:nowrap; text-decoration:underline; text-underline-offset:3px; }
+.header-signout:hover { color:#94a3b8; }
 .header-meta { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
 .meta-tag { background: var(--surface2); padding: 6px 16px; border-radius: 20px; font-size: 13px; color: var(--text2); }
 .meta-tag span { color: var(--text); font-weight: 600; }
@@ -112,7 +114,8 @@ tr:hover td { background: rgba(59,130,246,0.05); }
 .ts-btn { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:6px 16px; border-radius:6px; font-size:12px; cursor:pointer; font-family:inherit; transition:all 0.2s; }
 .ts-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
 
-.dr-bar { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:24px; align-items:center; }
+.dr-bar { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px; align-items:center; justify-content:space-between; }
+.dr-bar-controls { display:flex; flex-wrap:wrap; gap:12px; align-items:center; flex:1; min-width:min(100%,280px); }
 .dr-bar label { font-size:13px; color:var(--text2); font-weight:600; }
 .dr-bar input[type=date] { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:8px; font-size:13px; font-family:inherit; cursor:pointer; color-scheme:dark; }
 .dr-bar input[type=date]:focus { outline:none; border-color:var(--accent); }
@@ -184,13 +187,22 @@ tr:hover td { background: rgba(59,130,246,0.05); }
 </div>
 
 <script>
+var _ADS_REL_SESSION_KEY = 'fk_ads_rel_auth';
 var _loginAttempts = 0;
+
+function showDashboard() {
+  var gate = document.getElementById('login-gate');
+  var app = document.getElementById('app-content');
+  if (gate) gate.style.display = 'none';
+  if (app) app.style.display = '';
+}
+
 function attemptLogin(){
   var uid = document.getElementById('login-uid').value.trim();
   var pwd = document.getElementById('login-pwd').value;
   if(uid === 'ads_admin' && pwd === 'ads@admin_123'){
-    document.getElementById('login-gate').style.display = 'none';
-    document.getElementById('app-content').style.display = '';
+    try { sessionStorage.setItem(_ADS_REL_SESSION_KEY, '1'); } catch (e) {}
+    showDashboard();
   } else {
     _loginAttempts++;
     var errEl = document.getElementById('login-error');
@@ -202,8 +214,23 @@ function attemptLogin(){
     }
   }
 }
+
+function signOutDashboard() {
+  try { sessionStorage.removeItem(_ADS_REL_SESSION_KEY); } catch (e) {}
+  location.reload();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    if (sessionStorage.getItem(_ADS_REL_SESSION_KEY) === '1') {
+      showDashboard();
+    }
+  } catch (e) {}
+});
+
 document.addEventListener('keydown', function(e){
-  if(e.key === 'Enter' && document.getElementById('login-gate').style.display !== 'none') attemptLogin();
+  var gate = document.getElementById('login-gate');
+  if(e.key === 'Enter' && gate && gate.style.display !== 'none') attemptLogin();
 });
 </script>
 
@@ -221,19 +248,24 @@ document.addEventListener('keydown', function(e){
 
 <!-- HEADER -->
 <div class="header" style="position:relative;">
-  <img src="flipkart_logo.png" alt="Flipkart" style="position:absolute;top:14px;right:32px;height:100px;">
+  <div style="position:absolute;top:14px;right:32px;">
+    <img src="flipkart_logo.png" alt="Flipkart" style="height:100px;display:block;">
+  </div>
   <h1>Flipkart Search Ads Relevance &amp; AIS Analysis</h1>
   <p style="color:var(--text2); font-size:14px;">Store &amp; Query Level Ads Relevance Analysis</p>
 </div>
 
 <!-- DATE RANGE FILTER -->
 <div class="dr-bar" id="dr-bar">
-  <label>Date Range:</label>
-  <input type="date" id="dr-from">
-  <span style="color:var(--text3)">to</span>
-  <input type="date" id="dr-to">
-  <button class="dr-reset" onclick="resetDateRange()">Reset</button>
-  <span class="dr-note" id="dr-note"></span>
+  <div class="dr-bar-controls">
+    <label>Date Range:</label>
+    <input type="date" id="dr-from">
+    <span style="color:var(--text3)">to</span>
+    <input type="date" id="dr-to">
+    <button class="dr-reset" onclick="resetDateRange()">Reset</button>
+    <span class="dr-note" id="dr-note"></span>
+  </div>
+  <button type="button" class="header-signout" onclick="signOutDashboard()">Sign out</button>
 </div>
 
 <!-- TIME SERIES -->
