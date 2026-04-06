@@ -24,3 +24,6 @@ _archive/relevance_raw_data.cleaned.csv
 _archive/relevance_data_for_04_march.csv
 _archive/store_level_data_for_2026.csv
 _archive/04_march_query_top80_ais.json
+slot_level_raw_data.csv
+store_level_FR.csv
+04_march_query_level_bu_store_query.csv

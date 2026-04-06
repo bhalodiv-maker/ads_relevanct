@@ -1625,35 +1625,6 @@ function gapBucketStoreDetailTableHtml(top, g) {
   return h;
 }
 
-function toggleDetailColumns(element, type) {
-  var table = element.closest('table');
-  if (!table) return;
-  
-  // Toggle the detail columns
-  var detailCols = table.querySelectorAll('.detail-cols.' + type + '-cols');
-  var isVisible = detailCols.length > 0 && detailCols[0].style.display !== 'none';
-  
-  // Hide all detail columns first
-  table.querySelectorAll('.detail-cols').forEach(function(col) {
-    col.style.display = 'none';
-  });
-  
-  // Show/hide the clicked type columns
-  detailCols.forEach(function(col) {
-    col.style.display = isVisible ? 'none' : '';
-  });
-  
-  // Update arrow indicators
-  table.querySelectorAll('.clickable-col').forEach(function(col) {
-    var colType = col.getAttribute('onclick').match(/'([^']+)'/)[1];
-    if (colType === type) {
-      col.textContent = col.textContent.replace('↓', isVisible ? '↓' : '↑');
-    } else {
-      col.textContent = col.textContent.replace(/[↓↑]/, '↓');
-    }
-  });
-}
-
 function gapBucketStoreDetailTableHtmlF1Bu(top, g) {
   var h = '<table class="f1bu-detail-table"><thead><tr>';
   h += '<th rowspan="2">#</th>';
@@ -1701,24 +1672,6 @@ function gapBucketStoreDetailTableHtmlF1Bu(top, g) {
   }
   h += '</tbody></table>';
   return h;
-}
-
-function toggleColumnGroup(header, group) {
-  var table = header.closest('table');
-  if (!table) return;
-  
-  var isVisible = table.querySelector('.col-' + group).style.display !== 'none';
-  
-  table.querySelectorAll('.col-' + group).forEach(function(cell) {
-    cell.style.display = isVisible ? 'none' : '';
-  });
-  
-  // Update arrow indicator
-  var arrow = isVisible ? '▼' : '▲';
-  table.querySelectorAll('.col-' + group + '.clickable-header').forEach(function(h) {
-    var currentText = h.textContent;
-    h.textContent = currentText.replace(/[▼▲]/, arrow);
-  });
 }
 
 function renderGapBucketBuModal() {
