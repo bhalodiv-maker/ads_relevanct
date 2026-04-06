@@ -20,9 +20,13 @@ ROOT = Path(__file__).resolve().parent.parent
 INPUT_CSV = ROOT / "_archive" / "store_level_data_for_2026.csv"
 STORE_NAME_CSV = ROOT / "_archive" / "store_to_store_name_mapping.csv"
 OUTPUT_JS = ROOT / "2026_dashboard_data.js"
+OUTPUT_FOLD_SLICES_JS = ROOT / "2026_dashboard_fold_slices.js"
 
 VALID_BUS = {"BGM", "CoreElectronics", "EmergingElectronics", "Furniture", "Home", "Large", "Lifestyle"}
-R0_ORDER = ["0–25%", "25–40%", "40–50%", "50–60%", "60–70%", "70–80%", ">80%"]
+# Fold-slice keys: only these rows contribute; "rest" = folds 4–12 combined
+FOLD_SLICE_KEYS = ("1", "2", "3", "rest")
+FOLD_SLICE_FOLDS = {"1": {1}, "2": {2}, "3": {3}, "rest": set(range(4, 13))}
+R0_ORDER = ["0–20%", "20–30%", "30–40%", "40–50%", "50–60%", "60–70%", "70–80%", "80%+"]
 AIS_ORDER = ["<5%", "5–15%", "15–25%", "25–30%", "30–35%", "35–40%", "40–45%", ">45%"]
 
 PERIODS = {
@@ -35,13 +39,14 @@ PERIOD_LABELS = {"all": "Full Period", "2026-01": "January 2026", "2026-02": "Fe
 
 
 def r0_bucket(r0_pct):
-    if r0_pct < 25: return "0–25%"
-    if r0_pct < 40: return "25–40%"
+    if r0_pct < 20: return "0–20%"
+    if r0_pct < 30: return "20–30%"
+    if r0_pct < 40: return "30–40%"
     if r0_pct < 50: return "40–50%"
     if r0_pct < 60: return "50–60%"
     if r0_pct < 70: return "60–70%"
     if r0_pct < 80: return "70–80%"
-    return ">80%"
+    return "80%+"
 
 
 def ais_bucket(ais_pct):
@@ -65,6 +70,64 @@ def compute_r0(fold_data):
     return (num / den * 100.0) if den else None
 
 
+def compute_fold_slice_r0(agg):
+    """Same relevance ratio as main R0 per-fold terms: (ads_cabn/ads_imp)/(org_cabn/org_imp)×100; no 1/f² weighting."""
+    if agg["ai"] <= 0 or agg["oi"] <= 0 or agg["oc"] <= 0:
+        return None
+    org_cvi = agg["oc"] / agg["oi"]
+    if org_cvi <= 0:
+        return None
+    ads_cvi = agg["ac"] / agg["ai"]
+    return (ads_cvi / org_cvi) * 100.0
+
+
+def segment_metrics_from_agg(agg):
+    """Per-segment AIS, CABN-based R0, CTR and CABN/click for expand-columns."""
+    ti = agg["ai"] + agg["oi"]
+    if ti <= 0:
+        return None
+    ai, oi = agg["ai"], agg["oi"]
+    r0v = compute_fold_slice_r0(agg)
+    return {
+        "r0": r0v,
+        "ais": 100.0 * ai / ti,
+        "ads_ctr": round(100.0 * agg["ak"] / ai, 4) if ai else 0,
+        "org_ctr": round(100.0 * agg["ok"] / oi, 4) if oi else 0,
+        "ads_cabn_clk": round(100.0 * agg["ac"] / agg["ak"], 4) if agg["ak"] else 0,
+        "org_cabn_clk": round(100.0 * agg["oc"] / agg["ok"], 4) if agg["ok"] else 0,
+        "ai": ai,
+        "oi": oi,
+        "ti": ti,
+    }
+
+
+def pack_seg_json(sm):
+    if sm is None:
+        return None
+    return {
+        "r0": round(sm["r0"], 2) if sm.get("r0") is not None else None,
+        "ais": round(sm["ais"], 2),
+        "ads_ctr": sm["ads_ctr"],
+        "org_ctr": sm["org_ctr"],
+        "ads_cabn_clk": sm["ads_cabn_clk"],
+        "org_cabn_clk": sm["org_cabn_clk"],
+        "ai": sm["ai"],
+        "oi": sm["oi"],
+    }
+
+
+def build_fold_cmp_for_store(pid, store, ps, fg_ps):
+    """Overall = all folds pooled, CABN R0 (no weighting). Fold 1 only (for fold-page compare table)."""
+    ag_o = ps.get((pid, store), new_agg())
+    out = {"o": pack_seg_json(segment_metrics_from_agg(ag_o))}
+    ag = fg_ps.get(("1", pid, store), new_agg())
+    if ag["ai"] + ag["oi"] <= 0:
+        out["f1"] = None
+    else:
+        out["f1"] = pack_seg_json(segment_metrics_from_agg(ag))
+    return out
+
+
 def safe_int(v):
     try: return int(v)
     except: return 0
@@ -76,6 +139,177 @@ def new_agg():
 
 def add_agg(dst, ac, ai, oc, oi, ak, ok):
     dst["ac"] += ac; dst["ai"] += ai; dst["oc"] += oc; dst["oi"] += oi; dst["ak"] += ak; dst["ok"] += ok
+
+
+def build_fold_group_dashboard(fg, fg_ps, fg_pb, fg_pt, fg_dat, fg_dbt, valid_stores, store_bu, all_dates, sorted_dates):
+    """Full period/store/BU/crosstab structure using compute_fold_slice_r0 (no fold weighting)."""
+    period_data = {}
+    for pid in PERIODS:
+        tot = fg_pt.get((fg, pid), new_agg())
+        all_imp = tot["ai"] + tot["oi"]
+        overall_r0 = compute_fold_slice_r0(tot)
+        n_stores = sum(1 for s in valid_stores if (fg, pid, s) in fg_ps)
+
+        p_dates = sorted(d for d in all_dates if PERIODS[pid](d))
+
+        overall = {
+            "stores": n_stores,
+            "all_impressions": all_imp,
+            "ads_imp": tot["ai"],
+            "R0": round(overall_r0, 4) if overall_r0 else 0,
+            "AIS": round(100.0 * tot["ai"] / all_imp, 4) if all_imp else 0,
+            "ads_CTR": round(100.0 * tot["ak"] / tot["ai"], 4) if tot["ai"] else 0,
+            "org_CTR": round(100.0 * tot["ok"] / tot["oi"], 4) if tot["oi"] else 0,
+            "ads_CABN_clk": round(100.0 * tot["ac"] / tot["ak"], 4) if tot["ak"] else 0,
+            "org_CABN_clk": round(100.0 * tot["oc"] / tot["ok"], 4) if tot["ok"] else 0,
+            "date_min": p_dates[0] if p_dates else "",
+            "date_max": p_dates[-1] if p_dates else "",
+            "n_days": len(p_dates),
+        }
+
+        bu_metrics = []
+        for bu in sorted(VALID_BUS):
+            d = fg_pb.get((fg, pid, bu), new_agg())
+            a_imp = d["ai"] + d["oi"]
+            bu_r0 = compute_fold_slice_r0(d)
+            bu_stores = sum(
+                1 for s in valid_stores
+                if store_bu.get(s) == bu and (fg, pid, s) in fg_ps
+            )
+            bu_metrics.append({
+                "bu": bu, "stores": bu_stores, "all_impressions": a_imp, "ads_imp": d["ai"],
+                "R0": round(bu_r0, 4) if bu_r0 else 0,
+                "AIS": round(100.0 * d["ai"] / a_imp, 4) if a_imp else 0,
+                "ads_CTR": round(100.0 * d["ak"] / d["ai"], 4) if d["ai"] else 0,
+                "org_CTR": round(100.0 * d["ok"] / d["oi"], 4) if d["oi"] else 0,
+                "ads_CABN_clk": round(100.0 * d["ac"] / d["ak"], 4) if d["ak"] else 0,
+                "org_CABN_clk": round(100.0 * d["oc"] / d["ok"], 4) if d["ok"] else 0,
+            })
+
+        store_list = []
+        for s in valid_stores:
+            if (fg, pid, s) not in fg_ps:
+                continue
+            d = fg_ps[(fg, pid, s)]
+            a_imp = d["ai"] + d["oi"]
+            if a_imp == 0:
+                continue
+            s_r0 = compute_fold_slice_r0(d)
+            s_ais = 100.0 * d["ai"] / a_imp
+            rb = r0_bucket(s_r0) if s_r0 is not None else "0–20%"
+            ab = ais_bucket(s_ais)
+            store_list.append({
+                "b": store_bu.get(s, ""), "s": s,
+                "r": round(s_r0, 2) if s_r0 is not None else 0,
+                "a": round(s_ais, 2),
+                "ac": round(100.0 * d["ak"] / d["ai"], 4) if d["ai"] else 0,
+                "oc": round(100.0 * d["ok"] / d["oi"], 4) if d["oi"] else 0,
+                "acb": round(100.0 * d["ac"] / d["ak"], 4) if d["ak"] else 0,
+                "ocb": round(100.0 * d["oc"] / d["ok"], 4) if d["ok"] else 0,
+                "ai": d["ai"], "oi": d["oi"], "ti": a_imp,
+                "ak": d["ak"], "ok": d["ok"], "acn": d["ac"], "ocn": d["oc"],
+                "rb": rb, "ab": ab,
+            })
+        store_list.sort(key=lambda x: -x["ti"])
+
+        def build_dist(stores_sub):
+            r0m = defaultdict(lambda: {"c": 0, "i": 0})
+            am = defaultdict(lambda: {"c": 0, "i": 0})
+            for s in stores_sub:
+                r0m[s["rb"]]["c"] += 1
+                r0m[s["rb"]]["i"] += s["ti"]
+                am[s["ab"]]["c"] += 1
+                am[s["ab"]]["i"] += s["ti"]
+            tc = len(stores_sub)
+            ti = sum(s["ti"] for s in stores_sub)
+            r0d = [{"bucket": b, "stores": r0m[b]["c"], "store_pct": round(100.0 * r0m[b]["c"] / tc, 2) if tc else 0,
+                    "impressions": r0m[b]["i"], "impr_pct": round(100.0 * r0m[b]["i"] / ti, 2) if ti else 0} for b in R0_ORDER]
+            aisd = [{"bucket": b, "stores": am[b]["c"], "store_pct": round(100.0 * am[b]["c"] / tc, 2) if tc else 0,
+                     "impressions": am[b]["i"], "impr_pct": round(100.0 * am[b]["i"] / ti, 2) if ti else 0} for b in AIS_ORDER]
+            return r0d, aisd, tc, ti
+
+        r0_dist, ais_dist, _, _ = build_dist(store_list)
+
+        crosstab = []
+        for ab in AIS_ORDER:
+            row_d = {"ais_bucket": ab}
+            for rb in R0_ORDER:
+                matched = [s for s in store_list if s["ab"] == ab and s["rb"] == rb]
+                row_d[rb + "_count"] = len(matched)
+                imp = sum(s["ti"] for s in matched)
+                row_d[rb + "_imp_pct"] = round(100.0 * imp / all_imp, 2) if all_imp else 0
+            crosstab.append(row_d)
+
+        bu_r0_table = []
+        for bu in sorted(VALID_BUS):
+            bu_s = [s for s in store_list if s["b"] == bu]
+            t_imp = sum(s["ti"] for s in bu_s)
+            row_d = {"bu": bu}
+            for rb in R0_ORDER:
+                bs = [s for s in bu_s if s["rb"] == rb]
+                row_d[rb + "_count"] = len(bs)
+                imp = sum(s["ti"] for s in bs)
+                row_d[rb + "_imp_pct"] = round(100.0 * imp / t_imp, 2) if t_imp else 0
+            bu_r0_table.append(row_d)
+
+        bu_bucket = {"Overall": {"r0_dist": r0_dist, "ais_dist": ais_dist, "store_count": len(store_list), "total_imp": all_imp}}
+        for bu in sorted(VALID_BUS):
+            bu_s = [s for s in store_list if s["b"] == bu]
+            rd, ad, sc, ti = build_dist(bu_s)
+            bu_bucket[bu] = {"r0_dist": rd, "ais_dist": ad, "store_count": sc, "total_imp": ti}
+
+        period_data[pid] = {
+            "overall": overall, "bu_metrics": bu_metrics,
+            "r0_dist": r0_dist, "ais_dist": ais_dist,
+            "crosstab": crosstab, "bu_r0": bu_r0_table,
+            "r0_order": R0_ORDER, "ais_order": AIS_ORDER,
+            "BU_BUCKET_DATA": bu_bucket,
+            "ALL_STORES": store_list,
+        }
+
+    ts_daily = []
+    for date in sorted_dates:
+        d = fg_dat.get((fg, date), new_agg())
+        a_imp = d["ai"] + d["oi"]
+        d_r0 = compute_fold_slice_r0(d)
+        ts_daily.append({
+            "date": date,
+            "R0": round(d_r0, 2) if d_r0 else None,
+            "AIS": round(100.0 * d["ai"] / a_imp, 2) if a_imp else 0,
+            "all_imp": a_imp, "ads_imp": d["ai"],
+            "ads_CTR": round(100.0 * d["ak"] / d["ai"], 4) if d["ai"] else 0,
+            "org_CTR": round(100.0 * d["ok"] / d["oi"], 4) if d["oi"] else 0,
+            "ads_CABN": round(100.0 * d["ac"] / d["ak"], 4) if d["ak"] else 0,
+            "org_CABN": round(100.0 * d["oc"] / d["ok"], 4) if d["ok"] else 0,
+        })
+
+    ts_daily_bu = []
+    for date in sorted_dates:
+        for bu in sorted(VALID_BUS):
+            if (fg, date, bu) not in fg_dbt:
+                continue
+            d = fg_dbt[(fg, date, bu)]
+            a_imp = d["ai"] + d["oi"]
+            if a_imp == 0:
+                continue
+            d_r0 = compute_fold_slice_r0(d)
+            ts_daily_bu.append({
+                "date": date, "bu": bu,
+                "R0": round(d_r0, 2) if d_r0 else None,
+                "AIS": round(100.0 * d["ai"] / a_imp, 2) if a_imp else 0,
+                "all_imp": a_imp,
+                "ads_CTR": round(100.0 * d["ak"] / d["ai"], 4) if d["ai"] else 0,
+                "org_CTR": round(100.0 * d["ok"] / d["oi"], 4) if d["oi"] else 0,
+                "ads_CABN": round(100.0 * d["ac"] / d["ak"], 4) if d["ak"] else 0,
+                "org_CABN": round(100.0 * d["oc"] / d["ok"], 4) if d["ok"] else 0,
+            })
+
+    return {
+        "PERIODS": period_data,
+        "PERIOD_LABELS": PERIOD_LABELS,
+        "TS_DAILY": ts_daily,
+        "TS_DAILY_BU": ts_daily_bu,
+    }
 
 
 def load_store_names():
@@ -139,6 +373,13 @@ def main():
     dbf = defaultdict(new_agg)   # (date, bu, fold)
     dbt = defaultdict(new_agg)   # (date, bu)
 
+    # Fold slices 1, 2, 3, rest (4–12): same key shapes with leading fg
+    fg_ps = defaultdict(new_agg)   # (fg, period, store)
+    fg_pb = defaultdict(new_agg)   # (fg, period, bu)
+    fg_pt = defaultdict(new_agg)   # (fg, period)
+    fg_dat = defaultdict(new_agg)   # (fg, date)
+    fg_dbt = defaultdict(new_agg)   # (fg, date, bu)
+
     all_dates = set()
 
     with INPUT_CSV.open(newline="", encoding="utf-8-sig") as f:
@@ -167,15 +408,27 @@ def main():
                 add_agg(pb[(pid, bu)], ac, ai, oc, oi, ak, ok)
                 add_agg(pf[(pid, fold)], ac, ai, oc, oi, ak, ok)
                 add_agg(pt[(pid,)], ac, ai, oc, oi, ak, ok)
+                for fg in FOLD_SLICE_KEYS:
+                    if fold not in FOLD_SLICE_FOLDS[fg]:
+                        continue
+                    add_agg(fg_ps[(fg, pid, store)], ac, ai, oc, oi, ak, ok)
+                    add_agg(fg_pb[(fg, pid, bu)], ac, ai, oc, oi, ak, ok)
+                    add_agg(fg_pt[(fg, pid)], ac, ai, oc, oi, ak, ok)
 
             add_agg(daf[(date, fold)], ac, ai, oc, oi, ak, ok)
             add_agg(dat[(date,)], ac, ai, oc, oi, ak, ok)
             add_agg(dbf[(date, bu, fold)], ac, ai, oc, oi, ak, ok)
             add_agg(dbt[(date, bu)], ac, ai, oc, oi, ak, ok)
+            for fg in FOLD_SLICE_KEYS:
+                if fold not in FOLD_SLICE_FOLDS[fg]:
+                    continue
+                add_agg(fg_dat[(fg, date)], ac, ai, oc, oi, ak, ok)
+                add_agg(fg_dbt[(fg, date, bu)], ac, ai, oc, oi, ak, ok)
 
     print("Computing metrics per period...")
 
     period_data = {}
+    sfc_by_period = {}
     for pid in PERIODS:
         tot = pt.get((pid,), new_agg())
         all_imp = tot["ai"] + tot["oi"]
@@ -226,7 +479,7 @@ def main():
             if a_imp == 0: continue
             s_r0 = compute_r0({f: psf[(pid, s, f)] for f in range(1, 13) if (pid, s, f) in psf})
             s_ais = 100.0 * d["ai"] / a_imp
-            rb = r0_bucket(s_r0) if s_r0 is not None else "0–25%"
+            rb = r0_bucket(s_r0) if s_r0 is not None else "0–20%"
             ab = ais_bucket(s_ais)
             store_list.append({
                 "b": store_bu.get(s, ""), "s": s,
@@ -241,6 +494,17 @@ def main():
                 "rb": rb, "ab": ab,
             })
         store_list.sort(key=lambda x: -x["ti"])
+        sfc_by_period[pid] = [
+            {
+                "s": ent["s"],
+                "b": ent["b"],
+                "rb": ent["rb"],
+                "ab": ent["ab"],
+                "ti": ent["ti"],
+                "fc": build_fold_cmp_for_store(pid, ent["s"], ps, fg_ps),
+            }
+            for ent in store_list
+        ]
 
         # Distributions
         def build_dist(stores_sub):
@@ -290,6 +554,61 @@ def main():
             rd, ad, sc, ti = build_dist(bu_s)
             bu_bucket[bu] = {"r0_dist": rd, "ais_dist": ad, "store_count": sc, "total_imp": ti}
 
+        bu_fold1_compare = []
+        for bu in sorted(VALID_BUS):
+            ag_o = pb.get((pid, bu), new_agg())
+            ag_f1 = fg_pb.get(("1", pid, bu), new_agg())
+            r_o = compute_fold_slice_r0(ag_o)
+            r_f1 = compute_fold_slice_r0(ag_f1)
+            a_imp_bu = ag_o["ai"] + ag_o["oi"]
+            sm_o = segment_metrics_from_agg(ag_o)
+            sm_f1 = segment_metrics_from_agg(ag_f1)
+            row = {
+                "bu": bu,
+                "r0_overall": round(r_o, 4) if r_o is not None else None,
+                "r0_fold1": round(r_f1, 4) if r_f1 is not None else None,
+                # Fold 1 R0 minus Overall R0 (pp); negative when Fold 1 is below Overall
+                "delta_pp": round(r_f1 - r_o, 4) if (r_o is not None and r_f1 is not None) else None,
+                "all_impressions": a_imp_bu,
+            }
+            if sm_o:
+                row["ais_overall"] = round(sm_o["ais"], 4)
+                row["ads_ctr_overall"] = sm_o["ads_ctr"]
+                row["org_ctr_overall"] = sm_o["org_ctr"]
+                row["ads_cabn_clk_overall"] = sm_o["ads_cabn_clk"]
+                row["org_cabn_clk_overall"] = sm_o["org_cabn_clk"]
+            else:
+                row["ais_overall"] = None
+                row["ads_ctr_overall"] = None
+                row["org_ctr_overall"] = None
+                row["ads_cabn_clk_overall"] = None
+                row["org_cabn_clk_overall"] = None
+            if sm_f1:
+                row["ais_fold1"] = round(sm_f1["ais"], 4)
+                row["ads_ctr_fold1"] = sm_f1["ads_ctr"]
+                row["org_ctr_fold1"] = sm_f1["org_ctr"]
+                row["ads_cabn_clk_fold1"] = sm_f1["ads_cabn_clk"]
+                row["org_cabn_clk_fold1"] = sm_f1["org_cabn_clk"]
+            else:
+                row["ais_fold1"] = None
+                row["ads_ctr_fold1"] = None
+                row["org_ctr_fold1"] = None
+                row["ads_cabn_clk_fold1"] = None
+                row["org_cabn_clk_fold1"] = None
+            if sm_o and sm_f1:
+                row["ais_delta_pp"] = round(sm_f1["ais"] - sm_o["ais"], 4)
+                row["ads_ctr_delta_pp"] = round(sm_f1["ads_ctr"] - sm_o["ads_ctr"], 4)
+                row["org_ctr_delta_pp"] = round(sm_f1["org_ctr"] - sm_o["org_ctr"], 4)
+                row["ads_cabn_clk_delta_pp"] = round(sm_f1["ads_cabn_clk"] - sm_o["ads_cabn_clk"], 4)
+                row["org_cabn_clk_delta_pp"] = round(sm_f1["org_cabn_clk"] - sm_o["org_cabn_clk"], 4)
+            else:
+                row["ais_delta_pp"] = None
+                row["ads_ctr_delta_pp"] = None
+                row["org_ctr_delta_pp"] = None
+                row["ads_cabn_clk_delta_pp"] = None
+                row["org_cabn_clk_delta_pp"] = None
+            bu_fold1_compare.append(row)
+
         period_data[pid] = {
             "overall": overall, "bu_metrics": bu_metrics,
             "r0_dist": r0_dist, "ais_dist": ais_dist,
@@ -297,6 +616,7 @@ def main():
             "r0_order": R0_ORDER, "ais_order": AIS_ORDER,
             "BU_BUCKET_DATA": bu_bucket,
             "ALL_STORES": store_list,
+            "BU_FOLD1_COMPARE": bu_fold1_compare,
         }
         print(f"  {pid}: {n_stores} stores, {all_imp:,} impressions, R0={overall['R0']}")
 
@@ -355,6 +675,26 @@ def main():
     sz = OUTPUT_JS.stat().st_size / 1024 / 1024
     print(f"Wrote {OUTPUT_JS.name} ({sz:.1f} MB)")
     print(f"  Daily rows: {len(ts_daily)}, Daily BU rows: {len(ts_daily_bu)}")
+
+    print("Building fold-slice dashboards (CABN/imp R0, no fold weighting)...")
+    fold_payload = {}
+    for fg in FOLD_SLICE_KEYS:
+        fold_payload[fg] = build_fold_group_dashboard(
+            fg, fg_ps, fg_pb, fg_pt, fg_dat, fg_dbt,
+            valid_stores, store_bu, all_dates, sorted_dates,
+        )
+        tot = fg_pt.get((fg, "all"), new_agg())
+        r0 = compute_fold_slice_r0(tot)
+        print(f"  slice {fg}: R0={round(r0, 4) if r0 else 0}")
+
+    fold_js = "var FOLD_SLICE_DATA=" + json.dumps(fold_payload, separators=(",", ":")) + ";\n"
+    fold_js += "var STORE_NAMES=" + json.dumps(sn_map, separators=(",", ":")) + ";\n"
+    fold_js += "var STORE_FOLD_COMPARE_BY_PERIOD=" + json.dumps(sfc_by_period, separators=(",", ":")) + ";\n"
+    bu_f1_by_period = {pid: period_data[pid]["BU_FOLD1_COMPARE"] for pid in PERIODS}
+    fold_js += "var BU_FOLD1_COMPARE_BY_PERIOD=" + json.dumps(bu_f1_by_period, separators=(",", ":")) + ";\n"
+    OUTPUT_FOLD_SLICES_JS.write_text(fold_js, encoding="utf-8")
+    fsz = OUTPUT_FOLD_SLICES_JS.stat().st_size / 1024 / 1024
+    print(f"Wrote {OUTPUT_FOLD_SLICES_JS.name} ({fsz:.1f} MB)")
 
 
 if __name__ == "__main__":
