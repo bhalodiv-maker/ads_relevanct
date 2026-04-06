@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flipkart Search Ads Relevance &amp; AIS Analysis</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<script src="2026_dashboard_fold_slices.js"></script>
+<script src="store_fr_jan25_31_embed.js"></script>
+<style>
+:root {
+  --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
+  --border: #475569; --text: #e2e8f0; --text2: #94a3b8; --text3: #64748b; --muted: #64748b;
+  --accent: #3b82f6; --green: #10b981; --red: #ef4444; --amber: #f59e0b;
+  --purple: #a78bfa; --cyan: #22d3ee; --pink: #f472b6;
+  --radius: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+.container { max-width: 1440px; margin: 0 auto; padding: 24px; }
+
+.header { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; margin-bottom: 32px; }
+.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header-signout { background:none; border:none; color:var(--text2); font-size:13px; font-family:inherit; padding:4px 0; cursor:pointer; white-space:nowrap; text-decoration:underline; text-underline-offset:3px; }
+.header-signout:hover { color:#94a3b8; }
+.header-meta { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+.meta-tag { background: var(--surface2); padding: 6px 16px; border-radius: 20px; font-size: 13px; color: var(--text2); }
+.meta-tag span { color: var(--text); font-weight: 600; }
+
+.section { margin-bottom: 32px; }
+.section-title { font-size: 18px; font-weight: 600; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--surface2); display: flex; align-items: center; gap: 8px; }
+.section-title .icon { display: none; }
+.header-logo-wrap { position: absolute; top: 50%; right: 28px; transform: translateY(-50%); }
+.header-logo-wrap img { height: 100px; width: auto; display: block; opacity: 0.9; }
+.header .header-lead { color: var(--text2); font-size: 13px; max-width: 640px; line-height: 1.5; margin-top: 6px; }
+.analysis-nav { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-bottom: 20px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); }
+.analysis-nav-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+.analysis-nav a { color: var(--accent); font-size: 13px; text-decoration: none; }
+.analysis-nav a:hover { text-decoration: underline; }
+.analysis-nav-current { font-size: 13px; color: var(--text); font-weight: 600; }
+.subsection-title { font-size: 14px; font-weight: 600; color: var(--text2); margin: 18px 0 10px 0; padding-bottom: 6px; border-bottom: 1px solid var(--surface2); }
+.sfc-note-details { margin-bottom: 12px; border: 1px solid var(--surface2); border-radius: 8px; background: rgba(30,41,59,0.5); }
+.sfc-note-details summary { cursor: pointer; padding: 10px 14px; font-size: 12px; color: var(--accent); font-weight: 600; list-style: none; user-select: none; }
+.sfc-note-details summary::-webkit-details-marker { display: none; }
+.sfc-note-details[open] summary { border-bottom: 1px solid var(--surface2); }
+.sfc-note-details .sfc-note { margin: 0; padding: 10px 14px 12px 14px; }
+.page-foot-min { text-align: center; padding: 16px 12px; margin-top: 20px; color: var(--text3); font-size: 11px; border-top: 1px solid var(--surface2); }
+.table-toolbar { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+.view-switch-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 18px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); }
+.view-switch-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.view-switch-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-right: 4px; }
+.view-btn { display: inline-block; border: 1px solid var(--border); background: var(--surface2); color: var(--text2); padding: 10px 22px; border-radius: 10px; font-size: 13px; font-weight: 600; font-family: inherit; cursor: pointer; transition: border-color 0.2s, color 0.2s, background 0.2s, box-shadow 0.2s; vertical-align: middle; }
+.view-btn:hover { border-color: var(--accent); color: var(--text); }
+span.view-btn.active { cursor: default; }
+.view-btn.active { background: linear-gradient(135deg, rgba(59,130,246,0.35), rgba(167,139,250,0.2)); border-color: var(--accent); color: #fff; box-shadow: 0 1px 12px rgba(59,130,246,0.25); }
+a.view-btn { display: inline-block; text-decoration: none; text-align: center; box-sizing: border-box; }
+a.view-btn:hover { text-decoration: none; }
+.sfc-note-details .def-doc { padding: 12px 14px 16px; font-size: 12px; color: var(--text2); line-height: 1.65; border-top: 1px solid var(--surface2); }
+.sfc-note-details .def-doc h4 { font-size: 12px; color: var(--text); margin: 14px 0 6px 0; font-weight: 600; }
+.sfc-note-details .def-doc h4:first-child { margin-top: 0; }
+.sfc-note-details .def-doc code { font-size: 11px; background: var(--surface2); padding: 2px 7px; border-radius: 4px; color: var(--text); }
+.sfc-note-details .def-doc ul { margin: 6px 0 6px 1.1em; padding: 0; }
+
+.metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.metric-card { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 20px; text-align: center; transition: transform 0.2s, border-color 0.2s; }
+.metric-card:hover { transform: translateY(-2px); border-color: var(--accent); }
+.metric-card .label { font-size: 12px; color: var(--text3); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.metric-card .value { font-size: 28px; font-weight: 700; }
+.metric-card .sub { font-size: 12px; color: var(--text2); margin-top: 4px; }
+.metric-card.highlight { border-left: 3px solid var(--accent); }
+
+.table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--surface2); }
+table { width: auto; border-collapse: collapse; font-size: 13px; min-width: 100%; }
+th { background: var(--surface2); padding: 12px 16px; text-align: left; font-weight: 600; color: var(--text2); text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; white-space: normal; line-height: 1.3; max-width: 120px; vertical-align: top; }
+td { padding: 10px 16px; border-top: 1px solid rgba(71,85,105,0.3); white-space: nowrap; }
+tr:hover td { background: rgba(59,130,246,0.05); }
+.text-right { text-align: right; }
+.bu-badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.bu-sort-th { cursor:pointer; user-select:none; transition:color 0.15s; white-space:nowrap; }
+.bu-sort-th:hover { color:var(--accent); }
+
+.chart-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.chart-card { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 24px; }
+.chart-card h3 { font-size: 15px; margin-bottom: 16px; color: var(--text2); }
+.chart-container { position: relative; height: 320px; }
+.chart-container-tall { position: relative; height: 380px; }
+
+.heatmap-wrap { overflow-x: auto; }
+.heatmap { border-collapse: collapse; width: 100%; }
+.heatmap th { padding: 10px 12px; font-size: 11px; }
+.heatmap td { padding: 10px 12px; text-align: center; font-size: 12px; font-weight: 600; border: 1px solid rgba(71,85,105,0.2); min-width: 80px; transition: transform 0.15s; }
+.heatmap td:hover { transform: scale(1.05); z-index: 1; }
+.heatmap td.ct-clickable { cursor:pointer; position:relative; transition:outline 0.15s; }
+.heatmap td.ct-clickable:hover { outline:2px solid var(--accent); outline-offset:-2px; border-radius:2px; }
+.heatmap th.heatmap-marginal, .heatmap td.heatmap-marginal { background: rgba(51,65,85,0.95) !important; color: var(--text2); font-weight: 600; }
+.heatmap tr.heatmap-total-row th, .heatmap tr.heatmap-total-row td { border-top: 2px solid var(--border); }
+
+.insight-box { background: rgba(30,41,59,0.55); border: 1px solid rgba(71,85,105,0.4); border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; font-size: 13px; line-height: 1.55; color: var(--text2); }
+.insight-box strong { color: var(--text); font-weight: 600; }
+
+.sli-filters { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; align-items:flex-end; }
+.sli-filter-group { display:flex; flex-direction:column; gap:4px; }
+.sli-filter-group label { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:0.5px; }
+.sli-filter-group select { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:7px 12px; border-radius:6px; font-size:13px; font-family:inherit; min-width:120px; cursor:pointer; }
+.csv-dl-btn { background:var(--surface); border:1px solid var(--border); color:var(--accent); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px; transition:all 0.2s; font-family:inherit; }
+.csv-dl-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+.ms-wrap { position:relative; min-width:160px; }
+.ms-toggle { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:7px 28px 7px 10px; border-radius:6px; font-size:13px; font-family:inherit; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block; width:100%; }
+.ms-toggle::after { content:'\25BE'; position:absolute; right:10px; top:50%; transform:translateY(-50%); font-size:12px; color:var(--text3); pointer-events:none; }
+.ms-toggle:hover { border-color:var(--accent); }
+.ms-drop { display:none; position:absolute; top:calc(100% + 4px); left:0; background:var(--surface); border:1px solid var(--border); border-radius:8px; min-width:100%; max-height:240px; overflow-y:auto; z-index:200; box-shadow:0 8px 24px rgba(0,0,0,0.4); padding:4px 0; }
+.ms-drop.open { display:block; }
+.ms-item { display:flex; align-items:center; gap:8px; padding:6px 12px; cursor:pointer; font-size:13px; color:var(--text2); transition:background 0.1s; }
+.ms-item:hover { background:var(--surface2); }
+.ms-item input { accent-color:var(--accent); cursor:pointer; margin:0; flex-shrink:0; }
+.ms-item .ms-name { flex:1; }
+.ms-item .ms-only { font-size:11px; color:var(--accent); opacity:0; padding:2px 6px; border-radius:4px; transition:opacity 0.15s; }
+.ms-item:hover .ms-only { opacity:1; }
+.ms-item .ms-only:hover { background:var(--accent); color:#fff; }
+.ms-item.ms-all { border-bottom:1px solid var(--border); margin-bottom:2px; font-weight:600; color:var(--text); }
+
+#sli-pager { display:none; align-items:center; justify-content:center; gap:12px; margin-top:12px; font-size:13px; color:var(--text2); flex-wrap:wrap; }
+#sli-pager button { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px; font-family:inherit; }
+#sli-pager button:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+#sli-pager button:disabled { opacity:0.4; cursor:not-allowed; }
+
+.sfc-toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:12px; }
+.sfc-toolbar .sfc-toggle { background:var(--surface2); border:1px solid var(--border); color:var(--text2); padding:6px 12px; border-radius:6px; font-size:12px; cursor:pointer; font-family:inherit; }
+.sfc-toolbar .sfc-toggle:hover { border-color:var(--accent); color:var(--accent); }
+.sfc-toolbar .sfc-toggle.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+.sfc-note { font-size:12px; color:var(--text3); max-width:900px; line-height:1.55; margin-bottom:10px; }
+.table-wrap.sfc-wrap { overflow-x:auto; }
+#table-bu-fold1-delta th, #table-bu-fold1-delta td { font-size:11px; padding:8px 6px; }
+#table-bu-fold1-delta .sfc-group { background:rgba(51,65,85,0.55); text-align:center; font-weight:600; color:var(--text2); font-size:11px; }
+#table-store-fold-compare-f1bu th, #table-store-fold-compare-f1bu td { font-size:11px; padding:8px 6px; }
+#table-store-fold-compare-f1bu .sfc-group { background:rgba(51,65,85,0.55); text-align:center; font-weight:600; color:var(--text2); font-size:11px; }
+#table-store-fold-compare-f1bu th.cmp-sort { cursor:pointer; user-select:none; white-space:nowrap; }
+#table-store-fold-compare-f1bu th.cmp-sort:hover { color:var(--accent); }
+.sfc-gap-cell { font-weight:600; border-radius:4px; padding:4px 6px !important; text-align:center !important; }
+.sfc-gap-na { background:rgba(71,85,105,0.5); color:var(--text3); }
+.sfc-gap-02 { background:rgba(16,185,129,0.28); color:#a7f3d0; }
+.sfc-gap-24 { background:rgba(34,211,238,0.22); color:#a5f3fc; }
+.sfc-gap-46 { background:rgba(59,130,246,0.28); color:#bfdbfe; }
+.sfc-gap-68 { background:rgba(245,158,11,0.3); color:#fde68a; }
+.sfc-gap-8p { background:rgba(239,68,68,0.32); color:#fecaca; }
+#table-store-fold-compare-f1bu .sfc-gap-pri-ctr { color:#7dd3fc; font-weight:600; }
+#table-store-fold-compare-f1bu .sfc-gap-pri-cvr { color:#a7f3d0; font-weight:600; }
+#table-store-fold-compare-f1bu .sfc-gap-pri-tie { color:var(--text3); font-weight:600; }
+.fr-bucket-cell { font-weight:600; border-radius:4px; padding:4px 6px !important; text-align:center !important; font-size:10px; }
+.fr-bkt-na { background:rgba(71,85,105,0.5); color:var(--text3); }
+.fr-bkt-low { background:rgba(239,68,68,0.28); color:#fecaca; }
+.fr-bkt-mid { background:rgba(245,158,11,0.28); color:#fde68a; }
+.fr-bkt-high { background:rgba(34,211,238,0.2); color:#a5f3fc; }
+.fr-bkt-top { background:rgba(16,185,129,0.28); color:#a7f3d0; }
+.gap-drv-ctr { color:#7dd3fc; font-weight:600; }
+.gap-drv-cvr { color:#a7f3d0; font-weight:600; }
+.gap-drv-tie { color:var(--text3); font-weight:600; }
+
+/* Overall vs Fold 1 gap drill-down modal: match main store table (group headers, primary factor, dense cells). */
+#ct-modal-table.f1bu-drill-table th,
+#ct-modal-table.f1bu-drill-table td { font-size:11px; padding:8px 6px; }
+#ct-modal-table.f1bu-drill-table .sfc-group { background:rgba(51,65,85,0.55); text-align:center; font-weight:600; color:var(--text2); font-size:11px; }
+#ct-modal-table.f1bu-drill-table .sfc-gap-pri-ctr { color:#7dd3fc; font-weight:600; }
+#ct-modal-table.f1bu-drill-table .sfc-gap-pri-cvr { color:#a7f3d0; font-weight:600; }
+#ct-modal-table.f1bu-drill-table .sfc-gap-pri-tie { color:var(--text3); font-weight:600; }
+
+.ct-modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:1000; align-items:center; justify-content:center; }
+.ct-modal-overlay.active { display:flex; }
+.ct-modal { position:relative; background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:44px 20px 24px 20px; min-width:min(300px,96vw); width:max-content; max-width:min(96vw,900px); max-height:85vh; overflow-x:auto; overflow-y:auto; box-shadow:0 12px 40px rgba(0,0,0,0.5); box-sizing:border-box; }
+.ct-close-x { position:absolute; top:12px; right:12px; z-index:3; width:36px; height:36px; padding:0; margin:0; border:none; border-radius:8px; background:var(--surface2); color:var(--text2); font-size:22px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; font-family:inherit; }
+.ct-close-x:hover { background:var(--border); color:var(--text); }
+.ct-modal h3 { margin:0 0 6px; font-size:16px; color:var(--accent); padding-right:32px; white-space:normal; word-break:break-word; }
+.ct-modal .ct-subtitle { font-size:12px; color:var(--muted); margin-bottom:16px; white-space:normal; word-break:break-word; }
+.ct-modal table { width:max-content; border-collapse:collapse; font-size:13px; table-layout:auto; }
+.ct-modal th, .ct-modal td { padding:6px 8px; text-align:left; border-bottom:1px solid var(--border); white-space:nowrap; font-size:12px; }
+.ct-modal th { color:var(--muted); font-weight:600; font-size:11px; text-transform:uppercase; letter-spacing:0.5px; white-space:normal; line-height:1.3; max-width:120px; }
+.clickable-col { cursor:pointer; transition:color 0.2s; position:relative; }
+.clickable-col:hover { color:var(--accent); }
+.clickable-col::after { content: ''; position:absolute; bottom:0; left:0; width:100%; height:2px; background:var(--accent); transform:scaleX(0); transition:transform 0.2s; }
+.clickable-col:hover::after { transform:scaleX(1); }
+.detail-cols { background:rgba(59,130,246,0.05); }
+.ct-modal .ct-bar { height:6px; border-radius:3px; background:var(--accent); margin-top:3px; transition:width 0.3s; }
+.ct-modal .bu-click { cursor:pointer; transition:opacity 0.15s; }
+.ct-modal .bu-click:hover { opacity:0.8; }
+.ct-modal td.text-right { text-align:right; }
+.ct-modal.ct-modal-wide { max-width:min(98vw,1720px); }
+
+.ts-controls { display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:16px; }
+.ts-controls label { font-size:12px; color:var(--text3); }
+.ts-btn { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:6px 16px; border-radius:6px; font-size:12px; cursor:pointer; font-family:inherit; transition:all 0.2s; }
+.ts-btn.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+.dr-bar { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:24px; align-items:center; justify-content:space-between; }
+.dr-bar-controls { display:flex; flex-wrap:wrap; gap:12px; align-items:center; flex:1; min-width:min(100%,280px); }
+.dr-bar label { font-size:13px; color:var(--text2); font-weight:600; }
+.dr-bar input[type=date] { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:8px 14px; border-radius:8px; font-size:13px; font-family:inherit; cursor:pointer; color-scheme:dark; }
+.dr-bar input[type=date]:focus { outline:none; border-color:var(--accent); }
+.dr-bar .dr-reset { background:none; border:1px solid var(--border); color:var(--text3); padding:8px 14px; border-radius:8px; font-size:12px; cursor:pointer; font-family:inherit; }
+.dr-bar .dr-reset:hover { border-color:var(--accent); color:var(--accent); }
+.dr-bar .dr-note { font-size:12px; color:var(--text3); font-style:italic; }
+
+.qai-section-note { font-size: 12px; color: var(--text3); margin: -8px 0 16px 0; line-height: 1.45; }
+.qai-ais-dist-card { margin-bottom: 20px; }
+#ct-modal-extras { min-height: 0; }
+#qai-pager { display:flex; align-items:center; justify-content:center; gap:12px; margin-top:12px; font-size:13px; color:var(--text2); flex-wrap:wrap; }
+#qai-pager button { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px; font-family:inherit; }
+#qai-pager button:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+#qai-pager button:disabled { opacity:0.4; cursor:not-allowed; }
+.sli-filter-group input[type="text"].qai-query-search { min-width:220px; }
+.ms-wrap.qai-store-ms { min-width:min(100%,280px); max-width:360px; }
+.ms-wrap.qai-store-ms .ms-drop { max-height:min(50vh,360px); }
+.qai-info-btn { position:absolute; top:16px; right:16px; background:none; border:1px solid var(--border); color:var(--accent); width:28px; height:28px; border-radius:50%; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; padding:0; line-height:1; transition:all 0.2s; }
+.qai-info-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+.qai-info-popup { display:none; position:absolute; top:50px; right:16px; z-index:100; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:16px 18px; max-width:380px; font-size:13px; color:var(--text2); line-height:1.6; box-shadow:0 8px 24px rgba(0,0,0,0.4); }
+.qai-info-popup.open { display:block; }
+.qai-info-popup strong { color:var(--accent); }
+.qai-info-close { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:4px 14px; border-radius:6px; font-size:12px; cursor:pointer; font-family:inherit; }
+.qai-info-close:hover { border-color:var(--accent); color:var(--accent); }
+.ms-search { display:block; width:calc(100% - 16px); margin:4px 8px 8px; padding:6px 10px; border-radius:6px; border:1px solid var(--border); background:var(--surface2); color:var(--text); font-size:12px; font-family:inherit; box-sizing:border-box; }
+.ms-search:focus { outline:none; border-color:var(--accent); }
+
+/* BU small multiples grid */
+.bu-sm-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); gap:16px; margin-bottom:24px; }
+.bu-sm-card { background:var(--surface); border:1px solid var(--surface2); border-radius:var(--radius); padding:16px; }
+.bu-sm-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.bu-sm-header .bu-sm-name { font-size:14px; font-weight:600; }
+.bu-sm-header .bu-sm-vals { font-size:11px; color:var(--text3); }
+.bu-sm-header .bu-sm-vals span { font-weight:600; }
+.bu-sm-chart { position:relative; height:160px; }
+
+.val-good { color: var(--green); }
+.val-warn { color: var(--amber); }
+.val-bad { color: var(--red); }
+
+@media (max-width: 900px) {
+  .chart-grid { grid-template-columns: 1fr; }
+  .header h1 { font-size: 22px; }
+}
+.login-gate{position:fixed;inset:0;z-index:99999;background:var(--bg);display:flex;align-items:center;justify-content:center;}
+.login-box{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px 36px;width:380px;text-align:center;}
+.login-box h2{font-size:22px;font-weight:700;margin-bottom:6px;background:linear-gradient(90deg,#60a5fa,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.login-box p{color:var(--text2);font-size:13px;margin-bottom:24px;}
+.login-box input{width:100%;padding:10px 14px;margin-bottom:14px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:14px;outline:none;}
+.login-box input:focus{border-color:var(--accent);}
+.login-box button{width:100%;padding:10px;border:none;border-radius:8px;background:var(--accent);color:#fff;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;}
+.login-box button:hover{background:#2563eb;}
+.login-error{color:var(--red);font-size:13px;margin-top:12px;display:none;}
+.denied-msg{color:var(--red);font-size:18px;font-weight:600;text-align:center;margin-top:40px;}
+</style>
+</head>
+<body>
+
+<div class="login-gate" id="login-gate">
+  <div class="login-box">
+    <img src="flipkart_logo.png" alt="" style="height:56px;margin-bottom:14px;">
+    <h2>Flipkart Search Ads Relevance</h2>
+    <p>Enter credentials to access the analysis</p>
+    <input type="text" id="login-uid" placeholder="Login ID" autocomplete="off">
+    <input type="password" id="login-pwd" placeholder="Password">
+    <button onclick="attemptLogin()">Sign In</button>
+    <div class="login-error" id="login-error"></div>
+  </div>
+</div>
+
+<script>
+var _ADS_REL_SESSION_KEY = 'fk_ads_rel_auth';
+var _loginAttempts = 0;
+
+function showDashboard() {
+  var gate = document.getElementById('login-gate');
+  var app = document.getElementById('app-content');
+  if (gate) gate.style.display = 'none';
+  if (app) app.style.display = '';
+}
+
+function attemptLogin(){
+  var uid = document.getElementById('login-uid').value.trim();
+  var pwd = document.getElementById('login-pwd').value;
+  if(uid === 'ads_admin' && pwd === 'ads@admin_123'){
+    try { sessionStorage.setItem(_ADS_REL_SESSION_KEY, '1'); } catch (e) {}
+    showDashboard();
+  } else {
+    _loginAttempts++;
+    var errEl = document.getElementById('login-error');
+    if(_loginAttempts >= 3){
+      document.getElementById('login-gate').innerHTML = '<div class="denied-msg">You are not allowed to access this analysis.</div>';
+    } else {
+      errEl.textContent = 'Invalid credentials. Try again.';
+      errEl.style.display = 'block';
+    }
+  }
+}
+
+function signOutDashboard() {
+  try { sessionStorage.removeItem(_ADS_REL_SESSION_KEY); } catch (e) {}
+  location.reload();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    if (sessionStorage.getItem(_ADS_REL_SESSION_KEY) === '1') {
+      showDashboard();
+    }
+  } catch (e) {}
+});
+
+document.addEventListener('keydown', function(e){
+  var gate = document.getElementById('login-gate');
+  if(e.key === 'Enter' && gate && gate.style.display !== 'none') attemptLogin();
+});
+</script>
+
+<div id="app-content" style="display:none;">
+<div class="ct-modal-overlay" id="ct-modal-overlay" onclick="if(event.target===this)closeCtModal()">
+  <div class="ct-modal" onclick="event.stopPropagation()">
+    <button type="button" class="ct-close-x" aria-label="Close" onclick="closeCtModal()">&times;</button>
+    <h3 id="ct-modal-title"></h3>
+    <div class="ct-subtitle" id="ct-modal-subtitle"></div>
+    <table id="ct-modal-table"></table>
+    <div id="ct-modal-extras"></div>
+  </div>
+</div>
+<div class="container">
+
+<!-- HEADER -->
+<div class="header" style="position:relative;padding-right:220px;min-height:120px;">
+  <div class="header-logo-wrap">
+    <img src="flipkart_logo.png" alt="">
+  </div>
+  <h1>Flipkart Search Ads Relevance &amp; AIS Analysis</h1>
+  <p class="header-lead">Store &amp; Query Level Ads Relevance Analysis</p>
+</div>
+
+<div class="view-switch-bar view-switch-bar-main">
+  <div class="view-switch-group">
+    <span class="view-switch-label">View</span>
+    <a class="view-btn" href="2026_relevance_dashboard.html">Overall</a>
+    <a class="view-btn" href="2026_relevance_dashboard_fold.html">Fold level</a>
+    <span class="view-btn active" aria-current="page">Overall vs Fold 1</span>
+    <a class="view-btn" href="2026_relevance_dashboard.html#query">Query level</a>
+  </div>
+  <button type="button" class="header-signout" onclick="signOutDashboard()">Sign out</button>
+</div>
+
+<div id="dr-bar-wrap" class="dr-bar-wrap">
+<div class="dr-bar" id="dr-bar">
+  <div class="dr-bar-controls">
+    <label>Date range</label>
+    <input type="date" id="dr-from">
+    <span style="color:var(--text3)">to</span>
+    <input type="date" id="dr-to">
+    <button type="button" class="dr-reset" onclick="resetDateRange()">Reset</button>
+    <span class="dr-note" id="dr-note"></span>
+  </div>
+</div>
+</div>
+
+<div class="section">
+  <div class="section-title" style="justify-content:space-between;flex-wrap:wrap;gap:12px;">
+    <span>Business units</span>
+    <button type="button" class="csv-dl-btn" onclick="downloadTableCSV('table-bu-fold1-delta','bu_overall_vs_fold1.csv')">Download CSV</button>
+  </div>
+  <p class="sfc-note" style="margin-bottom:10px;">Each metric: <strong>Overall</strong>, <strong>Fold&nbsp;1</strong>, <strong>Delta</strong> (Fold&nbsp;1 − overall, pp). First data row = impression-weighted total.</p>
+  <div class="table-wrap sfc-wrap"><table id="table-bu-fold1-delta"></table></div>
+</div>
+
+<div class="sli-filters" id="sli-filters-wrap" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;" aria-hidden="true">
+  <div class="ms-wrap" id="sli-bu"></div>
+  <div class="ms-wrap" id="sli-sname"></div>
+  <div class="ms-wrap" id="sli-r0"></div>
+  <div class="ms-wrap" id="sli-ais"></div>
+  <select id="sli-topn" title="Page size for internal store list"><option value="10">10</option><option value="20">20</option><option value="30" selected>30</option><option value="50">50</option><option value="100">100</option><option value="0">All</option></select>
+</div>
+
+<div class="section">
+  <div class="section-title">Overall vs Fold 1</div>
+  <details class="sfc-note-details">
+    <summary>Definitions &amp; filters</summary>
+    <div class="def-doc">
+      <h4>R0 (relevance index)</h4>
+      <p>Inside <strong>Fold&nbsp;1</strong> only (fixed on this view). No 1/f² weighting across positions. Other folds: use <strong>Fold level</strong> in the nav.</p>
+      <p><code>R0 = (ads CABN ÷ ads imp) / (org CABN ÷ org imp) × 100</code></p>
+      <p><code>ads CABN ÷ ads imp = Ads CTR × Ads CABN/click</code> (and the same idea for organic). <strong>CABN/click</strong> = CABN per click.</p>
+      <h4>AIS (ads impression share)</h4>
+      <p><code>AIS = 100 × ads imp / (ads imp + organic imp)</code> in Fold&nbsp;1 and the same filters.</p>
+      <h4>Gap (store vs BU)</h4>
+      <p><strong>Gap</strong> = store-level Fold&nbsp;1 R0 − BU Fold&nbsp;1 R0 (percentage points). Chart buckets and the <strong>R0 Gap (Store to BU)</strong> filter use this value per store.</p>
+      <h4>Mapping the R0 gap to CTR vs CABN/click</h4>
+      <p>With <code>Gap_pp</code> as above, attribution uses <strong>log-variance</strong> on:</p>
+      <ul>
+        <li><strong>CTR ratio</strong> = (Ads CTR) ÷ (Org CTR)</li>
+        <li><strong>CABN/click ratio</strong> = (Ads CABN/click) ÷ (Org CABN/click)</li>
+      </ul>
+      <p><strong>Baseline</strong> = BU Fold&nbsp;1; <strong>segment</strong> = store Fold&nbsp;1. <code>Log_Var = ln(segment) − ln(baseline)</code> per lever; <code>Sum = Log_Var_CTR + Log_Var_CABN</code>. Then <code>Δ→CTR_pp = (Log_Var_CTR/Sum) × Gap_pp</code> and <code>Δ→CABN/clk_pp = (Log_Var_CABN/Sum) × Gap_pp</code>. <strong>Primary</strong> = larger <code>|attributed pp|</code> (or Tie). Gap buckets: 5&nbsp;pp bands plus &le;&nbsp;&minus;20 and 20+.</p>
+      <h4>FR (fill rate, Jan&nbsp;25–31)</h4>
+      <p><code>FR% = 100 × served ÷ requests</code> from <code>store_level_FR.csv</code>, aggregated by <code>page_browse_store</code> (same string as the store id column after stripping a leading <code>./</code>). Buckets: 0-20, 20-40, 40-50, 50-60, 60-70, 70-80, 80+. Export: <code>store_fr_jan25_31_2026.csv</code>; rebuild with <code>python3 build_store_fr_jan.py</code>.</p>
+      <h4>Using this page</h4>
+      <p>Filters: <strong>R0 Gap (Store to BU)</strong>, <strong>FR bucket</strong>, BU / store / R0 / AIS, plus column sort. Chart omits <strong>N/A</strong>; the line is % of impressions among bucketed stores only. <strong>Click a bar</strong> &rarr; BU breakdown &rarr; top stores. For other fold slices or time series, use <strong>Fold level</strong> in the nav.</p>
+    </div>
+  </details>
+  <h3 class="subsection-title">Stores — R0 vs BU (Fold 1)</h3>
+  <div class="sli-filters" id="cmp-filters-wrap" style="margin-top:10px;">
+    <div class="sli-filter-group"><label>BU</label><div class="ms-wrap" id="cmp-f-bu"></div></div>
+    <div class="sli-filter-group"><label>Store Name</label><div class="ms-wrap" id="cmp-f-sname"></div></div>
+    <div class="sli-filter-group"><label>R0 Bucket</label><div class="ms-wrap" id="cmp-f-r0"></div></div>
+    <div class="sli-filter-group"><label>AIS Bucket</label><div class="ms-wrap" id="cmp-f-ais"></div></div>
+    <div class="sli-filter-group"><label>R0 Gap (Store to BU)</label><div class="ms-wrap" id="cmp-f-gap-f1bu"></div></div>
+    <div class="sli-filter-group"><label>FR bucket</label><div class="ms-wrap" id="cmp-f-fr-bucket"></div></div>
+  </div>
+  <div class="chart-card" style="margin-top:14px;margin-bottom:8px;">
+    <h3 class="subsection-title" style="margin-top:0;border-bottom:none;padding-bottom:0;">Gap bucket distribution</h3>
+    <p style="font-size:12px;color:var(--text2);margin:4px 0 6px 0;line-height:1.5;"><strong>Gap</strong> = store-level Fold&nbsp;1 R0 − BU Fold&nbsp;1 R0 (pp).</p>
+    <p style="font-size:12px;color:var(--text3);margin:0 0 12px 0;line-height:1.55;">Bars = store count, line = % of <strong>bucketed</strong> impressions per band. <strong>N/A</strong> omitted from the chart. <strong>Click a bar</strong> for a <strong>BU list</strong> (CTR / CABN/clk driver split), then <strong>click a BU</strong> for up to <strong>20 stores</strong> by impression share.</p>
+    <div class="chart-container" style="height:300px;"><canvas id="sfc-gap-bucket-chart-f1bu"></canvas></div>
+  </div>
+  <div class="table-toolbar"><button type="button" class="csv-dl-btn" onclick="downloadTableCSV('table-store-fold-compare-f1bu','store_fold1_r0_vs_bu_f1_gap.csv')">Download CSV</button></div>
+  <div class="table-wrap sfc-wrap"><table id="table-store-fold-compare-f1bu"></table></div>
+</div>
+
+<div class="page-foot-min">Overall vs Fold 1 · <a href="2026_relevance_dashboard_fold.html" style="color:var(--accent)">Open fold dashboard</a></div>
+</div>
+
+    <script src="2026_fold_dashboard_app.js?v=20260406-1655"></script>
+</div><!-- /app-content -->
+</body>
+</html>

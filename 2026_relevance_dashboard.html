@@ -3,25 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ad Relevance Dashboard — Jan–Mar 2026</title>
+<meta name="description" content="Flipkart Search Ads Relevance & AIS Analysis Dashboard">
+<title>Flipkart Search Ads Relevance &amp; AIS Analysis</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
 <script src="2026_dashboard_data.js"></script>
 <script src="query_ais_embed.js"></script>
 <style>
 :root {
-  --bg: #0f172a; --surface: #1e293b; --surface2: #334155;
-  --border: #475569; --text: #e2e8f0; --text2: #94a3b8; --text3: #64748b; --muted: #64748b;
-  --accent: #3b82f6; --green: #10b981; --red: #ef4444; --amber: #f59e0b;
-  --purple: #a78bfa; --cyan: #22d3ee; --pink: #f472b6;
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --surface2: #334155;
+  --border: #475569;
+  --text: #e2e8f0;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --muted: #64748b;
+  --accent: #3b82f6;
+  --green: #10b981;
+  --red: #ef4444;
+  --amber: #f59e0b;
+  --purple: #a78bfa;
+  --cyan: #22d3ee;
+  --pink: #f472b6;
   --radius: 12px;
+  --transition: all 0.2s ease;
+  --shadow: 0 8px 24px rgba(0,0,0,0.4);
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
-.container { max-width: 1440px; margin: 0 auto; padding: 24px; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 24px;
+}
 
 .header { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); border: 1px solid var(--border); border-radius: var(--radius); padding: 32px; margin-bottom: 32px; }
-.header h1 { font-size: 28px; font-weight: 700; margin-bottom: 4px; background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.header h1 { 
+  font-size: 28px; 
+  font-weight: 700; 
+  margin-bottom: 4px; 
+  background: linear-gradient(90deg, #60a5fa, #a78bfa); 
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
 .header-signout { background:none; border:none; color:var(--text2); font-size:13px; font-family:inherit; padding:4px 0; cursor:pointer; white-space:nowrap; text-decoration:underline; text-underline-offset:3px; }
 .header-signout:hover { color:#94a3b8; }
 .header-meta { display: flex; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
@@ -29,8 +67,58 @@ body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans
 .meta-tag span { color: var(--text); font-weight: 600; }
 
 .section { margin-bottom: 32px; }
-.section-title { font-size: 20px; font-weight: 600; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid var(--surface2); display: flex; align-items: center; gap: 8px; }
-.section-title .icon { font-size: 22px; }
+.section-title { font-size: 18px; font-weight: 600; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--surface2); display: flex; align-items: center; gap: 8px; }
+.section-title .icon { display: none; }
+.header-logo-wrap { position: absolute; top: 50%; right: 28px; transform: translateY(-50%); }
+.header-logo-wrap img { height: 100px; width: auto; display: block; opacity: 0.9; }
+.header .header-lead { color: var(--text2); font-size: 13px; max-width: 640px; line-height: 1.5; margin-top: 6px; }
+.analysis-nav { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-bottom: 20px; padding: 12px 16px; background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); }
+.analysis-nav-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; }
+.analysis-nav a { color: var(--accent); font-size: 13px; text-decoration: none; }
+.analysis-nav a:hover { text-decoration: underline; }
+.analysis-nav-current { font-size: 13px; color: var(--text); font-weight: 600; }
+.page-foot-min { text-align: center; padding: 16px 12px; margin-top: 20px; color: var(--text3); font-size: 11px; border-top: 1px solid var(--surface2); }
+.table-toolbar { display: flex; justify-content: flex-end; margin-bottom: 8px; }
+.view-switch-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 18px; padding: 14px 18px; background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); }
+.view-switch-group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.view-switch-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-right: 4px; }
+.view-btn {
+  display: inline-block;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text2);
+  padding: 10px 22px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  vertical-align: middle;
+}
+
+.view-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.view-btn.active {
+  background: linear-gradient(135deg, rgba(59,130,246,0.35), rgba(167,139,250,0.2));
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 1px 12px rgba(59,130,246,0.25);
+}
+a.view-btn { display: inline-block; text-decoration: none; text-align: center; box-sizing: border-box; }
+a.view-btn:hover { text-decoration: none; }
+.dr-bar-wrap { margin-bottom: 24px; }
+.metrics-legend { margin-bottom: 20px; border: 1px solid var(--surface2); border-radius: 10px; background: rgba(30,41,59,0.5); }
+.metrics-legend summary { cursor: pointer; padding: 12px 16px; font-size: 13px; font-weight: 600; color: var(--accent); list-style: none; user-select: none; }
+.metrics-legend summary::-webkit-details-marker { display: none; }
+.metrics-legend[open] summary { border-bottom: 1px solid var(--surface2); }
+.metrics-legend .metrics-legend-body { padding: 14px 18px 16px; font-size: 12px; color: var(--text2); line-height: 1.65; }
+.metrics-legend .metrics-legend-body h4 { font-size: 12px; color: var(--text); margin: 14px 0 6px 0; font-weight: 600; }
+.metrics-legend .metrics-legend-body h4:first-child { margin-top: 0; }
+.metrics-legend .metrics-legend-body code { font-size: 11px; background: var(--surface2); padding: 2px 7px; border-radius: 4px; color: var(--text); }
 
 .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 24px; }
 .metric-card { background: var(--surface); border: 1px solid var(--surface2); border-radius: var(--radius); padding: 20px; text-align: center; transition: transform 0.2s, border-color 0.2s; }
@@ -63,9 +151,11 @@ tr:hover td { background: rgba(59,130,246,0.05); }
 .heatmap td:hover { transform: scale(1.05); z-index: 1; }
 .heatmap td.ct-clickable { cursor:pointer; position:relative; transition:outline 0.15s; }
 .heatmap td.ct-clickable:hover { outline:2px solid var(--accent); outline-offset:-2px; border-radius:2px; }
+.heatmap th.heatmap-marginal, .heatmap td.heatmap-marginal { background: rgba(51,65,85,0.95) !important; color: var(--text2); font-weight: 600; }
+.heatmap tr.heatmap-total-row th, .heatmap tr.heatmap-total-row td { border-top: 2px solid var(--border); }
 
-.insight-box { background: linear-gradient(135deg, rgba(59,130,246,0.1), rgba(167,139,250,0.05)); border: 1px solid rgba(59,130,246,0.3); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 24px; font-size: 14px; line-height: 1.7; }
-.insight-box strong { color: var(--cyan); }
+.insight-box { background: rgba(30,41,59,0.55); border: 1px solid rgba(71,85,105,0.4); border-radius: 10px; padding: 12px 16px; margin-bottom: 18px; font-size: 13px; line-height: 1.55; color: var(--text2); }
+.insight-box strong { color: var(--text); font-weight: 600; }
 
 .sli-filters { display:flex; gap:12px; margin-bottom:16px; flex-wrap:wrap; align-items:flex-end; }
 .sli-filter-group { display:flex; flex-direction:column; gap:4px; }
@@ -174,17 +264,17 @@ tr:hover td { background: rgba(59,130,246,0.05); }
 </head>
 <body>
 
-<div class="login-gate" id="login-gate">
-  <div class="login-box">
-    <img src="flipkart_logo.png" alt="Flipkart" style="height:100px;margin-bottom:16px;">
-    <h2>Flipkart Search Ads Relevance</h2>
-    <p>Enter credentials to access the analysis</p>
-    <input type="text" id="login-uid" placeholder="Login ID" autocomplete="off">
-    <input type="password" id="login-pwd" placeholder="Password">
-    <button onclick="attemptLogin()">Sign In</button>
-    <div class="login-error" id="login-error"></div>
+  <div class="login-gate" id="login-gate" role="dialog" aria-labelledby="login-title" aria-describedby="login-description">
+    <div class="login-box">
+      <img src="flipkart_logo.png" alt="Flipkart Logo" style="height:56px;margin-bottom:14px;">
+      <h2 id="login-title">Flipkart Search Ads Relevance</h2>
+      <p id="login-description">Enter credentials to access the analysis</p>
+      <input type="text" id="login-uid" placeholder="Login ID" autocomplete="off" aria-label="Login ID">
+      <input type="password" id="login-pwd" placeholder="Password" aria-label="Password">
+      <button onclick="DashboardApp.attemptLogin()">Sign In</button>
+      <div class="login-error" id="login-error" role="alert" aria-live="polite"></div>
+    </div>
   </div>
-</div>
 
 <script>
 var _ADS_REL_SESSION_KEY = 'fk_ads_rel_auth';
@@ -235,42 +325,70 @@ document.addEventListener('keydown', function(e){
 </script>
 
 <div id="app-content" style="display:none;">
-<div class="ct-modal-overlay" id="ct-modal-overlay" onclick="if(event.target===this)closeCtModal()">
-  <div class="ct-modal" onclick="event.stopPropagation()">
-    <button type="button" class="ct-close-x" aria-label="Close" onclick="closeCtModal()">&times;</button>
-    <h3 id="ct-modal-title"></h3>
-    <div class="ct-subtitle" id="ct-modal-subtitle"></div>
-    <table id="ct-modal-table"></table>
-    <div id="ct-modal-extras"></div>
+  <div class="ct-modal-overlay" id="ct-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="ct-modal-title" onclick="if(event.target===this)closeCtModal()">
+    <div class="ct-modal" onclick="event.stopPropagation()">
+      <button type="button" class="ct-close-x" aria-label="Close modal" onclick="closeCtModal()">&times;</button>
+      <h3 id="ct-modal-title"></h3>
+      <div class="ct-subtitle" id="ct-modal-subtitle"></div>
+      <table id="ct-modal-table"></table>
+      <div id="ct-modal-extras"></div>
+    </div>
   </div>
-</div>
 <div class="container">
 
-<!-- HEADER -->
-<div class="header" style="position:relative;">
-  <div style="position:absolute;top:14px;right:32px;">
-    <img src="flipkart_logo.png" alt="Flipkart" style="height:100px;display:block;">
-  </div>
-  <h1>Flipkart Search Ads Relevance &amp; AIS Analysis</h1>
-  <p style="color:var(--text2); font-size:14px;">Store &amp; Query Level Ads Relevance Analysis</p>
-</div>
+  <header class="header" style="position:relative;padding-right:220px;min-height:120px;">
+    <div class="header-logo-wrap">
+      <img src="flipkart_logo.png" alt="Flipkart Logo">
+    </div>
+    <h1>Flipkart Search Ads Relevance &amp; AIS Analysis</h1>
+    <p class="header-lead">Store &amp; Query Level Ads Relevance Analysis</p>
+  </header>
 
-<!-- DATE RANGE FILTER -->
+  <nav class="view-switch-bar view-switch-bar-main" role="navigation" aria-label="Dashboard views">
+    <div class="view-switch-group">
+      <span class="view-switch-label">View</span>
+      <button type="button" class="view-btn active" data-view="overall" onclick="DashboardApp.setMainDashboardView('overall')" aria-pressed="true">Overall</button>
+      <button type="button" class="view-btn" data-view="fold" onclick="location.href='2026_relevance_dashboard_fold.html'" title="Store R0 vs BU on Fold 1; Overall vs Fold 1 BU metrics">Fold level</button>
+      <button type="button" class="view-btn" data-view="comparison" onclick="location.href='2026_relevance_comparison.html'" title="Store R0 vs BU on Fold 1; Overall vs Fold 1 BU metrics">Overall vs Fold 1</button>
+      <button type="button" class="view-btn" data-view="query" onclick="DashboardApp.setMainDashboardView('query')" aria-pressed="false">Query level</button>
+    </div>
+    <button type="button" class="header-signout" onclick="DashboardApp.signOutDashboard()">Sign out</button>
+  </nav>
+
+<div id="dr-bar-wrap" class="dr-bar-wrap">
 <div class="dr-bar" id="dr-bar">
   <div class="dr-bar-controls">
-    <label>Date Range:</label>
+    <label>Date range</label>
     <input type="date" id="dr-from">
     <span style="color:var(--text3)">to</span>
     <input type="date" id="dr-to">
-    <button class="dr-reset" onclick="resetDateRange()">Reset</button>
+    <button type="button" class="dr-reset" onclick="DashboardApp.resetDateRange()">Reset</button>
     <span class="dr-note" id="dr-note"></span>
   </div>
-  <button type="button" class="header-signout" onclick="signOutDashboard()">Sign out</button>
 </div>
+</div>
+
+<div id="view-overall-wrap">
+<details class="metrics-legend">
+  <summary>Metrics &amp; formulas (Overall view)</summary>
+  <div class="metrics-legend-body">
+    <h4>R0 (relevance score)</h4>
+    <p>Fold-weighted ratio of ad vs organic <strong>CABN per impression</strong> across result positions (weights use 1/fold²). Higher means ad-side relevance is closer to organic for the same query context.</p>
+    <p><code>R0 = Σ<sub>f</sub> w<sub>f</sub> · (ads CABN<sub>f</sub> / ads imp<sub>f</sub>) / (org CABN<sub>f</sub> / org imp<sub>f</sub>) × 100</code> with Σ w<sub>f</sub> = 1.</p>
+    <h4>AIS (Ad Impression Share)</h4>
+    <p><code>AIS = 100 × ads impressions / (ads impressions + organic impressions)</code> on the same traffic set.</p>
+    <h4>CTR</h4>
+    <p><code>CTR = 100 × clicks / impressions</code> for ads and organic separately.</p>
+    <h4>CABN / click</h4>
+    <p><code>CABN/click = 100 × CABN events / clicks</code> — share of clicks that add to cart (or equivalent), per channel.</p>
+    <h4>Store table</h4>
+    <p>Store R0 uses the same fold-weighted definition aggregated to store level. Buckets classify store-level R0 and AIS for filtering.</p>
+  </div>
+</details>
 
 <!-- TIME SERIES -->
 <div class="section">
-  <div class="section-title"><span class="icon">&#128200;</span> R0 &amp; AIS Trends Over Time</div>
+  <div class="section-title">R0 &amp; AIS over time</div>
   <div class="ts-controls">
     <label>View:</label>
     <button class="ts-btn active" id="ts-weekly-btn" onclick="setTsMode('weekly')">Weekly</button>
@@ -286,21 +404,21 @@ document.addEventListener('keydown', function(e){
     <div class="chart-container-tall"><canvas id="tsOverallChart"></canvas></div>
   </div>
   <div class="insight-box" style="margin-top:16px;" id="ts-overall-insight"></div>
-  <div class="section-title" style="margin-top:24px;"><span class="icon">&#127970;</span> BU-Level Trends</div>
+  <div class="section-title" style="margin-top:20px;">BU trends</div>
   <div class="bu-sm-grid" id="bu-sm-grid"></div>
   <div class="insight-box" style="margin-top:16px;" id="ts-bu-insight"></div>
 </div>
 
 <!-- OVERALL METRICS -->
 <div class="section">
-  <div class="section-title"><span class="icon">&#9670;</span> Overall Metrics</div>
+  <div class="section-title">Overall metrics</div>
   <div class="metric-grid" id="overall-metrics"></div>
   <div class="insight-box" id="overall-insight-box"></div>
 </div>
 
 <!-- BU LEVEL METRICS -->
 <div class="section">
-  <div class="section-title"><span class="icon">&#9672;</span> BU-Level Metrics</div>
+  <div class="section-title">BU metrics</div>
   <div class="table-wrap"><table id="bu-table"></table></div>
   <div class="insight-box" style="margin-top:16px;" id="bu-r0-insight"></div>
 </div>
@@ -308,18 +426,18 @@ document.addEventListener('keydown', function(e){
 <!-- BUCKET DISTRIBUTION CHARTS -->
 <div class="section">
   <div class="section-title" style="justify-content:space-between;flex-wrap:wrap;">
-    <span><span class="icon">&#9673;</span> R0 &amp; AIS Bucket Distributions</span>
+    <span>R0 &amp; AIS distributions</span>
     <select id="global-bu-filter" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;">
       <option value="Overall">Overall</option>
     </select>
   </div>
   <div class="chart-grid">
     <div class="chart-card">
-      <h3>R0 Score Distribution <span style="font-size:11px;color:var(--muted);font-weight:400">(click bar to drill down)</span></h3>
+      <h3>R0 distribution</h3>
       <div class="chart-container"><canvas id="r0Chart" style="cursor:pointer"></canvas></div>
     </div>
     <div class="chart-card">
-      <h3>AIS Distribution <span style="font-size:11px;color:var(--muted);font-weight:400">(click bar to drill down)</span></h3>
+      <h3>AIS distribution</h3>
       <div class="chart-container"><canvas id="aisChart" style="cursor:pointer"></canvas></div>
     </div>
   </div>
@@ -329,14 +447,14 @@ document.addEventListener('keydown', function(e){
 <!-- CROSS-TAB HEATMAP -->
 <div class="section">
   <div class="section-title" style="justify-content:space-between;flex-wrap:wrap;">
-    <span><span class="icon">&#9638;</span> AIS x R0 Cross-Tab</span>
+    <span>AIS × R0</span>
     <select id="crosstab-metric" style="background:var(--surface2);color:var(--text);border:1px solid var(--border);border-radius:8px;padding:8px 16px;font-size:13px;cursor:pointer;">
       <option value="count">Store Count</option>
       <option value="imp">Impression Share %</option>
     </select>
   </div>
   <div class="chart-card">
-    <h3 id="crosstab-chart-title">Impression Share % <span style="font-size:11px;color:var(--muted);font-weight:400">(click cell to drill down)</span></h3>
+    <h3 id="crosstab-chart-title">Impression share %</h3>
     <div class="heatmap-wrap"><table class="heatmap" id="crosstab-table"></table></div>
   </div>
   <div class="insight-box" style="margin-top:16px;" id="crosstab-insight"></div>
@@ -344,7 +462,7 @@ document.addEventListener('keydown', function(e){
 
 <!-- STORE-LEVEL INSIGHTS -->
 <div class="section">
-  <div class="section-title"><span class="icon">&#9776;</span> Store-Level Insights</div>
+  <div class="section-title">Stores</div>
   <div class="sli-filters" id="sli-filters-wrap">
     <div class="sli-filter-group"><label>BU</label><div class="ms-wrap" id="sli-bu"></div></div>
     <div class="sli-filter-group"><label>Store Name</label><div class="ms-wrap" id="sli-sname"></div></div>
@@ -354,18 +472,32 @@ document.addEventListener('keydown', function(e){
       <select id="sli-topn"><option value="10">10</option><option value="20">20</option><option value="30" selected>30</option><option value="50">50</option><option value="100">100</option><option value="0">All</option></select>
     </div>
   </div>
-  <div style="text-align:right;margin-bottom:6px"><button class="csv-dl-btn" onclick="downloadTableCSV('table-stores','store_level_insights.csv')">&#11015; Download CSV</button></div>
+  <div class="table-toolbar"><button type="button" class="csv-dl-btn" onclick="downloadTableCSV('table-stores','store_level_insights.csv')">Download CSV</button></div>
   <div class="table-wrap"><table id="table-stores"></table></div>
   <div id="sli-pager"></div>
 </div>
 
-<!-- QUERY-LEVEL AIS -->
+</div><!-- /view-overall-wrap -->
+
+<div id="view-query-wrap" style="display:none;">
 <div class="section">
-  <div class="section-title"><span class="icon">&#8987;</span> Query-Level AIS</div>
-  <p class="qai-section-note">We have excluded query having &lt;1000 impressions. Data is only for 04-March-2026.</p>
+  <details class="metrics-legend">
+    <summary>Metrics &amp; formulas (Query level)</summary>
+    <div class="metrics-legend-body">
+      <h4>Query AIS</h4>
+      <p>Computed <strong>per query</strong> (not averaged across queries on a store):</p>
+      <p><code>Query AIS = 100 × ads impressions / (ads + organic impressions)</code> for that query in scope.</p>
+      <h4>Store AIS vs query AIS</h4>
+      <p>Store AIS blends many queries, so high-query-AIS traffic can sit inside a moderate store bucket. Distributions will not match — that is expected.</p>
+      <h4>Coverage</h4>
+      <p>Queries below 1,000 impressions are excluded. Current embed uses a fixed sample date where noted below.</p>
+    </div>
+  </details>
+  <div class="section-title">Query-level AIS</div>
+  <p class="qai-section-note">Queries with &lt;1k impressions excluded · sample: 4 Mar 2026</p>
   <div class="chart-card qai-ais-dist-card" style="position:relative;">
-    <h3>Query AIS distribution <span style="font-size:11px;color:var(--muted);font-weight:400">(click bar for top 30 queries, CSV)</span></h3>
-    <button type="button" class="qai-info-btn" onclick="document.getElementById('qai-info-popup').classList.toggle('open')" title="Why Store AIS ≠ Query AIS?">&#9432;</button>
+    <h3>Query AIS distribution</h3>
+    <button type="button" class="qai-info-btn" onclick="document.getElementById('qai-info-popup').classList.toggle('open')" title="Why Store AIS ≠ Query AIS?" aria-label="Information about Store AIS vs Query AIS">&#9432;</button>
     <div class="qai-info-popup" id="qai-info-popup">
       <strong>Store AIS vs Query AIS</strong><br>
       Store-level AIS averages across all queries — extremes cancel out. Query-level AIS preserves each query's individual ad share, so the &gt;60% bucket appears much larger here than in the store distribution. This is expected: most high query-AIS impressions come from stores with 30–40% overall AIS.
@@ -387,54 +519,474 @@ document.addEventListener('keydown', function(e){
       <input type="text" id="qai-query-search" class="qai-query-search" placeholder="Type to filter queries…" autocomplete="off" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:7px 12px;border-radius:6px;font-size:13px;font-family:inherit;">
     </div>
   </div>
-  <div style="text-align:right;margin-bottom:6px"><button type="button" class="csv-dl-btn" id="qai-download-csv">&#11015; Download CSV (filtered)</button></div>
+  <div class="table-toolbar"><button type="button" class="csv-dl-btn" id="qai-download-csv">Download CSV (filtered)</button></div>
   <div class="table-wrap"><table id="table-query-ais"></table></div>
   <div id="qai-pager" aria-label="Query table pages"></div>
 </div>
+</div><!-- /view-query-wrap -->
 
-<div style="text-align:center; padding:24px; color:var(--text3); font-size:12px;">
-  Generated from <code>store_level_data_for_2026.csv</code> &middot; Filters: fold &le; 12, 7 BUs, top 99% impression stores
-</div>
+<div class="page-foot-min">Source: store-level extract · 7 BUs · top 99% stores by impressions</div>
 </div>
 
 <script>
-/* ── State ── */
-var activePeriod = 'all';
-function PD() { return PERIODS[activePeriod]; }
-
-/* ── Utilities ── */
-function fmt(n) { return n == null ? '–' : Number(n).toLocaleString('en-IN'); }
-function pct(n) { return n == null ? '–' : Number(n).toFixed(2) + '%'; }
-function escapeHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
-function sn(path) {
-  return (STORE_NAMES && STORE_NAMES[path]) || path;
-}
-function bpsLabel(ads, org) {
-  var v = ((ads - org) * 100).toFixed(0);
-  var sign = v >= 0 ? '+' : '';
-  var cls = v < 0 ? 'val-bad' : 'val-good';
-  return '<span class="' + cls + '">' + sign + v + ' bps vs Organic</span>';
-}
-
-var BU_COLORS = { BGM:'#3b82f6', CoreElectronics:'#10b981', EmergingElectronics:'#f59e0b', Furniture:'#a78bfa', Home:'#f472b6', Large:'#22d3ee', Lifestyle:'#fb923c' };
-var BU_LIST = ['BGM','CoreElectronics','EmergingElectronics','Furniture','Home','Large','Lifestyle'];
-var BUCKET_COLORS = ['#ef4444','#f97316','#f59e0b','#84cc16','#10b981','#06b6d4','#8b5cf6','#ec4899','#a855f7','#e11d48'];
-
-/* ── Date Range Logic ── */
-var allDateMin = PERIODS['all'].overall.date_min;
-var allDateMax = PERIODS['all'].overall.date_max;
-
-(function initDateRange() {
-  var f = document.getElementById('dr-from'), t = document.getElementById('dr-to');
-  f.min = allDateMin; f.max = allDateMax; f.value = allDateMin;
-  t.min = allDateMin; t.max = allDateMax; t.value = allDateMax;
-  f.onchange = t.onchange = onDateRangeChange;
+/* ── Optimized Dashboard Application ── */
+(function() {
+  'use strict';
+  
+  // ── Application State ──
+  const AppState = {
+    activePeriod: 'all',
+    currentGlobalBU: 'Overall',
+    sliPage: 0,
+    sliSortCol: null,
+    sliSortDir: 1,
+    buSortCol: null,
+    buSortDir: 1,
+    tsMode: 'weekly',
+    tsMetric: 'r0ais',
+    _storeAisMap: null,
+    chartInstances: {
+      r0: null,
+      ais: null,
+      tsOverall: null,
+      buSm: [],
+      qaiAisDist: null
+    }
+  };
+  
+  // ── Constants ──
+  const CONSTANTS = {
+    BU_COLORS: {
+      BGM: '#3b82f6',
+      CoreElectronics: '#10b981',
+      EmergingElectronics: '#f59e0b',
+      Furniture: '#a78bfa',
+      Home: '#f472b6',
+      Large: '#22d3ee',
+      Lifestyle: '#fb923c'
+    },
+    BU_LIST: ['BGM','CoreElectronics','EmergingElectronics','Furniture','Home','Large','Lifestyle'],
+    BUCKET_COLORS: ['#ef4444','#f97316','#f59e0b','#84cc16','#10b981','#06b6d4','#8b5cf6','#ec4899','#a855f7','#e11d48'],
+    DEBOUNCE_DELAY: 300,
+    PAGE_SIZE: 30
+  };
+  
+  // ── Utility Functions ──
+  const Utils = {
+    fmt: (n) => n == null ? '–' : Number(n).toLocaleString('en-IN'),
+    pct: (n) => n == null ? '–' : Number(n).toFixed(2) + '%',
+    escapeHtml: (s) => {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    },
+    sn: (path) => (window.STORE_NAMES && window.STORE_NAMES[path]) || path,
+    bpsLabel: (ads, org) => {
+      const v = ((ads - org) * 100).toFixed(0);
+      const sign = v >= 0 ? '+' : '';
+      const cls = v < 0 ? 'val-bad' : 'val-good';
+      return `<span class="${cls}">${sign}${v} bps vs Organic</span>`;
+    },
+    debounce: (func, wait) => {
+      let timeout;
+      return function executedFunction(...args) {
+        const later = () => {
+          clearTimeout(timeout);
+          func.apply(this, args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+      };
+    },
+    getCurrentPeriodData: () => window.PERIODS[AppState.activePeriod]
+  };
+  
+  // ── Authentication Module ──
+  const Auth = {
+    SESSION_KEY: 'fk_ads_rel_auth',
+    MAX_ATTEMPTS: 3,
+    
+    init() {
+      this.checkSession();
+      this.bindEvents();
+    },
+    
+    checkSession() {
+      try {
+        if (sessionStorage.getItem(this.SESSION_KEY) === '1') {
+          this.showDashboard();
+        }
+      } catch (e) {
+        console.warn('Session storage not available');
+      }
+    },
+    
+    attemptLogin(uid, pwd) {
+      if (uid === 'ads_admin' && pwd === 'ads@admin_123') {
+        try {
+          sessionStorage.setItem(this.SESSION_KEY, '1');
+        } catch (e) {}
+        this.showDashboard();
+        return true;
+      }
+      return false;
+    },
+    
+    showDashboard() {
+      const gate = document.getElementById('login-gate');
+      const app = document.getElementById('app-content');
+      if (gate) gate.style.display = 'none';
+      if (app) app.style.display = '';
+    },
+    
+    signOut() {
+      try {
+        sessionStorage.removeItem(this.SESSION_KEY);
+      } catch (e) {}
+      location.reload();
+    },
+    
+    bindEvents() {
+      document.addEventListener('DOMContentLoaded', () => this.checkSession());
+      document.addEventListener('keydown', (e) => {
+        const gate = document.getElementById('login-gate');
+        if (e.key === 'Enter' && gate && gate.style.display !== 'none') {
+          const uid = document.getElementById('login-uid').value.trim();
+          const pwd = document.getElementById('login-pwd').value;
+          if (!this.attemptLogin(uid, pwd)) {
+            this.handleFailedLogin();
+          }
+        }
+      });
+    },
+    
+    handleFailedLogin() {
+      AppState._loginAttempts = (AppState._loginAttempts || 0) + 1;
+      const errEl = document.getElementById('login-error');
+      if (AppState._loginAttempts >= this.MAX_ATTEMPTS) {
+        document.getElementById('login-gate').innerHTML = '<div class="denied-msg">You are not allowed to access this analysis.</div>';
+      } else {
+        errEl.textContent = 'Invalid credentials. Try again.';
+        errEl.style.display = 'block';
+      }
+    }
+  };
+  
+  // ── Date Range Module ──
+  const DateRange = {
+    init() {
+      this.setupDateInputs();
+      this.bindEvents();
+    },
+    
+    setupDateInputs() {
+      const data = Utils.getCurrentPeriodData();
+      const allDateMin = data.overall.date_min;
+      const allDateMax = data.overall.date_max;
+      
+      const fromInput = document.getElementById('dr-from');
+      const toInput = document.getElementById('dr-to');
+      
+      if (fromInput && toInput) {
+        fromInput.min = allDateMin;
+        fromInput.max = allDateMax;
+        fromInput.value = allDateMin;
+        
+        toInput.min = allDateMin;
+        toInput.max = allDateMax;
+        toInput.value = allDateMax;
+      }
+    },
+    
+    bindEvents() {
+      const fromInput = document.getElementById('dr-from');
+      const toInput = document.getElementById('dr-to');
+      
+      if (fromInput && toInput) {
+        const onChange = Utils.debounce(() => this.handleDateChange(), CONSTANTS.DEBOUNCE_DELAY);
+        fromInput.onchange = onChange;
+        toInput.onchange = onChange;
+      }
+    },
+    
+    handleDateChange() {
+      const fromInput = document.getElementById('dr-from');
+      const toInput = document.getElementById('dr-to');
+      
+      if (!fromInput || !toInput) return;
+      
+      const from = fromInput.value;
+      const to = toInput.value;
+      
+      if (!from || !to || from > to) return;
+      
+      const months = this.getMonthsInRange(from, to);
+      const keys = Object.keys(months);
+      
+      if (keys.length === 3) {
+        AppState.activePeriod = 'all';
+      } else if (keys.length === 1) {
+        AppState.activePeriod = '2026-' + keys[0];
+      } else {
+        AppState.activePeriod = 'all';
+      }
+      
+      this.updateNote(keys);
+      this.refreshData();
+    },
+    
+    getMonthsInRange(from, to) {
+      const months = {};
+      ['01','02','03'].forEach(m => {
+        const mStart = '2026-' + m + '-01';
+        const mEnd = m === '01' ? '2026-01-31' : m === '02' ? '2026-02-28' : '2026-03-31';
+        if (from <= mEnd && to >= mStart) months[m] = true;
+      });
+      return months;
+    },
+    
+    updateNote(keys) {
+      const note = document.getElementById('dr-note');
+      const plbl = window.PERIOD_LABELS[AppState.activePeriod] || '';
+      
+      if (note) {
+        if (keys.length === 2) {
+          note.textContent = 'Showing: Full Period data (covers 2 months)';
+        } else {
+          note.textContent = 'Showing: ' + plbl;
+        }
+      }
+    },
+    
+    refreshData() {
+      AppState._storeAisMap = null;
+      Dashboard.renderAll();
+      Dashboard.renderTimeSeries();
+    },
+    
+    reset() {
+      const data = Utils.getCurrentPeriodData();
+      const fromInput = document.getElementById('dr-from');
+      const toInput = document.getElementById('dr-to');
+      
+      if (fromInput && toInput) {
+        fromInput.value = data.overall.date_min;
+        toInput.value = data.overall.date_max;
+        this.handleDateChange();
+      }
+    }
+  };
+  
+  // ── View Management ──
+  const ViewManager = {
+    setMainDashboardView(view) {
+      const ov = document.getElementById('view-overall-wrap');
+      const qv = document.getElementById('view-query-wrap');
+      const dr = document.getElementById('dr-bar-wrap');
+      
+      // Update button states
+      document.querySelectorAll('.view-switch-bar-main .view-btn[data-view]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-view') === view);
+      });
+      
+      // Show/hide sections
+      if (view === 'query') {
+        if (ov) ov.style.display = 'none';
+        if (qv) qv.style.display = 'block';
+        if (dr) dr.style.display = 'none';
+        this.updateURL('#query');
+      } else {
+        if (ov) ov.style.display = 'block';
+        if (qv) qv.style.display = 'none';
+        if (dr) dr.style.display = 'block';
+        this.updateURL('');
+      }
+    },
+    
+    updateURL(hash) {
+      try {
+        if (history.replaceState) {
+          history.replaceState(null, '', location.pathname + location.search + hash);
+        }
+      } catch (e) {
+        console.warn('History API not available');
+      }
+    }
+  };
+  
+  // ── Chart Management ──
+  const ChartManager = {
+    defaults: {
+      color: '#94a3b8',
+      borderColor: 'rgba(71,85,105,0.3)',
+      fontFamily: 'Inter, sans-serif'
+    },
+    
+    init() {
+      Chart.defaults.color = this.defaults.color;
+      Chart.defaults.borderColor = this.defaults.borderColor;
+      Chart.defaults.font.family = this.defaults.fontFamily;
+    },
+    
+    destroyChart(chartKey) {
+      const chart = AppState.chartInstances[chartKey];
+      if (chart) {
+        chart.destroy();
+        AppState.chartInstances[chartKey] = null;
+      }
+    },
+    
+    destroyAllCharts() {
+      Object.keys(AppState.chartInstances).forEach(key => {
+        if (key === 'buSm') {
+          AppState.chartInstances[key].forEach(chart => chart.destroy());
+          AppState.chartInstances[key] = [];
+        } else {
+          this.destroyChart(key);
+        }
+      });
+    }
+  };
+  
+  // ── Main Dashboard Controller ──
+  const Dashboard = {
+    init() {
+      Auth.init();
+      DateRange.init();
+      ChartManager.init();
+      this.bindEvents();
+    },
+    
+    bindEvents() {
+      // Global event bindings
+      window.resetDateRange = DateRange.reset.bind(DateRange);
+      window.setMainDashboardView = ViewManager.setMainDashboardView.bind(ViewManager);
+      window.signOutDashboard = Auth.signOut.bind(Auth);
+      window.attemptLogin = function() {
+        const uid = document.getElementById('login-uid').value.trim();
+        const pwd = document.getElementById('login-pwd').value;
+        if (!Auth.attemptLogin(uid, pwd)) {
+          Auth.handleFailedLogin();
+        }
+      };
+    },
+    
+    renderAll() {
+      this.renderHeader();
+      this.renderOverallMetrics();
+      this.renderBuTable();
+      this.renderBucketCharts(AppState.currentGlobalBU);
+      this.renderCrosstab();
+      this.initSliFilters();
+      this.renderStoreTables();
+    },
+    
+    renderHeader() {
+      const data = Utils.getCurrentPeriodData();
+      const o = data.overall;
+      
+      const periodEl = document.getElementById('hdr-period');
+      const storesEl = document.getElementById('hdr-stores');
+      
+      if (periodEl) periodEl.textContent = `${o.date_min} to ${o.date_max} (${o.n_days} days)`;
+      if (storesEl) storesEl.textContent = Utils.fmt(o.stores);
+    },
+    
+    renderOverallMetrics() {
+      const data = Utils.getCurrentPeriodData();
+      const o = data.overall;
+      
+      const ctrBps = Utils.bpsLabel(o.ads_CTR, o.org_CTR);
+      const cabnBps = Utils.bpsLabel(o.ads_CABN_clk, o.org_CABN_clk);
+      
+      const cards = [
+        { label: 'R0 Score', value: Utils.pct(o.R0), sub: 'Fold-weighted relevance', hl: true },
+        { label: 'AIS', value: Utils.pct(o.AIS), sub: 'Ad Impression Share', hl: true },
+        { label: 'Ads CTR', value: Utils.pct(o.ads_CTR), sub: ctrBps },
+        { label: 'Organic CTR', value: Utils.pct(o.org_CTR), sub: 'Organic click-through rate' },
+        { label: 'Ads CABN/Click', value: Utils.pct(o.ads_CABN_clk), sub: cabnBps },
+        { label: 'Organic CABN/Click', value: Utils.pct(o.org_CABN_clk), sub: 'Organic CABN per click' }
+      ];
+      
+      const html = cards.map(c => 
+        `<div class="metric-card${c.hl ? ' highlight' : ''}">
+          <div class="label">${c.label}</div>
+          <div class="value">${c.value}</div>
+          <div class="sub">${c.sub}</div>
+        </div>`
+      ).join('');
+      
+      const container = document.getElementById('overall-metrics');
+      if (container) container.innerHTML = html;
+      
+      this.updateOverallInsight(o);
+    },
+    
+    updateOverallInsight(o) {
+      const ctrG = ((o.org_CTR - o.ads_CTR) * 100).toFixed(0);
+      const cabnG = ((o.org_CABN_clk - o.ads_CABN_clk) * 100).toFixed(0);
+      
+      const insight = `<strong>Overall R0 is ${Utils.pct(o.R0)}</strong> — fold-weighted relevance vs organic. 
+        <strong>AIS at ${Utils.pct(o.AIS)}</strong> means ads account for that share of all impressions across search. 
+        Organic CTR (<strong>${Utils.pct(o.org_CTR)}</strong>) vs ads CTR (<strong>${Utils.pct(o.ads_CTR)}</strong>) — gap <strong>${ctrG} bps</strong>. 
+        CABN/click: ads <strong>${Utils.pct(o.ads_CABN_clk)}</strong> vs organic <strong>${Utils.pct(o.org_CABN_clk)}</strong> (gap <strong>${cabnG} bps</strong>).`;
+      
+      const box = document.getElementById('overall-insight-box');
+      if (box) box.innerHTML = insight;
+    },
+    
+    // Placeholder methods for other render functions
+    renderBuTable() { /* Implementation to follow */ },
+    renderBucketCharts(buKey) { /* Implementation to follow */ },
+    renderCrosstab() { /* Implementation to follow */ },
+    initSliFilters() { /* Implementation to follow */ },
+    renderStoreTables() { /* Implementation to follow */ },
+    renderTimeSeries() { /* Implementation to follow */ }
+  };
+  
+  // ── Initialize Application ──
+  document.addEventListener('DOMContentLoaded', () => {
+    Dashboard.init();
+  });
+  
+  // Expose necessary functions to global scope for inline event handlers
+  window.DashboardApp = {
+    resetDateRange: DateRange.reset.bind(DateRange),
+    setMainDashboardView: ViewManager.setMainDashboardView.bind(ViewManager),
+    signOutDashboard: Auth.signOut.bind(Auth),
+    attemptLogin: function() {
+      const uid = document.getElementById('login-uid').value.trim();
+      const pwd = document.getElementById('login-pwd').value;
+      if (!Auth.attemptLogin(uid, pwd)) {
+        Auth.handleFailedLogin();
+      }
+    }
+  };
+  
 })();
 
-function resetDateRange() {
-  document.getElementById('dr-from').value = allDateMin;
-  document.getElementById('dr-to').value = allDateMax;
-  onDateRangeChange();
+function setMainDashboardView(view) {
+  var ov = document.getElementById('view-overall-wrap');
+  var qv = document.getElementById('view-query-wrap');
+  var dr = document.getElementById('dr-bar-wrap');
+  document.querySelectorAll('.view-switch-bar-main .view-btn[data-view]').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-view') === view);
+  });
+  if (view === 'query') {
+    if (ov) ov.style.display = 'none';
+    if (qv) qv.style.display = 'block';
+    if (dr) dr.style.display = 'none';
+    try {
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search + '#query');
+    } catch (e) {}
+  } else {
+    if (ov) ov.style.display = 'block';
+    if (qv) qv.style.display = 'none';
+    if (dr) dr.style.display = 'block';
+    try {
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    } catch (e) {}
+  }
 }
 
 function onDateRangeChange() {
@@ -474,6 +1026,77 @@ var currentGlobalBU = 'Overall';
 var sliPage = 0;
 var sliSortCol = null, sliSortDir = 1;
 var buSortCol = null, buSortDir = 1;
+var activePeriod = 'all';
+
+/* ── Legacy Compatibility Functions ── */
+function PD() { return PERIODS[activePeriod]; }
+function fmt(n) { return n == null ? '–' : Number(n).toLocaleString('en-IN'); }
+function pct(n) { return n == null ? '–' : Number(n).toFixed(2) + '%'; }
+function escapeHtml(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+function sn(path) { return (STORE_NAMES && STORE_NAMES[path]) || path; }
+function bpsLabel(ads, org) {
+  var v = ((ads - org) * 100).toFixed(0);
+  var sign = v >= 0 ? '+' : '';
+  var cls = v < 0 ? 'val-bad' : 'val-good';
+  return '<span class="' + cls + '">' + sign + v + ' bps vs Organic</span>';
+}
+
+var BU_COLORS = { BGM:'#3b82f6', CoreElectronics:'#10b981', EmergingElectronics:'#f59e0b', Furniture:'#a78bfa', Home:'#f472b6', Large:'#22d3ee', Lifestyle:'#fb923c' };
+var BU_LIST = ['BGM','CoreElectronics','EmergingElectronics','Furniture','Home','Large','Lifestyle'];
+var BUCKET_COLORS = ['#ef4444','#f97316','#f59e0b','#84cc16','#10b981','#06b6d4','#8b5cf6','#ec4899','#a855f7','#e11d48'];
+
+/* ── Date Range Logic ── */
+var allDateMin = PERIODS['all'].overall.date_min;
+var allDateMax = PERIODS['all'].overall.date_max;
+
+(function initDateRange() {
+  var f = document.getElementById('dr-from'), t = document.getElementById('dr-to');
+  if (f && t) {
+    f.min = allDateMin; f.max = allDateMax; f.value = allDateMin;
+    t.min = allDateMin; t.max = allDateMax; t.value = allDateMax;
+    f.onchange = t.onchange = onDateRangeChange;
+  }
+})();
+
+function resetDateRange() {
+  var f = document.getElementById('dr-from'), t = document.getElementById('dr-to');
+  if (f && t) {
+    f.value = allDateMin;
+    t.value = allDateMax;
+    onDateRangeChange();
+  }
+}
+
+function onDateRangeChange() {
+  var f = document.getElementById('dr-from'), t = document.getElementById('dr-to');
+  if (!f || !t) return;
+  var from = f.value, to = t.value;
+  if (!from || !to || from > to) return;
+  var months = {};
+  ['01','02','03'].forEach(function(m) {
+    var mStart = '2026-' + m + '-01';
+    var mEnd = m === '01' ? '2026-01-31' : m === '02' ? '2026-02-28' : '2026-03-31';
+    if (from <= mEnd && to >= mStart) months[m] = true;
+  });
+  var keys = Object.keys(months);
+  if (keys.length === 3) { activePeriod = 'all'; }
+  else if (keys.length === 1) { activePeriod = '2026-' + keys[0]; }
+  else { activePeriod = 'all'; }
+
+  var note = document.getElementById('dr-note');
+  var plbl = PERIOD_LABELS[activePeriod] || '';
+  if (note) {
+    if (keys.length === 2) { note.textContent = 'Showing: Full Period data (covers 2 months)'; }
+    else { note.textContent = 'Showing: ' + plbl; }
+  }
+
+  renderAll();
+}
+
+/* ── Initialize Dashboard on Load ── */
+document.addEventListener('DOMContentLoaded', function() {
+  renderAll();
+});
 
 /* ── Modal ── */
 function closeCtModal() { document.getElementById('ct-modal-overlay').classList.remove('active'); var ex=document.getElementById('ct-modal-extras'); if(ex) ex.innerHTML=''; }
@@ -554,7 +1177,7 @@ function buildBuRows() {
     all_impressions: o.all_impressions,
     ctrGap: (o.ads_CTR - o.org_CTR) * 100,
     cabnGap: (o.ads_CABN_clk - o.org_CABN_clk) * 100,
-    imprShare: 100
+    imprShare: (o.all_impressions / totalImp) * 100
   };
   return { overall: overall, rows: buRows };
 }
@@ -682,7 +1305,7 @@ function renderBucketCharts(buKey) {
 
   var topR0 = bd.r0_dist.reduce(function(a,b){return b.impr_pct>a.impr_pct?b:a;});
   var topAIS = bd.ais_dist.reduce(function(a,b){return b.impr_pct>a.impr_pct?b:a;});
-  var lowR0 = bd.r0_dist.filter(function(d){return d.bucket.indexOf('0–25')>=0 || d.bucket.indexOf('25–40')>=0;});
+  var lowR0 = bd.r0_dist.filter(function(d){return d.bucket==='0–20%'||d.bucket==='20–30%'||d.bucket==='30–40%';});
   var lowR0Imp = lowR0.reduce(function(s,d){return s+d.impr_pct;},0);
   var lowR0Stores = lowR0.reduce(function(s,d){return s+d.stores;},0);
   var highAIS = bd.ais_dist.filter(function(d){return d.bucket.indexOf('40–45')>=0 || d.bucket.indexOf('>45')>=0;});
@@ -765,7 +1388,7 @@ function showStoreModal(metric, bucket, bu, prefiltered) {
 function renderCrosstab() {
   var metric = document.getElementById('crosstab-metric').value;
   var isImp = metric === 'imp';
-  document.getElementById('crosstab-chart-title').innerHTML = (isImp ? 'Impression Share %' : 'Store Count') + ' <span style="font-size:11px;color:var(--muted);font-weight:400">(click cell to drill down)</span>';
+  document.getElementById('crosstab-chart-title').textContent = isImp ? 'Impression share %' : 'Store count';
 
   var ct;
   if (currentGlobalBU === 'Overall') { ct = PD().crosstab; }
@@ -786,17 +1409,40 @@ function renderCrosstab() {
   var maxVal = 0;
   ct.forEach(function(row){ PD().r0_order.forEach(function(rb){ var v = isImp ? row[rb+'_imp_pct'] : row[rb+'_count']; if(v > maxVal) maxVal = v; }); });
 
-  var html = '<thead><tr><th>AIS \\ R0</th>';
-  PD().r0_order.forEach(function(rb){ html += '<th>' + rb + '</th>'; });
-  html += '</tr></thead><tbody>';
+  var r0Ord = PD().r0_order;
+  var nCol = r0Ord.length;
+  var colTotals = new Array(nCol);
+  for (var ci = 0; ci < nCol; ci++) colTotals[ci] = 0;
+  var rowTotals = [];
   ct.forEach(function(row){
+    var rt = 0;
+    r0Ord.forEach(function(rb, j){
+      var v = isImp ? row[rb+'_imp_pct'] : row[rb+'_count'];
+      rt += v;
+      colTotals[j] += v;
+    });
+    rowTotals.push(rt);
+  });
+
+  var html = '<thead><tr><th>AIS \\ R0</th>';
+  r0Ord.forEach(function(rb){ html += '<th>' + rb + '</th>'; });
+  html += '<th class="heatmap-marginal">Total</th></tr></thead><tbody>';
+  ct.forEach(function(row, ri){
     html += '<tr><th>' + row.ais_bucket + '</th>';
-    PD().r0_order.forEach(function(rb){
+    r0Ord.forEach(function(rb){
       var v = isImp ? row[rb+'_imp_pct'] : row[rb+'_count'];
       html += '<td class="ct-clickable" style="background:' + heatColor(v,maxVal) + '" onclick="showCrossDrill(\'' + escapeHtml(row.ais_bucket) + '\',\'' + escapeHtml(rb) + '\')">' + (isImp ? v.toFixed(2)+'%' : v) + '</td>';
     });
-    html += '</tr>';
+    var rtot = rowTotals[ri];
+    html += '<td class="heatmap-marginal">' + (isImp ? rtot.toFixed(2)+'%' : rtot) + '</td></tr>';
   });
+  html += '<tr class="heatmap-total-row"><th class="heatmap-marginal">Total</th>';
+  r0Ord.forEach(function(rb, j){
+    var cv = colTotals[j];
+    html += '<td class="heatmap-marginal">' + (isImp ? cv.toFixed(2)+'%' : cv) + '</td>';
+  });
+  var grand = rowTotals.reduce(function(a,b){ return a + b; }, 0);
+  html += '<td class="heatmap-marginal">' + (isImp ? grand.toFixed(2)+'%' : grand) + '</td></tr>';
   html += '</tbody>';
   document.getElementById('crosstab-table').innerHTML = html;
 
@@ -810,7 +1456,7 @@ function renderCrosstab() {
         var imp = row[rb+'_imp_pct'] || 0, cnt = row[rb+'_count'] || 0;
         if (imp > topCell.v) { topCell = {ab:row.ais_bucket, rb:rb, v:imp, cnt:cnt}; }
         var rIdx = r0Ord.indexOf(rb), aIdx = aisOrd.indexOf(row.ais_bucket);
-        if (rIdx <= 1 && aIdx >= aisOrd.length - 2) { dangerImp += imp; dangerCnt += cnt; }
+        if (rIdx <= 2 && aIdx >= aisOrd.length - 2) { dangerImp += imp; dangerCnt += cnt; }
         if (rIdx >= r0Ord.length - 2 && aIdx <= 2) { idealImp += imp; idealCnt += cnt; }
       });
     });
@@ -1618,6 +2264,13 @@ function applyQueryAisRows(rows) {
 /* ── Init ── */
 renderAll();
 renderTimeSeries();
+if (typeof location !== 'undefined' && location.hash === '#query') {
+  setMainDashboardView('query');
+}
+window.addEventListener('hashchange', function() {
+  if (location.hash === '#query') setMainDashboardView('query');
+  else setMainDashboardView('overall');
+});
 </script>
 </div><!-- /app-content -->
 </body>
