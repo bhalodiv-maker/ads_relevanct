@@ -141,6 +141,42 @@ tr:hover td { background: rgba(59,130,246,0.05); }
 #table-store-fold-compare-f1bu .sfc-group { background:rgba(51,65,85,0.55); text-align:center; font-weight:600; color:var(--text2); font-size:11px; }
 #table-store-fold-compare-f1bu th.cmp-sort { cursor:pointer; user-select:none; white-space:nowrap; }
 #table-store-fold-compare-f1bu th.cmp-sort:hover { color:var(--accent); }
+.seg-group { position:relative; letter-spacing:0.3px; }
+.seg-group-storef1 { background:linear-gradient(180deg, rgba(37,99,235,0.30), rgba(37,99,235,0.14)) !important; color:#bfdbfe !important; }
+.seg-group-buf1 { background:linear-gradient(180deg, rgba(245,158,11,0.34), rgba(245,158,11,0.15)) !important; color:#fde68a !important; }
+.seg-group-overall { background:linear-gradient(180deg, rgba(16,185,129,0.30), rgba(16,185,129,0.13)) !important; color:#bbf7d0 !important; }
+
+#table-store-fold-compare-f1bu th.seg-storef1,
+#table-store-fold-compare-f1bu td.seg-storef1,
+#ct-modal-table.f1bu-drill-table th.seg-storef1,
+#ct-modal-table.f1bu-drill-table td.seg-storef1,
+.f1bu-detail-table th.seg-storef1,
+.f1bu-detail-table td.seg-storef1 { background:rgba(37,99,235,0.08); }
+
+#table-store-fold-compare-f1bu th.seg-buf1,
+#table-store-fold-compare-f1bu td.seg-buf1,
+#ct-modal-table.f1bu-drill-table th.seg-buf1,
+#ct-modal-table.f1bu-drill-table td.seg-buf1,
+.f1bu-detail-table th.seg-buf1,
+.f1bu-detail-table td.seg-buf1 { background:rgba(245,158,11,0.09); }
+
+#table-store-fold-compare-f1bu th.seg-overall,
+#table-store-fold-compare-f1bu td.seg-overall,
+#ct-modal-table.f1bu-drill-table th.seg-overall,
+#ct-modal-table.f1bu-drill-table td.seg-overall,
+.f1bu-detail-table th.seg-overall,
+.f1bu-detail-table td.seg-overall { background:rgba(16,185,129,0.08); }
+
+#table-store-fold-compare-f1bu th.seg-start,
+#table-store-fold-compare-f1bu td.seg-start,
+#ct-modal-table.f1bu-drill-table th.seg-start,
+#ct-modal-table.f1bu-drill-table td.seg-start,
+.f1bu-detail-table th.seg-start,
+.f1bu-detail-table td.seg-start { border-left:2px solid rgba(148,163,184,0.45); }
+
+#table-store-fold-compare-f1bu td.seg-cell,
+#ct-modal-table.f1bu-drill-table td.seg-cell,
+.f1bu-detail-table td.seg-cell { font-weight:600; }
 .sfc-gap-cell { font-weight:600; border-radius:4px; padding:4px 6px !important; text-align:center !important; }
 .sfc-gap-na { background:rgba(71,85,105,0.5); color:var(--text3); }
 .sfc-gap-02 { background:rgba(16,185,129,0.28); color:#a7f3d0; }
@@ -426,7 +462,7 @@ document.addEventListener('keydown', function(e){
 <div class="page-foot-min">Overall vs Fold 1 · <a href="2026_relevance_dashboard_fold.html" style="color:var(--accent)">Open fold dashboard</a></div>
 </div>
 
-    <script src="2026_fold_dashboard_app.js?v=20260407-1550"></script>
+    <script src="2026_fold_dashboard_app.js?v=20260407-1612"></script>
 </div><!-- /app-content -->
 </body>
 </html>

@@ -1407,6 +1407,12 @@ function sfcSortThRowspan2(key, label, cls) {
   return '<th rowspan="2" class="' + c + '" onclick="storeListSortBy(\'' + key + '\')">' + label + arrow + '</th>';
 }
 
+function segCssKey(segKey) {
+  if (segKey === 'f1') return 'storef1';
+  if (segKey === 'buf1') return 'buf1';
+  return 'overall';
+}
+
 /* ── Store-Level Table (with Store Name) ── */
 function renderStoreTables() {
   var stores = PD().ALL_STORES;
@@ -1513,7 +1519,7 @@ function renderStoreTables() {
     if (sfcF1buPage >= f1buTotalPages) sfcF1buPage = 0;
     var f1buStart = sfcF1buPage * sfcF1buPageSize;
     var f1buPage = filtered.slice(f1buStart, f1buStart + sfcF1buPageSize);
-        renderStoreFoldCompareF1Bu(f1buPage, globalImp, f1buStart);
+    renderStoreFoldCompareF1Bu(f1buPage, globalImp, f1buStart);
     var f1buPager = document.getElementById('sfc-f1bu-pager');
     if (f1buPager) {
       f1buPager.style.display = 'flex';
@@ -1554,13 +1560,14 @@ function fmtPctPlain(n) {
 /** Six metrics per segment (Overall / Fold 1): R0, AIS, ad/org CTR, ad/org CABN/clk. */
 function foldCompareSixCellsForSeg(fc, segKey) {
   var x = fc ? fc[segKey] : null;
+  var seg = segCssKey(segKey);
   var h = '';
-  h += '<td class="text-right ' + r0LevelClass(x && x.r0) + '">' + fmtSegR0(x) + '</td>';
-  h += '<td class="text-right">' + fmtSegAis(x) + '</td>';
-  h += '<td class="text-right">' + fmtPctPlain(x && x.ads_ctr) + '</td>';
-  h += '<td class="text-right">' + fmtPctPlain(x && x.org_ctr) + '</td>';
-  h += '<td class="text-right">' + fmtPctPlain(x && x.ads_cabn_clk) + '</td>';
-  h += '<td class="text-right">' + fmtPctPlain(x && x.org_cabn_clk) + '</td>';
+  h += '<td class="text-right seg-cell seg-' + seg + ' seg-start ' + r0LevelClass(x && x.r0) + '">' + fmtSegR0(x) + '</td>';
+  h += '<td class="text-right seg-cell seg-' + seg + '">' + fmtSegAis(x) + '</td>';
+  h += '<td class="text-right seg-cell seg-' + seg + '">' + fmtPctPlain(x && x.ads_ctr) + '</td>';
+  h += '<td class="text-right seg-cell seg-' + seg + '">' + fmtPctPlain(x && x.org_ctr) + '</td>';
+  h += '<td class="text-right seg-cell seg-' + seg + '">' + fmtPctPlain(x && x.ads_cabn_clk) + '</td>';
+  h += '<td class="text-right seg-cell seg-' + seg + '">' + fmtPctPlain(x && x.org_cabn_clk) + '</td>';
   return h;
 }
 
@@ -1656,10 +1663,10 @@ function gapBucketStoreDetailTableHtmlF1Bu(top, g) {
   h += '<th rowspan="2" class="text-right">Gap Assigned<br>to CTR</th>';
   h += '<th rowspan="2" class="text-right">Gap Assigned<br>to CVR</th>';
   h += '<th rowspan="2" class="text-right">Primary<br>Factor</th>';
-  h += '<th colspan="6" class="sfc-group">Store Fold 1</th><th colspan="6" class="sfc-group">BU Fold 1</th><th colspan="6" class="sfc-group">Overall</th></tr>';
-  h += '<tr><th class="text-right">R0</th><th class="text-right">AIS</th><th class="text-right">Ads CTR</th><th class="text-right">Org CTR</th><th class="text-right">Ads CABN/clk</th><th class="text-right">Org CABN/clk</th>';
-  h += '<th class="text-right">R0</th><th class="text-right">AIS</th><th class="text-right">Ads CTR</th><th class="text-right">Org CTR</th><th class="text-right">Ads CABN/clk</th><th class="text-right">Org CABN/clk</th>';
-  h += '<th class="text-right">R0</th><th class="text-right">AIS</th><th class="text-right">Ads CTR</th><th class="text-right">Org CTR</th><th class="text-right">Ads CABN/clk</th><th class="text-right">Org CABN/clk</th></tr></thead><tbody>';
+  h += '<th colspan="6" class="sfc-group seg-group seg-group-storef1">Store Fold 1</th><th colspan="6" class="sfc-group seg-group seg-group-buf1">BU Fold 1</th><th colspan="6" class="sfc-group seg-group seg-group-overall">Overall</th></tr>';
+  h += '<tr><th class="text-right seg-storef1 seg-start">R0</th><th class="text-right seg-storef1">AIS</th><th class="text-right seg-storef1">Ads CTR</th><th class="text-right seg-storef1">Org CTR</th><th class="text-right seg-storef1">Ads CABN/clk</th><th class="text-right seg-storef1">Org CABN/clk</th>';
+  h += '<th class="text-right seg-buf1 seg-start">R0</th><th class="text-right seg-buf1">AIS</th><th class="text-right seg-buf1">Ads CTR</th><th class="text-right seg-buf1">Org CTR</th><th class="text-right seg-buf1">Ads CABN/clk</th><th class="text-right seg-buf1">Org CABN/clk</th>';
+  h += '<th class="text-right seg-overall seg-start">R0</th><th class="text-right seg-overall">AIS</th><th class="text-right seg-overall">Ads CTR</th><th class="text-right seg-overall">Org CTR</th><th class="text-right seg-overall">Ads CABN/clk</th><th class="text-right seg-overall">Org CABN/clk</th></tr></thead><tbody>';
   
   if (!top.length) {
     h += '<tr><td colspan="28" style="color:var(--text3)">No stores in this BU for the current bucket and filters.</td></tr>';
@@ -1916,22 +1923,22 @@ function renderStoreFoldCompare(page, globalImp, start) {
 
 function buFold1SixCells(br) {
   var h = '';
-  function pct(v) { return v != null ? Number(v).toFixed(2) + '%' : '\u2013'; }
-  function raw(v) { return v != null ? Number(v).toFixed(2) : '\u2013'; }
+  function pct(v) { return v != null ? Number(v).toFixed(2) + '%' : '–'; }
+  function raw(v) { return v != null ? Number(v).toFixed(2) : '–'; }
   var r0 = br ? br.r0_fold1 : null;
-  h += '<td class="text-right ' + r0LevelClass(r0) + '">' + pct(r0) + '</td>';
-  h += '<td class="text-right">' + pct(br ? br.ais_fold1 : null) + '</td>';
-  h += '<td class="text-right">' + pct(br ? br.ads_ctr_fold1 : null) + '</td>';
-  h += '<td class="text-right">' + pct(br ? br.org_ctr_fold1 : null) + '</td>';
-  h += '<td class="text-right">' + raw(br ? br.ads_cabn_clk_fold1 : null) + '</td>';
-  h += '<td class="text-right">' + raw(br ? br.org_cabn_clk_fold1 : null) + '</td>';
+  h += '<td class="text-right seg-cell seg-buf1 seg-start ' + r0LevelClass(r0) + '">' + pct(r0) + '</td>';
+  h += '<td class="text-right seg-cell seg-buf1">' + pct(br ? br.ais_fold1 : null) + '</td>';
+  h += '<td class="text-right seg-cell seg-buf1">' + pct(br ? br.ads_ctr_fold1 : null) + '</td>';
+  h += '<td class="text-right seg-cell seg-buf1">' + pct(br ? br.org_ctr_fold1 : null) + '</td>';
+  h += '<td class="text-right seg-cell seg-buf1">' + raw(br ? br.ads_cabn_clk_fold1 : null) + '</td>';
+  h += '<td class="text-right seg-cell seg-buf1">' + raw(br ? br.org_cabn_clk_fold1 : null) + '</td>';
   return h;
 }
 
 function renderStoreFoldCompareF1Bu(page, globalImp, start) {
   var tbl = document.getElementById('table-store-fold-compare-f1bu');
   if (!tbl) return;
-    var segs = [{ k: 'f1', lab: 'Store Fold 1' }, { k: 'buf1', lab: 'BU Fold 1' }, { k: 'o', lab: 'Overall' }];
+  var segs = [{ k: 'f1', lab: 'Store Fold 1' }, { k: 'buf1', lab: 'BU Fold 1' }, { k: 'o', lab: 'Overall' }];
   var perSeg = 6;
   var h1 = '<tr><th rowspan="2">#</th>';
   h1 += sfcSortThRowspan2('b', 'BU');
@@ -1946,18 +1953,21 @@ function renderStoreFoldCompareF1Bu(page, globalImp, start) {
   h1 += sfcSortThRowspan2('f1bu_cvr', 'Gap Assigned<br>to CVR', 'text-right');
   h1 += sfcSortThRowspan2('f1bu_pri', 'Primary<br>Factor', 'text-right');
   segs.forEach(function(sg) {
-    h1 += '<th colspan="' + perSeg + '" class="sfc-group">' + escapeHtml(sg.lab) + '</th>';
+    var seg = segCssKey(sg.k);
+    h1 += '<th colspan="' + perSeg + '" class="sfc-group seg-group seg-group-' + seg + '">' + escapeHtml(sg.lab) + '</th>';
   });
   h1 += '</tr><tr>';
   segs.forEach(function(sg) {
+    var seg = segCssKey(sg.k);
+    var baseCls = 'seg-' + seg;
     var isO = sg.k === 'buf1';
     var isOverall = sg.k === 'o';
-    h1 += sfcSortThRow2(isOverall ? 'or0' : (isO ? 'f1r0' : 'f1r0'), 'R0');
-    h1 += sfcSortThRow2(isOverall ? 'oais' : (isO ? 'f1ais' : 'f1ais'), 'AIS');
-    h1 += sfcSortThRow2(isOverall ? 'oadctr' : (isO ? 'f1adctr' : 'f1adctr'), 'Ads CTR');
-    h1 += sfcSortThRow2(isOverall ? 'oorgctr' : (isO ? 'f1orgctr' : 'f1orgctr'), 'Org CTR');
-    h1 += sfcSortThRow2(isOverall ? 'oadscabn' : (isO ? 'f1adscabn' : 'f1adscabn'), 'Ads CABN/clk');
-    h1 += sfcSortThRow2(isOverall ? 'oorgcabn' : (isO ? 'f1orgcabn' : 'f1orgcabn'), 'Org CABN/clk');
+    h1 += sfcSortThRow2(isOverall ? 'or0' : (isO ? 'f1r0' : 'f1r0'), 'R0', baseCls + ' seg-start');
+    h1 += sfcSortThRow2(isOverall ? 'oais' : (isO ? 'f1ais' : 'f1ais'), 'AIS', baseCls);
+    h1 += sfcSortThRow2(isOverall ? 'oadctr' : (isO ? 'f1adctr' : 'f1adctr'), 'Ads CTR', baseCls);
+    h1 += sfcSortThRow2(isOverall ? 'oorgctr' : (isO ? 'f1orgctr' : 'f1orgctr'), 'Org CTR', baseCls);
+    h1 += sfcSortThRow2(isOverall ? 'oadscabn' : (isO ? 'f1adscabn' : 'f1adscabn'), 'Ads CABN/clk', baseCls);
+    h1 += sfcSortThRow2(isOverall ? 'oorgcabn' : (isO ? 'f1orgcabn' : 'f1orgcabn'), 'Org CABN/clk', baseCls);
   });
   h1 += '</tr>';
   var body = '';
