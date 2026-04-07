@@ -954,68 +954,75 @@ function renderBuFold1Table() {
   var rows = BU_FOLD1_COMPARE_BY_PERIOD[activePeriod] || [];
   var totalImp = rows.reduce(function(acc, r) { return acc + (r.all_impressions || 0); }, 0);
   var sorted = rows.slice().sort(function(a, b) { return (b.all_impressions || 0) - (a.all_impressions || 0); });
-  var g3 = ' colspan="3" class="text-center sfc-group"';
+  var g3 = ' colspan="3" class="text-center sfc-group seg-group seg-group-overall"';
+  var g3Store = ' colspan="3" class="text-center sfc-group seg-group seg-group-storef1"';
+  var g3Delta = ' colspan="3" class="text-center sfc-group seg-group seg-group-buf1"';
   var html = '<thead><tr><th rowspan="2">BU</th><th rowspan="2" class="text-right">Impr share %</th>';
-  html += '<th' + g3 + '>R0</th><th' + g3 + '>AIS</th><th' + g3 + '>Ads CTR</th><th' + g3 + '>Org CTR</th><th' + g3 + '>Ads CABN/clk</th><th' + g3 + '>Org CABN/clk</th></tr>';
-  html += '<tr><th class="text-right">BU Fold 1</th><th class="text-right">Store Fold 1</th><th class="text-right">Delta</th>';
-  html += '<th class="text-right">BU Fold 1</th><th class="text-right">Store Fold 1</th><th class="text-right">Delta</th>';
-  html += '<th class="text-right">BU Fold 1</th><th class="text-right">Store Fold 1</th><th class="text-right">Delta</th>';
-  html += '<th class="text-right">BU Fold 1</th><th class="text-right">Store Fold 1</th><th class="text-right">Delta</th>';
-  html += '<th class="text-right">BU Fold 1</th><th class="text-right">Store Fold 1</th><th class="text-right">Delta</th>';
-  html += '<th class="text-right">BU Fold 1</th><th class="text-right">Store Fold 1</th><th class="text-right">Delta</th></tr></thead><tbody>';
+  html += '<th colspan="3" class="text-center sfc-group seg-group seg-group-overall">R0</th>';
+  html += '<th colspan="3" class="text-center sfc-group seg-group seg-group-storef1">AIS</th>';
+  html += '<th colspan="3" class="text-center sfc-group seg-group seg-group-buf1">Ads CTR</th>';
+  html += '<th colspan="3" class="text-center sfc-group seg-group seg-group-overall">Org CTR</th>';
+  html += '<th colspan="3" class="text-center sfc-group seg-group seg-group-storef1">Ads CABN/clk</th>';
+  html += '<th colspan="3" class="text-center sfc-group seg-group seg-group-buf1">Org CABN/clk</th></tr>';
+  html += '<tr><th class="text-right seg-overall seg-start">Overall</th><th class="text-right seg-storef1 seg-start">Fold 1</th><th class="text-right seg-buf1 seg-start">Delta</th>';
+  html += '<th class="text-right seg-overall">Overall</th><th class="text-right seg-storef1">Fold 1</th><th class="text-right seg-buf1">Delta</th>';
+  html += '<th class="text-right seg-overall">Overall</th><th class="text-right seg-storef1">Fold 1</th><th class="text-right seg-buf1">Delta</th>';
+  html += '<th class="text-right seg-overall">Overall</th><th class="text-right seg-storef1">Fold 1</th><th class="text-right seg-buf1">Delta</th>';
+  html += '<th class="text-right seg-overall">Overall</th><th class="text-right seg-storef1">Fold 1</th><th class="text-right seg-buf1">Delta</th>';
+  html += '<th class="text-right seg-overall">Overall</th><th class="text-right seg-storef1">Fold 1</th><th class="text-right seg-buf1">Delta</th></tr></thead><tbody>';
   if (sorted.length && totalImp > 0) {
-    // Use BU Fold 1 vs Store Fold 1 comparison
-    var fold1Data = PD().overall;
+    // Use Overall vs Fold 1 comparison
+    var overallData = PD().overall;
     var w = function(k) { return buFold1WeightedAvg(sorted, k); };
-    var buR0 = w('r0_fold1'), storeR0 = fold1Data.R0;
-    var r0Delta = (buR0 != null && storeR0 != null) ? (storeR0 - buR0) : null;
-    var buAis = w('ais_fold1'), storeAis = fold1Data.AIS;
-    var aisDelta = (buAis != null && storeAis != null) ? (storeAis - buAis) : null;
-    var buAdsCtr = w('ads_ctr_fold1'), storeAdsCtr = fold1Data.ads_CTR;
-    var adsCtrDelta = (buAdsCtr != null && storeAdsCtr != null) ? (storeAdsCtr - buAdsCtr) : null;
-    var buOrgCtr = w('org_ctr_fold1'), storeOrgCtr = fold1Data.org_CTR;
-    var orgCtrDelta = (buOrgCtr != null && storeOrgCtr != null) ? (storeOrgCtr - buOrgCtr) : null;
-    var buAdsCabn = w('ads_cabn_clk_fold1'), storeAdsCabn = fold1Data.ads_CABN_clk;
-    var adsCabnDelta = (buAdsCabn != null && storeAdsCabn != null) ? (storeAdsCabn - buAdsCabn) : null;
-    var buOrgCabn = w('org_cabn_clk_fold1'), storeOrgCabn = fold1Data.org_CABN_clk;
-    var orgCabnDelta = (buOrgCabn != null && storeOrgCabn != null) ? (storeOrgCabn - buOrgCabn) : null;
+    var overallR0 = overallData.R0, fold1R0 = w('r0_fold1');
+    var r0Delta = (overallR0 != null && fold1R0 != null) ? (fold1R0 - overallR0) : null;
+    var overallAis = overallData.AIS, fold1Ais = w('ais_fold1');
+    var aisDelta = (overallAis != null && fold1Ais != null) ? (fold1Ais - overallAis) : null;
+    var overallAdsCtr = overallData.ads_CTR, fold1AdsCtr = w('ads_ctr_fold1');
+    var adsCtrDelta = (overallAdsCtr != null && fold1AdsCtr != null) ? (fold1AdsCtr - overallAdsCtr) : null;
+    var overallOrgCtr = overallData.org_CTR, fold1OrgCtr = w('org_ctr_fold1');
+    var orgCtrDelta = (overallOrgCtr != null && fold1OrgCtr != null) ? (fold1OrgCtr - overallOrgCtr) : null;
+    var overallAdsCabn = overallData.ads_CABN_clk, fold1AdsCabn = w('ads_cabn_clk_fold1');
+    var adsCabnDelta = (overallAdsCabn != null && fold1AdsCabn != null) ? (fold1AdsCabn - overallAdsCabn) : null;
+    var overallOrgCabn = overallData.org_CABN_clk, fold1OrgCabn = w('org_cabn_clk_fold1');
+    var orgCabnDelta = (overallOrgCabn != null && fold1OrgCabn != null) ? (fold1OrgCabn - overallOrgCabn) : null;
     function pctCell(x) { return x != null ? Number(x).toFixed(2) + '%' : '\u2013'; }
     html += '<tr style="background:rgba(51,65,85,0.45);font-weight:600"><td><strong>Overall</strong></td>';
     html += '<td class="text-right">100.00%</td>';
-    html += '<td class="text-right ' + r0LevelClass(buR0) + '">' + pctCell(buR0) + '</td><td class="text-right ' + r0LevelClass(storeR0) + '">' + pctCell(storeR0) + '</td><td class="text-right ' + buDeltaClass(r0Delta, 'r0') + '">' + fmtBuDeltaPp(r0Delta) + '</td>';
-    html += '<td class="text-right">' + pctCell(buAis) + '</td><td class="text-right">' + pctCell(storeAis) + '</td><td class="text-right ' + buDeltaClass(aisDelta, 'ais') + '">' + fmtBuDeltaPp(aisDelta) + '</td>';
-    html += '<td class="text-right">' + pctCell(buAdsCtr) + '</td><td class="text-right">' + pctCell(storeAdsCtr) + '</td><td class="text-right ' + buDeltaClass(adsCtrDelta, 'metric') + '">' + fmtBuDeltaPp(adsCtrDelta) + '</td>';
-    html += '<td class="text-right">' + pctCell(buOrgCtr) + '</td><td class="text-right">' + pctCell(storeOrgCtr) + '</td><td class="text-right ' + buDeltaClass(orgCtrDelta, 'metric') + '">' + fmtBuDeltaPp(orgCtrDelta) + '</td>';
-    html += '<td class="text-right">' + pctCell(buAdsCabn) + '</td><td class="text-right">' + pctCell(storeAdsCabn) + '</td><td class="text-right ' + buDeltaClass(adsCabnDelta, 'metric') + '">' + fmtBuDeltaPp(adsCabnDelta) + '</td>';
-    html += '<td class="text-right">' + pctCell(buOrgCabn) + '</td><td class="text-right">' + pctCell(storeOrgCabn) + '</td><td class="text-right ' + buDeltaClass(orgCabnDelta, 'metric') + '">' + fmtBuDeltaPp(orgCabnDelta) + '</td></tr>';
+    html += '<td class="text-right seg-overall seg-start ' + r0LevelClass(overallR0) + '">' + pctCell(overallR0) + '</td><td class="text-right seg-storef1 seg-start ' + r0LevelClass(fold1R0) + '">' + pctCell(fold1R0) + '</td><td class="text-right seg-buf1 seg-start ' + buDeltaClass(r0Delta, 'r0') + '">' + fmtBuDeltaPp(r0Delta) + '</td>';
+    html += '<td class="text-right seg-overall">' + pctCell(overallAis) + '</td><td class="text-right seg-storef1">' + pctCell(fold1Ais) + '</td><td class="text-right seg-buf1 ' + buDeltaClass(aisDelta, 'ais') + '">' + fmtBuDeltaPp(aisDelta) + '</td>';
+    html += '<td class="text-right seg-overall">' + pctCell(overallAdsCtr) + '</td><td class="text-right seg-storef1">' + pctCell(fold1AdsCtr) + '</td><td class="text-right seg-buf1 ' + buDeltaClass(adsCtrDelta, 'metric') + '">' + fmtBuDeltaPp(adsCtrDelta) + '</td>';
+    html += '<td class="text-right seg-overall">' + pctCell(overallOrgCtr) + '</td><td class="text-right seg-storef1">' + pctCell(fold1OrgCtr) + '</td><td class="text-right seg-buf1 ' + buDeltaClass(orgCtrDelta, 'metric') + '">' + fmtBuDeltaPp(orgCtrDelta) + '</td>';
+    html += '<td class="text-right seg-overall">' + pctCell(overallAdsCabn) + '</td><td class="text-right seg-storef1">' + pctCell(fold1AdsCabn) + '</td><td class="text-right seg-buf1 ' + buDeltaClass(adsCabnDelta, 'metric') + '">' + fmtBuDeltaPp(adsCabnDelta) + '</td>';
+    html += '<td class="text-right seg-overall">' + pctCell(overallOrgCabn) + '</td><td class="text-right seg-storef1">' + pctCell(fold1OrgCabn) + '</td><td class="text-right seg-buf1 ' + buDeltaClass(orgCabnDelta, 'metric') + '">' + fmtBuDeltaPp(orgCabnDelta) + '</td></tr>';
   }
   sorted.forEach(function(r) {
     var col = BU_COLORS[r.bu] || '#64748b';
     var sh = totalImp && r.all_impressions ? ((r.all_impressions / totalImp) * 100).toFixed(2) : '0';
-    var buR0 = r.r0_fold1 != null ? Number(r.r0_fold1).toFixed(2) + '%' : '\u2013';
-    var storeR0 = r.r0_overall != null ? Number(r.r0_overall).toFixed(2) + '%' : '\u2013';
-    var r0Delta = (r.r0_overall != null && r.r0_fold1 != null) ? (Number(r.r0_overall) - Number(r.r0_fold1)) : null;
+    var overallR0 = r.r0_overall != null ? Number(r.r0_overall).toFixed(2) + '%' : '\u2013';
+    var fold1R0 = r.r0_fold1 != null ? Number(r.r0_fold1).toFixed(2) + '%' : '\u2013';
+    var r0Delta = (r.r0_fold1 != null && r.r0_overall != null) ? (Number(r.r0_fold1) - Number(r.r0_overall)) : null;
     var rdp = fmtBuDeltaPp(r0Delta);
-    function pctBUStore(kbu, kstore) {
-      var bu = r[kbu], store = r[kstore];
+    function pctOverallFold1(koverall, kfold1) {
+      var overall = r[koverall], fold1 = r[kfold1];
       return [
-        bu != null ? Number(bu).toFixed(2) + '%' : '\u2013',
-        store != null ? Number(store).toFixed(2) + '%' : '\u2013'
+        overall != null ? Number(overall).toFixed(2) + '%' : '\u2013',
+        fold1 != null ? Number(fold1).toFixed(2) + '%' : '\u2013'
       ];
     }
-    var aisP = pctBUStore('ais_fold1', 'ais_overall');
-    var adsCtr = pctBUStore('ads_ctr_fold1', 'ads_ctr_overall');
-    var orgCtr = pctBUStore('org_ctr_fold1', 'org_ctr_overall');
-    var adsCab = pctBUStore('ads_cabn_clk_fold1', 'ads_cabn_clk_overall');
-    var orgCab = pctBUStore('org_cabn_clk_fold1', 'org_cabn_clk_overall');
+    var aisP = pctOverallFold1('ais_overall', 'ais_fold1');
+    var adsCtr = pctOverallFold1('ads_ctr_overall', 'ads_ctr_fold1');
+    var orgCtr = pctOverallFold1('org_ctr_overall', 'org_ctr_fold1');
+    var adsCab = pctOverallFold1('ads_cabn_clk_overall', 'ads_cabn_clk_fold1');
+    var orgCab = pctOverallFold1('org_cabn_clk_overall', 'org_cabn_clk_fold1');
     html += '<tr><td><span class="bu-badge" style="background:' + col + '22;color:' + col + '">' + escapeHtml(r.bu) + '</span></td>';
     html += '<td class="text-right">' + sh + '%</td>';
-    html += '<td class="text-right ' + r0LevelClass(r.r0_fold1) + '">' + buR0 + '</td><td class="text-right ' + r0LevelClass(r.r0_overall) + '">' + storeR0 + '</td><td class="text-right ' + buDeltaClass(r0Delta, 'r0') + '">' + rdp + '</td>';
-    html += '<td class="text-right">' + aisP[0] + '</td><td class="text-right">' + aisP[1] + '</td><td class="text-right ' + buDeltaClass(r.ais_delta_pp, 'ais') + '">' + fmtBuDeltaPp(r.ais_delta_pp) + '</td>';
-    html += '<td class="text-right">' + adsCtr[0] + '</td><td class="text-right">' + adsCtr[1] + '</td><td class="text-right ' + buDeltaClass(r.ads_ctr_delta_pp, 'metric') + '">' + fmtBuDeltaPp(r.ads_ctr_delta_pp) + '</td>';
-    html += '<td class="text-right">' + orgCtr[0] + '</td><td class="text-right">' + orgCtr[1] + '</td><td class="text-right ' + buDeltaClass(r.org_ctr_delta_pp, 'metric') + '">' + fmtBuDeltaPp(r.org_ctr_delta_pp) + '</td>';
-    html += '<td class="text-right">' + adsCab[0] + '</td><td class="text-right">' + adsCab[1] + '</td><td class="text-right ' + buDeltaClass(r.ads_cabn_clk_delta_pp, 'metric') + '">' + fmtBuDeltaPp(r.ads_cabn_clk_delta_pp) + '</td>';
-    html += '<td class="text-right">' + orgCab[0] + '</td><td class="text-right">' + orgCab[1] + '</td><td class="text-right ' + buDeltaClass(r.org_cabn_clk_delta_pp, 'metric') + '">' + fmtBuDeltaPp(r.org_cabn_clk_delta_pp) + '</td></tr>';
+    html += '<td class="text-right seg-overall seg-start ' + r0LevelClass(r.r0_overall) + '">' + overallR0 + '</td><td class="text-right seg-storef1 seg-start ' + r0LevelClass(r.r0_fold1) + '">' + fold1R0 + '</td><td class="text-right seg-buf1 seg-start ' + buDeltaClass(r0Delta, 'r0') + '">' + rdp + '</td>';
+    html += '<td class="text-right seg-overall">' + aisP[0] + '</td><td class="text-right seg-storef1">' + aisP[1] + '</td><td class="text-right seg-buf1 ' + buDeltaClass(r.ais_delta_pp, 'ais') + '">' + fmtBuDeltaPp(r.ais_delta_pp) + '</td>';
+    html += '<td class="text-right seg-overall">' + adsCtr[0] + '</td><td class="text-right seg-storef1">' + adsCtr[1] + '</td><td class="text-right seg-buf1 ' + buDeltaClass(r.ads_ctr_delta_pp, 'metric') + '">' + fmtBuDeltaPp(r.ads_ctr_delta_pp) + '</td>';
+    html += '<td class="text-right seg-overall">' + orgCtr[0] + '</td><td class="text-right seg-storef1">' + orgCtr[1] + '</td><td class="text-right seg-buf1 ' + buDeltaClass(r.org_ctr_delta_pp, 'metric') + '">' + fmtBuDeltaPp(r.org_ctr_delta_pp) + '</td>';
+    html += '<td class="text-right seg-overall">' + adsCab[0] + '</td><td class="text-right seg-storef1">' + adsCab[1] + '</td><td class="text-right seg-buf1 ' + buDeltaClass(r.ads_cabn_clk_delta_pp, 'metric') + '">' + fmtBuDeltaPp(r.ads_cabn_clk_delta_pp) + '</td>';
+    html += '<td class="text-right seg-overall">' + orgCab[0] + '</td><td class="text-right seg-storef1">' + orgCab[1] + '</td><td class="text-right seg-buf1 ' + buDeltaClass(r.org_cabn_clk_delta_pp, 'metric') + '">' + fmtBuDeltaPp(r.org_cabn_clk_delta_pp) + '</td></tr>';
   });
   html += '</tbody>';
   tbl.innerHTML = html;

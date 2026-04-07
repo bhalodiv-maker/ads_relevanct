@@ -137,6 +137,18 @@ tr:hover td { background: rgba(59,130,246,0.05); }
 .table-wrap.sfc-wrap { overflow-x:auto; }
 #table-bu-fold1-delta th, #table-bu-fold1-delta td { font-size:11px; padding:8px 6px; }
 #table-bu-fold1-delta .sfc-group { background:rgba(51,65,85,0.55); text-align:center; font-weight:600; color:var(--text2); font-size:11px; }
+
+#table-bu-fold1-delta th.seg-buf1,
+#table-bu-fold1-delta td.seg-buf1 { background:rgba(245,158,11,0.09); }
+
+#table-bu-fold1-delta th.seg-storef1,
+#table-bu-fold1-delta td.seg-storef1 { background:rgba(37,99,235,0.08); }
+
+#table-bu-fold1-delta th.seg-overall,
+#table-bu-fold1-delta td.seg-overall { background:rgba(16,185,129,0.08); }
+
+#table-bu-fold1-delta th.seg-start,
+#table-bu-fold1-delta td.seg-start { border-left:2px solid rgba(148,163,184,0.45); }
 #table-store-fold-compare-f1bu th, #table-store-fold-compare-f1bu td { font-size:11px; padding:8px 6px; }
 #table-store-fold-compare-f1bu .sfc-group { background:rgba(51,65,85,0.55); text-align:center; font-weight:600; color:var(--text2); font-size:11px; }
 #table-store-fold-compare-f1bu th.cmp-sort { cursor:pointer; user-select:none; white-space:nowrap; }
@@ -462,7 +474,7 @@ document.addEventListener('keydown', function(e){
 <div class="page-foot-min">Overall vs Fold 1 · <a href="2026_relevance_dashboard_fold.html" style="color:var(--accent)">Open fold dashboard</a></div>
 </div>
 
-    <script src="2026_fold_dashboard_app.js?v=20260407-1612"></script>
+    <script src="2026_fold_dashboard_app.js?v=20260407-1622"></script>
 </div><!-- /app-content -->
 </body>
 </html>
