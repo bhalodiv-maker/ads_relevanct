@@ -105,6 +105,9 @@ tr:hover td { background: rgba(59,130,246,0.05); }
 .sli-filter-group select { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:7px 12px; border-radius:6px; font-size:13px; font-family:inherit; min-width:120px; cursor:pointer; }
 .csv-dl-btn { background:var(--surface); border:1px solid var(--border); color:var(--accent); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px; transition:all 0.2s; font-family:inherit; }
 .csv-dl-btn:hover { background:var(--accent); color:#fff; border-color:var(--accent); }
+#sfc-f1bu-pager button { background:var(--surface2); border:1px solid var(--border); color:var(--text); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:12px; font-family:inherit; }
+#sfc-f1bu-pager button:hover:not(:disabled) { border-color:var(--accent); color:var(--accent); }
+#sfc-f1bu-pager button:disabled { opacity:0.4; cursor:not-allowed; }
 
 .ms-wrap { position:relative; min-width:160px; }
 .ms-toggle { background:var(--surface); border:1px solid var(--border); color:var(--text); padding:7px 28px 7px 10px; border-radius:6px; font-size:13px; font-family:inherit; cursor:pointer; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; display:block; width:100%; }
@@ -415,14 +418,15 @@ document.addEventListener('keydown', function(e){
     <p style="font-size:12px;color:var(--text3);margin:0 0 12px 0;line-height:1.55;">Bars = store count, line = % of <strong>bucketed</strong> impressions per band. <strong>N/A</strong> omitted from the chart. <strong>Click a bar</strong> for a <strong>BU list</strong> (CTR / CABN/clk driver split), then <strong>click a BU</strong> for up to <strong>20 stores</strong> by impression share.</p>
     <div class="chart-container" style="height:300px;"><canvas id="sfc-gap-bucket-chart-f1bu"></canvas></div>
   </div>
-  <div class="table-toolbar"><button type="button" class="csv-dl-btn" onclick="downloadTableCSV('table-store-fold-compare-f1bu','store_fold1_r0_vs_bu_f1_gap.csv')">Download CSV</button></div>
+  <div class="table-toolbar"><button type="button" class="csv-dl-btn" onclick="downloadF1BuTableCSV()">Download CSV (all filtered stores)</button></div>
   <div class="table-wrap sfc-wrap"><table id="table-store-fold-compare-f1bu"></table></div>
+  <div id="sfc-f1bu-pager" style="display:none;justify-content:center;align-items:center;gap:14px;margin-top:14px;font-size:13px;color:var(--text2);"></div>
 </div>
 
 <div class="page-foot-min">Overall vs Fold 1 · <a href="2026_relevance_dashboard_fold.html" style="color:var(--accent)">Open fold dashboard</a></div>
 </div>
 
-    <script src="2026_fold_dashboard_app.js?v=20260407-1439"></script>
+    <script src="2026_fold_dashboard_app.js?v=20260407-1550"></script>
 </div><!-- /app-content -->
 </body>
 </html>

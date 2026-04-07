@@ -129,6 +129,8 @@ var tsOverallChartInst = null;
 var buSmCharts = [];
 var currentGlobalBU = 'Overall';
 var sliPage = 0;
+var sfcF1buPage = 0;
+var sfcF1buPageSize = 30;
 var storeListSortCol = null, storeListSortDir = 1;
 var buSortCol = null, buSortDir = 1;
 
@@ -1505,7 +1507,22 @@ function renderStoreTables() {
   if (document.getElementById('sfc-gap-bucket-chart')) renderGapBucketDistribution(filtered, globalImp);
   if (document.getElementById('table-store-fold-compare')) renderStoreFoldCompare(page, globalImp, start);
   if (document.getElementById('sfc-gap-bucket-chart-f1bu')) renderGapBucketDistributionF1Bu(filtered, globalImp);
-  if (document.getElementById('table-store-fold-compare-f1bu')) renderStoreFoldCompareF1Bu(page, globalImp, start);
+  if (document.getElementById('table-store-fold-compare-f1bu')) {
+    var f1buTotal = filtered.length;
+    var f1buTotalPages = Math.ceil(f1buTotal / sfcF1buPageSize);
+    if (sfcF1buPage >= f1buTotalPages) sfcF1buPage = 0;
+    var f1buStart = sfcF1buPage * sfcF1buPageSize;
+    var f1buPage = filtered.slice(f1buStart, f1buStart + sfcF1buPageSize);
+        renderStoreFoldCompareF1Bu(f1buPage, globalImp, f1buStart);
+    var f1buPager = document.getElementById('sfc-f1bu-pager');
+    if (f1buPager) {
+      f1buPager.style.display = 'flex';
+      f1buPager.innerHTML =
+        '<button onclick="sfcF1buPage--;renderStoreTables()" ' + (sfcF1buPage === 0 ? 'disabled' : '') + '>&#171; Prev</button>' +
+        '<span>Page ' + (sfcF1buPage + 1) + ' of ' + f1buTotalPages + ' (' + f1buTotal + ' stores)</span>' +
+        '<button onclick="sfcF1buPage++;renderStoreTables()" ' + (sfcF1buPage >= f1buTotalPages - 1 ? 'disabled' : '') + '>Next &#187;</button>';
+    }
+  }
 }
 
 function toggleSfcR0Detail() {
@@ -1639,7 +1656,7 @@ function gapBucketStoreDetailTableHtmlF1Bu(top, g) {
   h += '<th rowspan="2" class="text-right">Gap Assigned<br>to CTR</th>';
   h += '<th rowspan="2" class="text-right">Gap Assigned<br>to CVR</th>';
   h += '<th rowspan="2" class="text-right">Primary<br>Factor</th>';
-  h += '<th colspan="6" class="sfc-group">Store Fold 1</th><th colspan="6" class="sfc-group">Overall</th><th colspan="6" class="sfc-group">BU Fold 1</th></tr>';
+  h += '<th colspan="6" class="sfc-group">Store Fold 1</th><th colspan="6" class="sfc-group">BU Fold 1</th><th colspan="6" class="sfc-group">Overall</th></tr>';
   h += '<tr><th class="text-right">R0</th><th class="text-right">AIS</th><th class="text-right">Ads CTR</th><th class="text-right">Org CTR</th><th class="text-right">Ads CABN/clk</th><th class="text-right">Org CABN/clk</th>';
   h += '<th class="text-right">R0</th><th class="text-right">AIS</th><th class="text-right">Ads CTR</th><th class="text-right">Org CTR</th><th class="text-right">Ads CABN/clk</th><th class="text-right">Org CABN/clk</th>';
   h += '<th class="text-right">R0</th><th class="text-right">AIS</th><th class="text-right">Ads CTR</th><th class="text-right">Org CTR</th><th class="text-right">Ads CABN/clk</th><th class="text-right">Org CABN/clk</th></tr></thead><tbody>';
@@ -1667,8 +1684,8 @@ function gapBucketStoreDetailTableHtmlF1Bu(top, g) {
       h += '<td class="text-right">' + share + '%</td>';
       h += htmlF1BuAttributionCells(gap, gapSplit);
       h += foldCompareSixCellsForSeg(fc, 'f1');
-      h += foldCompareSixCellsForSeg(fc, 'o');
       h += buFold1SixCells(br);
+      h += foldCompareSixCellsForSeg(fc, 'o');
       h += '</tr>';
     });
   }
@@ -1914,7 +1931,7 @@ function buFold1SixCells(br) {
 function renderStoreFoldCompareF1Bu(page, globalImp, start) {
   var tbl = document.getElementById('table-store-fold-compare-f1bu');
   if (!tbl) return;
-  var segs = [{ k: 'f1', lab: 'Store Fold 1' }, { k: 'o', lab: 'Overall' }, { k: 'buf1', lab: 'BU Fold 1' }];
+    var segs = [{ k: 'f1', lab: 'Store Fold 1' }, { k: 'buf1', lab: 'BU Fold 1' }, { k: 'o', lab: 'Overall' }];
   var perSeg = 6;
   var h1 = '<tr><th rowspan="2">#</th>';
   h1 += sfcSortThRowspan2('b', 'BU');
@@ -1963,8 +1980,8 @@ function renderStoreFoldCompareF1Bu(page, globalImp, start) {
     body += '<td class="text-right">' + share + '%</td>';
     body += htmlF1BuAttributionCells(gap, gapSplit);
     body += foldCompareSixCellsForSeg(fc, 'f1');
-    body += foldCompareSixCellsForSeg(fc, 'o');
     body += buFold1SixCells(br);
+    body += foldCompareSixCellsForSeg(fc, 'o');
     body += '</tr>';
   });
   tbl.innerHTML = '<thead>' + h1 + '</thead><tbody>' + body + '</tbody>';
@@ -2090,7 +2107,7 @@ function onSliFilterChange() {
   msCopyChecks('sli-sname', 'cmp-f-sname');
   msCopyChecks('sli-r0', 'cmp-f-r0');
   msCopyChecks('sli-ais', 'cmp-f-ais');
-  sliPage = 0;
+  sliPage = 0; sfcF1buPage = 0;
   renderStoreTables();
 }
 
@@ -2099,7 +2116,7 @@ function onCmpFilterChange() {
   msCopyChecks('cmp-f-sname', 'sli-sname');
   msCopyChecks('cmp-f-r0', 'sli-r0');
   msCopyChecks('cmp-f-ais', 'sli-ais');
-  sliPage = 0;
+  sliPage = 0; sfcF1buPage = 0;
   renderStoreTables();
 }
 
@@ -2151,6 +2168,85 @@ function initSliFilters() {
     if (tn) tn.onchange = function(){ sliPage=0; renderStoreTables(); };
   }
   initCmpDuplicateFilters();
+}
+
+function downloadF1BuTableCSV() {
+  var stores = PD().ALL_STORES;
+  var bus = msGetSelected('cmp-f-bu') || msGetSelected('sli-bu');
+  var r0s = msGetSelected('sli-r0');
+  var aiss = msGetSelected('sli-ais');
+  var snames = msGetSelected('sli-sname') || msGetSelected('cmp-f-sname');
+  var gapSelF1bu = msGetSelected('cmp-f-gap-f1bu');
+  var frBuckSel = msGetSelected('cmp-f-fr-bucket');
+  var globalImp = PD().overall.all_impressions;
+
+  var filtered = stores.filter(function(s) {
+    if (bus && bus.indexOf(s.b) === -1) return false;
+    if (r0s && r0s.indexOf(s.rb) === -1) return false;
+    if (aiss && aiss.indexOf(s.ab) === -1) return false;
+    if (snames && snames.length && snames.indexOf(sn(s.s)) === -1) return false;
+    if (gapSelF1bu && gapSelF1bu.length) {
+      var gbF = gapBucketSignedF1Bu(storeFold1R0MinusBuFold1R0Pp(s));
+      if (gapSelF1bu.indexOf(gbF) === -1) return false;
+    }
+    if (frBuckSel && frBuckSel.length) {
+      var frdF = getStoreFrJan2531(s);
+      var bkF = frdF && frdF.bucket ? frdF.bucket : 'N/A';
+      if (frBuckSel.indexOf(bkF) === -1) return false;
+    }
+    return true;
+  });
+  filtered.sort(function(a, b) { return b.ti - a.ti; });
+
+  var cols = [
+    '#', 'BU', 'Store_id', 'Store_name',
+    'FR_%', 'FR_Bucket', 'Impr_share_%',
+    'R0_Gap_pp', 'Gap_Bucket', 'Gap_Assigned_to_CTR_pp', 'Gap_Assigned_to_CVR_pp', 'Primary_Factor',
+    'StoreFold1_R0_%', 'StoreFold1_AIS_%', 'StoreFold1_Ads_CTR_%', 'StoreFold1_Org_CTR_%', 'StoreFold1_Ads_CABN_per_clk', 'StoreFold1_Org_CABN_per_clk',
+    'BUFold1_R0_%', 'BUFold1_AIS_%', 'BUFold1_Ads_CTR_%', 'BUFold1_Org_CTR_%', 'BUFold1_Ads_CABN_per_clk', 'BUFold1_Org_CABN_per_clk',
+    'Overall_R0_%', 'Overall_AIS_%', 'Overall_Ads_CTR_%', 'Overall_Org_CTR_%', 'Overall_Ads_CABN_per_clk', 'Overall_Org_CABN_per_clk'
+  ];
+
+  var rows = [cols.join(',')];
+  filtered.forEach(function(st, i) {
+    var fc = getFoldCmpForStore(st);
+    var br = getBuFold1CompareRow(st.b);
+    var gap = storeFold1R0MinusBuFold1R0Pp(st);
+    var gapSplit = (gap != null && !isNaN(gap) && fc && br) ? logVarianceCtrCvrPpSplitStoreF1VsBuFold1(fc, br, gap) : null;
+    var frRow = getStoreFrJan2531(st);
+    var frPct = frRow && frRow.fr != null ? frRow.fr.toFixed(2) : '';
+    var frBuck = frRow && frRow.bucket ? frRow.bucket : 'N/A';
+    var share = globalImp ? ((st.ti / globalImp) * 100).toFixed(2) : '0';
+    var gapLabel = gap != null ? gapBucketSignedF1Bu(gap) : 'N/A';
+    var ctrPp = gapSplit ? gapSplit.ctrPpImpact.toFixed(2) : '';
+    var cvrPp = gapSplit ? gapSplit.cvrPpImpact.toFixed(2) : '';
+    var primary = gapSplit ? gapSplit.driver : '';
+
+    function v(x) { return x != null ? Number(x).toFixed(2) : ''; }
+
+    var f1 = fc && fc.f1 ? fc.f1 : null;
+    var o  = fc && fc.o  ? fc.o  : null;
+
+    var row = [
+      i + 1,
+      '"' + st.b + '"',
+      '"' + st.s + '"',
+      '"' + sn(st.s) + '"',
+      frPct, '"' + frBuck + '"', share,
+      gap != null ? gap.toFixed(2) : '', '"' + gapLabel + '"', ctrPp, cvrPp, '"' + primary + '"',
+      v(f1 && f1.r0), v(f1 && f1.ais), v(f1 && f1.ads_ctr), v(f1 && f1.org_ctr), v(f1 && f1.ads_cabn_clk), v(f1 && f1.org_cabn_clk),
+      v(br && br.r0_fold1), v(br && br.ais_fold1), v(br && br.ads_ctr_fold1), v(br && br.org_ctr_fold1), v(br && br.ads_cabn_clk_fold1), v(br && br.org_cabn_clk_fold1),
+      v(o && o.r0), v(o && o.ais), v(o && o.ads_ctr), v(o && o.org_ctr), v(o && o.ads_cabn_clk), v(o && o.org_cabn_clk)
+    ];
+    rows.push(row.join(','));
+  });
+
+  var blob = new Blob([rows.join('\n')], { type: 'text/csv;charset=utf-8;' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'store_fold1_vs_bu_fold1_comparison.csv';
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 
 function downloadTableCSV(tableId, filename) {
