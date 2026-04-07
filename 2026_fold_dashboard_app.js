@@ -1639,12 +1639,13 @@ function gapBucketStoreDetailTableHtmlF1Bu(top, g) {
   h += '<th rowspan="2" class="text-right">Gap Assigned<br>to CTR</th>';
   h += '<th rowspan="2" class="text-right">Gap Assigned<br>to CVR</th>';
   h += '<th rowspan="2" class="text-right">Primary<br>Factor</th>';
-  h += '<th colspan="6" class="sfc-group">Store Fold 1</th><th colspan="6" class="sfc-group">BU Fold 1</th></tr>';
+  h += '<th colspan="6" class="sfc-group">Store Fold 1</th><th colspan="6" class="sfc-group">Overall</th><th colspan="6" class="sfc-group">BU Fold 1</th></tr>';
   h += '<tr><th class="text-right">R0</th><th class="text-right">AIS</th><th class="text-right">Ads CTR</th><th class="text-right">Org CTR</th><th class="text-right">Ads CABN/clk</th><th class="text-right">Org CABN/clk</th>';
+  h += '<th class="text-right">R0</th><th class="text-right">AIS</th><th class="text-right">Ads CTR</th><th class="text-right">Org CTR</th><th class="text-right">Ads CABN/clk</th><th class="text-right">Org CABN/clk</th>';
   h += '<th class="text-right">R0</th><th class="text-right">AIS</th><th class="text-right">Ads CTR</th><th class="text-right">Org CTR</th><th class="text-right">Ads CABN/clk</th><th class="text-right">Org CABN/clk</th></tr></thead><tbody>';
   
   if (!top.length) {
-    h += '<tr><td colspan="22" style="color:var(--text3)">No stores in this BU for the current bucket and filters.</td></tr>';
+    h += '<tr><td colspan="28" style="color:var(--text3)">No stores in this BU for the current bucket and filters.</td></tr>';
   } else {
     top.forEach(function(st, i) {
       var fc = getFoldCmpForStore(st);
@@ -1666,6 +1667,7 @@ function gapBucketStoreDetailTableHtmlF1Bu(top, g) {
       h += '<td class="text-right">' + share + '%</td>';
       h += htmlF1BuAttributionCells(gap, gapSplit);
       h += foldCompareSixCellsForSeg(fc, 'f1');
+      h += foldCompareSixCellsForSeg(fc, 'o');
       h += buFold1SixCells(br);
       h += '</tr>';
     });
@@ -1912,7 +1914,7 @@ function buFold1SixCells(br) {
 function renderStoreFoldCompareF1Bu(page, globalImp, start) {
   var tbl = document.getElementById('table-store-fold-compare-f1bu');
   if (!tbl) return;
-  var segs = [{ k: 'f1', lab: 'Store Fold 1' }, { k: 'buf1', lab: 'BU Fold 1' }];
+  var segs = [{ k: 'f1', lab: 'Store Fold 1' }, { k: 'o', lab: 'Overall' }, { k: 'buf1', lab: 'BU Fold 1' }];
   var perSeg = 6;
   var h1 = '<tr><th rowspan="2">#</th>';
   h1 += sfcSortThRowspan2('b', 'BU');
@@ -1932,12 +1934,13 @@ function renderStoreFoldCompareF1Bu(page, globalImp, start) {
   h1 += '</tr><tr>';
   segs.forEach(function(sg) {
     var isO = sg.k === 'buf1';
-    h1 += sfcSortThRow2(isO ? 'or0' : 'f1r0', 'R0');
-    h1 += sfcSortThRow2(isO ? 'oais' : 'f1ais', 'AIS');
-    h1 += sfcSortThRow2(isO ? 'oadctr' : 'f1adctr', 'Ads CTR');
-    h1 += sfcSortThRow2(isO ? 'oorgctr' : 'f1orgctr', 'Org CTR');
-    h1 += sfcSortThRow2(isO ? 'oadscabn' : 'f1adscabn', 'Ads CABN/clk');
-    h1 += sfcSortThRow2(isO ? 'oorgcabn' : 'f1orgcabn', 'Org CABN/clk');
+    var isOverall = sg.k === 'o';
+    h1 += sfcSortThRow2(isOverall ? 'or0' : (isO ? 'f1r0' : 'f1r0'), 'R0');
+    h1 += sfcSortThRow2(isOverall ? 'oais' : (isO ? 'f1ais' : 'f1ais'), 'AIS');
+    h1 += sfcSortThRow2(isOverall ? 'oadctr' : (isO ? 'f1adctr' : 'f1adctr'), 'Ads CTR');
+    h1 += sfcSortThRow2(isOverall ? 'oorgctr' : (isO ? 'f1orgctr' : 'f1orgctr'), 'Org CTR');
+    h1 += sfcSortThRow2(isOverall ? 'oadscabn' : (isO ? 'f1adscabn' : 'f1adscabn'), 'Ads CABN/clk');
+    h1 += sfcSortThRow2(isOverall ? 'oorgcabn' : (isO ? 'f1orgcabn' : 'f1orgcabn'), 'Org CABN/clk');
   });
   h1 += '</tr>';
   var body = '';
@@ -1960,6 +1963,7 @@ function renderStoreFoldCompareF1Bu(page, globalImp, start) {
     body += '<td class="text-right">' + share + '%</td>';
     body += htmlF1BuAttributionCells(gap, gapSplit);
     body += foldCompareSixCellsForSeg(fc, 'f1');
+    body += foldCompareSixCellsForSeg(fc, 'o');
     body += buFold1SixCells(br);
     body += '</tr>';
   });
